@@ -34,7 +34,7 @@ const GalleryCard = ({ languageText, language, gallery }) => {
     return (
         <motion.div
             variants={InputChildVariants}
-            className='h-120 flex items-end px-10'>
+            className='h-120 flex items-end '>
             <div
                 className='w-95 h-120 md:w-100 md:h-120 lg:h-100 lg:hover:h-120 transition-all duration-300 ease-in-out bg-darktheme2/80 ring-3 ring-darktheme/60 dark:ring-darktheme shadow-2xl  rounded-[30px] group relative  overflow-hidden'>
                 <div className="w-full h-100 relative bg-contain bg-top overflow-hidden rounded-[30px]">
