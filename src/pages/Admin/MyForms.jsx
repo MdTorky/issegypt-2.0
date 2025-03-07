@@ -139,8 +139,8 @@ const MyForms = ({ languageText, language, api }) => {
                         </div>
                     </div>
 
-                    <h1 className="text-8xl font-bold text-redtheme dark:text-whitetheme">{languageText.MyForms}</h1>
-                    <p className="text-gray-600 text-2xl text-center mb-4">
+                    <h1 className="text-8xl font-bold text-redtheme text-center  dark:text-whitetheme">{languageText.MyForms}</h1>
+                    <p className="text-gray-600 text-2xl text-center  mb-4">
                         {languageText.MyFormDesc}
                     </p>
 
