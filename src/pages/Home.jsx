@@ -344,7 +344,7 @@ const Home = ({ languageText, language, api }) => {
                             <HandCardLoader key={index} />
                         )) :
                         <motion.div
-                            className="flex flex-wrap gap-10 justify-center"
+                            className="flex flex-wrap gap-10 justify-center px-2"
                             initial="hidden"
                             whileInView="visible"
                             variants={{

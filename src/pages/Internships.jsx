@@ -338,30 +338,34 @@ const Internships = ({ languageText, language, api }) => {
                     {languageText.Companies}
                 </h1>
                 <div className="lg:w-fit w-full flex justify-center items-center z-20 gap-4 lg:gap-10 lg:flex-row flex-col">
-
-                    <MultiSelectField
-                        options={categoryOptions}
-                        placeholder={languageText.SelectCategories}
-                        iconValue="iconamoon:category-fill"
-                        icon="iconamoon:category-light"
-                        language={language}
-                        languageText={languageText}
-                        setValue={setSelectedCategories}
-                        regex={null}
-                        value={selectedCategories}
-                    />
+                    <div className='w-[50%] lg:w-full'>
+                        <MultiSelectField
+                            options={categoryOptions}
+                            placeholder={languageText.SelectCategories}
+                            iconValue="iconamoon:category-fill"
+                            icon="iconamoon:category-light"
+                            language={language}
+                            languageText={languageText}
+                            setValue={setSelectedCategories}
+                            regex={null}
+                            value={selectedCategories}
+                        />
+                    </div>
                     <SearchInput languageText={languageText} language={language} onSearch={(query) => setSearchQuery(query)} />
-                    <MultiSelectField
-                        options={locationOptions}
-                        placeholder={languageText.SelectCity}
-                        iconValue="solar:city-bold"
-                        icon="solar:city-broken"
-                        language={language}
-                        languageText={languageText}
-                        setValue={setSelectedLocations}
-                        regex={null}
-                        value={selectedLocations}
-                    />
+                    <div className='w-[50%] lg:w-[100%]'>
+
+                        <MultiSelectField
+                            options={locationOptions}
+                            placeholder={languageText.SelectCity}
+                            iconValue="solar:city-bold"
+                            icon="solar:city-broken"
+                            language={language}
+                            languageText={languageText}
+                            setValue={setSelectedLocations}
+                            regex={null}
+                            value={selectedLocations}
+                        />
+                    </div>
                 </div>
 
                 <p className="ScrollHorizontally">{languageText.ScrollHorizontally}</p>
