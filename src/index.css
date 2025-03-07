@@ -1,0 +1,321 @@
+@import "tailwindcss";
+
+@font-face {
+  font-family: Anton;
+  src: url("./assets/fonts/Anton-Regular.ttf");
+}
+
+@font-face {
+  font-family: Tanker;
+  src: url("./assets/fonts/Tanker-Regular.ttf");
+}
+
+@font-face {
+  font-family: ModernPro;
+  src: url("./assets/fonts/Ya-ModernPro-Bold.otf");
+}
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+@theme {
+  --color-redtheme: #a31621;
+  --color-redtheme2: #62050d;
+  --color-whitetheme: #ffff;
+  --color-whitetheme2: #dddddd;
+  --color-darktheme: #272a31;
+  --color-darktheme2: #15161a;
+  --font-anton: "Anton", serif;
+  --font-tanker: "Tanker", regular;
+  --font-modernpro: "ModernPro";
+}
+
+:root {
+  --redtheme: #a31621;
+  --redtheme2: #62050d;
+  --darktheme: #272a31;
+  --darktheme2: #15161a;
+  --whitetheme: #f7f4f3;
+  --whitetheme2: #dddddd;
+}
+
+*::-webkit-scrollbar {
+  width: 8px;
+  border-radius: 20px;
+}
+
+*::-webkit-scrollbar-track {
+  background-color: transparent;
+  border-radius: 20px;
+}
+
+*::-webkit-scrollbar-thumb {
+  background: var(--redtheme);
+  border-radius: 10px;
+  transition: 0.8s ease all;
+}
+
+*::-webkit-scrollbar-thumb:hover {
+  cursor: pointer;
+  background: var(--redtheme);
+  height: 100px;
+  transition: 0.8s ease all;
+}
+
+.arabic {
+  direction: rtl;
+}
+
+body {
+  background: var(--whitetheme);
+}
+
+.bottomNavBar {
+  @apply relative hover:cursor-pointer 
+    p-2 rounded-[15px] text-whitetheme;
+}
+/* hover:bg-whitetheme2 hover:text-darktheme hover:scale-110  */
+.activeIndicator {
+  @apply absolute w-[20px] h-[10px]  bg-whitetheme ring-0 ring-whitetheme rounded-t-full z-85;
+}
+
+.bottomNavBarLink {
+  @apply absolute bottom-full left-1/2 transform -translate-x-1/2 mb-4 w-max px-2 py-1 text-white bg-darktheme rounded-md opacity-0 scale-50 transition-all duration-500 group-hover:opacity-100 group-hover:scale-100 z-[100] text-2xl ring-2  ring-gray-700 ring-offset-2 ring-offset-whitetheme dark:ring-offset-darktheme2;
+}
+
+.relativeGeneralButton {
+  @apply w-5 h-5 md:w-10 md:h-10 bg-redtheme text-whitetheme ring-2 ring-whitetheme rounded-md md:rounded-xl flex items-center justify-center  cursor-pointer;
+}
+
+.generalButton {
+  @apply bg-redtheme text-white rounded-lg p-4  text-sm lg:text-2xl cursor-pointer ring-2 ring-whitetheme;
+}
+
+.menuButton {
+  @apply bg-redtheme text-white rounded-lg  p-2 text-xl cursor-pointer ring-2 ring-whitetheme;
+}
+
+.generalButtonText {
+  @apply absolute bottom-full left-1/2 transform -translate-x-1/2 mb-4 w-max px-2 py-1 text-white rounded-md opacity-0 scale-50 transition-all duration-500 group-hover:opacity-100 group-hover:scale-100 z-81 text-3xl ring-3 ring-gray-400;
+}
+
+.AddFormButton {
+  @apply text-whitetheme p-2.5 rounded  flex justify-center m-auto cursor-pointer  relative ring-3 ring-darktheme;
+}
+
+.formRow {
+  @apply flex lg:flex-row flex-col gap-4 w-full justify-center;
+}
+
+.socailHomeButton {
+  @apply text-whitetheme cursor-pointer p-1 rounded-xl  ring-0 ring-gray-300 text-4xl;
+}
+
+.socailHomeButtonText {
+  @apply absolute bottom-full left-1/2 transform -translate-x-1/2 mb-4 w-max px-2 py-1 text-white rounded-md opacity-0 scale-50 transition-all duration-500 group-hover:opacity-100 group-hover:scale-100 z-81 text-sm ring-2 ring-gray-400;
+}
+
+.inputIconText {
+  @apply absolute bottom-full left-1/2 transform -translate-x-1/2 mb-4 w-max px-2 py-1 text-white rounded-md opacity-0 scale-50 transition-all duration-500 group-hover:opacity-100 group-hover:scale-100 z-81 text-sm ring-2 ring-darktheme2 ring-offset-2 ring-offset-whitetheme dark:ring-offset-whitetheme;
+}
+
+.formButton {
+  @apply bg-linear-to-bl from-redtheme to-redtheme2 w-50 m-auto p-2 rounded-lg text-whitetheme focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 cursor-pointer border-3 border-whitetheme dark:border-darktheme2 mt-3 flex items-center gap-2 justify-center ring-4 ring-redtheme;
+}
+
+.formTitle {
+  @apply text-4xl lg:text-6xl bg-gradient-to-r from-redtheme to-redtheme2 dark:from-whitetheme dark:to-whitetheme2 bg-clip-text text-transparent text-center font-bold mb-10 m-auto;
+}
+
+.formForm {
+  @apply flex flex-col gap-4 rounded-xl items-center  bg-center bg-cover p-10 bg-radial from-whitetheme2/50 to-whitetheme/50 dark:from-darktheme/50 dark:to-darktheme2/50 shadow-[0_2.8px_2.2px_rgba(0,_0,_0,_0.034),_0_6.7px_5.3px_rgba(0,_0,_0,_0.048),_0_12.5px_10px_rgba(0,_0,_0,_0.06),_0_22.3px_17.9px_rgba(0,_0,_0,_0.072),_0_41.8px_33.4px_rgba(0,_0,_0,_0.086),_0_100px_80px_rgba(0,_0,_0,_0.12)];
+}
+
+.serviceTitle {
+  @apply bg-radial from-redtheme to-darktheme2 text-whitetheme text-5xl lg:text-7xl px-5 py-2 rounded-xl ring-redtheme2 border-6 border-whitetheme dark:border-darktheme2 ring-3 w-fit text-center;
+}
+
+.serviceContainer {
+  @apply bg-radial from-darktheme to-darktheme2  rounded-xl py-4 px-10 ring-5 ring-darktheme2 dark:ring-whitetheme border-4 border-whitetheme outline-3 outline-darktheme shadow-[0_2.8px_2.2px_rgba(0,_0,_0,_0.034),_0_6.7px_5.3px_rgba(0,_0,_0,_0.048),_0_12.5px_10px_rgba(0,_0,_0,_0.06),_0_22.3px_17.9px_rgba(0,_0,_0,_0.072),_0_41.8px_33.4px_rgba(0,_0,_0,_0.086),_0_100px_80px_rgba(0,_0,_0,_0.12)];
+}
+
+.serviceContainerTitle {
+  @apply text-redtheme text-2xl text-center bg-radial from-whitetheme to-whitetheme2  mb-5 p-2 rounded-xl ring-3 ring-whitetheme  border-4 border-darktheme;
+}
+
+.noData {
+  @apply bg-radial from-redtheme to-darktheme2 text-whitetheme p-2 flex items-center gap-2 rounded-xl ring-redtheme2 border-6 border-whitetheme dark:border-darktheme2 ring-3 w-fit text-center;
+}
+
+.drivePageButton {
+  @apply flex items-center gap-1 px-3 py-1 text-white rounded-md cursor-pointer hover:scale-105 transition-all duration-300 ease-in-out;
+}
+
+.adminDashboardCard {
+  @apply bg-darktheme2/80 rounded-xl w-fit py-2  px-4 lg:py-7 lg:px-10 flex items-center gap-10 duration-500 ease-in-out hover:scale-105 cursor-pointer  hover:bg-darktheme/50 ring-4 ring-darktheme2/80 border-4 border-whitetheme hover:ring-redtheme dark:border-darktheme;
+}
+
+.tableHeader {
+  @apply bg-radial from-redtheme/90 to-redtheme2/80 ring-4 ring-redtheme border-4 border-whitetheme rounded-lg py-1 flex w-full 2xl:justify-center text-center text-whitetheme dark:border-darktheme2 min-w-max;
+}
+
+/* .tableHeader {
+  @apply bg-radial from-redtheme/90 to-redtheme2/80 ring-4 ring-redtheme border-4 border-whitetheme 
+    rounded-lg py-1 flex min-w-max w-full justify-center text-center text-whitetheme dark:border-darktheme2;
+}
+
+.tableRow {
+  @apply bg-radial from-darktheme/90 to-darktheme2/80 ring-4 ring-darktheme2 border-4 border-whitetheme 
+    py-2 flex rounded-lg dark:border-darktheme items-center w-full min-w-max;
+}
+
+.tableDiv {
+  @apply flex-1 min-w-[150px] text-xl text-center px-2;
+} */
+
+.tableBody {
+  @apply flex flex-col w-full  2xl:justify-center text-center gap-3 text-whitetheme;
+}
+
+.tableRow {
+  @apply bg-radial from-darktheme/90 to-darktheme2/80 ring-4 ring-darktheme2 border-4 border-whitetheme py-2 flex rounded-lg dark:border-darktheme  items-center w-full min-w-max 2xl:min-w-auto;
+}
+
+.tableDiv {
+  @apply lg:flex-1 2xl:text-xl min-w-[150px] 2xl:min-w-auto flex items-center justify-center;
+}
+
+.tableButton {
+  @apply flex items-center gap-2 p-1 lg:p-3 text-sm lg:text-base rounded cursor-pointer relative hover:scale-110 hover:-translate-y-1 transition-all duration-300 ease-in-out;
+}
+
+.ScrollHorizontally {
+  @apply bg-redtheme px-2 dark:bg-whitetheme dark:text-darktheme2 text-whitetheme text-xl rounded;
+}
+
+.animate-shimmer {
+  background-size: 200% 100%;
+  animation: shimmer 1.5s infinite;
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: -200% 0;
+  }
+  100% {
+    background-position: 200% 0;
+  }
+}
+
+.backgroundDark {
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(
+        circle farthest-side at 0% 50%,
+        var(--darktheme2) 23.5%,
+        rgba(255, 170, 0, 0) 0
+      )
+      21px 30px,
+    radial-gradient(
+        circle farthest-side at 0% 50%,
+        var(--darktheme) 24%,
+        rgba(240, 166, 17, 0) 0
+      )
+      19px 30px,
+    linear-gradient(
+        var(--darktheme2) 14%,
+        rgba(240, 166, 17, 0) 0,
+        rgba(240, 166, 17, 0) 85%,
+        var(--darktheme2) 0
+      )
+      0 0,
+    linear-gradient(
+        150deg,
+        var(--darktheme2) 24%,
+        var(--darktheme) 0,
+        var(--darktheme) 26%,
+        rgba(240, 166, 17, 0) 0,
+        rgba(240, 166, 17, 0) 74%,
+        var(--darktheme) 0,
+        var(--darktheme) 76%,
+        var(--darktheme2) 0
+      )
+      0 0,
+    linear-gradient(
+        30deg,
+        var(--darktheme2) 24%,
+        var(--darktheme) 0,
+        var(--darktheme) 26%,
+        rgba(240, 166, 17, 0) 0,
+        rgba(240, 166, 17, 0) 74%,
+        var(--darktheme) 0,
+        var(--darktheme) 76%,
+        var(--darktheme2) 0
+      )
+      0 0,
+    linear-gradient(
+        90deg,
+        var(--darktheme) 2%,
+        var(--darktheme2) 0,
+        var(--darktheme2) 98%,
+        var(--darktheme) 0%
+      )
+      0 0 var(--darktheme);
+  background-size: 40px 60px;
+}
+
+.backgroundWhite {
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(
+        circle farthest-side at 0% 50%,
+        var(--whitetheme) 23.5%,
+        rgba(255, 170, 0, 0) 0
+      )
+      21px 30px,
+    radial-gradient(
+        circle farthest-side at 0% 50%,
+        var(--whitetheme2) 24%,
+        rgba(240, 166, 17, 0) 0
+      )
+      19px 30px,
+    linear-gradient(
+        var(--whitetheme) 14%,
+        rgba(240, 166, 17, 0) 0,
+        rgba(240, 166, 17, 0) 85%,
+        var(--whitetheme) 0
+      )
+      0 0,
+    linear-gradient(
+        150deg,
+        var(--whitetheme) 24%,
+        var(--whitetheme2) 0,
+        var(--whitetheme2) 26%,
+        rgba(240, 166, 17, 0) 0,
+        rgba(240, 166, 17, 0) 74%,
+        var(--whitetheme2) 0,
+        var(--whitetheme2) 76%,
+        var(--whitetheme) 0
+      )
+      0 0,
+    linear-gradient(
+        30deg,
+        var(--whitetheme) 24%,
+        var(--whitetheme2) 0,
+        var(--whitetheme2) 26%,
+        rgba(240, 166, 17, 0) 0,
+        rgba(240, 166, 17, 0) 74%,
+        var(--whitetheme2) 0,
+        var(--whitetheme2) 76%,
+        var(--whitetheme) 0
+      )
+      0 0,
+    linear-gradient(
+        90deg,
+        var(--whitetheme2) 2%,
+        var(--whitetheme) 0,
+        var(--whitetheme) 98%,
+        var(--whitetheme2) 0%
+      )
+      0 0 var(--whitetheme2);
+  background-size: 40px 60px;
+}
