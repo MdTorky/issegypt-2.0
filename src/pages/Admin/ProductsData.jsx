@@ -315,7 +315,7 @@ const ProductsData = ({ languageText, language, api }) => {
                             </div>
                         </div>
 
-                        <h1 className="text-8xl font-bold text-redtheme dark:text-whitetheme my-10 ">{languageText.Purchases}</h1>
+                        <h1 className="text-5xl md:text-8xl font-bold text-redtheme dark:text-whitetheme text-center my-10 ">{languageText.Purchases}</h1>
 
 
                         <div className="flex lg:flex-row flex-col gap-2 items-center">
