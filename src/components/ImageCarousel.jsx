@@ -33,7 +33,7 @@ const ImageCarousel = ({ images, language }) => {
             className="flex flex-col justify-center gap-4 group cursor-pointer">
 
             {/* <h1 className="text-center text-4xl group-hover:text-redtheme duration-500 text-darktheme dark:text-whitetheme">{images[currentIndex]?.title}</h1> */}
-            <div className="relative w-[400px] h-[400px] md:w-[500px] m-auto md:h-[500px] overflow-hidden shadow-[0_3px_10px_rgb(0,0,0,0.2)]  rounded-lg ring-4 ring-darktheme lg:ring-darktheme dark:ring-gray-500 duration-500 lg:group-hover:ring-redtheme">
+            <div className="relative w-[300px] h-[300px] md:w-[500px] m-auto md:h-[500px] overflow-hidden shadow-[0_3px_10px_rgb(0,0,0,0.2)]  rounded-lg ring-4 ring-darktheme lg:ring-darktheme dark:ring-gray-500 duration-500 lg:group-hover:ring-redtheme">
                 {/* Slides */}
                 <AnimatePresence >
                     <motion.div
@@ -115,7 +115,7 @@ const ImageCarousel = ({ images, language }) => {
 
             <div className="duration-500 -translate-y-35 relative m-auto w- lg:w-120 rounded-t-lg  text-whitetheme lg:text-darktheme lg:dark:text-whitetheme z-20">
 
-                <h1 className="px-5 lg:opacity-0 lg:group-hover:opacity-100 text-5xl lg:text-3xl group-hover:ring-0 lg:group-hover:text-whitetheme lg:group-hover:text-4xl rounded-t-lg dark:text-whitetheme z-20 ">{language === "en" ? images[currentIndex]?.title : images[currentIndex]?.aTitle}</h1>
+                <h1 className="px-10 lg:px-5 lg:opacity-0 lg:group-hover:opacity-100 text-4xl lg:text-3xl group-hover:ring-0 lg:group-hover:text-whitetheme lg:group-hover:text-4xl rounded-t-lg dark:text-whitetheme z-20 ">{language === "en" ? images[currentIndex]?.title : images[currentIndex]?.aTitle}</h1>
 
                 {/* <p className=" px-5 lg:hidden absolute flex lg:group-hover:flex w-full font-light text-sm lg:text-lg bg-redtheme lg:group-hover:rounded-b-lg rounded-b-lg !text-gray-300 lg:group-hover:border-b-3 lg:group-hover:border-r-3 lg:group-hover:border-l-3 lg:border-0 border-b-3 border-r-3 border-l-3 border-slate-200 ">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Atque quis vero molestias tempora provident placeat fuga alias aspernatur architecto repellat.</p> */}
 
