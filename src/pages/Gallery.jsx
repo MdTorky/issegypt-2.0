@@ -87,13 +87,13 @@ const Gallery = ({ languageText, language, api }) => {
                             exit={{ y: 20, opacity: 0 }}
                             transition={{ duration: 0.8, type: "spring", stiffness: 200 }}
 
-                            className="text-sm md:text-5xl text-redtheme">{languageText.StudentGallery}</motion.p>
+                            className="text-xl md:text-5xl text-redtheme">{languageText.StudentGallery}</motion.p>
                         <motion.h1
                             initial={{ y: -20, scale: 0, opacity: 0 }}
                             animate={{ y: 0, scale: 1, opacity: 1 }}
                             exit={{ y: -20, opacity: 0 }}
                             transition={{ duration: 0.8, type: "spring", stiffness: 100 }}
-                            className="text-2xl md:text-8xl font-bold w-[85%] mx-auto text-whitetheme">
+                            className="text-5xl md:text-8xl font-bold w-[85%] mx-auto text-whitetheme">
                             {languageText.StudentGalleryDesc}
                         </motion.h1>
                     </AnimatePresence>

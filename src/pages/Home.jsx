@@ -314,7 +314,7 @@ const Home = ({ languageText, language, api }) => {
 
 
             {/* Services */}
-            <div className="my-20 overflow-hidden">
+            <div className="my-20 overflow-hidden px-2">
                 <motion.h1
                     className="text-center text-redtheme text-6xl lg:text-8xl"
                     style={{ opacity: handTitleOpacity }}
