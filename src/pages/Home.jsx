@@ -279,7 +279,7 @@ const Home = ({ languageText, language, api }) => {
                 {/* Social Media Accounts */}
                 <AnimatePresence>
                     <motion.div
-                        className={`absolute flex justify-center lg:flex-col gap-3 top-[15%] lg:bottom-20 text-red-900 left-0 right-0 ${language === "en" ? "lg:left-10 lg:right-auto" : "lg:right-10 lg:left-auto"}`}
+                        className={`absolute flex justify-center lg:flex-col gap-3 top-[15%] lg:top-auto lg:bottom-20 text-red-900 left-0 right-0 ${language === "en" ? "lg:left-10 lg:right-auto" : "lg:right-10 lg:left-auto"}`}
                         initial="hidden"
                         whileInView="visible"
                         style={{ x: xRight }}
