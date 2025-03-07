@@ -295,7 +295,7 @@ const SelectField = ({
                             />
                         </div>
                         {/* Options List */}
-                        <div className="max-h-48 overflow-y-auto z-30">
+                        <div className="max-h-48 overflow-y-auto z-30 pb-4 md:pb-0">
                             {filteredOptions.length > 0 ? (
                                 filteredOptions.map((option, index) => (
                                     <div
