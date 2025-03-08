@@ -33,22 +33,22 @@ const Shop = ({ languageText, language, api }) => {
                             animate={{ x: 0, opacity: 1 }}
                             exit={{ x: -200, opacity: 0 }}
                             transition={{ duration: 0.8, type: "spring", stiffness: 100 }}
-                            className='text-7xl text-center  lg:text-9xl lg:text-start text-whitetheme '>{languageText.ISSEgyptShop}</motion.h1>
+                            className='text-5xl text-center  lg:text-9xl lg:text-start text-whitetheme '>{languageText.ISSEgyptShop}</motion.h1>
                         <motion.p
 
                             initial={{ x: -200, opacity: 0 }}
                             animate={{ x: 0, opacity: 1 }}
                             exit={{ x: -200, opacity: 0 }}
                             transition={{ duration: 0.8, delay: 0.2, type: "spring", stiffness: 100 }}
-                            className='text-2xl text-center  lg:text-4xl lg:text-start  text-gray-300'>{languageText.ShopDesc}
+                            className='text-xl text-center  lg:text-4xl lg:text-start  text-gray-300'>{languageText.ShopDesc}
                         </motion.p>
                     </div>
                 </div>
             </div>
 
-            <div className='flex flex-col mt-80 2xl:mt-70 mb-10 w-full items-center gap-5'>
+            <div className='flex flex-col mt-100 md:mt-60 xl:mt-80 2xl:mt-70 mb-10 w-full items-center gap-5'>
                 <h1 className='text-6xl text-start text-redtheme '>{languageText.ISSEgyptShop}</h1>
-                <div className='flex lg:w-full lg:flex-row flex-col justify-center gap-10'>
+                <div className='flex lg:w-full flex-row flex-wrap justify-center gap-10'>
                     {loading ? (
                         <Loader text={languageText.Loading} />
                     ) : (

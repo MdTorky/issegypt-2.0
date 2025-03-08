@@ -94,7 +94,7 @@ const Product = ({ languageText, language, api, }) => {
 
     return (
         <div>
-            <div className="relative w-full h-[130vh] md:h-[80vh] flex items-center justify-center bg-cover bg-center "
+            <div className="relative w-full h-[150vh] md:h-[110vh] xl:h-[155vh] 2xl:h-[125vh] flex  justify-center bg-cover bg-center "
 
                 style={{ backgroundImage: "url('')" }}>
 
@@ -120,7 +120,7 @@ const Product = ({ languageText, language, api, }) => {
                         initial={{ scale: 0, opacity: 0 }}
                         animate={{ scale: 1, opacity: 1 }}
                         transition={{ duration: 0.4, type: "spring", stiffness: 100 }}
-                        className="relative mt-5 md:mt-30 lg:mt-40 z-20 justify-center md:px-10 lg:px-4 lg:py-10 rounded-xl flex flex-col lg:flex-row bg-whitetheme/10">
+                        className="relative mt-20 md:mt-30 lg:mt-40 z-20 justify-center md:px-10 lg:px-4 lg:py-10 rounded-xl flex flex-col lg:flex-row bg-whitetheme/10 h-fit">
 
                         {/* Title */}
                         <div className=" flex flex-col pt-4 lg:pt-20 w-100 text-center lg:text-start">
@@ -171,7 +171,7 @@ const Product = ({ languageText, language, api, }) => {
                                         className={`text-darktheme font-tanker`}> {size}</motion.span></p>
                                 <button className="mb-2 bg-whitetheme/10 w-fit px-2 rounded text-whitetheme2 text-lg cursor-pointer hover:scale-110 hover:translate-x-2 transition-all duration-500 ease-in-out">{languageText.SizeGuide}</button>
                             </div>
-                            <div className="flex flex-wrap items-center gap-3">
+                            <div className="flex flex-wrap items-center justify-center gap-3">
                                 {sizes.map((s) => (
                                     <label key={s} className="relative">
                                         <input

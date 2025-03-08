@@ -10,12 +10,20 @@ import SearchInput from '../../components/formInputs/SearchInput';
 import useDelete from '../../hooks/useDelete';
 import { Link } from "react-router-dom";
 import ScrollToTop from "../../components/ScrollToTop";
-
+import { useNavigate } from "react-router-dom";
 
 const MyForms = ({ languageText, language, api }) => {
 
-    const { forms, dispatch } = useFormsContext();
     const { user } = useAuthContext();
+    const navigate = useNavigate()
+
+    useEffect(() => {
+        if (!user) {
+            navigate('/auth/login', { replace: true }); // Redirect to login
+        }
+    }, [user, navigate]);
+
+    const { forms, dispatch } = useFormsContext();
     const [committeeType, setCommitteeType] = useState(user?.committee);
     const [searchQuery, setSearchQuery] = useState("");
 

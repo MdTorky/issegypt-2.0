@@ -327,7 +327,7 @@ const AddInternship = ({ languageText, language, api }) => {
                                 })()}
                             </h1>
 
-                            <div className="flex gap-4 w-full justify-center">
+                            <div className="formRow">
                                 <InputField
                                     placeholder={languageText.CompanyName}
                                     iconValue="heroicons-solid:office-building"
@@ -351,7 +351,7 @@ const AddInternship = ({ languageText, language, api }) => {
                                 />
                             </div>
 
-                            <div className="flex gap-4 w-full justify-center">
+                            <div className="formRow">
                                 <InputField
                                     placeholder={languageText.CompanyWebsite}
                                     iconValue="pepicons-pop:internet-circle-filled"
@@ -374,7 +374,7 @@ const AddInternship = ({ languageText, language, api }) => {
                                     regex={null}
                                 />
                             </div>
-                            <div className="flex gap-4 w-full justify-center">
+                            <div className="formRow">
                                 <InputField
                                     placeholder={languageText.CompanyApplyEmail}
                                     iconValue="streamline:send-email-solid"
@@ -409,7 +409,7 @@ const AddInternship = ({ languageText, language, api }) => {
                                 regex={null}
                             />
 
-                            <div className="flex gap-4 w-full justify-center">
+                            <div className="formRow">
                                 <MultiSelectField
                                     options={categoryOptions}
                                     placeholder={languageText.SelectCategories}

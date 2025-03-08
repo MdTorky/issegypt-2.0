@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import { Icon } from "@iconify/react";
 import useSubmitForm from "../../hooks/useSubmitForm";
 import useFetchDataById from "../../hooks/useFetchDataById";
 import InputField from "../../components/formInputs/InputField";
@@ -10,13 +9,20 @@ import { useFormsContext } from '../../hooks/useFormContext';
 import { AnimatePresence, motion } from "framer-motion";
 import Loader from "../../components/loaders/Loader";
 import SelectField from "../../components/formInputs/SelectField";
+import { useAuthContext } from '../../hooks/useAuthContext';
 
 
 const EditGallery = ({ language, languageText, api }) => {
     const { id } = useParams(); // Get the ID of the Helping Hand from the URL
-    const navigate = useNavigate()
     const { galleries, dispatch } = useFormsContext();
+    const { user } = useAuthContext();
+    const navigate = useNavigate()
 
+    useEffect(() => {
+        if (!user) {
+            navigate('/auth/login', { replace: true }); // Redirect to login
+        }
+    }, [user, navigate]);
 
     const [folderName, setFolderName] = useState(""); // Selected service
     const [arabicFolderName, setArabicFolderName] = useState(""); // Selected group
@@ -129,7 +135,7 @@ const EditGallery = ({ language, languageText, api }) => {
 
                             <img src={folderImage} className="w-70 shadow-xl rounded-xl ring-darktheme ring-3 dark:ring-whitetheme border-9 border-whitetheme/0" />
 
-                            <div className="flex gap-4 w-full justify-center">
+                            <div className="formRow">
                                 <InputField
                                     placeholder={languageText.EventName}
                                     iconValue="solar:text-field-bold"
@@ -156,7 +162,7 @@ const EditGallery = ({ language, languageText, api }) => {
                                 />
                             </div>
 
-                            <div className="flex gap-4 w-full justify-center">
+                            <div className="formRow">
                                 <InputField
                                     placeholder={languageText.EventImageLink}
                                     iconValue="fluent:image-copy-28-filled"
@@ -185,7 +191,7 @@ const EditGallery = ({ language, languageText, api }) => {
                             </div>
 
 
-                            <div className="flex gap-4 w-full justify-center">
+                            <div className="formRow">
 
                                 <InputField
                                     placeholder={languageText.EventNumber}
@@ -215,7 +221,7 @@ const EditGallery = ({ language, languageText, api }) => {
 
 
 
-                            <div className="flex gap-4 w-full justify-center">
+                            <div className="formRow">
                                 <InputField
                                     placeholder={languageText.GalleryLink}
                                     iconValue="fluent:image-copy-28-filled"

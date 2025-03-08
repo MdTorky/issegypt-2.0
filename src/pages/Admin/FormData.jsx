@@ -12,14 +12,26 @@ import JSZip from "jszip";
 import { saveAs } from "file-saver";
 import SuccessMessage from "../../components/formInputs/SuccessMessage";
 import ScrollToTop from "../../components/ScrollToTop";
+import { useNavigate } from "react-router-dom";
+import { useAuthContext } from '../../hooks/useAuthContext';
 
 
 
 const FormData = ({ languageText, language, api }) => {
+
+    const { user } = useAuthContext();
+    const navigate = useNavigate()
+
+    useEffect(() => {
+        if (!user) {
+            navigate('/auth/login', { replace: true }); // Redirect to login
+        }
+    }, [user, navigate]);
     const { id } = useParams()
     const { forms, ISSForm, dispatch } = useFormsContext();
     const [searchQuery, setSearchQuery] = useState("");
     const [copySuccess, setCopySuccess] = useState('')
+
 
 
     const { data: formData, loading: formLoading, error: formError } = useFetchDataById(`${api}/api/forms/${id}`);

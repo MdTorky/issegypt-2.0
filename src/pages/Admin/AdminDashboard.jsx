@@ -7,6 +7,7 @@ import { useAuthContext } from '../../hooks/useAuthContext';
 import UserType from "../../components/UserType";
 import Loader from "../../components/loaders/Loader";
 import { Icon } from "@iconify/react";
+import { useNavigate } from "react-router-dom";
 
 
 
@@ -14,6 +15,13 @@ const AdminDashboard = ({ languageText, language, api }) => {
 
     const { dispatch, forms, members } = useFormsContext();
     const { user } = useAuthContext();
+    const navigate = useNavigate()
+    useEffect(() => {
+        if (!user) {
+            navigate('/auth/login', { replace: true }); // Redirect to login
+        }
+    }, [user, navigate]);
+
     const [committeeType, setCommitteeType] = useState(user?.committee);
 
 

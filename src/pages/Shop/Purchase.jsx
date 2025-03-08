@@ -189,10 +189,10 @@ const Purchase = ({ languageText, language, api }) => {
                             animate="visible"
                             exit="exit"
                             transition={{ duration: 0.8, ease: "linear", type: "spring", stiffness: 100 }}
-                            className={`lg:w-[50%] p-8 flex flex-col gap-4  rounded-xl`}
+                            className={`lg:w-[50%] w-[90%] justify-center m-auto p-8 flex flex-col gap-4  rounded-xl`}
                         >
                             <h1 className='text-2xl text-center text-redtheme dark:text-whitetheme'>{languageText.PersonalDetails}</h1>
-                            <div className="flex gap-4 w-full">
+                            <div className="formRow">
                                 <InputField
                                     placeholder={languageText.FullName}
                                     iconValue="fluent:rename-16-filled"
@@ -216,7 +216,7 @@ const Purchase = ({ languageText, language, api }) => {
                                     regex={null}
                                 />
                             </div>
-                            <div className="flex gap-4 w-full">
+                            <div className="formRow">
                                 <InputField
                                     placeholder={languageText.MatricNo}
                                     iconValue="ion:id-card"
@@ -240,7 +240,7 @@ const Purchase = ({ languageText, language, api }) => {
                                     regex={null}
                                 />
                             </div>
-                            <div className="flex gap-4 w-full">
+                            <div className="formRow">
                                 <SelectField
                                     options={facultyOptions}
                                     placeholder={languageText.ChooseYourFaculty}
@@ -268,10 +268,10 @@ const Purchase = ({ languageText, language, api }) => {
                             <hr className='w-3/4 h-1 mx-auto bg-redtheme dark:bg-whitetheme' />
                             <h1 className='text-2xl text-center text-redtheme dark:text-whitetheme'>{languageText.PaymentDetails}</h1>
 
-                            <div className="flex gap-4 w-full">
+                            <div className="formRow">
                                 <motion.div
                                     variants={InputChildVariants}
-                                    className='w-1/2 rounded-xl border-3 border-gray-700 p-1'>
+                                    className='lg:w-1/2 ring-3 p-1 ring-darktheme rounded-xl'>
                                     <img src="https://res.cloudinary.com/dmv4mxgn5/image/upload/v1720717445/Events/Fifa_ot5yio.png" className='rounded-lg' alt="" />
                                 </motion.div>
                                 <ImageUploadField

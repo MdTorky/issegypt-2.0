@@ -9,8 +9,20 @@ import useFetchData from "../../hooks/useFetchData";
 import Loader from "../../components/loaders/Loader";
 import InputField from "../../components/formInputs/InputField";
 import FormButton from "../../components/formInputs/FormButton";
+import AdminNavBar from "../../components/AdminNavBar";
+import { useAuthContext } from '../../hooks/useAuthContext';
+import { useNavigate } from "react-router-dom";
 
 const HelpingHandForm = ({ language, languageText, api }) => {
+  const { user } = useAuthContext();
+  const navigate = useNavigate()
+
+  useEffect(() => {
+    if (!user) {
+      navigate('/auth/login', { replace: true }); // Redirect to login
+    }
+  }, [user, navigate]);
+
   const { services, dispatch } = useFormsContext();
   const [service, setService] = useState(""); // Selected service
   const [group, setGroup] = useState(""); // Selected group
@@ -117,215 +129,220 @@ const HelpingHandForm = ({ language, languageText, api }) => {
     await handleSubmit(`${api}/api/helping`, "POST", helpingData, "helpinghands", languageText.ServiceSuccessMessage);
   };
 
+
+
   return (
-    <div className=" flex justify-center items-center">
-      {loading ?
-        (
-          <div className="h-screen flex justify-center items-center">
-            <Loader text={languageText.Loading} />
-          </div>
-        ) :
-        submitLoading ? (
-          <div className="h-screen flex justify-center items-center">
-            <Loader text={languageText.Submitting} />
-          </div>
-        ) : (
+    <div className="lg:flex ">
+      <AdminNavBar languageText={languageText} language={language} api={api} />
+      <div className=" flex w-full justify-center items-center">
+        {loading ?
+          (
+            <div className="h-screen flex justify-center items-center">
+              <Loader text={languageText.Loading} />
+            </div>
+          ) :
+          submitLoading ? (
+            <div className="h-screen flex justify-center items-center">
+              <Loader text={languageText.Submitting} />
+            </div>
+          ) : (
 
-          <motion.div
-            initial={{ opacity: 0, y: -200 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -200 }}
-            transition={{ duration: 0.8, ease: "linear", type: "spring", stiffness: 100 }}
-            className={`w-full p-8 flex flex-col justify-center items-center m-auto rounded-xl my-20`}
-          >
-            <motion.form
-              className="formForm"
-              variants={{
-                visible: { transition: { staggerChildren: 0.2 } },
-                exit: { transition: { staggerChildren: 0.1 } },
-              }}
-              initial="hidden"
-              animate="visible"
-              exit="exit"
-              onSubmit={onSubmit}
+            <motion.div
+              initial={{ opacity: 0, y: -200 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -200 }}
+              transition={{ duration: 0.8, ease: "linear", type: "spring", stiffness: 100 }}
+              className={`w-full p-8 flex flex-col justify-center items-center m-auto rounded-xl my-20`}
             >
-              <motion.h2
-                initial={{ scale: 0, opacity: 0 }}
-                animate={{ scale: 1, opacity: 1 }}
-                exit={{ opacity: 0, scale: 0 }}
-                transition={{ duration: 0.9, delay: 0.1, type: "spring" }}
-                className={`formTitle ${language === "en" ? "" : "flex flex-row-reverse"}  gap-2`}
+              <motion.form
+                className="formForm"
+                variants={{
+                  visible: { transition: { staggerChildren: 0.2 } },
+                  exit: { transition: { staggerChildren: 0.1 } },
+                }}
+                initial="hidden"
+                animate="visible"
+                exit="exit"
+                onSubmit={onSubmit}
               >
-                {languageText.Services} <span className="text-darktheme2 dark:text-whitetheme">{languageText.Form}</span>
-              </motion.h2>
+                <motion.h2
+                  initial={{ scale: 0, opacity: 0 }}
+                  animate={{ scale: 1, opacity: 1 }}
+                  exit={{ opacity: 0, scale: 0 }}
+                  transition={{ duration: 0.9, delay: 0.1, type: "spring" }}
+                  className={`formTitle ${language === "en" ? "" : "flex flex-row-reverse"}  gap-2`}
+                >
+                  {languageText.Services} <span className="text-darktheme2 dark:text-whitetheme">{languageText.Form}</span>
+                </motion.h2>
 
-              <div className="flex gap-4 w-full justify-center">
+                <div className="formRow">
 
-                <SelectField
-                  options={serviceOptions}
-                  placeholder={languageText.ChooseService}
-                  iconValue="ri:service-fill"
-                  icon="ri:service-line"
-                  language={language}
-                  languageText={languageText}
-                  required={true}
-                  setValue={setService} // Update the selected service
-                  regex={null}
-                />
-
-                {selectedService?.groups.length > 0 && (
                   <SelectField
-                    options={groupOptions}
-                    placeholder={languageText.ChooseGroup}
-                    iconValue="fluent:tab-group-16-filled"
-                    icon="fluent:tab-group-16-regular"
+                    options={serviceOptions}
+                    placeholder={languageText.ChooseService}
+                    iconValue="ri:service-fill"
+                    icon="ri:service-line"
                     language={language}
                     languageText={languageText}
                     required={true}
-                    setValue={setGroup}
+                    setValue={setService} // Update the selected service
                     regex={null}
                   />
-                )}
-              </div>
 
-              {selectedService && (
-                <AnimatePresence>
-                  <motion.div
-                    variants={{
-                      visible: { transition: { staggerChildren: 0.2 } },
-                      exit: { transition: { staggerChildren: 0.1 } },
-                    }}
-                    className="flex flex-col gap-3"
-                  >
-                    <div className="flex gap-4 w-full justify-center">
-
-                      <InputField
-                        placeholder={languageText.ServiceName}
-                        iconValue="mdi:rename"
-                        icon="mdi:rename-outline"
-                        type="text"
-                        language={language}
-                        languageText={languageText}
-                        required={true}
-                        setValue={setName}
-                        regex={null}
-                      />
-                      <InputField
-                        placeholder={languageText.ServiceArabicName}
-                        iconValue="mdi:rename"
-                        icon="mdi:rename-outline"
-                        type="text"
-                        language={language}
-                        languageText={languageText}
-
-                        required={true}
-                        setValue={setAName}
-                        regex={null}
-                      />
-                    </div>
-
-                    <div className="flex gap-4 w-full">
-                      <InputField
-                        placeholder={languageText.ServiceDescription}
-                        iconValue="tabler:file-description-filled"
-                        icon="tabler:file-description"
-                        type="text"
-                        language={language}
-                        languageText={languageText}
-                        setValue={setDescription}
-                        regex={null}
-                      />
-                      <InputField
-                        placeholder={languageText.ServiceArabicDescription}
-                        iconValue="tabler:file-description-filled"
-                        icon="tabler:file-description"
-                        type="text"
-                        language={language}
-                        languageText={languageText}
-                        setValue={setADescription}
-                        regex={null}
-                      />
-                    </div>
-                    <InputField
-                      placeholder={languageText.ServiceImageLink}
-                      iconValue="fluent:image-copy-28-filled"
-                      icon="fluent:image-copy-28-regular"
-                      type="text"
-                      required={true}
+                  {selectedService?.groups.length > 0 && (
+                    <SelectField
+                      options={groupOptions}
+                      placeholder={languageText.ChooseGroup}
+                      iconValue="fluent:tab-group-16-filled"
+                      icon="fluent:tab-group-16-regular"
                       language={language}
                       languageText={languageText}
-                      setValue={setImg}
+                      required={true}
+                      setValue={setGroup}
                       regex={null}
                     />
+                  )}
+                </div>
 
-                    <motion.button
-                      variants={InputChildVariants}
-                      whileHover={{
-                        scale: 1.1
+                {selectedService && (
+                  <AnimatePresence>
+                    <motion.div
+                      variants={{
+                        visible: { transition: { staggerChildren: 0.2 } },
+                        exit: { transition: { staggerChildren: 0.1 } },
                       }}
-                      whileTap={{
-                        scale: 0.6
-                      }}
-                      type="button"
-                      className=" w-full mt-2 lg:-translate-y-1 py-3 bg-redtheme text-white rounded-lg cursor-pointer"
-                      onClick={addLink}
+                      className="flex flex-col gap-3"
                     >
-                      {languageText.AddLink}
-                    </motion.button>
-
-                    {links.map((link, index) => (
-                      <div key={index} className="flex items-center w-full gap-4">
-                        <SelectField
-                          options={linkTypes}
-                          placeholder={languageText.SelectLinkType}
-                          iconValue="f7:link-circle-fill"
-                          icon="f7:link-circle"
-                          language={language}
-                          languageText={languageText}
-                          required={true}
-                          setValue={(value) => updateLink(index, "type", value)}
-                          regex={null}
-                        />
+                      <div className="formRow">
 
                         <InputField
-                          placeholder={languageText.ServiceLink}
-                          iconValue="f7:link-circle-fill"
-                          icon="f7:link-circle"
+                          placeholder={languageText.ServiceName}
+                          iconValue="mdi:rename"
+                          icon="mdi:rename-outline"
                           type="text"
-                          required={true}
                           language={language}
                           languageText={languageText}
-                          setValue={(value) => updateLink(index, "url", value)}
+                          required={true}
+                          setValue={setName}
                           regex={null}
                         />
-                        <motion.button
-                          initial={{ opacity: 0, scale: 0 }}
-                          animate={{ opacity: 1, scale: 1 }}
-                          exit={{ opacity: 0, scale: 0 }}
-                          transition={{ duration: 0.3, type: 'spring', stiffness: 200 }}
-                          whileTap={{ scale: 0.6 }}
-                          whileHover={{ scale: 1.2 }}
-                          type="button"
-                          className="text-whitetheme bg-redtheme p-2 rounded-full w-fit absolute left-0 right-0 flex justify-center m-auto cursor-pointer"
-                          onClick={() => removeLink(index)}
-                        >
-                          <Icon icon="solar:trash-bin-minimalistic-broken" className="text-xl" />
-                        </motion.button>
+                        <InputField
+                          placeholder={languageText.ServiceArabicName}
+                          iconValue="mdi:rename"
+                          icon="mdi:rename-outline"
+                          type="text"
+                          language={language}
+                          languageText={languageText}
 
+                          required={true}
+                          setValue={setAName}
+                          regex={null}
+                        />
                       </div>
-                    ))}
-                  </motion.div>
-                </AnimatePresence>
-              )}
 
-              <AnimatePresence mode="popLayout">
-                {submitError &&
-                  <ErrorContainer error={submitError} setError={setError} />}
-              </AnimatePresence>
-              <FormButton icon="hugeicons:task-done-01" text={languageText.SubmitForm} />
-            </motion.form>
-          </motion.div>
-        )}
+                      <div className="formRow">
+                        <InputField
+                          placeholder={languageText.ServiceDescription}
+                          iconValue="tabler:file-description-filled"
+                          icon="tabler:file-description"
+                          type="text"
+                          language={language}
+                          languageText={languageText}
+                          setValue={setDescription}
+                          regex={null}
+                        />
+                        <InputField
+                          placeholder={languageText.ServiceArabicDescription}
+                          iconValue="tabler:file-description-filled"
+                          icon="tabler:file-description"
+                          type="text"
+                          language={language}
+                          languageText={languageText}
+                          setValue={setADescription}
+                          regex={null}
+                        />
+                      </div>
+                      <InputField
+                        placeholder={languageText.ServiceImageLink}
+                        iconValue="fluent:image-copy-28-filled"
+                        icon="fluent:image-copy-28-regular"
+                        type="text"
+                        required={true}
+                        language={language}
+                        languageText={languageText}
+                        setValue={setImg}
+                        regex={null}
+                      />
+
+                      <motion.button
+                        variants={InputChildVariants}
+                        whileHover={{
+                          scale: 1.1
+                        }}
+                        whileTap={{
+                          scale: 0.6
+                        }}
+                        type="button"
+                        className=" w-full mt-2 lg:-translate-y-1 py-3 bg-redtheme text-white rounded-lg cursor-pointer"
+                        onClick={addLink}
+                      >
+                        {languageText.AddLink}
+                      </motion.button>
+
+                      {links.map((link, index) => (
+                        <div key={index} className="formRow">
+                          <SelectField
+                            options={linkTypes}
+                            placeholder={languageText.SelectLinkType}
+                            iconValue="f7:link-circle-fill"
+                            icon="f7:link-circle"
+                            language={language}
+                            languageText={languageText}
+                            required={true}
+                            setValue={(value) => updateLink(index, "type", value)}
+                            regex={null}
+                          />
+
+                          <InputField
+                            placeholder={languageText.ServiceLink}
+                            iconValue="f7:link-circle-fill"
+                            icon="f7:link-circle"
+                            type="text"
+                            required={true}
+                            language={language}
+                            languageText={languageText}
+                            setValue={(value) => updateLink(index, "url", value)}
+                            regex={null}
+                          />
+                          <motion.button
+                            initial={{ opacity: 0, scale: 0 }}
+                            animate={{ opacity: 1, scale: 1 }}
+                            exit={{ opacity: 0, scale: 0 }}
+                            transition={{ duration: 0.3, type: 'spring', stiffness: 200 }}
+                            whileTap={{ scale: 0.6 }}
+                            whileHover={{ scale: 1.2 }}
+                            type="button"
+                            className="text-whitetheme bg-redtheme p-2 rounded-full w-fit absolute left-0 right-0 flex justify-center m-auto cursor-pointer"
+                            onClick={() => removeLink(index)}
+                          >
+                            <Icon icon="solar:trash-bin-minimalistic-broken" className="text-xl" />
+                          </motion.button>
+
+                        </div>
+                      ))}
+                    </motion.div>
+                  </AnimatePresence>
+                )}
+
+                <AnimatePresence mode="popLayout">
+                  {submitError &&
+                    <ErrorContainer error={submitError} setError={setError} />}
+                </AnimatePresence>
+                <FormButton icon="hugeicons:task-done-01" text={languageText.SubmitForm} />
+              </motion.form>
+            </motion.div>
+          )}
+      </div>
     </div>
   );
 };

@@ -107,7 +107,7 @@ const AboutUs = ({ language, languageText, api }) => {
                 whileTap={{ scale: 0.5 }}
                 transition={{ duration: 0.5, type: "spring", stiffness: 300 }}
                 onClick={() => setValue(committee?.committee)}
-                className={`relative ring-6 dark:ring-whitetheme/80 border-5 border-whitetheme dark:border-darktheme2 rounded-br-2xl rounded-tl-2xl bg-cover bg-center 2xl:w-[400px] lg:w-[300px] w-[150px] py-3 px-3 cursor-pointer backdrop-brightness-50 overflow-hidden ${committee?.committee === value ? "!ring-redtheme scale-105 rounded-none" : ""}`}
+                className={` relative ring-6 dark:ring-whitetheme/80 border-5 border-whitetheme dark:border-darktheme2 rounded-br-2xl rounded-tl-2xl bg-cover bg-center 2xl:w-[400px] lg:w-[300px] md:w-[300px] w-[150px] py-3 px-3 cursor-pointer backdrop-brightness-50 overflow-hidden ${committee?.committee === value ? "!ring-redtheme scale-105 rounded-none" : ""}`}
                 style={{ backgroundImage: `url(${committee?.background})` }}
             >
                 {/* Dark Overlay */}
@@ -340,7 +340,7 @@ const AboutUs = ({ language, languageText, api }) => {
                             className='flex flex-col lg:gap-2 justify-center '>
                             <p className='text-2xl text-redtheme dark:text-whitetheme text-center mb-3 '> {languageText.ChooseCommittee}</p>
                             <motion.div
-                                className='flex flex-row flex-wrap lg:flex-col justify-center !items-center w-full m-auto gap-5'>
+                                className='flex flex-row md:flex-wrap lg:flex-col justify-center !items-center w-full m-auto gap-5'>
                                 {committeeTypes.map((committee) => (
                                     <MemberButton committee={committee} setValue={setCommitteeType} value={committeeType} />
 

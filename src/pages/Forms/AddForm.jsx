@@ -1,7 +1,5 @@
 import React, { useState, useEffect } from "react";
 import AdminNavBar from "../../components/AdminNavBar";
-import useFetchData from "../../hooks/useFetchData";
-import { useFormsContext } from '../../hooks/useFormContext';
 import { useAuthContext } from '../../hooks/useAuthContext';
 import UserType from "../../components/UserType";
 import Loader from "../../components/loaders/Loader";
@@ -14,10 +12,18 @@ import ImageUploadField from "../../components/formInputs/ImageUploadField";
 import MultiSelectField from "../../components/formInputs/MultiSelectField";
 import SelectField from "../../components/formInputs/SelectField";
 import FormButton from "../../components/formInputs/FormButton";
+import { useNavigate } from "react-router-dom";
 
 const AddForm = ({ languageText, language, api }) => {
 
     const { user } = useAuthContext();
+    const navigate = useNavigate()
+
+    useEffect(() => {
+        if (!user) {
+            navigate('/auth/login', { replace: true }); // Redirect to login
+        }
+    }, [user, navigate]);
     const [committeeType, setCommitteeType] = useState(user?.committee);
     const [formType, setFormType] = useState(user?.committee)
 

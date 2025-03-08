@@ -5,19 +5,25 @@ import useSubmitForm from "../../hooks/useSubmitForm";
 import useFetchDataById from "../../hooks/useFetchDataById";
 import useFetchData from "../../hooks/useFetchData";
 import ErrorContainer from "../../components/formInputs/ErrorContainer";
-import SuccessMessage from "../../components/formInputs/SuccessMessage";
 import { useParams, useNavigate } from "react-router-dom";
 import { useFormsContext } from '../../hooks/useFormContext';
 import { AnimatePresence, motion } from "framer-motion";
 import Loader from "../../components/loaders/Loader";
 import InputField from "../../components/formInputs/InputField";
 import FormButton from "../../components/formInputs/FormButton";
+import { useAuthContext } from '../../hooks/useAuthContext';
 
 const EditHelpingHand = ({ language, languageText, api }) => {
     const { id } = useParams(); // Get the ID of the Helping Hand from the URL
-    const navigate = useNavigate()
     const { services, dispatch } = useFormsContext();
+    const { user } = useAuthContext();
+    const navigate = useNavigate()
 
+    useEffect(() => {
+        if (!user) {
+            navigate('/auth/login', { replace: true }); // Redirect to login
+        }
+    }, [user, navigate]);
 
     const [service, setService] = useState(""); // Selected service
     const [group, setGroup] = useState(""); // Selected group

@@ -3,7 +3,6 @@ import SelectField from "../../components/formInputs/SelectField";
 import useSubmitForm from "../../hooks/useSubmitForm";
 import useFetchDataById from "../../hooks/useFetchDataById";
 import ErrorContainer from "../../components/formInputs/ErrorContainer";
-import SuccessMessage from "../../components/formInputs/SuccessMessage";
 import { useParams, useNavigate, useLocation } from "react-router-dom";
 import { useFormsContext } from '../../hooks/useFormContext';
 import { AnimatePresence, motion } from "framer-motion";
@@ -11,11 +10,20 @@ import Loader from "../../components/loaders/Loader";
 import InputField from "../../components/formInputs/InputField";
 import FormButton from "../../components/formInputs/FormButton";
 import MultiSelectField from "../../components/formInputs/MultiSelectField";
+import { useAuthContext } from '../../hooks/useAuthContext';
+
 
 const EditInternship = ({ languageText, language, api }) => {
+    const { user } = useAuthContext();
+    const navigate = useNavigate()
+
+    useEffect(() => {
+        if (!user) {
+            navigate('/auth/login', { replace: true }); // Redirect to login
+        }
+    }, [user, navigate]);
 
     const { id } = useParams();
-    const navigate = useNavigate()
     const locations = useLocation();
     const { forms, dispatch } = useFormsContext();
 

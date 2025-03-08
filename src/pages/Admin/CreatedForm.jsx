@@ -222,7 +222,7 @@ const CreatedForm = ({ languageText, language, api }) => {
 
                                             {/* Event Poster */}
                                             <div className='flex flex-col gap-3  '>
-                                                <div className='md:w-150 w-100 lg:m-0 m-auto bg-darktheme2/40 ring-4 ring-darktheme2/40 border-4 border-whitetheme/90 p-3 relative rounded-3xl'>
+                                                <div className='md:w-150 w-90 lg:m-0 m-auto bg-darktheme2/40 ring-4 ring-darktheme2/40 border-4 border-whitetheme/90 p-3 relative rounded-3xl'>
                                                     <img src={formData?.eventImg} alt="" className="rounded-xl" />
                                                     <div className="absolute bottom-0 left-0 right-0 flex m-auto w-full md:h-80 h-50 bg-gradient-to-t from-darktheme2 via-darktheme2/95 to-transparent z-10 rounded-b-3xl "></div>
 
@@ -231,7 +231,7 @@ const CreatedForm = ({ languageText, language, api }) => {
                                                     </div>
                                                 </div>
 
-                                                <div className=' bg-darktheme2/40 ring-4 ring-darktheme2/40 border-4 border-whitetheme/90 p-3 relative rounded-2xl w-100 md:w-150 flex items-center justify-between px-5 m-auto lg:m-0'>
+                                                <div className=' bg-darktheme2/40 ring-4 ring-darktheme2/40 border-4 border-whitetheme/90 p-3 relative rounded-2xl w-90 md:w-150 flex items-center justify-between px-5 m-auto lg:m-0'>
                                                     <p className='text-whitetheme whitespace-break-spaces text-xl lg:text-xl'>{formData.eventDescription}</p>
                                                 </div>
                                             </div>

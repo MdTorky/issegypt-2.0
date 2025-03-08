@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import InputField from "../components/formInputs/InputField";
 import SelectField from "../components/formInputs/SelectField";
@@ -9,12 +9,21 @@ import { useRegister } from '../hooks/useRegister';
 import { Icon } from "@iconify/react";
 import ErrorContainer from "../components/formInputs/ErrorContainer";
 import { useAuthContext } from '../hooks/useAuthContext';
-// import SuccessMessage from "../components/formInputs/SuccessMessage";
 import Loader from "../components/loaders/Loader";
+import { useNavigate } from "react-router-dom";
 
 const Register = ({ language, languageText, api }) => {
     const { authType } = useParams();
     const { user } = useAuthContext()
+
+    const navigate = useNavigate()
+
+    useEffect(() => {
+        if (user) {
+            navigate('/adminDashboard', { replace: true }); // Redirect to login
+        }
+    }, [user, navigate]);
+
 
     const [isLogin, setIsLogin] = useState(authType);
 

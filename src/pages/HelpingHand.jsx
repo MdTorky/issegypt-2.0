@@ -257,7 +257,6 @@ const HelpingHand = ({ language, languageText, api }) => {
                         >
                             <motion.p variants={facultyChildVariants} className="text-2xl text-gray-400">{languageText.FacultyOf}</motion.p>
                             <motion.h1 variants={facultyChildVariants} className="text-[4em] leading-none lg:text-6xl 2xl:text-8xl text-redtheme lg:w-full m-auto w-[85%]">{language === "en" ? selectedFaculty.title : selectedFaculty.aTitle}</motion.h1>
-                            <motion.p variants={facultyChildVariants} className="text-2xl text-gray-400">Faculty Description</motion.p>
                             <motion.p variants={facultyChildVariants} className="text-1xl text-gray-400">{selectedFaculty.email}</motion.p>
                             <div className=" flex flex-col items-center justify-center gap-4 bg-darktheme p-4 rounded-lg ring-3 2xl:px-10 ring-gray-400 w-fit m-auto lg:m-0 lg:mt-5 mt-5">
                                 <p className="text-2xl text-gray-400 ">{languageText.FacultyLinks}</p>
@@ -363,11 +362,6 @@ const HelpingHand = ({ language, languageText, api }) => {
                     <p className="text-2xl text-gray-400">{languageText.ChooseFaculty}</p>
                     <AnimatePresence mode="wait">
                         <motion.div
-                            variants={parentStagger}
-                            initial="hidden"
-                            animate="visible"
-                            exit="exit"
-                            transition={{ duration: 0.5 }}
                             className="flex gap-3 lg:gap-7 items-center flex-wrap justify-center"
                         >
                             {faculties &&
