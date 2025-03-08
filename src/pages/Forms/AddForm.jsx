@@ -19,11 +19,11 @@ const AddForm = ({ languageText, language, api }) => {
     const { user } = useAuthContext();
     const navigate = useNavigate()
 
-    useEffect(() => {
-        if (!user) {
-            navigate('/auth/login', { replace: true }); // Redirect to login
-        }
-    }, [user, navigate]);
+    // useEffect(() => {
+    //     if (!user) {
+    //         navigate('/auth/login', { replace: true }); // Redirect to login
+    //     }
+    // }, [user, navigate]);
     const [committeeType, setCommitteeType] = useState(user?.committee);
     const [formType, setFormType] = useState(user?.committee)
 

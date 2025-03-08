@@ -35,6 +35,8 @@ import CreatedForm from './pages/Admin/CreatedForm';
 import FormData from './pages/Admin/FormData';
 import ProductsData from './pages/Admin/ProductsData';
 import NotFound from './pages/NotFound';
+import ProtectedRoute from './pages/ProtectedRoute';
+
 
 function App() {
   const api = import.meta.env.VITE_APP_API_KEY;
@@ -91,24 +93,24 @@ function App() {
         <Route path="/gallery/:id" element={<GalleryImages language={language} languageText={languageText} api={api} />} />
         <Route path="/reference/:id" element={<Reference language={language} languageText={languageText} api={api} />} />
         <Route path="/auth/:authType" element={<Register language={language} languageText={languageText} api={api} />} />
+        <Route path="/form/:link" element={<CreatedForm language={language} languageText={languageText} api={api} />} />
+        <Route path="/services/:link" element={<Service language={language} languageText={languageText} api={api} />} />
 
         {/* Admin */}
-        <Route path="/adminDashboard" element={<AdminDashboard language={language} languageText={languageText} api={api} />} />
-        <Route path="/myForms" element={<MyForms language={language} languageText={languageText} api={api} />} />
-        <Route path="/productsData" element={<ProductsData language={language} languageText={languageText} api={api} />} />
-        <Route path="/addForm" element={<AddForm language={language} languageText={languageText} api={api} />} />
-        <Route path="/editForm/:id" element={<EditForm language={language} languageText={languageText} api={api} />} />
-        <Route path="/form/:link" element={<CreatedForm language={language} languageText={languageText} api={api} />} />
-        <Route path="/formData/:id" element={<FormData language={language} languageText={languageText} api={api} />} />
-        <Route path="/editgallery/:id" element={<EditGallery language={language} languageText={languageText} api={api} />} />
-        <Route path="/editIntern/:id" element={<EditInternship language={language} languageText={languageText} api={api} />} />
+        <Route path="/adminDashboard" element={<ProtectedRoute><AdminDashboard language={language} languageText={languageText} api={api} /></ProtectedRoute>} />
+        <Route path="/myForms" element={<ProtectedRoute><MyForms language={language} languageText={languageText} api={api} /></ProtectedRoute>} />
+        <Route path="/productsData" element={<ProtectedRoute><ProductsData language={language} languageText={languageText} api={api} /></ProtectedRoute>} />
+        <Route path="/editForm/:id" element={<ProtectedRoute><EditForm language={language} languageText={languageText} api={api} /></ProtectedRoute>} />
+        <Route path="/formData/:id" element={<ProtectedRoute><FormData language={language} languageText={languageText} api={api} /></ProtectedRoute>} />
+        <Route path="/editgallery/:id" element={<ProtectedRoute><EditGallery language={language} languageText={languageText} api={api} /></ProtectedRoute>} />
+        <Route path="/editIntern/:id" element={<ProtectedRoute><EditInternship language={language} languageText={languageText} api={api} /></ProtectedRoute>} />
 
         {/* Forms */}
-        <Route path="/addService" element={<ServiceForm language={language} languageText={languageText} api={api} />} />
-        <Route path="/addHelpingHand" element={<HelpingHandForm language={language} languageText={languageText} api={api} />} />
-        <Route path="/services/:link" element={<Service language={language} languageText={languageText} api={api} />} />
-        <Route path="/editHelpingHand/:id" element={<EditHelpingHand language={language} languageText={languageText} api={api} />} />
-        <Route path="/addIntern" element={<AddInternship language={language} languageText={languageText} api={api} />} />
+        <Route path="/addForm" element={<ProtectedRoute><AddForm language={language} languageText={languageText} api={api} /></ProtectedRoute>} />
+        <Route path="/addService" element={<ProtectedRoute><ServiceForm language={language} languageText={languageText} api={api} /></ProtectedRoute>} />
+        <Route path="/addHelpingHand" element={<ProtectedRoute><HelpingHandForm language={language} languageText={languageText} api={api} /></ProtectedRoute>} />
+        <Route path="/editHelpingHand/:id" element={<ProtectedRoute><EditHelpingHand language={language} languageText={languageText} api={api} /></ProtectedRoute>} />
+        <Route path="/addIntern" element={<ProtectedRoute><AddInternship language={language} languageText={languageText} api={api} /></ProtectedRoute>} />
 
         <Route path="*" element={<NotFound darkMode={darkMode} language={language} languageText={languageText} />} />
       </Routes>

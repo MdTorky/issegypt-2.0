@@ -26,11 +26,7 @@ const EditForm = ({ languageText, language, api }) => {
     const [formType, setFormType] = useState(user?.committee)
 
 
-    useEffect(() => {
-        if (!user) {
-            navigate('/auth/login', { replace: true }); // Redirect to login
-        }
-    }, [user, navigate]);
+
 
     useEffect(() => {
         if (user?.committee) {

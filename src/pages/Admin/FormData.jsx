@@ -21,12 +21,6 @@ const FormData = ({ languageText, language, api }) => {
 
     const { user } = useAuthContext();
     const navigate = useNavigate()
-
-    useEffect(() => {
-        if (!user) {
-            navigate('/auth/login', { replace: true }); // Redirect to login
-        }
-    }, [user, navigate]);
     const { id } = useParams()
     const { forms, ISSForm, dispatch } = useFormsContext();
     const [searchQuery, setSearchQuery] = useState("");

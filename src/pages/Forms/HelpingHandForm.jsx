@@ -17,11 +17,11 @@ const HelpingHandForm = ({ language, languageText, api }) => {
   const { user } = useAuthContext();
   const navigate = useNavigate()
 
-  useEffect(() => {
-    if (!user) {
-      navigate('/auth/login', { replace: true }); // Redirect to login
-    }
-  }, [user, navigate]);
+  // useEffect(() => {
+  //   if (!user) {
+  //     navigate('/auth/login', { replace: true }); // Redirect to login
+  //   }
+  // }, [user, navigate]);
 
   const { services, dispatch } = useFormsContext();
   const [service, setService] = useState(""); // Selected service

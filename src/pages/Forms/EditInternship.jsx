@@ -17,11 +17,7 @@ const EditInternship = ({ languageText, language, api }) => {
     const { user } = useAuthContext();
     const navigate = useNavigate()
 
-    useEffect(() => {
-        if (!user) {
-            navigate('/auth/login', { replace: true }); // Redirect to login
-        }
-    }, [user, navigate]);
+
 
     const { id } = useParams();
     const locations = useLocation();

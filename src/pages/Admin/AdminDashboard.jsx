@@ -15,12 +15,6 @@ const AdminDashboard = ({ languageText, language, api }) => {
 
     const { dispatch, forms, members } = useFormsContext();
     const { user } = useAuthContext();
-    const navigate = useNavigate()
-    useEffect(() => {
-        if (!user) {
-            navigate('/auth/login', { replace: true }); // Redirect to login
-        }
-    }, [user, navigate]);
 
     const [committeeType, setCommitteeType] = useState(user?.committee);
 

@@ -16,15 +16,10 @@ import useSubmitForm from "../../hooks/useSubmitForm";
 import SelectField from "../../components/formInputs/SelectField";
 import ScrollToTop from "../../components/ScrollToTop";
 import { useAuthContext } from '../../hooks/useAuthContext';
-const ProductsData = ({ languageText, language, api }) => {
-    const { user } = useAuthContext();
-    const navigate = useNavigate()
 
-    useEffect(() => {
-        if (!user) {
-            navigate('/auth/login', { replace: true }); // Redirect to login
-        }
-    }, [user, navigate]);
+
+
+const ProductsData = ({ languageText, language, api }) => {
 
     const { products, transactions, dispatch } = useFormsContext();
     const [searchQuery, setSearchQuery] = useState("");

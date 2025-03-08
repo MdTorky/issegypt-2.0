@@ -19,11 +19,6 @@ const EditHelpingHand = ({ language, languageText, api }) => {
     const { user } = useAuthContext();
     const navigate = useNavigate()
 
-    useEffect(() => {
-        if (!user) {
-            navigate('/auth/login', { replace: true }); // Redirect to login
-        }
-    }, [user, navigate]);
 
     const [service, setService] = useState(""); // Selected service
     const [group, setGroup] = useState(""); // Selected group

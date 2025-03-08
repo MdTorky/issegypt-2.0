@@ -20,9 +20,13 @@ const Register = ({ language, languageText, api }) => {
 
     useEffect(() => {
         if (user) {
-            navigate('/adminDashboard', { replace: true }); // Redirect to login
+            // Retrieve last visited route or fallback to dashboard
+            const lastRoute = localStorage.getItem("lastRoute") || "/adminDashboard";
+            localStorage.removeItem("lastRoute"); // Clear after redirection
+            navigate(lastRoute, { replace: true });
         }
     }, [user, navigate]);
+
 
 
     const [isLogin, setIsLogin] = useState(authType);

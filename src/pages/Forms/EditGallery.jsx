@@ -18,11 +18,6 @@ const EditGallery = ({ language, languageText, api }) => {
     const { user } = useAuthContext();
     const navigate = useNavigate()
 
-    useEffect(() => {
-        if (!user) {
-            navigate('/auth/login', { replace: true }); // Redirect to login
-        }
-    }, [user, navigate]);
 
     const [folderName, setFolderName] = useState(""); // Selected service
     const [arabicFolderName, setArabicFolderName] = useState(""); // Selected group

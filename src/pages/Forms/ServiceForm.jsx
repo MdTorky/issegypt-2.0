@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import InputField from '../../components/formInputs/InputField';
 import { AnimatePresence, motion } from "framer-motion";
 import FormButton from '../../components/formInputs/FormButton';
@@ -15,11 +15,7 @@ const ServiceForm = ({ language, languageText, api }) => {
     const { user } = useAuthContext();
     const navigate = useNavigate()
 
-    useEffect(() => {
-        if (!user) {
-            navigate('/auth/login', { replace: true }); // Redirect to login
-        }
-    }, [user, navigate]);
+
 
 
     const [name, setName] = useState('');
