@@ -440,7 +440,21 @@
     "TransactionsConfirm": "Are you sure you want to update all transaction statuses?",
 
     "WhatHere": "What Are you Doing here?",
-    "NothingHere": "There's nothing...!"
+    "NothingHere": "There's nothing...!",
+
+    "JoinQuiz": "Join The Emoji Quiz",
+    "QuizCode": "Quiz Code",
+    "JoinQuizButton": "Join Quiz",
+    "WaitingForQuiz": "Waiting for Quiz to Start",
+    "WaitForHost": "Wait for the Host to Start!",
+    "YourGroupName": "Your Group Name:",
+    "YourAnswer": "Just Write Your Answer Already",
+    "AnswerSubmitted": "Answer Submitted!",
+    "FinallySubmitted": "Finally your Submitted, I thought you wouldn't",
+    "QuizCompleted": "Quiz Finished!",
+    "ThanksForAnswers": "Thanks for your whatever you wrote",
+    "ResultsReleased": "Those people in the corner who spent the whole day changing slides will view the answers and release the results soon, JUST WAIT",
+    "ExploreNewWebsite": "Explore The New Website"
   },
 
   "ar": {
@@ -883,6 +897,20 @@
     "TransactionsConfirm": "هل أنت متأكد أنك تريد تحديث حالات جميع المعاملات؟",
 
     "WhatHere": "أنت ايه اللي جابك هنا؟",
-    "NothingHere": "أنت تايه...!"
+    "NothingHere": "أنت تايه...!",
+
+    "JoinQuiz": "خش هتجيبك",
+    "QuizCode": "بص على الشاشة",
+    "JoinQuizButton": "تيجي نبدأ بقى",
+    "WaitingForQuiz": "ادينا مستنين المسؤول يبدأ اللعبة",
+    "WaitForHost": "ماطيلا ياعم",
+    "YourGroupName": "اسم جروبك ده خلي بالك:",
+    "YourAnswer": "اكتب اي حاجه يمكن تيجي",
+    "AnswerSubmitted": "شابوووه",
+    "FinallySubmitted": "خلصنا يابا عايزين نروح",
+    "QuizCompleted": "خلصنا خلاص روح بيتكم",
+    "ThanksForAnswers": "بالله عليكم هبدتم كام هبدة؟",
+    "ResultsReleased": "شايف الناس اللي واقفة بتقلب في سلايدات من أول اليوم دول؟ تمام",
+    "ExploreNewWebsite": "اتفسح براحتك في الموقع"
   }
 }

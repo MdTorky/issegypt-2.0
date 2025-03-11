@@ -36,6 +36,14 @@ import FormData from './pages/Admin/FormData';
 import ProductsData from './pages/Admin/ProductsData';
 import NotFound from './pages/NotFound';
 import ProtectedRoute from './pages/ProtectedRoute';
+import CreateQuiz from './pages/WelcomeQuiz/CreateQuiz';
+import JoinQuiz from './pages/WelcomeQuiz/JoinQuiz';
+import HostScreen from './pages/WelcomeQuiz/HostScreen';
+import ParticipantScreen from './pages/WelcomeQuiz/ParticipantScreen';
+import ResultsScreen from './pages/WelcomeQuiz/ResultsScreen';
+import QuizCompleted from './pages/WelcomeQuiz/QuizCompleted';
+import EditPoints from './pages/WelcomeQuiz/EditPoints';
+
 
 
 function App() {
@@ -112,10 +120,21 @@ function App() {
         <Route path="/editHelpingHand/:id" element={<ProtectedRoute><EditHelpingHand language={language} languageText={languageText} api={api} /></ProtectedRoute>} />
         <Route path="/addIntern" element={<ProtectedRoute><AddInternship language={language} languageText={languageText} api={api} /></ProtectedRoute>} />
 
+        <Route path="/create" element={<ProtectedRoute><CreateQuiz api={api} /></ProtectedRoute>} />
+        <Route path="/host/:code" element={<ProtectedRoute><HostScreen api={api} /></ProtectedRoute>} />
+        <Route path="/results/:code" element={<ProtectedRoute><ResultsScreen language={language} languageText={languageText} api={api} /></ProtectedRoute>} />
+        <Route path="/editPoints/:code" element={<ProtectedRoute><EditPoints api={api} languageText={languageText} /></ProtectedRoute>} />
+
+        <Route path="/join" element={<JoinQuiz language={language} languageText={languageText} api={api} />} />
+        <Route path="/participant/:code" element={<ParticipantScreen language={language} languageText={languageText} api={api} />} />
+        <Route path="/quizCompleted" element={<QuizCompleted languageText={languageText} api={api} />} />
+
+
         <Route path="*" element={<NotFound darkMode={darkMode} language={language} languageText={languageText} />} />
       </Routes>
       <BottomNavbar languageText={languageText} language={language} />
       <Footer languageText={languageText} language={language} />
+
       <AnimatePresence>
         {popUp && <PopUpCard desc={popDesc} title={popTitle} atitle={popATitle} language={language} />}
       </AnimatePresence>

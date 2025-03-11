@@ -14,6 +14,9 @@ const UserType = (number) => {
     } else if (number === "Admin") {
         return (user && (user.committee === "Admin"));
 
+    } else if (number === "Social") {
+
+        return (user && (user.committee === "Social" || user.committee === "Admin"));
     }
 };
 
