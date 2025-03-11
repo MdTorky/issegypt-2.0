@@ -1,5 +1,3 @@
-"use client"
-
 import { useState, useEffect } from "react"
 import { useParams, useNavigate } from "react-router-dom"
 import axios from "axios"
@@ -12,6 +10,9 @@ const EditPoints = ({ api, languageText }) => {
     const [groups, setGroups] = useState([])
     const [loading, setLoading] = useState(true)
     const [error, setError] = useState("")
+
+    const [sortColumn, setSortColumn] = useState(null)
+    const [sortOrder, setSortOrder] = useState("asc")
 
     useEffect(() => {
         fetchQuizAndGroups()
@@ -56,6 +57,27 @@ const EditPoints = ({ api, languageText }) => {
         }
     }
 
+
+    const handleSort = (questionIndex) => {
+        if (sortColumn === questionIndex) {
+            setSortOrder(sortOrder === "asc" ? "desc" : "asc") // Toggle sorting order
+        } else {
+            setSortColumn(questionIndex)
+            setSortOrder("asc") // Default to ascending when switching columns
+        }
+    }
+
+    // Sort groups based on selected column (question's timeTaken)
+    const sortedGroups = [...groups].sort((a, b) => {
+        if (sortColumn === null) return 0
+
+        const timeA = a.answers[sortColumn]?.timeTaken || Infinity // Default to large value if no time taken
+        const timeB = b.answers[sortColumn]?.timeTaken || Infinity
+
+        return sortOrder === "asc" ? timeA - timeB : timeB - timeA
+    })
+
+
     if (loading)
         return (
             <div className="min-h-screen flex items-center justify-center">
@@ -79,10 +101,16 @@ const EditPoints = ({ api, languageText }) => {
                             <tr className="bg-gray-50 dark:bg-darktheme">
                                 <th className="px-4 py-2 text-left m-auto">Group</th>
                                 {quiz.questions.map((question, index) => (
-                                    <th key={index} className="m-auto px-4 py-2 text-center">
+                                    <th
+                                        key={index}
+                                        className="px-4 py-2 text-center cursor-pointer hover:bg-gray-200 dark:hover:bg-darktheme2 transition m-auto "
+                                        onClick={() => handleSort(index)}
+                                    >
                                         <p>{question.text}</p>
-                                        <p className="text-redtheme m-auto">{question.correctAnswer}</p>
-                                        {/* {question.text + "\n" + question.correctAnswer} */}
+                                        <p className="text-redtheme font-modernpro">{question.correctAnswer}</p>
+                                        <p className="text-sm text-gray-500 flex items-center m-auto justify-center ">
+                                            Sort by Time {sortColumn === index ? (sortOrder === "asc" ? "↑" : "↓") : ""}
+                                        </p>
                                     </th>
                                 ))}
                             </tr>
@@ -93,7 +121,12 @@ const EditPoints = ({ api, languageText }) => {
                                     <td className="px-4 py-3 text-center">{group.name}</td>
                                     {quiz.questions.map((_, index) => (
                                         <td key={index} className="px-4 py-3 text-center m-auto">
-                                            <p className="text-redtheme">{group.answers[index]?.answer}</p>
+                                            <p className="text-redtheme font-modernpro">{group.answers[index]?.answer}</p>
+                                            <p className="text-emerald-600 font-modernpro">
+                                                {group.answers[index]?.timeTaken
+                                                    ? (group.answers[index].timeTaken / 1000).toFixed(2) + " sec"
+                                                    : ""}
+                                            </p>
                                             <input
                                                 type="number"
                                                 value={group.answers[index]?.points || 0}

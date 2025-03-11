@@ -173,7 +173,7 @@ const HostScreen = ({ api }) => {
 
                     {!quizStarted && !quizEnded && (
                         <div className=" bg-gradient-to-b from-whitetheme/50 to-whitetheme2/50 dark:from-darktheme/50 dark:to-darktheme2/50 rounded-xl shadow-xl py-6 flex flex-col max-w-200">
-                            <h2 className="text-2xl mb-4 text-center dark:text-whitetheme">Waiting for Groups to Join</h2>
+                            <h2 className="text-2xl mb-4 text-center dark:text-whitetheme w-[80%] m-auto">Waiting for Groups to Join</h2>
                             {groups.length === 0 ? (
                                 <p className="text-gray-600 text-center">No groups have joined yet.</p>
                             ) : (
@@ -226,7 +226,7 @@ const HostScreen = ({ api }) => {
                             onClick={nextQuestion}
                             className="w-full py-3 px-4 rounded-md bg-redtheme text-white font-medium hover:bg-redtheme2 duration-300 ease-in-out cursor-pointer"
                         >
-                            {currentQuestion.total ? "Finish Quiz" : "Next Question"}
+                            {currentQuestion === 15 ? "Finish Quiz" : "Next Question"}
                         </button>
                         {/* ) : ( */}
                         {/* )} */}

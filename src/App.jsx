@@ -83,6 +83,7 @@ function App() {
   const { popUp, popDesc, popTitle, popATitle } = usePopup();
 
 
+  const hiddenNavbarPaths = ["/join", "/participant/:code"];
 
   // dark:bg-darktheme2 bg-whitetheme
   return (
@@ -132,7 +133,9 @@ function App() {
 
         <Route path="*" element={<NotFound darkMode={darkMode} language={language} languageText={languageText} />} />
       </Routes>
-      <BottomNavbar languageText={languageText} language={language} />
+      {!hiddenNavbarPaths.includes(location.pathname) && (
+        <BottomNavbar languageText={languageText} language={language} />
+      )}
       <Footer languageText={languageText} language={language} />
 
       <AnimatePresence>
