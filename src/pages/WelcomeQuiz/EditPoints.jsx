@@ -59,23 +59,19 @@ const EditPoints = ({ api, languageText }) => {
 
 
     const handleSort = (questionIndex) => {
-        if (sortColumn === questionIndex) {
-            setSortOrder(sortOrder === "asc" ? "desc" : "asc") // Toggle sorting order
-        } else {
-            setSortColumn(questionIndex)
-            setSortOrder("asc") // Default to ascending when switching columns
-        }
-    }
+        const currentOrder = sortOrder[questionIndex] || "asc";
+        const newOrder = currentOrder === "asc" ? "desc" : "asc";
 
-    // Sort groups based on selected column (question's timeTaken)
-    const sortedGroups = [...groups].sort((a, b) => {
-        if (sortColumn === null) return 0
+        const sortedGroups = [...groups].sort((a, b) => {
+            const timeA = a.answers[questionIndex]?.timeTaken || Infinity;
+            const timeB = b.answers[questionIndex]?.timeTaken || Infinity;
 
-        const timeA = a.answers[sortColumn]?.timeTaken || Infinity // Default to large value if no time taken
-        const timeB = b.answers[sortColumn]?.timeTaken || Infinity
+            return newOrder === "asc" ? timeA - timeB : timeB - timeA;
+        });
 
-        return sortOrder === "asc" ? timeA - timeB : timeB - timeA
-    })
+        setGroups(sortedGroups);
+        setSortOrder({ ...sortOrder, [questionIndex]: newOrder });
+    };
 
 
     if (loading)
@@ -109,7 +105,7 @@ const EditPoints = ({ api, languageText }) => {
                                         <p>{question.text}</p>
                                         <p className="text-redtheme font-modernpro">{question.correctAnswer}</p>
                                         <p className="text-sm text-gray-500 flex items-center m-auto justify-center ">
-                                            Sort by Time {sortColumn === index ? (sortOrder === "asc" ? "↑" : "↓") : ""}
+                                            {sortOrder[index] === "asc" ? "▲" : "▼"}
                                         </p>
                                     </th>
                                 ))}

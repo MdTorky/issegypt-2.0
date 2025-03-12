@@ -137,12 +137,20 @@ const ResultsScreen = ({ api, languageText }) => {
                             >
                                 <h2 className="text-xl text-end font-modernpro font-semibold mb-4 dark:text-whitetheme text-redtheme">دي كل نقطكم اللي تكسف</h2>
                                 <div className="overflow-hidden rounded-lg border border-gray-200 dark:text-whitetheme">
-                                    <table className="w-full">
+                                    <table className="w-full overflow-auto">
                                         <thead>
-                                            <tr className="bg-gray-50 dark:text-darktheme2">
+                                            <tr className="bg-gray-50 dark:text-darktheme2 overflow-auto">
                                                 <th className="px-4 py-3 text-left">Rank</th>
                                                 <th className="px-4 py-3 text-left">Group</th>
                                                 <th className="px-4 py-3 text-right">Points</th>
+                                                {/* {quiz.questions.map((question, index) => (
+                                                    <th
+                                                        key={index}
+                                                    >
+                                                        <p>{question.text}</p>
+                                                        <p className="text-redtheme font-modernpro">{question.correctAnswer}</p>
+                                                    </th>
+                                                ))} */}
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -151,6 +159,11 @@ const ResultsScreen = ({ api, languageText }) => {
                                                     <td className="px-4 py-3 font-medium">{index + 1}</td>
                                                     <td className="px-4 py-3">{group.name}</td>
                                                     <td className="px-4 py-3 text-right font-bold">{group.totalPoints}</td>
+                                                    {/* {quiz.questions.map((_, index) => (
+                                                        <td key={index} className="px-4 py-3 text-center m-auto">
+                                                            <p className="text-redtheme font-modernpro">{group.answers[index]?.answer}</p>
+                                                        </td>
+                                                    ))} */}
                                                 </tr>
                                             ))}
                                         </tbody>
@@ -158,6 +171,8 @@ const ResultsScreen = ({ api, languageText }) => {
                                 </div>
                             </motion.div>
                         </div>
+
+
                     )}
 
                     {/* <div className="mt-8 text-center">
