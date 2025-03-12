@@ -30,10 +30,10 @@ const ImageCarousel = ({ images, language }) => {
                 visible: { y: 0, opacity: 1, transition: { type: "spring" } },
             }}
             transition={{ duration: 0.5 }}
-            className="flex flex-col justify-center gap-4 group cursor-pointer">
+            className="flex flex-col justify-center items-center m-auto group cursor-pointer">
 
             {/* <h1 className="text-center text-4xl group-hover:text-redtheme duration-500 text-darktheme dark:text-whitetheme">{images[currentIndex]?.title}</h1> */}
-            <div className="relative w-[300px] h-[300px] md:w-[500px] m-auto md:h-[500px] overflow-hidden shadow-[0_3px_10px_rgb(0,0,0,0.2)]  rounded-lg ring-4 ring-darktheme lg:ring-darktheme dark:ring-gray-500 duration-500 lg:group-hover:ring-redtheme">
+            <div className="relative w-[300px] h-[300px] md:w-[500px] m-auto md:h-[500px] overflow-hidden shadow-[0_3px_10px_rgb(0,0,0,0.2)]  rounded-lg ring-4 ring-darktheme lg:ring-darktheme dark:ring-gray-500 duration-500 lg:group-hover:ring-redtheme flex justify-center items-center">
                 {/* Slides */}
                 <AnimatePresence >
                     <motion.div
@@ -110,16 +110,18 @@ const ImageCarousel = ({ images, language }) => {
                         ></motion.div>
                     ))}
                 </div>
+                <h1 className={` absolute bottom-10 lg:opacity-0 lg:group-hover:opacity-100 text-4xl lg:text-6xl w-[60%] text-center lg:text-start group-hover:ring-0 md:lg:group-hover:text-whitetheme text-whitetheme z-20 ${language === "en" ? " lg:left-10" : " lg:right-10"}`}>{language === "en" ? images[currentIndex]?.title : images[currentIndex]?.aTitle}</h1>
             </div>
+
             <div className="absolute bottom-[17%] opacity-0 group-hover:opacity-100 transition-all duration-300 ease-in-out left-0 right-0 flex m-auto w-full h-100 bg-gradient-to-t from-darktheme2 via-darktheme2/90 to-transparent  rounded-lg " />
 
-            <div className="duration-500 -translate-y-35 relative m-auto w- lg:w-120 rounded-t-lg  text-whitetheme lg:text-darktheme lg:dark:text-whitetheme z-20">
+            {/* <div className="duration-500 -translate-y-35 relative m-auto w- lg:w-120 rounded-t-lg  text-whitetheme lg:text-darktheme lg:dark:text-whitetheme z-20"> */}
 
-                <h1 className="px-10 lg:px-5 lg:opacity-0 lg:group-hover:opacity-100 text-4xl lg:text-3xl group-hover:ring-0 lg:group-hover:text-whitetheme lg:group-hover:text-4xl rounded-t-lg dark:text-whitetheme z-20 ">{language === "en" ? images[currentIndex]?.title : images[currentIndex]?.aTitle}</h1>
 
-                {/* <p className=" px-5 lg:hidden absolute flex lg:group-hover:flex w-full font-light text-sm lg:text-lg bg-redtheme lg:group-hover:rounded-b-lg rounded-b-lg !text-gray-300 lg:group-hover:border-b-3 lg:group-hover:border-r-3 lg:group-hover:border-l-3 lg:border-0 border-b-3 border-r-3 border-l-3 border-slate-200 ">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Atque quis vero molestias tempora provident placeat fuga alias aspernatur architecto repellat.</p> */}
 
-            </div>
+            {/* <p className=" px-5 lg:hidden absolute flex lg:group-hover:flex w-full font-light text-sm lg:text-lg bg-redtheme lg:group-hover:rounded-b-lg rounded-b-lg !text-gray-300 lg:group-hover:border-b-3 lg:group-hover:border-r-3 lg:group-hover:border-l-3 lg:border-0 border-b-3 border-r-3 border-l-3 border-slate-200 ">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Atque quis vero molestias tempora provident placeat fuga alias aspernatur architecto repellat.</p> */}
+
+            {/* </div> */}
             {/* <div className="duration-500 -translate-y-35 lg:translate-y-0 lg:group-hover:-translate-y-43 relative m-auto w-[95%] lg:w-120 rounded-t-lg lg:group-hover:text-whitetheme text-whitetheme lg:text-darktheme lg:dark:text-whitetheme lg:group-hover:bg-redtheme  bg-redtheme lg:bg-transparent">
 
                 <h1 className="px-5 text-xl lg:text-3xl group-hover:ring-0 lg:group-hover:rounded-t-lg rounded-t-lg lg:border-0 border-t-3 border-r-3 border-l-3 lg:group-hover:border-t-3 lg:group-hover:border-r-3 lg:group-hover:border-l-3 border-slate-200 dark:text-whitetheme ">{language === "en" ? images[currentIndex]?.title : images[currentIndex]?.aTitle}</h1>
