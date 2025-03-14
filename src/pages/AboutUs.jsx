@@ -114,7 +114,7 @@ const AboutUs = ({ language, languageText, api }) => {
                 <div className="absolute inset-0 bg-black opacity-50" />
 
                 {/* Button Text */}
-                <h2 className="relative text-base md:text-4xl whitespace-nowrap text-center text-white">
+                <h2 className="relative text-sm md:text-4xl md:leading-10 leading-3 text-center text-white">
                     {committee?.name}
                 </h2>
             </motion.button>
@@ -340,7 +340,7 @@ const AboutUs = ({ language, languageText, api }) => {
                             className='flex flex-col lg:gap-2 justify-center '>
                             <p className='text-2xl text-redtheme dark:text-whitetheme text-center mb-3 '> {languageText.ChooseCommittee}</p>
                             <motion.div
-                                className='flex flex-row md:flex-wrap lg:flex-col justify-center !items-center w-full m-auto gap-5'>
+                                className='flex flex-row flex-wrap lg:flex-col justify-center !items-center w-full m-auto gap-5'>
                                 {committeeTypes.map((committee) => (
                                     <MemberButton committee={committee} setValue={setCommitteeType} value={committeeType} />
 
@@ -575,7 +575,7 @@ const AboutUs = ({ language, languageText, api }) => {
 
 
                 {/* ISS Egypt Event */}
-                <div className='flex flex-col gap-5 px-5 lg:px-30 mt-10 w-full'>
+                <div className='flex flex-col gap-5 px-5 lg:px-30 my-10 w-full'>
                     <motion.h1
                         className='text-redtheme dark:text-whitetheme text-center text-6xl'>{languageText.ISSEgyptEvents}
                     </motion.h1>
