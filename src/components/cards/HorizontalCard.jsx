@@ -111,7 +111,7 @@ const HorizontalCard = ({ helpingData, language, languageText, api, setSuccessTe
                 <Loader text={languageText.Deleting} />
             ) : (
 
-                <div className="relative flex  items-center mt-6 border-4 dark:border-3 border-darktheme2 dark:border-whitetheme  ring-6 ring-whitetheme  bg-radial  from-whitetheme2 to-whitetheme dark:from-darktheme dark:to-darktheme2 shadow-md bg-clip-border rounded-xl w-80 h-fit dark:outline-3 outline-darktheme2">
+                <div className="relative flex  items-center mt-6 border-4 dark:border-3 border-darktheme2 dark:border-whitetheme  ring-6 ring-whitetheme  bg-radial  from-whitetheme2 to-whitetheme dark:from-darktheme dark:to-darktheme2 shadow-md bg-clip-border rounded-xl w-70 md:w-80 h-fit dark:outline-3 outline-darktheme2">
                     <div
                         className={`relative h-25 w-35 overflow-hidden text-white shadow-lg bg-clip-border rounded-xl bg-blue-gray-500 shadow-blue-gray-500/40 border-5 border-whitetheme  dark:border-darktheme  dark:outline-2 outline-whitetheme ring-6 ring-darktheme bg-center bg-cover bg-radial from-darktheme to-darktheme2 p-2 ${language === 'en' ? "-ml-6" : "-mr-6"} `}>
                         <img
