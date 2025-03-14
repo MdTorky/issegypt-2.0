@@ -279,7 +279,7 @@ const SelectField = ({
                         animate="visible"
                         exit="exit"
                         variants={dropdownVariants}
-                        className="absolute left-0 right-0 mt-2 bg-darktheme2 border border-gray-700 rounded-lg shadow-lg z-50 h-full overflow-hidden"
+                        className="absolute left-0 right-0 mt-2 bg-darktheme2 border border-gray-700 rounded-lg shadow-lg z-50 overflow-hidden"
                     >
 
                         <div className="text-center pt-2">{placeholder}</div>

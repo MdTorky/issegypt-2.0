@@ -43,6 +43,7 @@ import ParticipantScreen from './pages/WelcomeQuiz/ParticipantScreen';
 import ResultsScreen from './pages/WelcomeQuiz/ResultsScreen';
 import QuizCompleted from './pages/WelcomeQuiz/QuizCompleted';
 import EditPoints from './pages/WelcomeQuiz/EditPoints';
+import BankAccount from './pages/BankAccount';
 
 
 
@@ -83,7 +84,7 @@ function App() {
   const { popUp, popDesc, popTitle, popATitle } = usePopup();
 
 
-  const hiddenNavbarPaths = ["/join", "/participant/"];
+  const hiddenNavbarPaths = ["/join", "/participant/", "/auth/"];
 
   const hideNavbar = hiddenNavbarPaths.some(path => location.pathname.startsWith(path));
 
@@ -97,6 +98,7 @@ function App() {
         <Route path="/gallery" element={<Gallery language={language} languageText={languageText} api={api} />} />
         <Route path="/about" element={<AboutUs language={language} languageText={languageText} api={api} />} />
         <Route path="/shop" element={<Shop language={language} languageText={languageText} api={api} />} />
+        <Route path="/bankaccount" element={<BankAccount language={language} languageText={languageText} api={api} />} />
         <Route path="/internships" element={<Internships language={language} languageText={languageText} api={api} />} />
         <Route path="/product/:id" element={<Product language={language} languageText={languageText} api={api} />} />
         <Route path="/purchase/:id" element={<Purchase language={language} languageText={languageText} api={api} />} />

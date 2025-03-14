@@ -155,7 +155,7 @@ const HelpingHandForm = ({ language, languageText, api }) => {
               className={`w-full p-8 flex flex-col justify-center items-center m-auto rounded-xl my-20`}
             >
               <motion.form
-                className="formForm"
+                className="formForm "
                 variants={{
                   visible: { transition: { staggerChildren: 0.2 } },
                   exit: { transition: { staggerChildren: 0.1 } },
