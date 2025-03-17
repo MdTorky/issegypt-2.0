@@ -390,6 +390,11 @@ const DriveExplorer = ({ languageText, language }) => {
         setIsSearching(false);
     };
 
+    useEffect(() => {
+        document.title = languageText.DriveExplorer; // Change title when page loads
+    }, []);
+
+
     // Render a file/folder card
     const renderCard = (file, showPath = false) => (
         <div key={file.id} className="p-4 rounded-lg shadow-xl bg-whitetheme/50 dark:bg-darktheme2/50 border-2 border-slate-300 dark:border-gray-700 ">

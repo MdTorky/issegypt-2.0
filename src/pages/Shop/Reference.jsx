@@ -58,6 +58,10 @@ const Reference = ({ languageText, language, api }) => {
         }
     }
 
+    useEffect(() => {
+        document.title = transactionData?.referenceNumber + " - " + transactionData?.buyerName + " | " + languageText.ISSEgyptGateway; // Change title when page loads
+    }, []);
+
     return (
         <div>
             {transactionLoading || productLoading ? (

@@ -11,6 +11,8 @@ const Product = ({ languageText, language, api, }) => {
 
     const { id } = useParams()
 
+
+
     const [sizeError, setSizeError] = useState("");
     const [size, setSize] = useState(null);
     const [quantity, setQuantity] = useState(1);
@@ -36,7 +38,9 @@ const Product = ({ languageText, language, api, }) => {
         localStorage.setItem('selectedQuantity', 1);
     }, [productData, loading, error, dispatch]);
 
-
+    useEffect(() => {
+        document.title = productData?.pTitle + " | " + languageText.ISSEgyptGateway; // Change title when page loads
+    }, []);
 
     const handlePurchase = (e) => {
         e.preventDefault();

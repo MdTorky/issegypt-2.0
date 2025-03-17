@@ -82,6 +82,11 @@ const Service = ({ language, languageText, api }) => {
         )
     });
 
+    useEffect(() => {
+        document.title = serviceData?.name + " | " + languageText.ISSEgyptGateway
+    }, []);
+
+
     return (
         <div className="mb-10 flex relative">
             {(serviceLoading || loading) ? (

@@ -379,8 +379,8 @@ const FormData = ({ languageText, language, api }) => {
 
                                     {formData.inputs.includes("Custom Inputs") &&
                                         formData.customInputs && // Check if it exists
-                                        Array.isArray(formData.customInputs) && // Ensure it's an array
-                                        formData.customInputs.map((customInput, index) => (
+                                        Array.isArray(form?.customInputs) && // Ensure it's an array
+                                        form?.customInputs.map((customInput, index) => (
                                             <div
                                                 key={index}
                                                 onClick={() => handleHeaderClick("Custom Inputs")}

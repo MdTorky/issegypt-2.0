@@ -53,6 +53,11 @@ const Purchase = ({ languageText, language, api }) => {
         }
     }, [productData, loading, error, dispatch]);
 
+    useEffect(() => {
+        document.title = productData?.pTitle + " | " + languageText.ISSEgyptGateway; // Change title when page loads
+    }, []);
+
+
     const InputChildVariants = {
         hidden: { opacity: 0, y: -50 },
         visible: {

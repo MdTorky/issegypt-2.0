@@ -88,6 +88,19 @@ function App() {
 
   const hideNavbar = hiddenNavbarPaths.some(path => location.pathname.startsWith(path));
 
+  useEffect(() => {
+    const titles = {
+      "/": languageText.Home + " | " + languageText.ISSEgyptGateway,
+      "/services": languageText.HelpingHand + " | " + languageText.ISSEgyptGateway,
+      "/about": languageText.AboutUs + " | " + languageText.ISSEgyptGateway,
+      "/gallery": languageText.Gallery + " | " + languageText.ISSEgyptGateway,
+      "/shop": languageText.ISSEgyptShop + " | " + languageText.ISSEgyptGateway,
+      "/internships": languageText.Internships + " | " + languageText.ISSEgyptGateway,
+    };
+
+    document.title = titles[location.pathname] || languageText.ISSEgyptGateway; // Default title if path is not found
+  }, [location, language]);
+
   // dark:bg-darktheme2 bg-whitetheme
   return (
     <div className={`min-h-screen  transition-all duration-300 ${language == 'ar' ? "font-modernpro arabic" : "font-tanker"} ${darkMode ? "backgroundDark" : "backgroundWhite"}`}>

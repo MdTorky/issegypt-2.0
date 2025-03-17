@@ -12,6 +12,7 @@
     "ToTop": "To the Top",
     "FillRequired": "Please fill in all required fields",
     "SubmitFailed": "Failed to submit. Please try again",
+    "ISSEgyptGateway": "ISS EGYPT",
 
     "LoginSuccesMessage": "You Logged In Successfully",
     "RegisterSuccesMessage": "You Registered Successfully",
@@ -470,6 +471,7 @@
     "ToTop": "إلى الأعلى",
     "FillRequired": "الرجاء ملء جميع الحقول المطلوبة",
     "SubmitFailed": "فشل الإرسال. الرجاء المحاولة مرة أخرى",
+    "ISSEgyptGateway": "موقع الاتحاد المصري",
 
     "LoginSuccesMessage": "لقد قمت بتسجيل الدخول بنجاح",
     "RegisterSuccesMessage": "لقد بالتسجيل بنجاح",

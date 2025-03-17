@@ -162,6 +162,10 @@ const CreatedForm = ({ languageText, language, api }) => {
     }
 
 
+    useEffect(() => {
+        document.title = formData?.eventName
+    }, []);
+
 
     return (
         <div className="lg:flex ">

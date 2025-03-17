@@ -235,6 +235,11 @@ const GalleryImages = ({ languageText, language, api }) => {
         if (filter === "landscape" && img.width && img.height) return img.width > img.height;
         return true;
     });
+
+
+    useEffect(() => {
+        document.title = galleryData?.folderName + " | " + languageText.ISSEgyptGateway; // Change title when page loads
+    }, []);
     return (
         <div className="min-h-screen flex flex-col justify-center p-6">
             {(isLoading || loading) ? (
