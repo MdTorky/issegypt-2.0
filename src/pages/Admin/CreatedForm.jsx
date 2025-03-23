@@ -242,7 +242,7 @@ const CreatedForm = ({ languageText, language, api }) => {
                                                         exit={{ height: 60 }}
                                                         transition={{ duration: 0.5 }}
                                                         className={` bg-darktheme2/40 ring-4 ring-darktheme2/40 border-4 border-whitetheme/90 p-3 relative rounded-2xl w-90 md:w-150 flex-col items-center justify-between px-5 m-auto lg:m-0`}>
-                                                        <p onClick={() => setDescOpen(!descOpen)} className='w-full flex items-center justify-between whitespace-break-spaces text-xl lg:text-xl text-darktheme2 cursor-pointer'>{descOpen ? languageText.CloseDescription : languageText.ViewDescription}
+                                                        <p onClick={() => setDescOpen(!descOpen)} className='w-full flex items-center justify-between whitespace-break-spaces text-xl lg:text-xl text-darktheme2 dark:text-whitetheme cursor-pointer'>{descOpen ? languageText.CloseDescription : languageText.ViewDescription}
                                                             <Icon
                                                                 icon="solar:alt-arrow-down-bold-duotone"
                                                                 className={`transition-transform duration-300 text-darktheme dark:text-whitetheme2 ${descOpen ? "rotate-180" : ""}`}
