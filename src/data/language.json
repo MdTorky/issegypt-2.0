@@ -229,6 +229,8 @@
     "NoOptions": "No Options Found",
     "Search": "Search...",
     "SubmitForm": "Submit Form",
+    "ViewDescription": "View Description",
+    "CloseDescription": "Close Description",
 
     "Success": "Success",
     "CharRegex": "It has to be at least 8 characters long",
@@ -688,6 +690,8 @@
     "NoOptions": "لم يتم العثور على أي خيارات",
     "Search": "بحث...",
     "SubmitForm": "إرسال الفورم",
+    "ViewDescription": "إظهار الوصف",
+    "CloseDescription": "إخفاء الوصف",
 
     "Success": "عااااااش",
     "CharRegex": "يجب أن يكون طوله 8 أحرف على الأقل",

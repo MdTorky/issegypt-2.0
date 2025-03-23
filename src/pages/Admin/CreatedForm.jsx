@@ -31,6 +31,7 @@ const CreatedForm = ({ languageText, language, api }) => {
     const [proof, setProof] = useState(null);
     const [customInputs, setCustomInputs] = useState([]);
     const [selectInputValues, setSelectInputValues] = useState({});
+    const [descOpen, setDescOpen] = useState(false)
 
     const [joinedGroup, setJoinedGroup] = useState(false)
     const navigate = useNavigate();
@@ -234,10 +235,26 @@ const CreatedForm = ({ languageText, language, api }) => {
                                                         <h1>{language === "en" ? formData.eventName : formData.arabicEventName}</h1>
                                                     </div>
                                                 </div>
+                                                <AnimatePresence>
+                                                    <motion.div
+                                                        initial={{ height: 60 }}
+                                                        animate={{ height: descOpen ? "100%" : 60 }}
+                                                        exit={{ height: 60 }}
+                                                        transition={{ duration: 0.5 }}
+                                                        className={` bg-darktheme2/40 ring-4 ring-darktheme2/40 border-4 border-whitetheme/90 p-3 relative rounded-2xl w-90 md:w-150 flex-col items-center justify-between px-5 m-auto lg:m-0`}>
+                                                        <p onClick={() => setDescOpen(!descOpen)} className='w-full flex items-center justify-between whitespace-break-spaces text-xl lg:text-xl text-darktheme2 cursor-pointer'>{descOpen ? languageText.CloseDescription : languageText.ViewDescription}
+                                                            <Icon
+                                                                icon="solar:alt-arrow-down-bold-duotone"
+                                                                className={`transition-transform duration-300 text-darktheme dark:text-whitetheme2 ${descOpen ? "rotate-180" : ""}`}
+                                                            />
+                                                        </p>
 
-                                                <div className=' bg-darktheme2/40 ring-4 ring-darktheme2/40 border-4 border-whitetheme/90 p-3 relative rounded-2xl w-90 md:w-150 flex items-center justify-between px-5 m-auto lg:m-0'>
-                                                    <p className='text-whitetheme whitespace-break-spaces text-xl lg:text-xl'>{formData.eventDescription}</p>
-                                                </div>
+
+                                                        {descOpen &&
+                                                            <p className='text-whitetheme whitespace-break-spaces text-xl lg:text-xl'>{formData.eventDescription}</p>
+                                                        }
+                                                    </motion.div>
+                                                </AnimatePresence>
                                             </div>
 
 
