@@ -38,9 +38,9 @@ const Product = ({ languageText, language, api, }) => {
         localStorage.setItem('selectedQuantity', 1);
     }, [productData, loading, error, dispatch]);
 
-    useEffect(() => {
-        document.title = productData?.pTitle + " | " + languageText.ISSEgyptGateway; // Change title when page loads
-    }, []);
+    // useEffect(() => {
+    //     document.title = productData?.pTitle + " | " + languageText.ISSEgyptGateway; // Change title when page loads
+    // }, []);
 
     const handlePurchase = (e) => {
         e.preventDefault();

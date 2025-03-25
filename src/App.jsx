@@ -88,18 +88,66 @@ function App() {
 
   const hideNavbar = hiddenNavbarPaths.some(path => location.pathname.startsWith(path));
 
+  // useEffect(() => {
+  //   const titles = {
+  //     "/": languageText.Home + " | " + languageText.ISSEgyptGateway,
+  //     "/services": languageText.HelpingHand + " | " + languageText.ISSEgyptGateway,
+  //     "/about": languageText.AboutUs + " | " + languageText.ISSEgyptGateway,
+  //     "/gallery": languageText.Gallery + " | " + languageText.ISSEgyptGateway,
+  //     "/shop": languageText.ISSEgyptShop + " | " + languageText.ISSEgyptGateway,
+  //     "/internships": languageText.Internships + " | " + languageText.ISSEgyptGateway,
+  //     "/product/:id": languageText.Internships + " | " + languageText.ISSEgyptGateway,
+  //   };
+
+  //   document.title = titles[location.pathname] || languageText.ISSEgyptGateway; // Default title if path is not found
+  // }, [location, language]);
+
+  const path = location.pathname;
   useEffect(() => {
+
     const titles = {
-      "/": languageText.Home + " | " + languageText.ISSEgyptGateway,
-      "/services": languageText.HelpingHand + " | " + languageText.ISSEgyptGateway,
-      "/about": languageText.AboutUs + " | " + languageText.ISSEgyptGateway,
-      "/gallery": languageText.Gallery + " | " + languageText.ISSEgyptGateway,
-      "/shop": languageText.ISSEgyptShop + " | " + languageText.ISSEgyptGateway,
-      "/internships": languageText.Internships + " | " + languageText.ISSEgyptGateway,
+      "/": languageText.Home,
+      "/services": languageText.HelpingHand,
+      "/about": languageText.AboutUs,
+      "/gallery": languageText.Gallery,
+      "/shop": languageText.ISSEgyptShop,
+      "/internships": languageText.Internships,
+      "/adminDashboard": languageText.AdminDashboard,
+      "/myForms": languageText.MyForms,
+      "/productsData": languageText.ProductsData,
+      "/addForm": languageText.AddForm,
+      "/addService": languageText.AddService,
+      "/addHelpingHand": languageText.AddHelpingHand,
+      "/addIntern": languageText.AddInternship,
+      "/join": languageText.EmojiQuiz,
+      "/quizCompleted": languageText.QuizCompleted,
+      "/auth/login": languageText.Login,
+      "/auth/register": languageText.Register,
     };
 
-    document.title = titles[location.pathname] || languageText.ISSEgyptGateway; // Default title if path is not found
-  }, [location, language]);
+    let pageTitle = titles[path] || languageText.ISSEgyptGateway; // Default title
+
+
+    if (!titles[path]) {
+      if (path.startsWith("/product/")) pageTitle = languageText.Product;
+      else if (path.startsWith("/purchase/")) pageTitle = languageText.Purchase;
+      else if (path.startsWith("/drive/")) pageTitle = languageText.DriveExplorer;
+      else if (path.startsWith("/gallery/")) pageTitle = languageText.GalleryImages;
+      else if (path.startsWith("/reference/")) pageTitle = languageText.Reference;
+      else if (path.startsWith("/form/")) pageTitle = languageText.Form;
+      else if (path.startsWith("/services/")) pageTitle = languageText.Services;
+      else if (path.startsWith("/editForm/")) pageTitle = languageText.EditForm;
+      else if (path.startsWith("/formData/")) pageTitle = languageText.FormData;
+      else if (path.startsWith("/editgallery/")) pageTitle = languageText.EditGalleryForm;
+      else if (path.startsWith("/editIntern/")) pageTitle = languageText.EditCompany;
+      else if (path.startsWith("/host/")) pageTitle = languageText.HostPage;
+      else if (path.startsWith("/results/")) pageTitle = languageText.Results;
+      else if (path.startsWith("/editPoints/")) pageTitle = languageText.EditPoints;
+      else if (path.startsWith("/participant/")) pageTitle = languageText.EmojiQuiz;
+    }
+
+    document.title = `${pageTitle} | ${languageText.ISSEgyptGateway}`;
+  }, [location, languageText]);
 
   // dark:bg-darktheme2 bg-whitetheme
   return (
