@@ -30,7 +30,7 @@ const MemberCard = ({ member, language, languageText }) => {
         <>
             <motion.div
                 className="relative w-[300px] h-[450px] bg-white dark:bg-darktheme2 cursor-pointer overflow-hidden rounded-lg shadow-[4.0px_8.0px_8.0px_rgba(0,0,0,0.38)] hidden lg:flex ring-1 ring-gray-400 group"
-                whileHover={!shouldReduceMotion ? "hover" : undefined}
+                whileHover="hover"
                 transition={{ duration: 0.4 }}
                 variants={{
                     hover: { scale: 1.05 },
@@ -48,7 +48,12 @@ const MemberCard = ({ member, language, languageText }) => {
                 />
 
                 {/* Image with Shimmer Effect */}
-                <div className="relative w-full h-full overflow-hidden">
+                <motion.div
+                    className="relative w-full h-full overflow-hidden"
+                    whileHover="hover" // Trigger hover state for all child elements
+                    initial="initial" // Initial state for all child elements
+                >
+                    {/* Image */}
                     <motion.img
                         src={member.img}
                         alt="Profile"
@@ -64,9 +69,6 @@ const MemberCard = ({ member, language, languageText }) => {
                             hover: { filter: "grayscale(0%)", scale: 1.2 },
                         }}
                         transition={{ duration: 2 }}
-                        animate={
-                            !shouldReduceMotion ? {} : { filter: "grayscale(0%)", scale: 1.2 }
-                        }
                     />
                     <div
                         className="absolute bottom-0 left-0 right-0 flex m-auto w-full h-80 bg-gradient-to-t from-darktheme2/10 via-darktheme2/10 opacity-0
@@ -96,96 +98,57 @@ const MemberCard = ({ member, language, languageText }) => {
                         transition={{ duration: 1.5, ease: "linear" }}
                         animate={!shouldReduceMotion ? {} : { opacity: 0 }}
                     />
-                </div>
 
-                {/* Name (Falling Paper Effect) */}
-                {/* <motion.h2
-                    className="absolute bottom-0 w-full text-center text-xl bg-whitetheme dark:bg-darktheme2 p-2 m-0 text-darktheme dark:text-whitetheme2"
-                    initial={
-                        !shouldReduceMotion
-                            ? {
-                                y: 100,
-                            }
-                            : { opacity: 1, rotateX: 0, y: 0, }
-                    }
-                    variants={{
-                        initial: {
-                            opacity: 0,
-                            rotateX: 90,
-                            y: -100,
-                        },
-                        hover: {
-                            opacity: 1,
-                            rotateX: 0,
-                            y: 0,
 
-                        },
-                    }}
-                    transition={{ duration: 1 }}
-                    animate={!shouldReduceMotion ? {} : { opacity: 1, rotateX: 0, y: 0 }}
-                >
-                    {language === 'ar' ? <p>{member.arabicName}</p> : <p>{member.name}</p>}
-                    <p className="text-sm text-gray-400">
+                    <ul className="absolute top-0 left-0 p-0 m-0">
+                        {[1, 2, 3].map((index) => (
+                            <motion.li
+                                key={index}
+                                className="w-10 h-10 border-b border-black/10 bg-white dark:bg-darktheme2 flex items-center justify-center text-redtheme dark:text-whitetheme text-lg"
+                                variants={{
+                                    initial: {
+                                        opacity: 0,
+                                        x: -50,
+                                    },
+                                    hover: {
+                                        opacity: 1,
+                                        x: 0,
+                                    },
+                                }}
+                                transition={{ duration: 0.5, delay: index * 0.3 }}
+                            >
+                                {index === 1 && (
+                                    <Link
+                                        onClick={() => window.open(`http://wa.me/${member.phone}`, "_blank")}
+                                        className="hover:scale-120 hover:text-whitetheme hover:p-2 hover:bg-red-900 transition duration-300"
+                                    >
+                                        <Icon icon="ant-design:whats-app-outlined" />
+                                    </Link>
+                                )}
+                                {index === 2 && (
+                                    <Link
+                                        onClick={() => window.open(`mailto:${member.email}`, "_blank")}
+                                        className="hover:scale-120 hover:text-whitetheme hover:p-2 hover:bg-red-900 transition duration-300"
+                                    >
+                                        <Icon icon="entypo:email" />
+                                    </Link>
+                                )}
+                                {index === 3 && (
+                                    <Link
+                                        onClick={handleLinkedInClick}
+                                        className="hover:scale-120 hover:text-whitetheme hover:p-2 hover:bg-red-900 transition duration-300"
+                                    >
+                                        <Icon icon="tabler:brand-linkedin" />
+                                    </Link>
+                                )}
+                            </motion.li>
+                        ))}
+                    </ul>
 
-                        {roleChecker({ languageText: languageText, committee: member.committee, role: member.type })}
-                    </p>
-                </motion.h2> */}
+                </motion.div>
 
                 {/* Social Media Icons (Slide In From Left) */}
-                <ul className="absolute top-0 left-0 p-0 m-0">
-                    {[1, 2, 3].map((index) => (
-                        <motion.li
-                            key={index}
-                            className="w-10 h-10 border-b border-black/10 bg-white dark:bg-darktheme2 flex items-center justify-center text-redtheme dark:text-whitetheme text-lg"
-                            initial={
-                                !shouldReduceMotion
-                                    ? { opacity: 0, x: -50 }
-                                    : { opacity: 1, x: 0 }
-                            }
-                            variants={{
-                                initial: {
-                                    opacity: 0,
-                                    x: -50,
-                                },
-                                hover: {
-                                    opacity: 1,
-                                    x: 0,
-                                },
-                            }}
-                            transition={{ duration: 0.5, delay: index * 0.3 }}
-                            animate={!shouldReduceMotion ? {} : { opacity: 1, x: 0 }}
-                        >
-                            {index === 1 && (
-                                <Link
-                                    onClick={() =>
-                                        window.open(`http://wa.me/${member.phone}`, "_blank")
-                                    }
-                                    className="hover:scale-120 hover:text-whitetheme hover:p-2 hover:bg-red-900 transition duration-300"
-                                >
-                                    <Icon icon="ant-design:whats-app-outlined" />
-                                </Link>
-                            )}
-                            {index === 2 && (
-                                <Link
-                                    onClick={() =>
-                                        window.open(`mailto:${member.email}`, "_blank")
-                                    }
-                                    className="hover:scale-120 hover:text-whitetheme hover:p-2 hover:bg-red-900 transition duration-300"
-                                >
-                                    <Icon icon="entypo:email" />
-                                </Link>
-                            )}
-                            {index === 3 && (
-                                <Link
-                                    onClick={handleLinkedInClick}
-                                    className="hover:scale-120 hover:text-whitetheme hover:p-2 hover:bg-red-900 transition duration-300"
-                                >
-                                    <Icon icon="tabler:brand-linkedin" />
-                                </Link>
-                            )}
-                        </motion.li>
-                    ))}
-                </ul>
+
             </motion.div>
 
             {/* No Hover */}
