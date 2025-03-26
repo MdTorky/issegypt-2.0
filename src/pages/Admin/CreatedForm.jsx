@@ -54,8 +54,8 @@ const CreatedForm = ({ languageText, language, api }) => {
         { value: "2021", label: "2021" },
         { value: "2022", label: "2022" },
         { value: "2023", label: "2023" },
-        { value: "2024", label: "2025" },
-        { value: "2025", label: "2024" },
+        { value: "2024", label: "2024" },
+        { value: "2025", label: "2025" },
     ];
 
     const semesterOptions = [
@@ -204,7 +204,7 @@ const CreatedForm = ({ languageText, language, api }) => {
                         ) :
                             submitLoading ? (
                                 <div className="h-screen flex w-full justify-center">
-                                    <Loader text={languageText.Updating} />
+                                    <Loader text={languageText.Submitting} />
                                 </div>
                             ) :
                                 (
@@ -350,19 +350,19 @@ const CreatedForm = ({ languageText, language, api }) => {
                                                         />
                                                     }
 
-
-                                                    <ImageUploadField
-                                                        placeholder={languageText.PersonalPicture}
-                                                        iconValue="iconamoon:profile-circle-fill"
-                                                        icon="iconamoon:profile-circle"
-                                                        type="number"
-                                                        language={language}
-                                                        languageText={languageText}
-                                                        required={true}
-                                                        setValue={setPicture}
-                                                        regex={null}
-                                                    />
-
+                                                    {formData.inputs.includes("Picture") &&
+                                                        <ImageUploadField
+                                                            placeholder={languageText.PersonalPicture}
+                                                            iconValue="iconamoon:profile-circle-fill"
+                                                            icon="iconamoon:profile-circle"
+                                                            type="number"
+                                                            language={language}
+                                                            languageText={languageText}
+                                                            required={true}
+                                                            setValue={setPicture}
+                                                            regex={null}
+                                                        />
+                                                    }
                                                 </div>
                                                 <div className="formRow">
                                                     {formData.inputs.includes("Year") &&
@@ -503,7 +503,7 @@ const CreatedForm = ({ languageText, language, api }) => {
                                                         <div className="formRow">
 
                                                             <div className="lg:w-1/2 ring-3 p-1 ring-darktheme rounded-xl">
-                                                                <img src={formData.paymentQR} className="rounded-xl" />
+                                                                <img src={formData.paymentQR} className="rounded-xl m-auto" />
                                                             </div>
 
                                                             <ImageUploadField

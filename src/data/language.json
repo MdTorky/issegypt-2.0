@@ -385,6 +385,7 @@
     "EidtForm": "Edit Form",
 
     "FormLimit": "Form Submissions Limit",
+    "SendEmail": "Send Confirmation Email",
     "Year": "Year",
     "Semester": "Semester",
     "Faculty": "Faculty",
@@ -853,6 +854,7 @@
     "EidtForm": "تعديل الفورم",
 
     "FormLimit": "حد التقديمات",
+    "SendEmail": "إرسال بريد إلكتروني تأكيدي",
     "Year": "السنة",
     "Semester": "الفصل الدراسي",
     "Faculty": "الكلية",

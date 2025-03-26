@@ -42,6 +42,7 @@ const AddForm = ({ languageText, language, api }) => {
     const [paymentAmount, setPaymentAmount] = useState('');
     const [formLimit, setFormLimit] = useState('');
     const [link, setLink] = useState('')
+    const [sendEmail, setSendEmail] = useState('')
     const [paymentQR, setPaymentQR] = useState(null);
 
     const [inputs, setInputs] = useState([]);
@@ -175,6 +176,11 @@ const AddForm = ({ languageText, language, api }) => {
             icon: "material-symbols:speed-rounded"
         },
         {
+            value: 'Send Email',
+            label: languageText.SendEmail,
+            icon: "carbon:send-alt-filled"
+        },
+        {
             value: 'Full Name',
             label: languageText.FullName,
             icon: "fluent:rename-16-filled"
@@ -273,6 +279,14 @@ const AddForm = ({ languageText, language, api }) => {
             proofUrl = await uploadFile("image", paymentQR, "images_preset");
         }
 
+        if (inputs.includes("Send Email")) {
+            setSendEmail(true)
+        }
+        else {
+            setSendEmail(false)
+
+        }
+
         const formData = {
             eventName,
             arabicEventName,
@@ -282,6 +296,7 @@ const AddForm = ({ languageText, language, api }) => {
             link,
             inputs,
             groupLink,
+            sendEmail,
             paymentQR: proofUrl,
             paymentAmount,
             customInputs: customInputs.map((input) => input.label),

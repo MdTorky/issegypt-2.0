@@ -43,6 +43,7 @@ const EditForm = ({ languageText, language, api }) => {
     const [groupLink, setGroupLink] = useState('');
     const [formLimit, setFormLimit] = useState('');
     const [link, setLink] = useState('')
+    const [sendEmail, setSendEmail] = useState('')
     const [paymentQR, setPaymentQR] = useState(null);
     const [paymentAmount, setPaymentAmount] = useState('');
 
@@ -230,6 +231,11 @@ const EditForm = ({ languageText, language, api }) => {
             icon: "material-symbols:speed-rounded"
         },
         {
+            value: 'Send Email',
+            label: languageText.SendEmail,
+            icon: "carbon:send-alt-filled"
+        },
+        {
             value: 'Full Name',
             label: languageText.FullName,
             icon: "fluent:rename-16-filled"
@@ -316,6 +322,7 @@ const EditForm = ({ languageText, language, api }) => {
             setPaymentAmount(formData.paymentAmount);
             setFormLimit(formData.limit);
             setLink(formData.link);
+            setSendEmail(formData.inputs.includes("Send Email") ? formData.sendEmail : false);
             setPaymentQR(formData.paymentQR);
             setInputs(formData.inputs);
             const transformedCustomInputs = formData.customInputs.map((label, index) => ({
@@ -347,21 +354,39 @@ const EditForm = ({ languageText, language, api }) => {
             setError(languageText.FillRequired);
             return;
         }
-        let imgUrl = formData.eventImg;
-        if (eventImg) {
+        // let imgUrl = formData.eventImg;
+        // if (eventImg) {
+        //     imgUrl = await uploadFile("image", eventImg, "images_preset");
+        // }
+        // if (!eventImg) {
+        //     imgUrl = "";
+        // }
+
+        // let proofUrl = formData.paymentQR;
+        // if (paymentQR) {
+        //     proofUrl = await uploadFile("image", paymentQR, "images_preset");
+        // }
+        // if (!paymentQR) {
+        //     proofUrl = "";
+        // }
+
+        let imgUrl = formData.eventImg; // Keep existing image by default
+        if (eventImg && eventImg !== formData.eventImg) {
             imgUrl = await uploadFile("image", eventImg, "images_preset");
-        }
-        if (!eventImg) {
-            imgUrl = "";
+        } else if (!eventImg) {
+            imgUrl = ""; // Remove the image if the user deletes it
         }
 
-        let proofUrl = formData.paymentQR;
-        if (paymentQR) {
+        let proofUrl = formData.paymentQR; // Keep existing QR proof by default
+        if (paymentQR && paymentQR !== formData.paymentQR) {
             proofUrl = await uploadFile("image", paymentQR, "images_preset");
+        } else if (!paymentQR) {
+            proofUrl = ""; // Remove the QR if the user deletes it
         }
-        if (!paymentQR) {
-            proofUrl = "";
-        }
+
+        const shouldSendEmail = inputs.includes("Send Email");
+        setSendEmail(shouldSendEmail);
+
 
         const customInputsForBackend = customInputs.map((input) => input.label);
         const customSelectForBackend = selectInputs.map(({ id, ...input }) => input)
@@ -375,6 +400,7 @@ const EditForm = ({ languageText, language, api }) => {
             link,
             inputs,
             groupLink,
+            sendEmail: shouldSendEmail,
             paymentQR: proofUrl,
             paymentAmount,
             customInputs: customInputsForBackend,
