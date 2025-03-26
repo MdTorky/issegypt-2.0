@@ -279,13 +279,13 @@ const AddForm = ({ languageText, language, api }) => {
             proofUrl = await uploadFile("image", paymentQR, "images_preset");
         }
 
-        if (inputs.includes("Send Email")) {
-            setSendEmail(true)
-        }
-        else {
-            setSendEmail(false)
+        // if (inputs.includes("Send Email")) {
+        //     setSendEmail(true)
+        // }
+        // else {
+        //     setSendEmail(false)
 
-        }
+        // }
 
         const formData = {
             eventName,
@@ -296,7 +296,7 @@ const AddForm = ({ languageText, language, api }) => {
             link,
             inputs,
             groupLink,
-            sendEmail,
+            sendEmail: inputs.includes("Send Email"),
             paymentQR: proofUrl,
             paymentAmount,
             customInputs: customInputs.map((input) => input.label),
