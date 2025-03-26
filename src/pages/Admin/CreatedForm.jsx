@@ -228,12 +228,16 @@ const CreatedForm = ({ languageText, language, api }) => {
                                             {/* Event Poster */}
                                             <div className='flex flex-col gap-3  '>
                                                 <div className='md:w-150 w-90 lg:m-0 m-auto bg-darktheme2/40 ring-4 ring-darktheme2/40 border-4 border-whitetheme/90 p-3 relative rounded-3xl'>
-                                                    <img src={formData?.eventImg} alt="" className="rounded-xl" />
-                                                    <div className="absolute bottom-0 left-0 right-0 flex m-auto w-full md:h-80 h-50 bg-gradient-to-t from-darktheme2 via-darktheme2/95 to-transparent z-10 rounded-b-3xl "></div>
-
-                                                    <div className={` absolute bottom-10  text-4xl lg:text-5xl text-whitetheme z-20 w-[85%] ${language === "en" ? "left-10" : "right-10"}`}>
+                                                    {!formData?.eventImg && <div className={`   text-4xl lg:text-5xl text-whitetheme z-20 w-[85%] ${language === "en" ? "left-10" : "right-10"}`}>
                                                         <h1>{language === "en" ? formData.eventName : formData.arabicEventName}</h1>
                                                     </div>
+                                                    }
+                                                    <img src={formData?.eventImg} alt="" className="rounded-xl" />
+                                                    {formData?.eventImg && <div className="absolute bottom-0 left-0 right-0 flex m-auto w-full md:h-80 h-50 bg-gradient-to-t from-darktheme2 via-darktheme2/95 to-transparent z-10 rounded-b-3xl "></div>}
+
+                                                    {formData?.eventImg && <div className={` absolute bottom-10  text-4xl lg:text-5xl text-whitetheme z-20 w-[85%] ${language === "en" ? "left-10" : "right-10"}`}>
+                                                        <h1>{language === "en" ? formData.eventName : formData.arabicEventName}</h1>
+                                                    </div>}
                                                 </div>
                                                 <AnimatePresence>
                                                     <motion.div
