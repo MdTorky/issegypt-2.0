@@ -30,7 +30,7 @@ const ImageCarousel = ({ images, language }) => {
                 visible: { y: 0, opacity: 1, transition: { type: "spring" } },
             }}
             transition={{ duration: 0.5 }}
-            className="flex flex-col justify-center items-center m-auto group cursor-pointer">
+            className="flex flex-col justify-center items-center m-auto group cursor-pointer relative">
 
             {/* <h1 className="text-center text-4xl group-hover:text-redtheme duration-500 text-darktheme dark:text-whitetheme">{images[currentIndex]?.title}</h1> */}
             <div className="relative w-[300px] h-[300px] md:w-[500px] m-auto md:h-[500px] overflow-hidden shadow-[0_3px_10px_rgb(0,0,0,0.2)]  rounded-lg ring-4 ring-darktheme lg:ring-darktheme dark:ring-gray-500 duration-500 lg:group-hover:ring-redtheme flex justify-center items-center">
