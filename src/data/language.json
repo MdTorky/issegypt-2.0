@@ -428,6 +428,7 @@
     "DownloadProof": "Download all Proof Images",
     "Submissions": "Submissions",
     "TotalSubmissions": "Total Submissions",
+    "LinkCopied": "Link Copied to Clipboard!",
 
     "TotalPurchases": "Total Purchases",
     "Purchases": "Purchases",
@@ -897,6 +898,7 @@
     "DownloadProof": "تحميل جميع صور إثبات الدفع",
     "Submissions": "التقديمات",
     "TotalSubmissions": "إجمالي التقديمات",
+    "LinkCopied": "تم نسخ الرابط!",
 
     "TotalPurchases": "إجمالي المشتريات",
     "Purchases": "المشتريات",

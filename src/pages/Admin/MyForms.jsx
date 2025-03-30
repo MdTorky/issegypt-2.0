@@ -11,6 +11,8 @@ import useDelete from '../../hooks/useDelete';
 import { Link } from "react-router-dom";
 import ScrollToTop from "../../components/ScrollToTop";
 import { useNavigate } from "react-router-dom";
+import SuccessMessage from "../../components/formInputs/SuccessMessage";
+import { AnimatePresence } from "framer-motion";
 
 const MyForms = ({ languageText, language, api }) => {
 
@@ -26,6 +28,7 @@ const MyForms = ({ languageText, language, api }) => {
     const { forms, dispatch } = useFormsContext();
     const [committeeType, setCommitteeType] = useState(user?.committee);
     const [searchQuery, setSearchQuery] = useState("");
+    const [copyMessage, setCopyMessage] = useState('')
 
 
     useEffect(() => {
@@ -120,6 +123,12 @@ const MyForms = ({ languageText, language, api }) => {
         }
     };
 
+    const copyLink = (link) => {
+        navigator.clipboard.writeText(link);
+        setCopyMessage(languageText.LinkCopied)
+    };
+
+
     return (
         <div className="lg:flex">
             {/* Navbar */}
@@ -177,7 +186,9 @@ const MyForms = ({ languageText, language, api }) => {
 
 
                             {filteredForms.map((form) => (
-                                <div className="tableRow" key={form.id}>
+                                <div className="tableRow cursor-pointer" key={form.id} onClick={(e) => {
+                                    copyLink(`issegypt.vercel.app/form/${form.link}`)
+                                }}>
                                     <div className="tableDiv">
                                         <img src={form.eventImg} alt="" className="w-20 lg:w-30 m-auto rounded-lg" />
                                     </div>
@@ -248,6 +259,9 @@ const MyForms = ({ languageText, language, api }) => {
                     </div>
                 </div>
             )}
+            <AnimatePresence>
+                {copyMessage && <SuccessMessage languageText={languageText} text={copyMessage} setValue={setCopyMessage} language={language} />}
+            </AnimatePresence>
             <ScrollToTop languageText={languageText} />
 
         </div>

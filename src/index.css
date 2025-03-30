@@ -177,7 +177,7 @@ body {
 }
 
 .tableRow {
-  @apply bg-radial from-darktheme/90 to-darktheme2/80 ring-4 ring-darktheme2 border-4 border-whitetheme py-2 flex rounded-lg dark:border-darktheme  items-center w-full min-w-max 2xl:min-w-auto;
+  @apply bg-radial from-darktheme/90 to-darktheme2/80 ring-4 ring-darktheme2 border-4 border-whitetheme py-2 flex rounded-lg dark:border-darktheme  items-center w-full min-w-max 2xl:min-w-auto hover:scale-102 duration-300 transition-all;
 }
 
 .tableDiv {
