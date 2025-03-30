@@ -154,10 +154,6 @@ body {
   @apply bg-darktheme2/80 rounded-xl w-fit py-2  px-4 lg:py-7 lg:px-10 flex items-center gap-10 duration-500 ease-in-out hover:scale-105 cursor-pointer  hover:bg-darktheme/50 ring-4 ring-darktheme2/80 border-4 border-whitetheme hover:ring-redtheme dark:border-darktheme;
 }
 
-.tableHeader {
-  @apply bg-radial from-redtheme/90 to-redtheme2/80 ring-4 ring-redtheme border-4 border-whitetheme rounded-lg py-1 flex w-full 2xl:justify-center text-center text-whitetheme dark:border-darktheme2 min-w-max;
-}
-
 /* .tableHeader {
   @apply bg-radial from-redtheme/90 to-redtheme2/80 ring-4 ring-redtheme border-4 border-whitetheme 
     rounded-lg py-1 flex min-w-max w-full justify-center text-center text-whitetheme dark:border-darktheme2;
@@ -172,6 +168,10 @@ body {
   @apply flex-1 min-w-[150px] text-xl text-center px-2;
 } */
 
+.tableHeader {
+  @apply bg-radial from-redtheme/90 to-redtheme2/80 ring-4 ring-redtheme border-4 border-whitetheme rounded-lg py-1 flex w-full 2xl:justify-center text-center text-whitetheme dark:border-darktheme2 min-w-max;
+}
+
 .tableBody {
   @apply flex flex-col w-full  2xl:justify-center text-center gap-3 text-whitetheme;
 }
@@ -181,11 +181,11 @@ body {
 }
 
 .tableDiv {
-  @apply lg:flex-1 2xl:text-xl min-w-[150px] 2xl:min-w-auto flex items-center justify-center;
+  @apply lg:flex-1 2xl:text-xl min-w-[250px] 2xl:min-w-auto flex items-center justify-center;
 }
 
 .tableButton {
-  @apply flex items-center gap-2 p-1 lg:p-3 text-sm lg:text-base rounded cursor-pointer relative hover:scale-110 hover:-translate-y-1 transition-all duration-300 ease-in-out;
+  @apply flex items-center gap-2 p-1 lg:p-3 text-xl lg:text-base rounded cursor-pointer relative hover:scale-110 hover:-translate-y-1 transition-all duration-300 ease-in-out;
 }
 
 .ScrollHorizontally {

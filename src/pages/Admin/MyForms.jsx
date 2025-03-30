@@ -187,10 +187,10 @@ const MyForms = ({ languageText, language, api }) => {
                                     </div>
 
                                     <div className="tableDiv">
-                                        {/* <p className="!w-[50%]"> */}
+                                        <p className="!w-[50%] !text-xs">
 
-                                        {language === "en" ? form?.eventName : form?.arabicEventName}
-                                        {/* </p> */}
+                                            {language === "en" ? form?.eventName : form?.arabicEventName}
+                                        </p>
                                     </div>
 
                                     <div className="tableDiv">
