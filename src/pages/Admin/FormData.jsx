@@ -223,7 +223,7 @@ const FormData = ({ languageText, language, api }) => {
                         </div>
                     </div>
 
-                    <h1 className="text-8xl font-bold text-redtheme dark:text-whitetheme text-center my-10 ">{language === "en" ? formData.eventName : formData.arabicEventName}</h1>
+                    <h1 className="text-6xl md:text-8xl font-bold text-redtheme dark:text-whitetheme text-center my-10 ">{language === "en" ? formData.eventName : formData.arabicEventName}</h1>
 
 
                     <div className="flex lg:flex-row flex-col gap-2 items-center">
@@ -362,7 +362,13 @@ const FormData = ({ languageText, language, api }) => {
                                     </div>}
 
 
-                                    {formData.inputs.includes("Full Name") && (<div className="tableDiv">{form.fullName}</div>)}
+                                    {formData.inputs.includes("Full Name") && (<div className="tableDiv">
+
+                                        <p className="!w-[50%] md:!text-xl !text-xs">
+
+                                            {form.fullName}
+                                        </p>
+                                    </div>)}
                                     {formData.inputs.includes("Matric") && (<div className="tableDiv">{form.matric}</div>)}
                                     {formData.inputs.includes("Email") && (<div className="tableDiv !text-xs">{form.email}</div>)}
                                     {formData.inputs.includes("Phone No.") && (<div className="tableDiv">{form.phone}</div>)}
