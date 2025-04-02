@@ -81,7 +81,11 @@ const GalleryCard = ({ languageText, language, gallery }) => {
 
                 {gallery.folderLink === "Coming Soon" ? (
                     <div className='absolute bottom-5 flex w-full justify-center gap-5 px-4 mt-3'>
-                        <div className='w-full p-2 bg-redtheme text-whitetheme rounded-xl flex items-center justify-center gap-3 cursor-pointer'>COMING SOON</div>
+                        <div className='w-full p-2 bg-redtheme text-whitetheme rounded-xl flex items-center justify-center gap-3 cursor-pointer'><Icon icon="hugeicons:coming-soon-01" />{languageText.ComingSoon}</div>
+                    </div>
+                ) : gallery.folderLink === "No Drive" ? (
+                    <div className='absolute bottom-5 flex w-full justify-center gap-5 px-4 mt-3'>
+                        <div className='w-full p-2 bg-redtheme text-whitetheme rounded-xl flex items-center justify-center gap-3 cursor-pointer'><Icon icon="iconoir:google-drive-warning" />{languageText.NoDrive}</div>
                     </div>
                 ) : (
                     <div className='absolute bottom-5 flex w-full justify-center gap-5 px-4 mt-3'>

@@ -12,7 +12,7 @@ import ScrollToTop from '../components/ScrollToTop';
 
 const Gallery = ({ languageText, language, api }) => {
 
-    const [session, setSession] = useState("2024")
+    const [session, setSession] = useState("2025")
     const [searchQuery, setSearchQuery] = useState("");
     const {
         scaleDown,

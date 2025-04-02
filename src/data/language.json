@@ -122,6 +122,8 @@
     "GalleryLink": "Gallery Link",
     "GalleryImages": "Gallery Images",
     "ApplyEmail": "Apply Email",
+    "ComingSoon": "Coming Soon",
+    "NoDrive": "No Drive Link",
 
     "NeedAHand": "Need a Hand?",
     "NeedAHandDesc": "Explore all the Services we can Help you with",
@@ -593,6 +595,8 @@
     "GalleryLink": "لينك المعرض",
     "GalleryImages": "صور المعرض",
     "ApplyEmail": "ايميل التقديم",
+    "ComingSoon": "قادم قريبا",
+    "NoDrive": "لا يوجد رابط درايف",
 
     "NeedAHand": "تحتاج إلى مساعدة؟",
     "NeedAHandDesc": "استكشف جميع الخدمات التي يمكننا مساعدتك بها",

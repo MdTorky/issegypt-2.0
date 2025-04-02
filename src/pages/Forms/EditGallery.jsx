@@ -27,6 +27,7 @@ const EditGallery = ({ language, languageText, api }) => {
     const [icon, setIcon] = useState("");
     const [time, setTime] = useState("");
     const [session, setSession] = useState("");
+    const [committee, setCommittee] = useState("");
 
 
     const { data: galleryData, loading, error } = useFetchDataById(`${api}/api/gallery/${id}`);
@@ -38,8 +39,9 @@ const EditGallery = ({ language, languageText, api }) => {
             setDriveLink(galleryData.driveLink);
             setIcon(galleryData.icon);
             setTime(galleryData.time);
-            setSession(galleryData.session);
             setFolderImage(galleryData.folderImage);
+            setSession(galleryData.session);
+            setCommittee(galleryData.committee);
         }
     }, [galleryData, loading, error]);
 
@@ -58,6 +60,7 @@ const EditGallery = ({ language, languageText, api }) => {
             icon,
             time,
             session,
+            committee
         };
 
         await handleSubmit(`${api}/api/gallery/${id}`, "PATCH", updatedHelpingData, "galleries", languageText.GalleryUpdateMessage);
@@ -82,6 +85,15 @@ const EditGallery = ({ language, languageText, api }) => {
         { label: "2023", value: "2023", aValue: "2023", },
         { label: "2024", value: "2024", aValue: "2024", },
         { label: "2025", value: "2025", aValue: "2025", },
+    ];
+
+    const committeeOptions = [
+        { value: "Social", label: languageText.SocialCommittee, icon: "solar:people-nearby-bold" },
+        { value: "Academic", label: languageText.AcademicCommittee, icon: "heroicons:academic-cap-solid" },
+        { value: "Culture", label: languageText.CultureCommittee, icon: "mdi:religion-islamic" },
+        { value: "Sport", label: languageText.SportCommittee, icon: "fluent-mdl2:more-sports" },
+        { value: "Women", label: languageText.WomenCommittee, icon: "healthicons:woman" },
+        { value: "General", label: languageText.General, icon: "material-symbols:public" },
     ];
 
     return (
@@ -213,7 +225,18 @@ const EditGallery = ({ language, languageText, api }) => {
                                     value={session}
                                 />
                             </div>
-
+                            <SelectField
+                                options={committeeOptions}
+                                placeholder={languageText.ChooseCommittee}
+                                iconValue="fluent:people-team-16-filled"
+                                icon="fluent:people-team-16-regular"
+                                language={language}
+                                languageText={languageText}
+                                required={true}
+                                setValue={setCommittee}
+                                regex={null}
+                                value={committee}
+                            />
 
 
                             <div className="formRow">

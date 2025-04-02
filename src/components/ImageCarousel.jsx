@@ -37,7 +37,7 @@ const ImageCarousel = ({ images, language }) => {
                 {/* Slides */}
                 <AnimatePresence >
                     <motion.div
-                        key={images[currentIndex]?.id}
+                        key={images[currentIndex]?._id}
                         className="absolute inset-0 flex items-center justify-center shadow-[0_3px_10px_rgb(0,0,0,0.2)]  p-4 lg:group-hover:p-0 duration-500"
                         initial={{ opacity: 0, scale: 0.8 }}
                         animate={{ opacity: 1, scale: 1 }}
@@ -48,8 +48,8 @@ const ImageCarousel = ({ images, language }) => {
                         }}
                     >
                         <img
-                            src={images[currentIndex]?.src}
-                            alt={images[currentIndex]?.title}
+                            src={images[currentIndex]?.folderImage}
+                            alt={images[currentIndex]?.folderName}
                             className="w-full h-full object-cover rounded-lg shadow-[0_3px_10px_rgb(0,0,0,0.2)] "
                         />
                         {/* Shimmer Effect */}
@@ -110,7 +110,7 @@ const ImageCarousel = ({ images, language }) => {
                         ></motion.div>
                     ))}
                 </div>
-                <h1 className={` absolute bottom-10 lg:opacity-0 lg:group-hover:opacity-100 text-4xl lg:text-6xl w-[60%] text-center lg:text-start group-hover:ring-0 md:lg:group-hover:text-whitetheme text-whitetheme z-20 ${language === "en" ? " lg:left-10" : " lg:right-10"}`}>{language === "en" ? images[currentIndex]?.title : images[currentIndex]?.aTitle}</h1>
+                <h1 className={` absolute bottom-10 lg:opacity-0 lg:group-hover:opacity-100 text-4xl lg:text-6xl w-[60%] text-center lg:text-start group-hover:ring-0 md:lg:group-hover:text-whitetheme text-whitetheme z-20 ${language === "en" ? " lg:left-10" : " lg:right-10"}`}>{language === "en" ? images[currentIndex]?.folderName : images[currentIndex]?.arabicFolderName}</h1>
             </div>
 
             <div className="absolute bottom-[17%] opacity-0 group-hover:opacity-100 transition-all duration-300 ease-in-out left-0 right-0 flex m-auto w-full h-100 bg-gradient-to-t from-darktheme2 via-darktheme2/90 to-transparent  rounded-lg " />

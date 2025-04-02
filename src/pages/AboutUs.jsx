@@ -90,12 +90,21 @@ const AboutUs = ({ language, languageText, api }) => {
         { name: languageText.General, committee: "General", background: "https://images.unsplash.com/photo-1494059980473-813e73ee784b?q=80&w=2069&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" },
     ]
 
+    const { data: galleryData, galleryLoading, galleryError } = useFetchData(`${api}/api/gallery`);
+    useEffect(() => {
+        if (galleryData && !galleryLoading && !galleryError) {
+            dispatch({
+                type: "SET_ITEM",
+                collection: "galleries",
+                payload: galleryData,
+            });
+        }
+    }, [galleryData, galleryLoading, galleryError, dispatch]);
 
-    const filteredImages = images.filter((image) => {
-        // Add your filtering logic here
-        return image.committee === eventType;
-    });
 
+    const filteredImages = galleryData?.length
+        ? galleryData.filter((image) => image?.committee === eventType).sort((a, b) => a.time - b.time)
+        : [];
 
 
     // setMemberCommittee
