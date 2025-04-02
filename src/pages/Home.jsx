@@ -13,6 +13,7 @@ import HandCard from "../components/cards/HandCard";
 import HandCardLoader from "../components/loaders/HandCardLoader";
 import images from '../data/events.json'
 import ScrollToTop from "../components/ScrollToTop";
+import Loader from "../components/loaders/Loader";
 
 
 const Home = ({ languageText, language, api }) => {
@@ -132,17 +133,43 @@ const Home = ({ languageText, language, api }) => {
         }
     ]
 
-    const filteredSocialImages = images.filter((image) => {
-        return image.committee === "Social";
-    });
 
-    const filteredAcademicImages = images.filter((image) => {
-        return image.committee === "Academic";
-    });
 
-    const filteredCultureImages = images.filter((image) => {
-        return image.committee === "Culture";
-    });
+    const { data: galleryData, galleryLoading, galleryError } = useFetchData(`${api}/api/gallery`);
+    useEffect(() => {
+        if (galleryData && !galleryLoading && !galleryError) {
+            dispatch({
+                type: "SET_ITEM",
+                collection: "galleries",
+                payload: galleryData,
+            });
+        }
+    }, [galleryData, galleryLoading, galleryError, dispatch]);
+
+
+    const filteredSocialImages = galleryData?.length
+        ? galleryData.filter((image) => image?.committee === "Social").sort((a, b) => a.time - b.time)
+        : [];
+
+    const filteredAcademicImages = galleryData?.length
+        ? galleryData.filter((image) => image?.committee === "Academic").sort((a, b) => a.time - b.time)
+        : [];
+
+    const filteredCultureImages = galleryData?.length
+        ? galleryData.filter((image) => image?.committee === "Culture").sort((a, b) => a.time - b.time)
+        : [];
+
+    // const filteredSocialImages = images.filter((image) => {
+    //     return image.committee === "Social";
+    // });
+
+    // const filteredAcademicImages = images.filter((image) => {
+    //     return image.committee === "Academic";
+    // });
+
+    // const filteredCultureImages = images.filter((image) => {
+    //     return image.committee === "Culture";
+    // });
 
 
     return (
@@ -435,6 +462,9 @@ const Home = ({ languageText, language, api }) => {
                     {languageText.ISSEgyptEventsDesc}
 
                 </motion.p>
+                {galleryLoading && (
+                    <Loader text={languageText.Loading} />
+                )}
                 <motion.div
                     initial="hidden"
                     whileInView="visible"
