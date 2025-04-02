@@ -52,7 +52,7 @@ const Shop = ({ languageText, language, api }) => {
                     {loading ? (
                         <Loader text={languageText.Loading} />
                     ) : (
-                        productData.map((product) => (
+                        productData.filter((product) => product.pStatus === "Active").map((product) => (
 
                             <ShopCard product={product} language={language} languageText={languageText} />
                         )))}
