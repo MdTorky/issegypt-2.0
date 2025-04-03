@@ -92,7 +92,7 @@ const ServiceForm = ({ language, languageText, api }) => {
     return (
         <div className="lg:flex ">
             <AdminNavBar languageText={languageText} language={language} api={api} />
-            <div className=' flex justify-center items-center'>
+            <div className=' flex w-full justify-center items-center'>
                 {submitLoading ?
                     (
                         <div className='h-screen flex justify-center items-center'>
@@ -241,7 +241,7 @@ const ServiceForm = ({ language, languageText, api }) => {
 
                                 {/* <div className="w-full"> */}
                                 {groups.map((group, index) => (
-                                    <div key={index} className="flex gap-4 items-center">
+                                    <div key={index} className="flex gap-4 items-center relative ">
                                         <InputField
                                             placeholder={languageText.GroupName}
                                             iconValue="fluent:tab-group-16-filled"
@@ -272,7 +272,7 @@ const ServiceForm = ({ language, languageText, api }) => {
                                             whileTap={{ scale: 0.6 }}
                                             whileHover={{ scale: 1.2 }}
                                             type="button"
-                                            className="text-whitetheme bg-redtheme p-2 rounded-full w-fit absolute left-0 right-0 flex justify-center m-auto cursor-pointer"
+                                            className="text-whitetheme bg-redtheme p-2 rounded-full w-fit absolute left-0 right-0 top-0 bottom-0 h-fit flex justify-center m-auto cursor-pointer"
                                             onClick={() => handleRemoveGroup(index)}
                                         >
                                             <Icon icon="solar:trash-bin-minimalistic-broken" className="text-xl" />

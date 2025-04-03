@@ -290,7 +290,7 @@ const HelpingHandForm = ({ language, languageText, api }) => {
                       </motion.button>
 
                       {links.map((link, index) => (
-                        <div key={index} className="formRow">
+                        <div key={index} className="formRow relative">
                           <SelectField
                             options={linkTypes}
                             placeholder={languageText.SelectLinkType}
@@ -322,7 +322,7 @@ const HelpingHandForm = ({ language, languageText, api }) => {
                             whileTap={{ scale: 0.6 }}
                             whileHover={{ scale: 1.2 }}
                             type="button"
-                            className="text-whitetheme bg-redtheme p-2 rounded-full w-fit absolute left-0 right-0 flex justify-center m-auto cursor-pointer"
+                            className="text-whitetheme bg-redtheme p-2 rounded-full w-fit absolute left-0 right-0 top-0 bottom-0 h-fit flex justify-center m-auto cursor-pointer"
                             onClick={() => removeLink(index)}
                           >
                             <Icon icon="solar:trash-bin-minimalistic-broken" className="text-xl" />
