@@ -6,6 +6,7 @@ import { useAuthContext } from '../../hooks/useAuthContext';
 import useDelete from '../../hooks/useDelete';
 import SuccessMessage from '../formInputs/SuccessMessage';
 import Loader from '../loaders/Loader';
+import UserType from '../UserType';
 
 
 const VerticalCard = ({ helpingData, language, languageText, api, setSuccessText }) => {
@@ -125,7 +126,7 @@ const VerticalCard = ({ helpingData, language, languageText, api, setSuccessText
                         );
                     })}
 
-                    {user && (
+                    {UserType("All") && (
                         <div className='bg-redtheme/80 flex gap-5 justify-between p-2 py-3 ring-2 rounded-xl ring-redtheme  border-2 border-whitetheme'>
                             <CircularButton
                                 icon="mdi:library-edit"

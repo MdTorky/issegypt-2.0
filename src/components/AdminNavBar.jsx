@@ -41,13 +41,13 @@ const AdminNavBar = ({ languageText, api, language, setCommitteeType }) => {
                 { name: languageText.MyForms, path: "/myForms", icon: "fluent:form-sparkle-20-filled" },
             ],
         },
-        {
-            name: languageText.Members,
-            icon: "fluent:people-20-filled",
-            dropdown: [
-                { name: languageText.MyMembers, path: "", icon: "fluent:people-eye-20-filled" },
-            ],
-        },
+        // {
+        //     name: languageText.Members,
+        //     icon: "fluent:people-20-filled",
+        //     dropdown: [
+        //         { name: languageText.MyMembers, path: "", icon: "fluent:people-eye-20-filled" },
+        //     ],
+        // },
         ...(UserType("All") ? [{
             name: languageText.Internships,
             icon: "hugeicons:permanent-job",
@@ -268,7 +268,7 @@ const AdminNavBar = ({ languageText, api, language, setCommitteeType }) => {
                     ))}
                 </nav>
 
-                {setCommitteeType && UserType("Secretary") && <div className="absolute bottom-20 w-full p-4">
+                {setCommitteeType && UserType("All") && <div className="absolute bottom-20 w-full p-4">
                     {membersLoading ? (
                         <div className="w-full justify-center flex">
                             <SmallLoader />

@@ -5,6 +5,7 @@ import { useAuthContext } from '../../hooks/useAuthContext';
 import useDelete from '../../hooks/useDelete';
 import Loader from '../loaders/Loader';
 import { usePopup } from "../../contexts/PopupContext";
+import UserType from '../UserType';
 
 
 
@@ -149,7 +150,7 @@ const HorizontalCard = ({ helpingData, language, languageText, api, setSuccessTe
                                         />
                                     );
                                 })}
-                                {user && (
+                                {UserType("All") && (
                                     <div className='bg-redtheme/80 flex gap-5 justify-between p-2 py-3 ring-2 rounded-xl ring-redtheme  border-2 border-whitetheme'>
                                         <CircularButton
                                             icon="mdi:library-edit"
