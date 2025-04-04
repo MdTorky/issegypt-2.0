@@ -213,7 +213,7 @@ const AboutUs = ({ language, languageText, api }) => {
                         exit={{ x: language === "en" ? -200 : 200, opacity: 0 }}
                         transition={{ duration: 0.8, type: "spring", stiffness: 200 }}
                     >
-                        <h1 className='lg:mt-40 text-darktheme lg:text-7xl text-6xl lg:text-start text-center'>{languageText.ISSEGYPTUTM}, <span className='text-redtheme'>{languageText.WhoAreWe}</span></h1>
+                        <h1 className='lg:mt-40 text-darktheme dark:text-whitetheme lg:text-7xl text-6xl lg:text-start text-center'>{languageText.ISSEGYPTUTM}, <span className='text-redtheme'>{languageText.WhoAreWe}</span></h1>
                         <p className='mb-10 text-gray-400 text-2xl lg:text-start text-center'>{languageText.DiscoverOurJoruney}</p>
                     </motion.div>
                     <motion.img
