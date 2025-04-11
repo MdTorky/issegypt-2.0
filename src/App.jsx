@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import Navbar from "./components/Navbar";
 import languageData from './data/language.json';
 import { useLanguage } from './contexts/languageContext';
-import { Routes, Route, useLocation } from 'react-router-dom';
+import { Routes, Route, useLocation, Navigate } from 'react-router-dom';
 import Home from './pages/Home';
 import BottomNavbar from './components/BottomNavBar';
 import Footer from './components/Footer';
@@ -154,6 +154,7 @@ function App() {
     <div className={`min-h-screen  transition-all duration-300 ${language == 'ar' ? "font-modernpro arabic" : "font-tanker"} ${darkMode ? "backgroundDark" : "backgroundWhite"}`}>
       <Navbar toggleDarkMode={toggleDarkMode} darkMode={darkMode} toggleLanguage={toggleLanguage} language={language} languageText={languageText} />
       <Routes location={location} key={location.key}>
+        <Route path="/form/67efd27e0e02456daf346e7d" element={<Navigate to="/form/welcomeday25" replace />} />
         <Route exact path="/" element={<Home language={language} languageText={languageText} api={api} />} />
         <Route path="/services" element={<HelpingHand language={language} languageText={languageText} api={api} />} />
         <Route path="/gallery" element={<Gallery language={language} languageText={languageText} api={api} />} />
