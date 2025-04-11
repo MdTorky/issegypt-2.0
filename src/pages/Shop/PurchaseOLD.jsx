@@ -27,7 +27,6 @@ const Purchase = ({ languageText, language, api }) => {
     const [productQuantity, setProductQuantity] = useState('')
     const [productSize, setProductSize] = useState('')
     const [proof, setProof] = useState(null);
-    const [price, setPrice] = useState()
     useEffect(() => {
         const savedSize = localStorage.getItem('selectedSize');
         if (savedSize) {
@@ -37,11 +36,6 @@ const Purchase = ({ languageText, language, api }) => {
         const savedQuantity = localStorage.getItem('selectedQuantity');
         if (savedQuantity) {
             setProductQuantity(savedQuantity);
-        }
-
-        const savedPrice = localStorage.getItem('selectedPrice');
-        if (savedPrice) {
-            setPrice(savedPrice); // Set the size from localStorage
         }
     }, []);
 
@@ -180,7 +174,7 @@ const Purchase = ({ languageText, language, api }) => {
                                 <p className='text-whitetheme text-xl lg:text-2xl lg:!w-[70%]'>{language === "en" ? productData.pDescription : productData.pArabicDescription}</p>
                                 <div className='flex flex-col items-center gap-0.5'>
                                     <p className='whitespace-nowrap text-sm lg:text-base text-whitetheme'>{languageText.Quantity}: <span className=' bg-whitetheme px-2 rounded text-darktheme'>{productQuantity}</span></p>
-                                    <p className='text-sm  whitespace-nowrap lg:text-2xl bg-darktheme/50 dark:bg-darktheme text-whitetheme px-5 rounded'>{price} {languageText.RM}</p>
+                                    <p className='text-sm  whitespace-nowrap lg:text-2xl bg-darktheme/50 dark:bg-darktheme text-whitetheme px-5 rounded'>{productQuantity * productData.pPrice} {languageText.RM}</p>
                                 </div>
                             </div>
                         </div>
@@ -265,7 +259,7 @@ const Purchase = ({ languageText, language, api }) => {
                                 />
                                 <SelectField
                                     options={addressOptions}
-                                    placeholder={languageText.ChooseYourAddress}
+                                    placeholder={languageText.ChosoeYourAddress}
                                     iconValue="f7:location-circle-fill"
                                     icon="f7:location-circle"
                                     language={language}
@@ -283,7 +277,7 @@ const Purchase = ({ languageText, language, api }) => {
                                 <motion.div
                                     variants={InputChildVariants}
                                     className='lg:w-1/2 ring-3 p-1 ring-darktheme rounded-xl'>
-                                    <img src="https://res.cloudinary.com/dmv4mxgn5/image/upload/v1744391699/Products/QR_Image_fumsak.jpg" className='rounded-lg' alt="" />
+                                    <img src="https://res.cloudinary.com/dmv4mxgn5/image/upload/v1720717445/Events/Fifa_ot5yio.png" className='rounded-lg' alt="" />
                                 </motion.div>
                                 <ImageUploadField
                                     placeholder={languageText.UploadProofImage}

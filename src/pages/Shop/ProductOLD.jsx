@@ -11,23 +11,15 @@ const Product = ({ languageText, language, api, }) => {
 
     const { id } = useParams()
 
+
+
     const [sizeError, setSizeError] = useState("");
     const [size, setSize] = useState(null);
     const [quantity, setQuantity] = useState(1);
     const sizes = ["XS", "S", "M", "L", "XL", "XXL"];
 
-    const { products, transactions, dispatch } = useFormsContext();
 
-    const { data: transactionData, transactionLoading, transactionError } = useFetchDataById(`${api}/api/transaction`);
-    useEffect(() => {
-        if (transactionData && !transactionLoading && !transactionError) {
-            dispatch({
-                type: "GET_ITEM",
-                collection: "transactions",
-                payload: transactionData,
-            });
-        }
-    }, [transactionData, transactionLoading, transactionError, dispatch]);
+    const { products, dispatch } = useFormsContext();
 
     const { data: productData, loading, error } = useFetchDataById(`${api}/api/product/${id}`);
     useEffect(() => {
@@ -42,14 +34,13 @@ const Product = ({ languageText, language, api, }) => {
         setQuantity(1);
         setSizeError("");
         localStorage.removeItem('selectedSize');
+        localStorage.setItem('selectedPrice', 30);
         localStorage.setItem('selectedQuantity', 1);
-        // localStorage.setItem('selectedPrice', productData?.pPrice);
-        if (productData) {
-            const initialPrice = transactionData?.length < 10 ? 40 : productData?.pPrice;
-            localStorage.setItem('selectedPrice', initialPrice);
-        }
-
     }, [productData, loading, error, dispatch]);
+
+    // useEffect(() => {
+    //     document.title = productData?.pTitle + " | " + languageText.ISSEgyptGateway; // Change title when page loads
+    // }, []);
 
     const handlePurchase = (e) => {
         e.preventDefault();
@@ -67,43 +58,12 @@ const Product = ({ languageText, language, api, }) => {
         localStorage.setItem('selectedSize', selectedSize);
     };
 
-    // const decrementQuantity = () => {
-    //     if (quantity > 1) {
-    //         const updatedQuantity = quantity - 1;
-    //         setQuantity(updatedQuantity);
-    //         productData.pPrice = (productData.pPrice * updatedQuantity / quantity);
-    //         localStorage.setItem('selectedQuantity', updatedQuantity);
-    //     }
-    // };
-
-    // const incrementQuantity = () => {
-    //     if (quantity < 5) {
-    //         const updatedQuantity = quantity + 1;
-    //         setQuantity(updatedQuantity);
-    //         productData.pPrice = (productData.pPrice * updatedQuantity / quantity);
-    //         localStorage.setItem('selectedQuantity', updatedQuantity);
-    //     }
-    // };
-
-    const getProductPrice = (qty = quantity) => {
-        const basePrice = transactionData?.length < 10 ? 40 : productData?.pPrice;
-        return basePrice * qty;
-    };
-
-    useEffect(() => {
-        if (productData) {
-            const currentPrice = getProductPrice();
-            localStorage.setItem('selectedPrice', currentPrice);
-
-        }
-    }, [quantity, productData]);
-
     const decrementQuantity = () => {
         if (quantity > 1) {
             const updatedQuantity = quantity - 1;
             setQuantity(updatedQuantity);
+            productData.pPrice = (productData.pPrice * updatedQuantity / quantity);
             localStorage.setItem('selectedQuantity', updatedQuantity);
-            // Price will be updated by the effect above
         }
     };
 
@@ -111,12 +71,10 @@ const Product = ({ languageText, language, api, }) => {
         if (quantity < 5) {
             const updatedQuantity = quantity + 1;
             setQuantity(updatedQuantity);
+            productData.pPrice = (productData.pPrice * updatedQuantity / quantity);
             localStorage.setItem('selectedQuantity', updatedQuantity);
-
-            // Price will be updated by the effect above
         }
     };
-
 
     const handleShare = async (e) => {
         e.stopPropagation();
@@ -137,18 +95,11 @@ const Product = ({ languageText, language, api, }) => {
         }
     };
 
-    // Calculate the promotional price based on transaction count
-    // const getProductPrice = () => {
-    //     if (transactions.length < 10) {
-    //         return 40; // First 10 transactions get the price of 40
-    //     } else {
-    //         return 45; // Regular price of 45 after 10 transactions
-    //     }
-    // };
 
     return (
         <div>
             <div className="relative w-full h-[150vh] md:h-[110vh] xl:h-[155vh] 2xl:h-[125vh] flex  justify-center bg-cover bg-center "
+
                 style={{ backgroundImage: "url('')" }}>
 
                 <motion.img
@@ -161,8 +112,12 @@ const Product = ({ languageText, language, api, }) => {
                     layout
                 />
 
+                {/* White Overlay Shape */}
+                {/* <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-b from-whitetheme/80 to-transparent z-10"></div> */}
+
                 {/* Content */}
-                {(loading || transactionLoading) ? (
+
+                {loading ? (
                     <Loader text={languageText.Loading} />
                 ) : (
                     <motion.div
@@ -170,6 +125,7 @@ const Product = ({ languageText, language, api, }) => {
                         animate={{ scale: 1, opacity: 1 }}
                         transition={{ duration: 0.4, type: "spring", stiffness: 100 }}
                         className="relative mt-20 md:mt-30 lg:mt-40 z-20 justify-center md:px-10 lg:px-4 lg:py-10 rounded-xl flex flex-col lg:flex-row bg-whitetheme/10 h-fit">
+
                         {/* Title */}
                         <div className=" flex flex-col pt-4 lg:pt-20 w-100 text-center lg:text-start">
                             <motion.p
@@ -177,8 +133,7 @@ const Product = ({ languageText, language, api, }) => {
                                 animate={{ x: 0, opacity: 1 }}
                                 transition={{ duration: 0.4, type: "spring", stiffness: 100, delay: 0.3 }}
                                 className="text-darktheme"
-                            >{language === "en" ? productData.pDescription : productData.pArabicDescription}
-                            </motion.p>
+                            >{language === "en" ? productData.pDescription : productData.pArabicDescription}</motion.p>
                             <motion.h1
                                 initial={{ x: language === "en" ? -200 : 200, opacity: 0 }}
                                 animate={{ x: 0, opacity: 1 }}
@@ -189,9 +144,11 @@ const Product = ({ languageText, language, api, }) => {
                         {/* Center Image */}
                         <div className="mt-4 lg:mt-0 flex lg:w-fit w-full">
                             <div className='w-full bg-redtheme2/0 rounded-full flex relative items-center m-auto '>
-                                <img src={productData.pFrontImage} alt="" className='relative flex w-70 lg:w-100 m-auto bottom-0 items-center left-0 right-0 hover:scale-130 hover:-translate-y-20 transition-all duration-500 ease-in-out z-20' />
+                                <img src={productData.pFrontImage} alt="" className='relative flex w-70  lg:w-100 m-auto bottom-0 items-center left-0 right-0 hover:scale-130 hover:-translate-y-20 transition-all duration-500 ease-in-out z-20' />
                             </div>
                         </div>
+
+
 
                         {/* Product Info */}
                         <motion.div
@@ -201,12 +158,12 @@ const Product = ({ languageText, language, api, }) => {
                             className=" flex flex-col pt-3 pb-6 lg:pt-20 lg:pb-0  px-4 lg:px-2 gap-2">
                             <div className="w-full justify-end flex">
                                 <motion.p
-                                    key={getProductPrice()}
+                                    key={productData.pPrice}
                                     initial={{ scale: 0, y: 30 }}
                                     animate={{ scale: 1, y: 0 }}
                                     exit={{ scale: 0 }}
                                     transition={{ type: "spring", stiffness: 200 }}
-                                    className="text-whitetheme w-fit rounded-xl text-4xl">{getProductPrice()} {languageText.RM}</motion.p>
+                                    className="text-whitetheme w-fit rounded-xl text-4xl">{productData.pPrice} {languageText.RM}</motion.p>
                             </div>
                             <div className="flex justify-between items-center">
                                 <p className="text-whitetheme text-lg">{languageText.Size} -
@@ -216,7 +173,7 @@ const Product = ({ languageText, language, api, }) => {
                                         animate={{ scale: 1 }}
                                         exit={{ scale: 0 }}
                                         className={`text-darktheme font-tanker`}> {size}</motion.span></p>
-                                <button onClick={() => window.open("https://res.cloudinary.com/dmv4mxgn5/image/upload/v1744389691/Products/Size_Guide_wkrofn.jpg")} className="mb-2 bg-whitetheme/10 w-fit px-2 rounded text-whitetheme2 text-lg cursor-pointer hover:scale-110 hover:translate-x-2 transition-all duration-500 ease-in-out">{languageText.SizeGuide}</button>
+                                <button className="mb-2 bg-whitetheme/10 w-fit px-2 rounded text-whitetheme2 text-lg cursor-pointer hover:scale-110 hover:translate-x-2 transition-all duration-500 ease-in-out">{languageText.SizeGuide}</button>
                             </div>
                             <div className="flex flex-wrap items-center justify-center gap-3">
                                 {sizes.map((s) => (
@@ -237,6 +194,7 @@ const Product = ({ languageText, language, api, }) => {
                             </div>
                             {sizeError && !size && <p className="mt-2 -mb-3 bg-redtheme/50 w-fit m-auto px-5 text-whitetheme text-center rounded flex items-center">{sizeError}</p>}
 
+
                             {/* Quantity */}
                             <div className='flex w-fit gap-20 justify-evenly items-center mt-4 bg-whitetheme/20 p-2 px-10 mx-auto rounded-xl border-3 border-darktheme2/40  ring-3 ring-whitetheme/30 '>
                                 <div className="flex flex-col justify-center">
@@ -251,6 +209,7 @@ const Product = ({ languageText, language, api, }) => {
                                 </div>
                             </div>
 
+
                             {/* Purchase Buttons */}
                             <div className="mt-4 flex justify-center gap-3">
                                 <Link
@@ -263,25 +222,35 @@ const Product = ({ languageText, language, api, }) => {
                                     <Icon icon="material-symbols:3d-rotation-rounded" />
                                     <div className="inputIconText bg-redtheme/40  !text-whitetheme  ">
                                         {languageText.DModel}
+
                                     </div>
                                 </button>
                                 <button className="bg-darktheme/50 border-3 border-whitetheme/30  ring-3 ring-darktheme2/30 flex items-center text-2xl gap-2 p-2 px-3 rounded-xl text-whitetheme cursor-pointer hover:scale-110 transition-all duration-500 ease-in-out hover:bg-darktheme2/80 group relative" onClick={handleShare}>
                                     <Icon icon="fluent:share-16-filled" />
                                     <div className="inputIconText bg-darktheme/50  !text-whitetheme  ">
                                         {languageText.Share}
+
                                     </div>
                                 </button>
                             </div>
-                            {transactionData?.length < 10 && (
-                                <motion.div
-                                    initial={{ scale: 0, opacity: 0 }}
-                                    animate={{ scale: 1, opacity: 1 }}
-                                    transition={{ delay: 0.3 }}
-                                    className="w-[80%] mx-auto text-center bg-redtheme/80 text-whitetheme px-2 py-1 rounded-lg text-sm">
-                                    {languageText.PromotionalPrice} ({10 - transactionData?.length} {languageText.Left})
-                                </motion.div>
-                            )}
                         </motion.div>
+                        {/* <AnimatePresence>
+                            <motion.p
+                                initial={{ y: 20, opacity: 0 }}
+                                animate={{ y: 0, opacity: 1 }}
+                                exit={{ y: 20, opacity: 0 }}
+                                transition={{ duration: 0.8, type: "spring", stiffness: 200 }}
+
+                                className="text-sm md:text-5xl text-redtheme">{productData.pTitle}</motion.p>
+                            <motion.h1
+                                initial={{ y: -20, scale: 0, opacity: 0 }}
+                                animate={{ y: 0, scale: 1, opacity: 1 }}
+                                exit={{ y: -20, opacity: 0 }}
+                                transition={{ duration: 0.8, type: "spring", stiffness: 100 }}
+                                className="text-2xl md:text-8xl font-bold w-[85%] mx-auto text-whitetheme">
+                                {languageText.StudentGalleryDesc}
+                            </motion.h1>
+                        </AnimatePresence> */}
                     </motion.div>
                 )}
             </div>
