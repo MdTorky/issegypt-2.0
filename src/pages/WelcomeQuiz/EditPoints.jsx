@@ -51,7 +51,7 @@ const EditPoints = ({ api, languageText }) => {
     const savePoints = async () => {
         try {
             await axios.put(`${api}/api/welcome/edit-points/${code}`, { groups })
-            navigate(`/host/${code}`)
+            navigate(`/editpoints/${code}`)
         } catch (err) {
             setError("Failed to save points")
         }
