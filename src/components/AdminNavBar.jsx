@@ -157,7 +157,7 @@ const AdminNavBar = ({ languageText, api, language, setCommitteeType }) => {
         }
     }, [membersData, membersLoading, membersError, dispatch]);
 
-    const currentMember = membersData?.find((member) => member?.committee === user?.committee && UserType("All"));
+    const currentMember = membersData?.find((member) => member?.committee === user?.committee);
 
 
     const handleClick = () => {
@@ -317,7 +317,7 @@ const AdminNavBar = ({ languageText, api, language, setCommitteeType }) => {
                                 transition={{ delay: 0.2 }}
                                 className="flex flex-col">
                                 <span className=" text-lg">{language === "en" ? currentMember?.name : currentMember?.arabicName}</span>
-                                <p className="text-sm text-gray-400 -mt-2">
+                                <p className="text-sm text-gray-400 -mt-2 w-[90%]">
                                     {roleChecker({
                                         languageText: languageText,
                                         committee: currentMember?.committee,

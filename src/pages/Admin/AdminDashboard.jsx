@@ -51,7 +51,7 @@ const AdminDashboard = ({ languageText, language, api }) => {
     const isUserType = UserType("All"); // Move outside render logic
 
     const currentMember = membersData?.find(
-        (member) => member?.committee === user?.committee && isUserType
+        (member) => (member?.committee === user?.committee)
     );
 
     // Get All Normal Members
