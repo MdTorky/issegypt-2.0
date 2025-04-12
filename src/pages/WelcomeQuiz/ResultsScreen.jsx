@@ -135,7 +135,7 @@ const ResultsScreen = ({ api, languageText }) => {
                                 animate={{ y: 0, opacity: 1 }}
                                 transition={{ duration: 0.5, type: "spring", stiffness: 100, delay: 9 }}
                             >
-                                <h2 className="text-xl text-end font-modernpro font-semibold mb-4 dark:text-whitetheme text-redtheme">دي كل نقطكم اللي تكسف</h2>
+                                <h2 className="text-xl text-end font-modernpro font-semibold mb-4 dark:text-whitetheme text-redtheme">مجموع نقط كل فريق</h2>
                                 <div className="overflow-hidden rounded-lg border border-gray-200 dark:text-whitetheme">
                                     <table className="w-full overflow-auto">
                                         <thead>
