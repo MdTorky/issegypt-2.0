@@ -306,6 +306,7 @@
     "Upload": "Upload",
     "PromotionalPrice": "Promotional Price",
     "Left": "Left",
+    "OutOfStock": "Out Of Stock",
 
     "Internships": "Internships",
     "InternshipsDesc": "Find a Job Quicker",
@@ -386,7 +387,6 @@
     "FormData": "Form Data",
     "ChangeStatus": "Change Status",
     "CreateNewForm": "Create a New Form",
-    "EidtForm": "Edit Form",
 
     "FormLimit": "Form Submissions Limit",
     "SendEmail": "Send Confirmation Email",
@@ -781,6 +781,7 @@
     "Upload": "رفع",
     "PromotionalPrice": "سعر ترويجي",
     "Left": "متبقية",
+    "OutOfStock": "إنتهى من المخزن",
 
     "Internships": "التدريب",
     "InternshipsDesc": "دورلك على شغل يرم عظمك",
@@ -860,7 +861,6 @@
     "FormData": "بيانات الفورم",
     "ChangeStatus": "تغيير الحالة",
     "CreateNewForm": "إنشاء فورم جديد",
-    "EidtForm": "تعديل الفورم",
 
     "FormLimit": "حد التقديمات",
     "SendEmail": "إرسال بريد إلكتروني تأكيدي",

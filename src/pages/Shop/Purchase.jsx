@@ -113,21 +113,49 @@ const Purchase = ({ languageText, language, api }) => {
         }
 
 
-        const transactionData = {
-            productId: productData._id,
-            buyerName,
-            buyerMatric,
-            buyerEmail,
-            buyerPhone,
-            buyerFaculty,
-            buyerAddress,
-            productSize,
-            productQuantity,
-            proof: proofUrl,
-        };
+        try {
 
-        await handleSubmit(`${api}/api/transaction`, "POST", transactionData, "transactions", languageText.PurchaseSuccessMessage);
-        navigate("/");
+            const inventoryCheckResponse = await fetch(`${api}/api/product/inventory`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    productId: productData._id,
+                    size: productSize,
+                    quantity: productQuantity
+                }),
+            });
+
+            if (!inventoryCheckResponse.ok) {
+                const errorData = await inventoryCheckResponse.json();
+                setError(errorData.error || 'Failed to check inventory');
+                return;
+            }
+
+
+            const transactionData = {
+                productId: productData._id,
+                buyerName,
+                buyerMatric,
+                buyerEmail,
+                buyerPhone,
+                buyerFaculty,
+                buyerAddress,
+                productSize,
+                productQuantity,
+                proof: proofUrl,
+                // proof: "dsffdgs",
+
+            };
+
+
+
+            await handleSubmit(`${api}/api/transaction`, "POST", transactionData, "transactions", languageText.PurchaseSuccessMessage);
+            navigate("/");
+        } catch (error) {
+            setError(error.message || 'An error occurred during submission');
+        }
     };
 
     return (

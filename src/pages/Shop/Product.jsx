@@ -61,10 +61,24 @@ const Product = ({ languageText, language, api, }) => {
         }
     }
 
+    const getMaxAvailableQuantity = () => {
+        if (!size || !productData?.pSizeInventory) return 5; // Default max if no size selected or no inventory
+
+        const sizeInventory = productData.pSizeInventory;
+        const available = sizeInventory[size] || 0;
+
+        // Return the available stock, but cap it at 5 (your existing limit)
+        return Math.min(available, 5);
+    };
+
     const handleSizeChange = (e) => {
         const selectedSize = e.target.value;
         setSize(selectedSize);
         localStorage.setItem('selectedSize', selectedSize);
+
+        const maxForThisSize = Math.min(productData?.pSizeInventory?.[selectedSize] || 5, 5);
+        setQuantity(1); // Always start with 1 when changing size
+        localStorage.setItem('selectedQuantity', 1);
     };
 
     // const decrementQuantity = () => {
@@ -84,6 +98,9 @@ const Product = ({ languageText, language, api, }) => {
     //         localStorage.setItem('selectedQuantity', updatedQuantity);
     //     }
     // };
+
+
+
 
     const getProductPrice = (qty = quantity) => {
         const basePrice = transactionData?.length < 10 ? 40 : productData?.pPrice;
@@ -145,6 +162,19 @@ const Product = ({ languageText, language, api, }) => {
     //         return 45; // Regular price of 45 after 10 transactions
     //     }
     // };
+
+    const isSizeInStock = (sizeKey) => {
+        if (!productData?.pSizeInventory) return true; // If inventory not set up yet
+        const inventory = productData.pSizeInventory;
+
+        // If using Map type in MongoDB, you need to access it differently
+        if (typeof inventory.get === 'function') {
+            return inventory.get(sizeKey) > 0;
+        } else {
+            // If it's serialized as a plain object in the API response
+            return inventory[sizeKey] > 0;
+        }
+    };
 
     return (
         <div>
@@ -219,7 +249,7 @@ const Product = ({ languageText, language, api, }) => {
                                 <button onClick={() => window.open("https://res.cloudinary.com/dmv4mxgn5/image/upload/v1744389691/Products/Size_Guide_wkrofn.jpg")} className="mb-2 bg-whitetheme/10 w-fit px-2 rounded text-whitetheme2 text-lg cursor-pointer hover:scale-110 hover:translate-x-2 transition-all duration-500 ease-in-out">{languageText.SizeGuide}</button>
                             </div>
                             <div className="flex flex-wrap items-center justify-center gap-3">
-                                {sizes.map((s) => (
+                                {/* {sizes.map((s) => (
                                     <label key={s} className="relative">
                                         <input
                                             type="radio"
@@ -233,12 +263,34 @@ const Product = ({ languageText, language, api, }) => {
                                             <span className="text-base font-medium font-tanker">{s}</span>
                                         </div>
                                     </label>
+                                ))} */}
+                                {sizes.map((s) => (
+                                    <label key={s} className={`relative ${!isSizeInStock(s) ? 'opacity-50 cursor-not-allowed' : ''}`}>
+                                        <input
+                                            type="radio"
+                                            name="size"
+                                            value={s}
+                                            className="hidden peer"
+                                            checked={size === s}
+                                            onChange={handleSizeChange}
+                                            disabled={!isSizeInStock(s)}
+                                        />
+                                        <div className={`flex flex-col items-center justify-center w-13 h-12 rounded-lg border-3 border-darktheme2/40 bg-whitetheme/40 ${isSizeInStock(s) ? 'cursor-pointer' : 'cursor-not-allowed'} ring-3 ring-whitetheme/30 peer-checked:border-redtheme peer-checked:text-redtheme peer-checked:shadow-[0px_0px_47px_0px_rgba(163,22,33,1)] hover:scale-110 hover:-translate-y-3 transition-all duration-500 ease-in-out hover:bg-whitetheme/80`}>
+                                            <span className="text-base font-medium font-tanker">{s}</span>
+                                            {isSizeInStock(s) && (
+                                                <span className="text-[10px] text-darktheme2/70">{productData?.pSizeInventory?.[s] || 0}</span>
+                                            )}
+                                            {!isSizeInStock(s) && (
+                                                <span className="text-[6px] text-redtheme text-center">{languageText.OutOfStock}</span>
+                                            )}
+                                        </div>
+                                    </label>
                                 ))}
                             </div>
                             {sizeError && !size && <p className="mt-2 -mb-3 bg-redtheme/50 w-fit m-auto px-5 text-whitetheme text-center rounded flex items-center">{sizeError}</p>}
 
                             {/* Quantity */}
-                            <div className='flex w-fit gap-20 justify-evenly items-center mt-4 bg-whitetheme/20 p-2 px-10 mx-auto rounded-xl border-3 border-darktheme2/40  ring-3 ring-whitetheme/30 '>
+                            {/* <div className='flex w-fit gap-20 justify-evenly items-center mt-4 bg-whitetheme/20 p-2 px-10 mx-auto rounded-xl border-3 border-darktheme2/40  ring-3 ring-whitetheme/30 '>
                                 <div className="flex flex-col justify-center">
                                     <h3 className="text-gray-200/80 text-base">{languageText.SelectQuantity}</h3>
                                     <h3 className="text-whitetheme2 text-xl ">{quantity}</h3>
@@ -248,6 +300,37 @@ const Product = ({ languageText, language, api, }) => {
                                     <button onClick={decrementQuantity} className="rounded-full text-lg bg-darktheme2/30 text-whitetheme p-1 hover:scale-130 transition-all duration-500 ease-in-out cursor-pointer">
                                         <Icon icon="typcn:minus" /></button>
                                     <button onClick={incrementQuantity} className="rounded-full text-lg bg-darktheme2/30 text-whitetheme p-1 hover:scale-130 transition-all duration-500 ease-in-out cursor-pointer"><Icon icon="mingcute:plus-fill" /></button>
+                                </div>
+                            </div> */}
+
+
+
+                            <div className='flex w-fit gap-20 justify-evenly items-center mt-4 bg-whitetheme/20 p-2 px-10 mx-auto rounded-xl border-3 border-darktheme2/40 ring-3 ring-whitetheme/30'>
+                                <div className="flex flex-col justify-center">
+                                    <h3 className="text-gray-200/80 text-base">{languageText.SelectQuantity}</h3>
+                                    <h3 className="text-whitetheme2 text-xl">{quantity}</h3>
+                                    {size && (
+                                        <span className="text-xs text-whitetheme/70">
+                                            {languageText.Available}: {getMaxAvailableQuantity()}
+                                        </span>
+                                    )}
+                                </div>
+
+                                <div className="flex gap-3 items-center">
+                                    <button
+                                        onClick={decrementQuantity}
+                                        className={`rounded-full text-lg bg-darktheme2/30 text-whitetheme p-1 ${quantity <= 1 ? 'opacity-50' : 'hover:scale-130'} transition-all duration-500 ease-in-out cursor-pointer`}
+                                        disabled={quantity <= 1}
+                                    >
+                                        <Icon icon="typcn:minus" />
+                                    </button>
+                                    <button
+                                        onClick={incrementQuantity}
+                                        className={`rounded-full text-lg bg-darktheme2/30 text-whitetheme p-1 ${quantity >= getMaxAvailableQuantity() ? 'opacity-50' : 'hover:scale-130'} transition-all duration-500 ease-in-out cursor-pointer`}
+                                        disabled={quantity >= getMaxAvailableQuantity()}
+                                    >
+                                        <Icon icon="mingcute:plus-fill" />
+                                    </button>
                                 </div>
                             </div>
 
