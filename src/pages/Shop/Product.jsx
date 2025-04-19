@@ -277,9 +277,9 @@ const Product = ({ languageText, language, api, }) => {
                                         />
                                         <div className={`flex flex-col items-center justify-center w-13 h-12 rounded-lg border-3 border-darktheme2/40 bg-whitetheme/40 ${isSizeInStock(s) ? 'cursor-pointer' : 'cursor-not-allowed'} ring-3 ring-whitetheme/30 peer-checked:border-redtheme peer-checked:text-redtheme peer-checked:shadow-[0px_0px_47px_0px_rgba(163,22,33,1)] hover:scale-110 hover:-translate-y-3 transition-all duration-500 ease-in-out hover:bg-whitetheme/80`}>
                                             <span className="text-base font-medium font-tanker">{s}</span>
-                                            {isSizeInStock(s) && (
+                                            {/* {isSizeInStock(s) && (
                                                 <span className="text-[10px] text-darktheme2/70">{productData?.pSizeInventory?.[s] || 0}</span>
-                                            )}
+                                            )} */}
                                             {!isSizeInStock(s) && (
                                                 <span className="text-[6px] text-redtheme text-center">{languageText.OutOfStock}</span>
                                             )}
@@ -309,11 +309,11 @@ const Product = ({ languageText, language, api, }) => {
                                 <div className="flex flex-col justify-center">
                                     <h3 className="text-gray-200/80 text-base">{languageText.SelectQuantity}</h3>
                                     <h3 className="text-whitetheme2 text-xl">{quantity}</h3>
-                                    {size && (
+                                    {/* {size && (
                                         <span className="text-xs text-whitetheme/70">
                                             {languageText.Available}: {getMaxAvailableQuantity()}
                                         </span>
-                                    )}
+                                    )} */}
                                 </div>
 
                                 <div className="flex gap-3 items-center">
