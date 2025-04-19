@@ -1,5 +1,3 @@
-"use client"
-
 import { useState, useEffect, useRef } from "react"
 import { useParams, useNavigate } from "react-router-dom"
 import axios from "axios"
@@ -16,13 +14,23 @@ const ParticipantScreen = ({ api, languageText }) => {
     const [submitted, setSubmitted] = useState(false)
     const [loading, setLoading] = useState(true)
     const [error, setError] = useState("")
+    const [selectedOption, setSelectedOption] = useState(null)
 
     // Use refs to store interval IDs and timers
     const timerRef = useRef(null)
     const pollingRef = useRef(null)
     const quizStatusPollingRef = useRef(null)
     const inputRef = useRef(null)
-    const endTimeRef = useRef(null) // Add this to store the end time
+    const endTimeRef = useRef(null)
+    const currentQuestionIndexRef = useRef(null)
+
+    // Colors for the multiple choice buttons
+    const colorClasses = {
+        red: "bg-red-500 hover:bg-red-600",
+        blue: "bg-blue-500 hover:bg-blue-600",
+        green: "bg-green-500 hover:bg-green-600",
+        yellow: "bg-yellow-500 hover:bg-yellow-600",
+    }
 
     // Load group data from localStorage only once on mount
     useEffect(() => {
@@ -101,9 +109,6 @@ const ParticipantScreen = ({ api, languageText }) => {
         }, 3000);
     }
 
-    // Add this ref
-    const currentQuestionIndexRef = useRef(null);
-
     const fetchCurrentQuestion = async () => {
         try {
             const response = await axios.get(`${api}/api/welcome/question/${code}`)
@@ -116,6 +121,7 @@ const ParticipantScreen = ({ api, languageText }) => {
                 setCurrentQuestion(response.data)
                 setSubmitted(false)
                 setAnswer("")
+                setSelectedOption(null)
 
                 // Set up the timer only for new questions
                 endTimeRef.current = Date.now() + response.data.timeLimit * 1000
@@ -155,18 +161,29 @@ const ParticipantScreen = ({ api, languageText }) => {
     }
 
     const handleSubmit = async (e) => {
-        e.preventDefault()
-        if (!answer.trim() || submitted) return
+        if (e) e.preventDefault();
+
+        if (currentQuestion.questionType === "open" && !answer.trim()) return;
+        if (currentQuestion.questionType === "multiple_choice" && !selectedOption) return;
+        if (submitted) return;
 
         try {
             await axios.post(`${api}/api/welcome/answer`, {
                 groupId: group.id,
-                answer: answer.trim(),
+                answer: currentQuestion.questionType === "open" ? answer.trim() : selectedOption
             })
             setSubmitted(true)
         } catch (err) {
             setError(err.response?.data?.error || "Failed to submit answer")
         }
+    }
+
+    const handleOptionSelect = (optionText) => {
+        setSelectedOption(optionText);
+        // Auto-submit when an option is selected
+        setTimeout(() => {
+            handleSubmit();
+        }, 100);
     }
 
     const formatTime = (seconds) => {
@@ -175,12 +192,10 @@ const ParticipantScreen = ({ api, languageText }) => {
         return `${mins}:${secs < 10 ? "0" : ""}${secs}`
     }
 
-    // Add this effect to debug state changes
     useEffect(() => {
         console.log("Current question changed:", currentQuestion?.index);
     }, [currentQuestion]);
 
-    // Add this effect to debug timeLeft changes
     useEffect(() => {
         console.log("Time left changed:", timeLeft);
     }, [timeLeft]);
@@ -224,7 +239,7 @@ const ParticipantScreen = ({ api, languageText }) => {
                 <div className="bg-gradient-to-b from-whitetheme/50 to-whitetheme2/50 dark:from-darktheme/50 dark:to-darktheme2/50  rounded-lg shadow-md p-6 mb-4">
                     <div className="flex justify-between items-center mb-2">
                         <h2 className="text-lg font-semibold text-redtheme">
-                            Emoji {currentQuestion.index + 1} of {currentQuestion.total}
+                            Question {currentQuestion.index + 1} of {currentQuestion.total}
                         </h2>
                         <div className="text-xl bg-redtheme/70 text-whitetheme px-3 py-1 rounded-md">{formatTime(timeLeft)}</div>
                     </div>
@@ -240,6 +255,19 @@ const ParticipantScreen = ({ api, languageText }) => {
                         <div className="text-center py-6">
                             <div className="text-3xl font-bold text-redtheme">{languageText.AnswerSubmitted}</div>
                             <div className=" text-gray-600">{languageText.FinallySubmitted}</div>
+                        </div>
+                    ) : currentQuestion.questionType === "multiple_choice" ? (
+                        <div className="grid grid-cols-2 gap-4">
+                            {currentQuestion.options.map((option, index) => (
+                                <button
+                                    key={index}
+                                    onClick={() => handleOptionSelect(option.text)}
+                                    disabled={timeLeft === 0}
+                                    className={`${colorClasses[option.color]} h-32 p-4 rounded-xl text-white font-bold text-lg shadow-md transition duration-200 transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-opacity-50`}
+                                >
+                                    {option.text}
+                                </button>
+                            ))}
                         </div>
                     ) : (
                         <form onSubmit={handleSubmit}>
