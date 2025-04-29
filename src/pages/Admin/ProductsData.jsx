@@ -311,7 +311,7 @@ const ProductsData = ({ languageText, language, api }) => {
                         <div className={`adminDashboardCard group mb-3 lg:mt-30 ${language === "en" ? "md:ml-auto" : "md:mr-auto"}`}>
                             <div className="flex flex-col">
                                 <p className="lg:text-2xl text-gray-300">{languageText.TotalPurchases}</p>
-                                <h1 className="lg:text-8xl text-whitetheme group-hover:text-redtheme duration-500">{productsData?.length}</h1>
+                                <h1 className="lg:text-8xl text-whitetheme group-hover:text-redtheme duration-500">{transactionData?.length}</h1>
                             </div>
                             <div className="lg:text-9xl text-whitetheme group-hover:text-redtheme duration-500">
                                 <Icon icon="mingcute:tag-2-fill" />
