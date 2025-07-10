@@ -44,6 +44,7 @@ import ResultsScreen from './pages/WelcomeQuiz/ResultsScreen';
 import QuizCompleted from './pages/WelcomeQuiz/QuizCompleted';
 import EditPoints from './pages/WelcomeQuiz/EditPoints';
 import BankAccount from './pages/BankAccount';
+// import FormFiller from './pages/FormFiller';
 
 
 
@@ -175,7 +176,7 @@ function App() {
         <Route path="/addIntern" element={<ProtectedRoute><AddInternship language={language} languageText={languageText} api={api} /></ProtectedRoute>} />
 
         <Route path="/create" element={<ProtectedRoute><CreateQuiz api={api} /></ProtectedRoute>} />
-        <Route path="/host/:code" element={<ProtectedRoute><HostScreen api={api} /></ProtectedRoute>} />
+        <Route path="/host/:code" element={<ProtectedRoute><HostScreen api={api} language={language} languageText={languageText} /></ProtectedRoute>} />
         <Route path="/results/:code" element={<ProtectedRoute><ResultsScreen language={language} languageText={languageText} api={api} /></ProtectedRoute>} />
         <Route path="/editPoints/:code" element={<ProtectedRoute><EditPoints api={api} languageText={languageText} /></ProtectedRoute>} />
 

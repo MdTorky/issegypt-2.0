@@ -39,9 +39,30 @@ const EditPoints = ({ api, languageText }) => {
                 group._id === groupId
                     ? {
                         ...group,
-                        answers: group.answers.map((answer, index) =>
-                            index === questionIndex ? { ...answer, points: Number.parseInt(points) || 0 } : answer,
-                        ),
+                        // answers: group.answers.map((answer, index) =>
+                        //     index === questionIndex ? { ...answer, points: Number.parseInt(points) || 0 } : answer,
+                        // ),
+
+                        answers: (() => {
+                            const exists = group.answers.find(a => a.questionIndex === questionIndex)
+                            if (exists) {
+                                return group.answers.map(answer =>
+                                    answer.questionIndex === questionIndex
+                                        ? { ...answer, points: Number.parseInt(points) || 0 }
+                                        : answer
+                                )
+                            } else {
+                                return [
+                                    ...group.answers,
+                                    {
+                                        questionIndex,
+                                        answer: "",
+                                        isCorrect: false,
+                                        points: Number.parseInt(points) || 0,
+                                    }
+                                ]
+                            }
+                        })(),
                     }
                     : group,
             ),
@@ -115,7 +136,7 @@ const EditPoints = ({ api, languageText }) => {
                             {groups.map((group) => (
                                 <tr key={group._id} className="border-t">
                                     <td className="px-4 py-3 text-center">{group.name}</td>
-                                    {quiz.questions.map((_, index) => (
+                                    {/* {quiz.questions.map((_, index) => (
                                         <td key={index} className="px-4 py-3 text-center m-auto">
                                             <p className="text-redtheme font-modernpro">{group.answers[index]?.answer}</p>
                                             <p className="text-emerald-600 font-modernpro">
@@ -130,7 +151,30 @@ const EditPoints = ({ api, languageText }) => {
                                                 className="w-16 text-center border rounded"
                                             />
                                         </td>
-                                    ))}
+                                    ))} */}
+                                    {quiz.questions.map((_, index) => {
+                                        const answer = group.answers.find((a) => a.questionIndex === index)
+
+                                        return (
+                                            <td key={index} className="px-4 py-3 text-center m-auto">
+                                                <p className="text-redtheme font-modernpro">{answer?.answer || "N/A"}</p>
+                                                <p className="text-emerald-600 font-modernpro">
+                                                    {answer?.timeTaken
+                                                        ? (answer.timeTaken / 1000).toFixed(2) + " sec"
+                                                        : ""}
+                                                </p>
+                                                <input
+                                                    type="number"
+                                                    value={answer?.points ?? 0}
+                                                    onChange={(e) =>
+                                                        handlePointChange(group._id, index, e.target.value)
+                                                    }
+                                                    className="w-16 text-center border rounded"
+                                                />
+                                            </td>
+                                        )
+                                    })}
+
                                 </tr>
                             ))}
                         </tbody>

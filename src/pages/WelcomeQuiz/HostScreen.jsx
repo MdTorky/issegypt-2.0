@@ -7,7 +7,7 @@ import Loader from "../../components/loaders/Loader";
 import { AnimatePresence, motion } from "framer-motion";
 
 
-const HostScreen = ({ api }) => {
+const HostScreen = ({ api, languageText, language }) => {
     const { code } = useParams()
     const [quiz, setQuiz] = useState(null)
     const [groups, setGroups] = useState([])
@@ -139,7 +139,7 @@ const HostScreen = ({ api }) => {
     if (loading) {
         return (
             <div className="min-h-screen flex items-center justify-center">
-                <div className="text-2xl"><Loader text="Loading..." /></div>
+                <div className="text-2xl"><Loader text={languageText.Loading} /></div>
             </div>
         )
     }
@@ -151,6 +151,8 @@ const HostScreen = ({ api }) => {
             </div>
         )
     }
+
+
 
     return (
         <div className=" flex flex-col justify-center items-center">
@@ -165,7 +167,7 @@ const HostScreen = ({ api }) => {
                         )}
                         {!quizStarted && !currentQuestion && (<div className="w-100 justify-center bg-gradient-to-l from-darktheme/80 to-darktheme2 ring-3 ring-darktheme/70 dark:ring-darktheme border-4 border-whitetheme dark:border-darktheme2 px-4 py-2 rounded-lg text-2xl flex items-center gap-3">
                             <Icon icon="hugeicons:sms-code" className="text-whitetheme text-3xl" />
-                            <span className="font-medium text-whitetheme2">Join Code: </span>
+                            <span className="font-medium text-whitetheme2">{languageText.JoinCode}: </span>
                             <span className="font-bold text-5xl text-whitetheme tracking-wider">{quiz.code}</span>
                         </div>
                         )}
@@ -173,9 +175,9 @@ const HostScreen = ({ api }) => {
 
                     {!quizStarted && !quizEnded && (
                         <div className=" bg-gradient-to-b from-whitetheme/50 to-whitetheme2/50 dark:from-darktheme/50 dark:to-darktheme2/50 rounded-xl shadow-xl py-6 flex flex-col max-w-200">
-                            <h2 className="text-2xl mb-4 text-center dark:text-whitetheme w-[80%] m-auto">Waiting for Groups to Join</h2>
+                            <h2 className="text-2xl mb-4 text-center dark:text-whitetheme w-[80%] m-auto">{languageText.WaitingForGroups}</h2>
                             {groups.length === 0 ? (
-                                <p className="text-gray-600 text-center">No groups have joined yet.</p>
+                                <p className="text-gray-600 text-center">{languageText.NoGroupsJoined}</p>
                             ) : (
                                 <div className="flex justify-center gap-10 mb-10  flex-wrap w-[90%] m-auto">
                                     {groups.map((group) => (
@@ -196,7 +198,7 @@ const HostScreen = ({ api }) => {
                                 className={`w-[60%] m-auto py-3 px-4 rounded-md text-whitetheme text-xl font-medium duration-300 ease-in-out ${groups.length === 0 ? "bg-gray-400 cursor-not-allowed" : "bg-redtheme hover:bg-redtheme2 cursor-pointer"
                                     }`}
                             >
-                                Start Quiz
+                                {languageText.StartQuiz}
                             </button>
                         </div>
                     )}
@@ -205,7 +207,7 @@ const HostScreen = ({ api }) => {
                     <div className="bg-gradient-to-b from-whitetheme/50 to-whitetheme2/50 dark:from-darktheme/50 dark:to-darktheme2/50  rounded-lg shadow-md p-6 mb-20">
                         <div className="flex justify-between items-center mb-2">
                             <h2 className="text-xl font-semibold text-redtheme">
-                                Emoji {currentQuestion.index + 1} of {currentQuestion.total}
+                                Q {currentQuestion.index + 1} of {currentQuestion.total}
                             </h2>
                             <div className="text-xl font-mono bg-redtheme/70 text-whitetheme px-3 py-1 rounded-md">{formatTime(timeLeft)}</div>
                         </div>
@@ -221,7 +223,7 @@ const HostScreen = ({ api }) => {
                         {/* <div className="text-9xl font-medium mb-8 text-center py-6">👩‍⚖🏃😭👊</div> */}
 
                         {/* {timeLeft === 0 ? ( */}
-                        <div className="text-center text-gray-600">Waiting for all groups to answer...</div>
+                        <div className="text-center text-gray-600">{languageText.WaitingToAnswer}</div>
                         <button
                             onClick={nextQuestion}
                             className="w-full py-3 px-4 rounded-md bg-redtheme text-white font-medium hover:bg-redtheme2 duration-300 ease-in-out cursor-pointer"
@@ -235,7 +237,7 @@ const HostScreen = ({ api }) => {
 
                 {quizEnded && (
                     <div className=" p-6 mb-80">
-                        <h2 className="text-5xl font-semibold text-center">Quiz Finished</h2>
+                        <h2 className="text-5xl font-semibold text-center">{languageText.QuizCompleted}</h2>
 
                         {/* {groups.length === 0 ? (
                             <p className="text-gray-600 text-center">No groups participated in this quiz.</p>

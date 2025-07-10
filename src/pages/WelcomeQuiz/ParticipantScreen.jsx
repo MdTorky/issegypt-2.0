@@ -254,7 +254,7 @@ const ParticipantScreen = ({ api, languageText }) => {
                     {submitted ? (
                         <div className="text-center py-6">
                             <div className="text-3xl font-bold text-redtheme">{languageText.AnswerSubmitted}</div>
-                            <div className=" text-gray-600">{languageText.FinallySubmitted}</div>
+                            <div className=" text-gray-600">{languageText.QuizCompleted}</div>
                         </div>
                     ) : currentQuestion.questionType === "multiple_choice" ? (
                         <div className="grid grid-cols-2 gap-4">

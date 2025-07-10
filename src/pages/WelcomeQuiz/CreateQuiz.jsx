@@ -1,9 +1,10 @@
 import { useState } from "react"
 import axios from "axios"
 
-const CreateQuiz = () => {
+const CreateQuiz = ({ api }) => {
     const [title, setTitle] = useState("")
     const [description, setDescription] = useState("")
+    const [showAnswersAfterEach, setShowAnswersAfterEach] = useState(false)
     const [questions, setQuestions] = useState([
         {
             text: "",
@@ -76,10 +77,11 @@ const CreateQuiz = () => {
         setLoading(true)
         setError("")
         try {
-            const response = await axios.post("http://localhost:4000/api/welcome/create", {
+            const response = await axios.post(`${api}/api/welcome/create`, {
                 title,
                 description,
                 questions,
+                showAnswersAfterEach
             })
             setQuiz(response.data)
             setLoading(false)
@@ -132,6 +134,17 @@ const CreateQuiz = () => {
                             className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
                             rows="2"
                         />
+                    </div>
+                    <div className="mb-6">
+                        <label className="inline-flex items-center">
+                            <input
+                                type="checkbox"
+                                checked={showAnswersAfterEach}
+                                onChange={(e) => setShowAnswersAfterEach(e.target.checked)}
+                                className="form-checkbox h-5 w-5 text-blue-600"
+                            />
+                            <span className="ml-2 text-gray-700">Show correct answer after each question</span>
+                        </label>
                     </div>
                     <h2 className="text-xl font-semibold mb-4">Questions</h2>
                     {questions.map((question, index) => (

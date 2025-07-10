@@ -454,7 +454,7 @@
     "WhatHere": "What Are you Doing here?",
     "NothingHere": "There's nothing...!",
 
-    "JoinQuiz": "Join The Emoji Quiz",
+    "JoinQuiz": "Join The Quiz",
     "EmojiQuiz": "Emoji Quiz",
     "Host": "Host",
     "HostPage": "Host Page",
@@ -465,13 +465,20 @@
     "WaitingForQuiz": "Waiting for Quiz to Start",
     "WaitForHost": "Wait for the Host to Start!",
     "YourGroupName": "Your Group Name:",
+    "QuizName": "Write a Name",
     "YourAnswer": "Just Write Your Answer Already",
     "AnswerSubmitted": "Answer Submitted!",
     "FinallySubmitted": "Finally your Submitted, I thought you wouldn't",
     "QuizCompleted": "Quiz Finished!",
-    "ThanksForAnswers": "Thanks for whatever you wrote",
+    "ThanksForAnswers": "Thanks for participating",
     "ResultsReleased": "Those people in the corner who spent the whole day changing slides will view the answers and release the results soon, JUST WAIT",
-    "ExploreNewWebsite": "Explore The New Website"
+    "ExploreNewWebsite": "Explore The New Website",
+
+    "JoinCode": "Join Code",
+    "WaitingForGroups": "Waiting for Groups to Join",
+    "NoGroupsJoined": "No groups have joined yet.",
+    "StartQuiz": "Start Quiz",
+    "WaitingToAnswer": "Waiting for all groups to answer..."
   },
 
   "ar": {
@@ -928,7 +935,7 @@
     "WhatHere": "أنت ايه اللي جابك هنا؟",
     "NothingHere": "أنت تايه...!",
 
-    "JoinQuiz": "خش هتجيبك",
+    "JoinQuiz": "سجل في المسابقة",
     "EmojiQuiz": "كويز الايموجي",
     "Host": "الريس",
     "HostPage": "صفحة الريس",
@@ -936,15 +943,22 @@
     "EditPoints": "تعديل النقط",
     "QuizCode": "بص على الشاشة",
     "JoinQuizButton": "تيجي نبدأ بقى",
-    "WaitingForQuiz": "ادينا مستنين المسؤول يبدأ اللعبة",
-    "WaitForHost": "ماطيلا ياعم",
+    "WaitingForQuiz": "في انتظار بدء المسابقة",
+    "WaitForHost": "انتظر حتى يبدأ المنسق!",
     "YourGroupName": "اسم جروبك ده خلي بالك:",
+    "QuizName": "أكتب أسم",
     "YourAnswer": "اكتب اي حاجه يمكن تيجي",
     "AnswerSubmitted": "شابوووه",
     "FinallySubmitted": "خلصنا يابا عايزين نروح",
-    "QuizCompleted": "خلصنا خلاص روح بيتكم",
-    "ThanksForAnswers": "بالله عليكم هبدتم كام هبدة؟",
+    "QuizCompleted": "أنتهت المسابقة",
+    "ThanksForAnswers": "شكرا على المشاركة",
     "ResultsReleased": "شايف الناس اللي واقفة بتقلب في سلايدات من أول اليوم دول؟ تمام",
-    "ExploreNewWebsite": "اتفسح براحتك في الموقع"
+    "ExploreNewWebsite": "اتفسح براحتك في الموقع",
+
+    "JoinCode": "رمز الانضمام",
+    "WaitingForGroups": "في انتظار انضمام المجموعات",
+    "NoGroupsJoined": "لم تنضم أي مجموعات بعد.",
+    "StartQuiz": "ابدأ الاختبار",
+    "WaitingToAnswer": "بانتظار إجابات جميع المجموعات..."
   }
 }

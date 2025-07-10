@@ -100,7 +100,7 @@ const JoinQuiz = ({ api, languageText, language }) => {
                                 value={code}
                             />
                             <InputField
-                                placeholder={languageText.GroupName}
+                                placeholder={languageText.QuizName}
                                 iconValue="mingcute:group-3-fill"
                                 icon="mingcute:group-3-line"
                                 type="text"
