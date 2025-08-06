@@ -1,0 +1,322 @@
+[
+  {
+    "question": "Can you tell me more about ISS Egypt?",
+    "answer": "Sure! ISS Egypt is the official society for Egyptian students at Universiti Teknologi Malaysia (UTM). We support students academically, socially, and culturally. You can read more on our About Us page: [Click here](https://issegypt.vercel.app/about).",
+    "keywords": [
+      "about iss egypt",
+      "what is iss egypt",
+      "learn about iss egypt",
+      "who are you",
+      "iss",
+      "utm",
+      "egyptian students",
+      "support",
+      "about us"
+    ],
+    "arabicQuestion": "ممكن تقولي أكتر عن الاتحاد المصري؟",
+    "arabicAnswer": "أكيد! الاتحاد المصري هو الاتحاد الرسمي للطلاب المصريين في جامعة تكنولوجي ماليزيا (UTM)، وبيساعد الطلبة في كل الجوانب الأكاديمية والاجتماعية والثقافية. ممكن تعرف أكتر من صفحة التعريف بينا: [اضغط هنا](https://issegypt.vercel.app/about).",
+    "arabicKeywords": [
+      "الاتحاد المصري",
+      "عن الاتحاد",
+      "من نحن",
+      "تعريف",
+      "دعم",
+      "UTM",
+      "الطلاب المصريين",
+      "صفحة من نحن",
+      "معلومات"
+    ],
+    "category": "about",
+    "priority": 10
+  },
+
+  {
+    "question": "How can I access the Academic Drive?",
+    "answer": "You can access the Drive through the services page then choose the faculty you want then click the drive link button: [Services](https://issegypt.vercel.app/services)",
+    "keywords": [
+      "Drive",
+      "shared drive",
+      "Google Drive",
+      "resources",
+      "files",
+      "academic",
+      "services"
+    ],
+    "arabicQuestion": "إزاي أوصل للدرايف الأكاديمي؟",
+    "arabicAnswer": "تقدر توصل للدرايف من خلال صفحة الخدمات، اختار الكلية اللي انت فيها، وبعد كده دوس على زر رابط الدرايف: [الخدمات](https://issegypt.vercel.app/services)",
+    "arabicKeywords": [
+      "درايف",
+      "الدرايف الأكاديمي",
+      "جوجل درايف",
+      "ملفات",
+      "موارد",
+      "أكاديمي",
+      "الخدمات"
+    ],
+    "category": "general",
+    "priority": 9
+  },
+
+  {
+    "question": "Where can I see photos from past events?",
+    "answer": "You can visit our gallery here: [View Gallery](https://issegypt.vercel.app/gallery)",
+    "keywords": [
+      "images",
+      "gallery",
+      "pictures",
+      "events",
+      "photos",
+      "past",
+      "past events"
+    ],
+    "category": "events",
+    "priority": 5
+  },
+
+  {
+    "question": "Who is the president of ISS Egypt? 2025",
+    "answer": "The current president is Mazen Mohamed. You can contact him on WhatsApp here: [Message Mazen](https://wa.me/60148336144).",
+    "keywords": [
+      "president",
+      "leader",
+      "Mazen Mohamed",
+      "board",
+      "top 4",
+      "contact",
+      "2025"
+    ],
+    "arabicQuestion": "مين رئيس الاتحاد المصري لسنة ٢٠٢٥؟",
+    "arabicAnswer": "الرئيس الحالي هو مازن محمد. ممكن تبعتله على واتساب من هنا: [راسل مازن](https://wa.me/60148336144).",
+    "arabicKeywords": [
+      "رئيس",
+      "مازن محمد",
+      "القيادة",
+      "مجلس الإدارة",
+      "الاتحاد المصري",
+      "تواصل",
+      "بورد",
+      "٢٠٢٥"
+    ],
+    "category": "contact",
+    "priority": 8
+  },
+
+  {
+    "question": "Who is the vice president of ISS Egypt? 2025",
+    "answer": "The current vice president is Mostafa Mohsen. You can contact him on WhatsApp here: [Message Mostafa](https://wa.me/601160502257).",
+    "keywords": ["vice", "Mostafa Mohsen", "top 4", "board", "contact", "2025"],
+    "arabicQuestion": "2025 مين نائب رئيس الاتحاد المصري؟",
+    "arabicAnswer": "النائب الحالي هو مصطفى محسن. ممكن تبعتله على واتساب من هنا: [راسل مصطفى](https://wa.me/601160502257).",
+    "arabicKeywords": [
+      "نائب",
+      "مصطفى محسن",
+      "مجلس الإدارة",
+      "إدارة",
+      "تواصل",
+      "بورد",
+      "٢٠٢٥"
+    ],
+    "category": "contact",
+    "priority": 8
+  },
+
+  {
+    "question": "Who is the secretary of ISS Egypt 2025?",
+    "answer": "The current secretary is Hajar Hisham. You can contact her on WhatsApp here: [Message Hajar](https://wa.me/60198307522).",
+    "keywords": [
+      "secretary",
+      "Hajar Hisham",
+      "top 4",
+      "board",
+      "contact",
+      "2025"
+    ],
+    "arabicQuestion": "مين سكرتير الاتحاد المصري لسنة 2025؟",
+    "arabicAnswer": "السكرتيرة الحالية هي هاجر هشام. ممكن تبعتلها على واتساب من هنا: [راسل هاجر](https://wa.me/60198307522).",
+    "arabicKeywords": [
+      "سكرتير",
+      "هاجر هشام",
+      "الإدارة",
+      "مجلس الإدارة",
+      "تواصل",
+      "بورد",
+      "٢٠٢٥"
+    ],
+    "category": "contact",
+    "priority": 8
+  },
+
+  {
+    "question": "Who is the treasurer of ISS Egypt 2025?",
+    "arabicQuestion": "من هو أمين صندوق للاتحاد المصري 2025؟",
+    "answer": "The current treasurer is Mohanad Ashraf. You can contact him at +60 11-118 56895.",
+    "arabicAnswer": "أمين الصندوق الحالي هو مهند أشرف. للتواصل معه، يُرجى الاتصال على الرقم ‎+60 11-118 56895.",
+    "keywords": [
+      "treasuer",
+      "Mohanad Ashraf",
+      "top 4",
+      "board",
+      "contact",
+      "2025"
+    ],
+    "arabicKeywords": ["امين صندوق", "مهند أضرف", "تواصل", "بورد", "ادارة"],
+    "category": "contact",
+    "priority": 8
+  },
+
+  [
+    {
+      "question": "Who is the social committee president of ISS Egypt? 2025",
+      "answer": "The current social president is Abdullah Zayan. You can contact him on WhatsApp here: [Message Abdullah](https://wa.me/601139839391).",
+      "keywords": ["social", "Abdullah Zayan", "committee", "contact", "2025"],
+      "arabicQuestion": "مين رئيس اللجنة الاجتماعية في الاتحاد المصري لسنة ٢٠٢٥؟",
+      "arabicAnswer": "رئيس اللجنة الاجتماعية الحالي هو عبدالله زيان. ممكن تبعتله على واتساب من هنا: [راسل عبدالله](https://wa.me/601139839391).",
+      "arabicKeywords": ["اجتماعية", "عبدالله زيان", "لجنة", "تواصل", "٢٠٢٥"],
+      "category": "contact",
+      "priority": 8
+    },
+    {
+      "question": "Who is the academic committee president of ISS Egypt? 2025",
+      "answer": "The current academic president is Anas Amer. You can contact him on WhatsApp here: [Message Anas](https://wa.me/60182360513).",
+      "keywords": ["academic", "Anas Amer", "committee", "contact", "2025"],
+      "arabicQuestion": "مين رئيس اللجنة الأكاديمية في الاتحاد المصري لسنة ٢٠٢٥؟",
+      "arabicAnswer": "رئيس اللجنة الأكاديمية الحالي هو أنس عامر. ممكن تبعتله على واتساب من هنا: [راسل أنس](https://wa.me/60182360513).",
+      "arabicKeywords": ["أكاديمية", "أنس عامر", "لجنة", "تواصل", "٢٠٢٥"],
+      "category": "contact",
+      "priority": 8
+    },
+    {
+      "question": "Who is the cultural committee president of ISS Egypt? 2025",
+      "answer": "The current cultural president is Mohamed Ramadan. You can contact him on WhatsApp here: [Message Mohamed](https://wa.me/97433799454).",
+      "keywords": [
+        "cultural",
+        "Mohamed Ramadan",
+        "committee",
+        "contact",
+        "2025"
+      ],
+      "arabicQuestion": "مين رئيس اللجنة الثقافية في الاتحاد المصري لسنة ٢٠٢٥؟",
+      "arabicAnswer": "رئيس اللجنة الثقافية الحالي هو محمد رمضان. ممكن تبعتله على واتساب من هنا: [راسل محمد](https://wa.me/97433799454).",
+      "arabicKeywords": ["ثقافية", "محمد رمضان", "لجنة", "تواصل", "٢٠٢٥"],
+      "category": "contact",
+      "priority": 8
+    },
+    {
+      "question": "Who is the sports committee president of ISS Egypt? 2025",
+      "answer": "The current sports president is Ahmed Fawzi. You can contact him on WhatsApp here: [Message Ahmed](https://wa.me/97430066040).",
+      "keywords": ["sports", "Ahmed Fawzi", "committee", "contact", "2025"],
+      "arabicQuestion": "مين رئيس اللجنة الرياضية في الاتحاد المصري لسنة ٢٠٢٥؟",
+      "arabicAnswer": "رئيس اللجنة الرياضية الحالي هو أحمد فوزي. ممكن تبعتله على واتساب من هنا: [راسل أحمد](https://wa.me/97430066040).",
+      "arabicKeywords": ["رياضية", "أحمد فوزي", "لجنة", "تواصل", "٢٠٢٥"],
+      "category": "contact",
+      "priority": 8
+    },
+    {
+      "question": "Who is the media committee president of ISS Egypt? 2025",
+      "answer": "The current media president is Mariam Gheith. You can contact her on WhatsApp here: [Message Mariam](https://wa.me/601162140263).",
+      "keywords": ["media", "Mariam Gheith", "committee", "contact", "2025"],
+      "arabicQuestion": "مين رئيسة لجنة الميديا في الاتحاد المصري لسنة ٢٠٢٥؟",
+      "arabicAnswer": "رئيسة لجنة الميديا الحالية هي مريم غيث. ممكن تبعتي لها على واتساب من هنا: [راسل مريم](https://wa.me/601162140263).",
+      "arabicKeywords": [
+        "ميديا",
+        "أعلامية",
+        "مريم غيث",
+        "لجنة",
+        "تواصل",
+        "٢٠٢٥"
+      ],
+      "category": "contact",
+      "priority": 8
+    },
+    {
+      "question": "Who is the human resources committee president of ISS Egypt? 2025",
+      "answer": "The current human resources president is Anas Elkhoudry. You can contact him on WhatsApp here: [Message Anas](https://wa.me/60132424621).",
+      "keywords": [
+        "human resources",
+        "Anas Elkhoudry",
+        "committee",
+        "contact",
+        "2025"
+      ],
+      "arabicQuestion": "مين رئيس لجنة الموارد البشرية في الاتحاد المصري لسنة ٢٠٢٥؟",
+      "arabicAnswer": "رئيس لجنة الموارد البشرية الحالي هو أنس الخضري. ممكن تبعتله على واتساب من هنا: [راسل أنس](https://wa.me/60132424621).",
+      "arabicKeywords": [
+        "الموارد البشرية",
+        "أنس الخضري",
+        "لجنة",
+        "تواصل",
+        "٢٠٢٥"
+      ],
+      "category": "contact",
+      "priority": 8
+    },
+    {
+      "question": "Who is the women affairs committee president of ISS Egypt? 2025",
+      "answer": "The current women affairs president is Jana Mohamed. You can contact her on WhatsApp here: [Message Jana](https://wa.me/60183183224).",
+      "keywords": [
+        "women affairs",
+        "Jana Mohamed",
+        "committee",
+        "contact",
+        "2025"
+      ],
+      "arabicQuestion": "مين رئيسة لجنة شؤون المرأة في الاتحاد المصري لسنة ٢٠٢٥؟",
+      "arabicAnswer": "رئيسة لجنة شؤون المرأة الحالية هي جنا محمد. ممكن تبعتي لها على واتساب من هنا: [راسل جنا](https://wa.me/60183183224).",
+      "arabicKeywords": ["شؤون المرأة", "جنا محمد", "لجنة", "تواصل", "٢٠٢٥"],
+      "category": "contact",
+      "priority": 8
+    },
+    {
+      "question": "Who is the public relations president of ISS Egypt? 2025",
+      "answer": "The current public relations president is Ali Reda. You can contact him on WhatsApp here: [Message Ali](https://wa.me/601137022309).",
+      "keywords": ["public relations", "Ali Reda", "contact", "2025"],
+      "arabicQuestion": "مين رئيس لجنة العلاقات العامة في الاتحاد المصري لسنة ٢٠٢٥؟",
+      "arabicAnswer": "رئيس لجنة العلاقات العامة الحالي هو علي رضا. ممكن تبعتله على واتساب من هنا: [راسل علي](https://wa.me/601137022309).",
+      "arabicKeywords": ["علاقات عامة", "علي رضا", "لجنة", "تواصل", "٢٠٢٥"],
+      "category": "contact",
+      "priority": 8
+    },
+    // -------------------------------------
+
+    {
+      "text": "What is ISS Egypt?",
+      "answer": "ISS Egypt is the International Student Society of Egypt in Universiti Teknologi Malaysia (UTM). It supports Egyptian students in UTM academically, socially, and culturally.",
+      "language": "en",
+      "keywords": [
+        "iss",
+        "egypt",
+        "utm",
+        "who",
+        "is",
+        "gateway",
+        "about",
+        "university teknologi malaysia",
+        "iss egypt"
+      ],
+      "category": "about",
+      "priority": 10
+    },
+
+    {
+      "text": "ما هو الاتحاد المصري؟",
+      "answer": "الاتحاد المصري هو اتحاد الطلاب المصريين في جامعة تكنولوجي ماليزيا (UTM)، وهدفها دعم الطلاب المصريين أكاديميًا، اجتماعيًا، وثقافيًا.",
+      "language": "ar",
+      "keywords": [
+        "الاتحاد المصري",
+        "تعريف",
+        "جامعة UTM",
+        "الطلاب المصريين",
+        "من هو",
+        "عن الاتحاد",
+        "بوابة",
+        "دعم",
+        "اتحاد",
+        "مين",
+        "الاتحاد",
+        "المصري"
+      ],
+      "category": "about",
+      "priority": 10
+    }
+  ]
+]

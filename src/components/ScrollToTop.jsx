@@ -26,7 +26,7 @@ const ScrollToTop = ({ languageText }) => {
                 transition={{ duration: 0.6, ease: "easeInOut" }}
 
                 onClick={scrollToTop}
-                className="fixed bottom-6 right-9 bg-radial from-redtheme/70 to-redtheme2/90 text-white p-3 rounded-full ring-4 ring-redtheme/70 border-3 border-whitetheme dark:border-darktheme2 cursor-pointer shadow-lg group  z-100"
+                className="fixed bottom-6 left-9 bg-radial from-redtheme/70 to-redtheme2/90 text-white p-3 rounded-full ring-4 ring-redtheme/70 border-3 border-whitetheme dark:border-darktheme2 cursor-pointer shadow-lg group  z-100"
             >
                 <motion.div
                     initial={{ y: 0 }}

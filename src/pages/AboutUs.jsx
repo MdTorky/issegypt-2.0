@@ -113,7 +113,7 @@ const AboutUs = ({ language, languageText, api }) => {
             <motion.button
                 variants={InputChildVariants}
                 whileHover={{ scale: 1.1 }}
-                whileTap={{ scale: 0.5 }}
+                // whileTap={{ scale: 0.5 }}
                 transition={{ duration: 0.5, type: "spring", stiffness: 300 }}
                 onClick={() => setValue(committee?.committee)}
                 className={` relative ring-6 dark:ring-whitetheme/80 border-5 border-whitetheme dark:border-darktheme2 rounded-br-2xl rounded-tl-2xl bg-cover bg-center 2xl:w-[400px] lg:w-[300px] md:w-[300px] w-[150px] py-3 px-3 cursor-pointer backdrop-brightness-50 overflow-hidden ${committee?.committee === value ? "!ring-redtheme scale-105 rounded-none" : ""}`}

@@ -103,7 +103,9 @@ const InputField = ({
     language,
     languageText,
     regex,
-    value, // This is the value passed from the parent component
+    value,
+    disabled,
+    onKeyPress // This is the value passed from the parent component
 }) => {
     const [changeType, setChangeType] = useState(type);
     const [isFocused, setIsFocused] = useState(false);
@@ -161,6 +163,8 @@ const InputField = ({
                 onChange={handleInputChange}
                 onFocus={() => setIsFocused(true)}
                 onBlur={() => setIsFocused(false)}
+                disabled={disabled}
+                onKeyPress={onKeyPress}
             />
 
             {/* Required Indicator */}

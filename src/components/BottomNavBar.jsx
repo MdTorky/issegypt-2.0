@@ -76,7 +76,7 @@ const BottomNavbar = ({ languageText, language }) => {
                     variants={buttonVariant}
                     initial='hidden'
                     animate="visible"
-                    whileTap="tap"
+                    // whileTap="tap"
                     whileHover="hover"
                     drag
                     onClick={toggleNavbar}
@@ -247,7 +247,7 @@ const BottomNavbar = ({ languageText, language }) => {
                                     exit="exit"
                                     transition="transition"
                                     whileHover="hover"
-                                    whileTap="tap"
+                                    // whileTap="tap"
                                     variants={buttonVariant}
                                     className="menuButton group"
                                 >

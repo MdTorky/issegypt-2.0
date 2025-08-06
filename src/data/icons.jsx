@@ -266,4 +266,9 @@ import { Icon } from "@iconify/react/dist/iconify.js";
     Input Field:
     <Icon icon="iconoir:input-field" />
 
+
+    Message:
+    <Icon icon="mynaui:message-minus"></Icon>
+    <Icon icon="mynaui:message-minus-solid"></Icon>
+
 </div>
