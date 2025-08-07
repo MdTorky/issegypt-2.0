@@ -142,7 +142,7 @@ function App() {
   return (
     <div className={`min-h-screen  transition-all duration-300 ${language == 'ar' ? "font-modernpro arabic" : "font-tanker"} ${darkMode ? "backgroundDark" : "backgroundWhite"}`}>
       <Navbar toggleDarkMode={toggleDarkMode} darkMode={darkMode} toggleLanguage={toggleLanguage} language={language} languageText={languageText} />
-      <Chatbot api={api} language={language} languageText={languageText} />
+      {/* <Chatbot api={api} language={language} languageText={languageText} /> */}
       <Routes location={location} key={location.key}>
         <Route path="/form/67efd27e0e02456daf346e7d" element={<Navigate to="/form/welcomeday25" replace />} />
         <Route exact path="/" element={<Home language={language} languageText={languageText} api={api} />} />
