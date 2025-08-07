@@ -6,7 +6,7 @@ import confetti from "canvas-confetti";
 
 
 export default function FeaturePopup() {
-    const [isVisible, setIsVisible] = useState(true); // Always visible for testing
+    const [isVisible, setIsVisible] = useState(false); // Always visible for testing
 
     // Disable this whole useEffect block temporarily
     useEffect(() => {
