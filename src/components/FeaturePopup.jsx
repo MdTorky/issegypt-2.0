@@ -6,7 +6,7 @@ import confetti from "canvas-confetti";
 
 
 export default function FeaturePopup() {
-    const [isVisible, setIsVisible] = useState(false); // Always visible for testing
+    const [isVisible, setIsVisible] = useState(true); // Always visible for testing
 
     // Disable this whole useEffect block temporarily
     useEffect(() => {
@@ -37,7 +37,7 @@ export default function FeaturePopup() {
     return (
         <>
             {/* Arrow to chat button */}
-            <div className="fixed bottom-25 right-2 z-110 flex flex-col items-center animate-bounce">
+            <div className="fixed bottom-20 md:bottom-25 right-0 md:right-2 z-110 flex flex-col items-center animate-bounce">
                 <span className="bg-redtheme2 text-whitetheme text-md rounded px-2 py-1 mt-1 shadow">
                     Try E-GPT Beta!
                 </span>
@@ -55,7 +55,7 @@ export default function FeaturePopup() {
                         animate={{ opacity: 1, scale: 1 }}
                         exit={{ opacity: 0, scale: 0.8, y: 50 }}
                         transition={{ duration: 0.6, ease: "easeOut" }}
-                        className="[--shadow:rgba(60,64,67,0.3)_0_1px_2px_0,rgba(60,64,67,0.15)_0_2px_6px_2px] w-1/5 h-auto rounded-2xl bg-white/80 [box-shadow:var(--shadow)]"
+                        className="[--shadow:rgba(60,64,67,0.3)_0_1px_2px_0,rgba(60,64,67,0.15)_0_2px_6px_2px] w-4/5 xl:w-2/5 2xl:w-1/3 h-auto rounded-2xl bg-white/80 [box-shadow:var(--shadow)]"
                     >
                         <div
                             className="flex flex-col items-center justify-between pt-9 px-6 pb-6 relative"
