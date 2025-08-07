@@ -223,8 +223,8 @@ export default function ChatBot({ api, botName = "e-GPT  – The ISS Egypt Assis
                             </motion.div>
                         )}
                     </AnimatePresence>
-                    <div className="inputIconText !bg-radial from-redtheme to-redtheme !text-whitetheme">
-                        eGPT AI
+                    <div className="inputIconText !bg-radial from-redtheme/80 to-redtheme/80 !text-whitetheme">
+                        e-GPT AI Beta
                     </div>
                 </button>
             </motion.div>
@@ -407,8 +407,10 @@ export default function ChatBot({ api, botName = "e-GPT  – The ISS Egypt Assis
                             </div>
                         )} */}
 
-                        {messages.length === 1 ? (
+                        {messages.length === 1 && (input.trim() ? filteredSuggestions.length > 0 : randomSuggestions.length > 0) ? (
                             // FIRST message logic: show random or filtered 3
+
+                            // (filteredSuggestions || randomSuggestions) &&
                             <div className="px-4 py-2 bg-whitetheme dark:bg-darktheme2 border-t border-gray-200 dark:border-whitetheme w-full">
                                 <p className="text-sm text-gray-500 mb-2">
                                     {input.trim() ? "Suggestions based on your input:" : "Try asking about:"}
@@ -662,7 +664,7 @@ export default function ChatBot({ api, botName = "e-GPT  – The ISS Egypt Assis
                                 </a>
                             </motion.div>
                         )}
-                        {messages.length === 1 ? (
+                        {messages.length === 1 && (input.trim() ? filteredSuggestions.length > 0 : randomSuggestions.length > 0) ? (
                             // FIRST message logic: show random or filtered 3
                             <div className="px-4 py-2 bg-whitetheme dark:bg-darktheme2 border-t border-gray-200 dark:border-whitetheme w-full">
                                 <p className="text-sm text-gray-500 mb-2">

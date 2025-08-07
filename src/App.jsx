@@ -45,6 +45,7 @@ import QuizCompleted from './pages/WelcomeQuiz/QuizCompleted';
 import EditPoints from './pages/WelcomeQuiz/EditPoints';
 import BankAccount from './pages/BankAccount';
 import Chatbot from "./components/Chatbot";
+import FeaturePopup from './components/FeaturePopup';
 // import FormFiller from './pages/FormFiller';
 
 
@@ -141,6 +142,7 @@ function App() {
   // dark:bg-darktheme2 bg-whitetheme
   return (
     <div className={`min-h-screen  transition-all duration-300 ${language == 'ar' ? "font-modernpro arabic" : "font-tanker"} ${darkMode ? "backgroundDark" : "backgroundWhite"}`}>
+      <FeaturePopup />
       <Navbar toggleDarkMode={toggleDarkMode} darkMode={darkMode} toggleLanguage={toggleLanguage} language={language} languageText={languageText} />
       <Chatbot api={api} language={language} languageText={languageText} />
       <Routes location={location} key={location.key}>
