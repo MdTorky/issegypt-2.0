@@ -10,6 +10,7 @@ import InputField from "./formInputs/InputField"
 import { useFormsContext } from "../hooks/useFormContext";
 import useFetchData from "../hooks/useFetchData";
 import eGPT from '../assets/img/eGPT logo 2.png'
+import Loader from './loaders/SmallLoader'
 
 
 export default function ChatBot({ api, botName = "e-GPT  – The ISS Egypt Assistant (Beta)", botIcon = "fluent:bot-sparkle-16-filled", chatbotImage = eGPT, language, languageText }) {
@@ -27,7 +28,7 @@ export default function ChatBot({ api, botName = "e-GPT  – The ISS Egypt Assis
     const messagesEndRef = useRef(null)
 
     const { dispatch } = useFormsContext();
-    const { data: knowledgeData, knowledgeLoader, error } = useFetchData(`${api}/api/knowledge`);
+    const { data: knowledgeData, loading: knowledgeLoader, error } = useFetchData(`${api}/api/knowledge`);
     const [randomSuggestions, setRandomSuggestions] = useState([]);
     const [filteredSuggestions, setFilteredSuggestions] = useState([]);
     const [liveSuggestion, setLiveSuggestion] = useState(null);
@@ -406,7 +407,9 @@ export default function ChatBot({ api, botName = "e-GPT  – The ISS Egypt Assis
                                 </div>
                             </div>
                         )} */}
-
+                        {knowledgeLoader && (
+                            <Loader />
+                        )}
                         {messages.length === 1 && (input.trim() ? filteredSuggestions.length > 0 : randomSuggestions.length > 0) ? (
                             // FIRST message logic: show random or filtered 3
 
@@ -663,6 +666,9 @@ export default function ChatBot({ api, botName = "e-GPT  – The ISS Egypt Assis
                                     {hoveredLink}
                                 </a>
                             </motion.div>
+                        )}
+                        {knowledgeLoader && (
+                            <Loader />
                         )}
                         {messages.length === 1 && (input.trim() ? filteredSuggestions.length > 0 : randomSuggestions.length > 0) ? (
                             // FIRST message logic: show random or filtered 3
