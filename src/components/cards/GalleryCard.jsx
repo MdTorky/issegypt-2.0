@@ -36,7 +36,7 @@ const GalleryCard = ({ languageText, language, gallery }) => {
             variants={InputChildVariants}
             className='h-120 flex items-end '>
             <div
-                className='w-95 h-120 md:w-100 md:h-120 lg:h-100 lg:hover:h-120 transition-all duration-300 ease-in-out bg-darktheme2/80 ring-3 ring-darktheme/60 dark:ring-darktheme shadow-2xl  rounded-[30px] group relative  overflow-hidden'>
+                className='w-95 h-120 md:w-100 md:h-120 lg:h-100 lg:hover:h-120 transition-all duration-300 ease-in-out bg-darktheme2/80 ring-3 hover:ring-redtheme/80 ring-darktheme/60 dark:ring-darktheme shadow-2xl  rounded-[30px] group relative  overflow-hidden'>
                 <div className="w-full h-100 relative bg-contain bg-top overflow-hidden rounded-[30px]">
                     <img
                         src={gallery.folderImage}
@@ -81,7 +81,7 @@ const GalleryCard = ({ languageText, language, gallery }) => {
 
                 {gallery.folderLink === "Coming Soon" ? (
                     <div className='absolute bottom-5 flex w-full justify-center gap-5 px-4 mt-3'>
-                        <div className='w-full p-2 bg-redtheme text-whitetheme rounded-xl flex items-center justify-center gap-3 cursor-pointer'><Icon icon="hugeicons:coming-soon-01" />{languageText.ComingSoon}</div>
+                        <div className='w-full p-2 bg-yellow-600 text-whitetheme rounded-xl flex items-center justify-center gap-3 cursor-pointer'><Icon icon="hugeicons:coming-soon-01" />{languageText.ComingSoon}</div>
                     </div>
                 ) : gallery.folderLink === "No Drive" ? (
                     <div className='absolute bottom-5 flex w-full justify-center gap-5 px-4 mt-3'>

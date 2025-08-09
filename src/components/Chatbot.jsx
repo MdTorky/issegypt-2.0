@@ -13,12 +13,14 @@ import eGPT from '../assets/img/eGPT logo 2.png'
 import Loader from './loaders/SmallLoader'
 
 
-export default function ChatBot({ api, botName = "e-GPT  – The ISS Egypt Assistant (Beta)", botIcon = "fluent:bot-sparkle-16-filled", chatbotImage = eGPT, language, languageText }) {
+export default function ChatBot({ api, botIcon = "fluent:bot-sparkle-16-filled", chatbotImage = eGPT, language, languageText }) {
+
+    const botName = languageText.egpt
     const [isOpen, setIsOpen] = useState(false)
     const [messages, setMessages] = useState([
         {
             from: "bot",
-            text: "Hi! I'm e-GPT your AI Assistant. I am happy to assist you! (Beta)",
+            text: languageText.egptIntro,
             timestamp: new Date(),
         },
     ])
@@ -181,7 +183,7 @@ export default function ChatBot({ api, botName = "e-GPT  – The ISS Egypt Assis
             <motion.div className="fixed bottom-6 right-6 z-110" whileHover={{ scale: 1.1 }} whileTap={{ scale: 0.9 }}>
                 <button
                     onClick={() => setIsOpen(!isOpen)}
-                    className="w-12 h-12 md:w-16 md:h-16 bg-radial from-darktheme2/70 to-redtheme2/90 text-white flex justify-center items-center rounded-full ring-4 ring-redtheme2/70 border-3 border-whitetheme dark:border-darktheme2 cursor-pointer group z-100"
+                    className="w-12 h-12 md:w-16 md:h-16 bg-radial from-darktheme2/70 to-yellow-600/70 text-white flex justify-center items-center rounded-full ring-4 ring-yellow-600 border-3 border-whitetheme dark:border-darktheme2 cursor-pointer group z-100"
                 >
                     <AnimatePresence mode="wait">
                         {isOpen ? (
@@ -224,7 +226,7 @@ export default function ChatBot({ api, botName = "e-GPT  – The ISS Egypt Assis
                             </motion.div>
                         )}
                     </AnimatePresence>
-                    <div className="inputIconText !bg-radial from-redtheme/80 to-redtheme/80 !text-whitetheme">
+                    <div className="inputIconText !bg-radial from-yellow-600/60 to-yellow-600/60 !text-whitetheme !ring-yellow-600">
                         e-GPT AI Beta
                     </div>
                 </button>
@@ -242,7 +244,7 @@ export default function ChatBot({ api, botName = "e-GPT  – The ISS Egypt Assis
 
                     >
                         {/* Header */}
-                        <div className="bg-gradient-to-l from-darktheme2 to-redtheme2 p-4 text-white">
+                        <div className="bg-gradient-to-l from-darktheme2 to-yellow-600 p-4 text-white">
                             <div className="flex items-center space-x-3">
                                 <div className="w-10 h-10 rounded-full flex items-center justify-center">
 
@@ -267,7 +269,7 @@ export default function ChatBot({ api, botName = "e-GPT  – The ISS Egypt Assis
                                 </div>
                                 <div>
                                     <h3 className="font-semibold text-lg tracking-wide">{botName}</h3>
-                                    <p className="text-sm opacity-90">Online</p>
+                                    <p className="text-sm opacity-90">{languageText.Online}</p>
                                 </div>
                             </div>
                         </div>
@@ -288,7 +290,7 @@ export default function ChatBot({ api, botName = "e-GPT  – The ISS Egypt Assis
                                     >
                                         {/* Avatar */}
                                         <div
-                                            className={`w-8 h-8 rounded-full flex  items-center justify-center flex-shrink-0  shadow-[0_3px_10px_rgb(0,0,0,0.2)] ${msg.from === "user" ? "bg-redtheme2 ring-2 ring-redtheme2 border-2 border-whitetheme dark:border-darktheme2 text-white" : "bg-darktheme2 dark:bg-whitetheme2 text-whitetheme dark:text-darktheme ring-2 ring-darktheme2 border-2 border-whitetheme dark:ring-whitetheme2 dark:border-darktheme2"
+                                            className={`w-8 h-8 rounded-full flex  items-center justify-center flex-shrink-0  shadow-[0_3px_10px_rgb(0,0,0,0.2)] ${msg.from === "user" ? "bg-yellow-600 ring-2 ring-yellow-600 border-2 border-whitetheme dark:border-darktheme2 text-white" : "bg-darktheme2 dark:bg-whitetheme2 text-whitetheme dark:text-darktheme ring-2 ring-darktheme2 border-2 border-whitetheme dark:ring-whitetheme2 dark:border-darktheme2"
                                                 }`}
                                         >
                                             <Icon icon={msg.from === "user" ? "solar:user-bold" : botIcon} />
@@ -297,7 +299,7 @@ export default function ChatBot({ api, botName = "e-GPT  – The ISS Egypt Assis
                                         {/* Message Bubble */}
                                         <div
                                             className={`rounded-2xl px-4 py-3 shadow-[4.0px_8.0px_8.0px_rgba(0,0,0,0.38)] ${msg.from === "user"
-                                                ? "bg-redtheme2 ring-2 ring-redtheme2 border-2 border-whitetheme dark:border-darktheme2 text-white rounded-br-md"
+                                                ? "bg-yellow-600 ring-2 ring-yellow-600 border-2 border-whitetheme dark:border-darktheme2 text-white rounded-br-md"
                                                 : "bg-darktheme dark:bg-whitetheme2 text-whitetheme dark:text-darktheme2 ring-2 ring-darktheme2 border-2 border-whitetheme dark:ring-whitetheme2 dark:border-darktheme2 rounded-bl-md"
                                                 } ${isArabic(msg.text) ? "font-modernpro text-end" : "font-tanker text-start"}`}
                                         >
@@ -307,7 +309,7 @@ export default function ChatBot({ api, botName = "e-GPT  – The ISS Egypt Assis
                                                     a: ({ href, children }) => (
                                                         <a
                                                             href={href}
-                                                            className={`underline hover:no-underline ${msg.from === "user" ? "text-blue-100" : "text-redtheme"
+                                                            className={`underline hover:no-underline ${msg.from === "user" ? "text-blue-100" : "text-yellow-600"
                                                                 }`}
                                                             target="_blank"
                                                             rel="noopener noreferrer"
@@ -324,7 +326,7 @@ export default function ChatBot({ api, botName = "e-GPT  – The ISS Egypt Assis
                                             >
                                                 {msg.text}
                                             </ReactMarkdown>
-                                            <div className="text-end text-gray-500 font-tanker">
+                                            <div className={`${msg.from === "user" ? "text-gray-300" : "text-gray-500"} text-end  font-tanker`}>
                                                 {formatTime(msg.timestamp.toLocaleTimeString())}
 
                                             </div>
@@ -347,17 +349,17 @@ export default function ChatBot({ api, botName = "e-GPT  – The ISS Egypt Assis
                                         <div className="bg-darktheme dark:bg-whitetheme2 text-whitetheme dark:text-darktheme ring-2 ring-darktheme2 border-2 border-whitetheme dark:ring-whitetheme2 dark:border-darktheme rounded-2xl rounded-bl-md px-4 py-3 shadow-sm">
                                             <div className="flex space-x-1">
                                                 <motion.div
-                                                    className="w-2 h-2 bg-whitetheme dark:bg-redtheme2 rounded-full"
+                                                    className="w-2 h-2 bg-whitetheme dark:bg-yellow-600 rounded-full"
                                                     animate={{ scale: [1, 1.2, 1] }}
                                                     transition={{ duration: 1, repeat: Number.POSITIVE_INFINITY, delay: 0 }}
                                                 />
                                                 <motion.div
-                                                    className="w-2 h-2 bg-whitetheme dark:bg-redtheme2 rounded-full"
+                                                    className="w-2 h-2 bg-whitetheme dark:bg-yellow-600 rounded-full"
                                                     animate={{ scale: [1, 1.2, 1] }}
                                                     transition={{ duration: 1, repeat: Number.POSITIVE_INFINITY, delay: 0.2 }}
                                                 />
                                                 <motion.div
-                                                    className="w-2 h-2 bg-whitetheme dark:bg-redtheme2 rounded-full"
+                                                    className="w-2 h-2 bg-whitetheme dark:bg-yellow-600 rounded-full"
                                                     animate={{ scale: [1, 1.2, 1] }}
                                                     transition={{ duration: 1, repeat: Number.POSITIVE_INFINITY, delay: 0.4 }}
                                                 />
@@ -378,8 +380,8 @@ export default function ChatBot({ api, botName = "e-GPT  – The ISS Egypt Assis
                                 className="mx-4 mb-2 bg-darktheme border-3 dark:bg-whitetheme2 border-gray-700 dark:border-gray-400 rounded-lg p-3 absolute bottom-15 right-0 left-0"
                             >
                                 <div className="flex items-center space-x-2 text-sm">
-                                    <Icon icon="mingcute:link-fill" className="w-4 h-4 dark:text-redtheme text-whitetheme2" />
-                                    <span className="dark:text-redtheme text-whitetheme2 font-medium">Link Preview:</span>
+                                    <Icon icon="mingcute:link-fill" className="w-4 h-4 dark:text-yellow-600 text-whitetheme2" />
+                                    <span className="dark:text-yellow-600 text-whitetheme2 font-medium">Link Preview:</span>
                                 </div>
                                 <a
                                     href={hoveredLink}
@@ -416,7 +418,7 @@ export default function ChatBot({ api, botName = "e-GPT  – The ISS Egypt Assis
                             // (filteredSuggestions || randomSuggestions) &&
                             <div className="px-4 py-2 bg-whitetheme dark:bg-darktheme2 border-t border-gray-200 dark:border-whitetheme w-full">
                                 <p className="text-sm text-gray-500 mb-2">
-                                    {input.trim() ? "Suggestions based on your input:" : "Try asking about:"}
+                                    {input.trim() ? languageText.SuggestionBasedOnInput : languageText.TryAskingAbout}
                                 </p>
                                 <div className="flex gap-2 flex-wrap">
                                     {(input.trim() ? filteredSuggestions : randomSuggestions).map((suggestion, index) => (
@@ -439,7 +441,7 @@ export default function ChatBot({ api, botName = "e-GPT  – The ISS Egypt Assis
                                         onClick={() => sendMessage(liveSuggestion)}
                                         className="flex items-center gap-1 px-3 py-1 bg-gray-100 dark:bg-darktheme dark:text-whitetheme hover:bg-gray-200 dark:hover:bg-darktheme2/40 rounded-md text-sm text-gray-700 transition-colors cursor-pointer whitespace-nowrap"
                                     >
-                                        <Icon icon="hugeicons:idea-01" className="text-redtheme dark:text-whitetheme2" /> {liveSuggestion.text}
+                                        <Icon icon="hugeicons:idea-01" className="text-yellow-600 dark:text-whitetheme2 text-lg" /> {liveSuggestion.text}
                                     </button>
                                 </div>
                             )
@@ -458,7 +460,7 @@ export default function ChatBot({ api, botName = "e-GPT  – The ISS Egypt Assis
                                 /> */}
 
                                 <InputField
-                                    placeholder="Type your message..."
+                                    placeholder={languageText.TypeQuestion}
                                     iconValue="mynaui:message-minus-solid"
                                     icon="mynaui:message-minus"
                                     type="text"
@@ -476,9 +478,12 @@ export default function ChatBot({ api, botName = "e-GPT  – The ISS Egypt Assis
                                     whileTap={{ scale: 0.95 }}
                                     onClick={() => handleSend(input)}
                                     disabled={loading || !input.trim()}
-                                    className="bg-gradient-to-r from-redtheme2 to-redtheme text-white p-2 rounded-xl hover:shadow-lg transition-shadow duration-200 disabled:opacity-50 disabled:cursor-not-allowed w-15 flex justify-center items-center cursor-pointer"
+                                    className="bg-gradient-to-r from-yellow-600 to-yellow-500 text-white p-2 rounded-xl hover:shadow-lg transition-shadow duration-200 disabled:opacity-50 disabled:cursor-not-allowed w-15 flex justify-center items-center cursor-pointer group"
                                 >
                                     <Icon icon="lets-icons:send-fill" className="w-5 h-5" />
+                                    <div className="inputIconText !bg-radial from-yellow-600/60 to-yellow-600 !text-whitetheme !ring-yellow-600">
+                                        {languageText.Send}
+                                    </div>
                                 </motion.button>
                             </div>
                         </div>
@@ -510,7 +515,7 @@ export default function ChatBot({ api, botName = "e-GPT  – The ISS Egypt Assis
                         className="fixed inset-x-4 bottom-4 top-20 bg-white dark:bg-darktheme2 rounded-2xl flex flex-col overflow-hidden shadow-[4.0px_8.0px_8.0px_rgba(0,0,0,0.38)] md:hidden z-120"
                     >
                         {/* Mobile Header */}
-                        <div className="bg-gradient-to-l from-darktheme2 to-redtheme2 p-4 text-white">
+                        <div className="bg-gradient-to-l from-darktheme2 to-yellow-600 p-4 text-white">
                             <div className="flex items-center justify-between">
                                 <div className="flex items-center space-x-3">
                                     <div className="w-10 h-10rounded-full flex items-center justify-center">
@@ -534,7 +539,7 @@ export default function ChatBot({ api, botName = "e-GPT  – The ISS Egypt Assis
                                     </div>
                                     <div>
                                         <h3 className="font-semibold text-lg tracking-wide">{botName}</h3>
-                                        <p className="text-sm opacity-90">Online</p>
+                                        <p className="text-sm opacity-90">{languageText.Online}</p>
                                     </div>
                                 </div>
                                 <button
@@ -563,7 +568,7 @@ export default function ChatBot({ api, botName = "e-GPT  – The ISS Egypt Assis
                                         {/* Avatar */}
                                         <div
                                             className={`w-8 h-8 rounded-full flex items-center justify-center flex-shrink-0 shadow-[0_3px_10px_rgb(0,0,0,0.2)] ${msg.from === "user"
-                                                ? "bg-redtheme2 ring-2 ring-redtheme2 border-2 border-whitetheme dark:border-darktheme2 text-white"
+                                                ? "bg-yellow-600 ring-2 ring-yellow-600 border-2 border-whitetheme dark:border-darktheme2 text-white"
                                                 : "bg-darktheme2 dark:bg-whitetheme2 text-whitetheme dark:text-darktheme ring-2 ring-darktheme2 border-2 border-whitetheme dark:ring-whitetheme2 dark:border-darktheme2"
                                                 }`}
                                         >
@@ -573,7 +578,7 @@ export default function ChatBot({ api, botName = "e-GPT  – The ISS Egypt Assis
                                         {/* Message Bubble */}
                                         <div
                                             className={`rounded-2xl px-4 py-3 shadow-[4.0px_8.0px_8.0px_rgba(0,0,0,0.38)] ${msg.from === "user"
-                                                ? "bg-redtheme2 ring-2 ring-redtheme2 border-2 border-whitetheme dark:border-darktheme2 text-white rounded-br-md"
+                                                ? "bg-yellow-600 ring-2 ring-yellow-600 border-2 border-whitetheme dark:border-darktheme2 text-white rounded-br-md"
                                                 : "bg-darktheme dark:bg-whitetheme2 text-whitetheme dark:text-darktheme2 ring-2 ring-darktheme2 border-2 border-whitetheme dark:ring-whitetheme2 dark:border-darktheme2 rounded-bl-md"
                                                 } ${isArabic(msg.text) ? "font-modernpro text-end" : "font-tanker text-start"}`}
                                         >
@@ -583,7 +588,7 @@ export default function ChatBot({ api, botName = "e-GPT  – The ISS Egypt Assis
                                                     a: ({ href, children }) => (
                                                         <a
                                                             href={href}
-                                                            className={`underline hover:no-underline ${msg.from === "user" ? "text-blue-100" : "text-redtheme"
+                                                            className={`underline hover:no-underline ${msg.from === "user" ? "text-blue-100" : "text-yellow-600"
                                                                 }`}
                                                             target="_blank"
                                                             rel="noopener noreferrer"
@@ -600,7 +605,7 @@ export default function ChatBot({ api, botName = "e-GPT  – The ISS Egypt Assis
                                             >
                                                 {msg.text}
                                             </ReactMarkdown>
-                                            <div className="text-end text-gray-500 font-tanker">
+                                            <div className={`${msg.from === "user" ? "text-gray-300" : "text-gray-500"} text-end  font-tanker`}>
                                                 {formatTime(msg.timestamp.toLocaleTimeString())}
 
                                             </div>
@@ -623,17 +628,17 @@ export default function ChatBot({ api, botName = "e-GPT  – The ISS Egypt Assis
                                         <div className="bg-darktheme dark:bg-whitetheme2 text-whitetheme dark:text-darktheme ring-2 ring-darktheme2 border-2 border-whitetheme dark:ring-whitetheme2 dark:border-darktheme rounded-2xl rounded-bl-md px-4 py-3 shadow-sm">
                                             <div className="flex space-x-1">
                                                 <motion.div
-                                                    className="w-2 h-2 bg-whitetheme dark:bg-redtheme2 rounded-full"
+                                                    className="w-2 h-2 bg-whitetheme dark:bg-yellow-600 rounded-full"
                                                     animate={{ scale: [1, 1.2, 1] }}
                                                     transition={{ duration: 1, repeat: Number.POSITIVE_INFINITY, delay: 0 }}
                                                 />
                                                 <motion.div
-                                                    className="w-2 h-2 bg-whitetheme dark:bg-redtheme2 rounded-full"
+                                                    className="w-2 h-2 bg-whitetheme dark:bg-yellow-600 rounded-full"
                                                     animate={{ scale: [1, 1.2, 1] }}
                                                     transition={{ duration: 1, repeat: Number.POSITIVE_INFINITY, delay: 0.2 }}
                                                 />
                                                 <motion.div
-                                                    className="w-2 h-2 bg-whitetheme dark:bg-redtheme2 rounded-full"
+                                                    className="w-2 h-2 bg-whitetheme dark:bg-yellow-600 rounded-full"
                                                     animate={{ scale: [1, 1.2, 1] }}
                                                     transition={{ duration: 1, repeat: Number.POSITIVE_INFINITY, delay: 0.4 }}
                                                 />
@@ -654,8 +659,8 @@ export default function ChatBot({ api, botName = "e-GPT  – The ISS Egypt Assis
                                 className="mx-4 mb-2 bg-darktheme border-3 dark:bg-whitetheme2 border-gray-700 dark:border-gray-400 rounded-lg p-3"
                             >
                                 <div className="flex items-center space-x-2 text-sm">
-                                    <Icon icon="mingcute:link-fill" className="w-4 h-4 dark:text-redtheme text-whitetheme2" />
-                                    <span className="dark:text-redtheme text-whitetheme2 font-medium">Link Preview:</span>
+                                    <Icon icon="mingcute:link-fill" className="w-4 h-4 dark:text-yellow-600 text-whitetheme2" />
+                                    <span className="dark:text-yellow-600 text-whitetheme2 font-medium">Link Preview:</span>
                                 </div>
                                 <a
                                     href={hoveredLink}
@@ -697,7 +702,7 @@ export default function ChatBot({ api, botName = "e-GPT  – The ISS Egypt Assis
                                         onClick={() => sendMessage(liveSuggestion)}
                                         className="flex items-center gap-1 px-3 py-1 bg-gray-100 dark:bg-darktheme dark:text-whitetheme hover:bg-gray-200 dark:hover:bg-darktheme2/40 rounded-md text-sm text-gray-700 transition-colors cursor-pointer whitespace-nowrap"
                                     >
-                                        <Icon icon="hugeicons:idea-01" className="text-redtheme dark:text-whitetheme2" /> {liveSuggestion.text}
+                                        <Icon icon="hugeicons:idea-01" className="text-yellow-600 dark:text-whitetheme2 text-lg" /> {liveSuggestion.text}
                                     </button>
                                 </div>
                             )
@@ -725,7 +730,7 @@ export default function ChatBot({ api, botName = "e-GPT  – The ISS Egypt Assis
                                     whileTap={{ scale: 0.95 }}
                                     onClick={() => handleSend(input)}
                                     disabled={loading || !input.trim()}
-                                    className="bg-gradient-to-r from-redtheme2 to-redtheme text-white p-3 rounded-xl hover:shadow-lg transition-shadow duration-200 disabled:opacity-50 disabled:cursor-not-allowed w-15 flex justify-center items-center cursor-pointer"
+                                    className="bg-gradient-to-r from-yellow-600 to-yellow-500 text-white p-3 rounded-xl hover:shadow-lg transition-shadow duration-200 disabled:opacity-50 disabled:cursor-not-allowed w-15 flex justify-center items-center cursor-pointer"
                                 >
                                     <Icon icon="lets-icons:send-fill" className="w-5 h-5" />
                                 </motion.button>

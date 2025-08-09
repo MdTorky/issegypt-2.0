@@ -88,12 +88,13 @@ const EditGallery = ({ language, languageText, api }) => {
     ];
 
     const committeeOptions = [
+        { label: languageText.All, value: "", aValue: "", },
         { value: "Social", label: languageText.SocialCommittee, icon: "solar:people-nearby-bold" },
         { value: "Academic", label: languageText.AcademicCommittee, icon: "heroicons:academic-cap-solid" },
         { value: "Culture", label: languageText.CultureCommittee, icon: "mdi:religion-islamic" },
         { value: "Sport", label: languageText.SportCommittee, icon: "fluent-mdl2:more-sports" },
         { value: "Women", label: languageText.WomenCommittee, icon: "healthicons:woman" },
-        { value: "General", label: languageText.General, icon: "material-symbols:public" },
+        { value: "General", label: languageText.General, icon: "oui:integration-general" },
     ];
 
     return (

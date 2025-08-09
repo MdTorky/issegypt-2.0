@@ -14,6 +14,14 @@
     "SubmitFailed": "Failed to submit. Please try again",
     "ISSEgyptGateway": "ISS EGYPT",
 
+    "Send": "Send",
+    "Online": "Online",
+    "TypeQuestion": "Type your question...",
+    "egpt": "e-GPT – The ISS Egypt Assistant (Beta)",
+    "egptIntro": "Hi! I'm e-GPT your AI Assistant. I am happy to assist you! (Beta)",
+    "TryAskingAbout": "Try asking about:",
+    "SuggestionBasedOnInput": "Suggestions based on your input:",
+
     "LoginSuccesMessage": "You Logged In Successfully",
     "RegisterSuccesMessage": "You Registered Successfully",
     "LogoutSuccesMessage": "You Logged Out Successfully",
@@ -495,6 +503,14 @@
     "FillRequired": "الرجاء ملء جميع الحقول المطلوبة",
     "SubmitFailed": "فشل الإرسال. الرجاء المحاولة مرة أخرى",
     "ISSEgyptGateway": "موقع الاتحاد المصري",
+
+    "Send": "إرسال",
+    "Online": "اونلاين",
+    "TypeQuestion": "اكتب سؤالك...",
+    "egpt": "e-GPT – مساعد الاتحاد المصري (نسخة تجريبية)",
+    "egptIntro": "مرحباً! أنا e-GPT مساعدك الذكي. سعيد بمساعدتك! (نسخة تجريبية)",
+    "TryAskingAbout": "جرّب أن تسأل عن:",
+    "SuggestionBasedOnInput": "اقتراحات بناءً على ما كتبت:",
 
     "LoginSuccesMessage": "لقد قمت بتسجيل الدخول بنجاح",
     "RegisterSuccesMessage": "لقد بالتسجيل بنجاح",

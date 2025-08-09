@@ -13,6 +13,7 @@ import ScrollToTop from '../components/ScrollToTop';
 const Gallery = ({ languageText, language, api }) => {
 
     const [session, setSession] = useState("2025")
+    const [committee, setCommittee] = useState("")
     const [searchQuery, setSearchQuery] = useState("");
     const {
         scaleDown,
@@ -43,11 +44,22 @@ const Gallery = ({ languageText, language, api }) => {
         { label: "2025", value: "2025", aValue: "2025", },
     ];
 
+    const committeeOptions = [
+        { label: languageText.All, value: "", aValue: "", },
+        { value: "Social", label: languageText.SocialCommittee, icon: "solar:people-nearby-bold" },
+        { value: "Academic", label: languageText.AcademicCommittee, icon: "heroicons:academic-cap-solid" },
+        { value: "Culture", label: languageText.CultureCommittee, icon: "mdi:religion-islamic" },
+        { value: "Sport", label: languageText.SportCommittee, icon: "fluent-mdl2:more-sports" },
+        { value: "Women", label: languageText.WomenCommittee, icon: "healthicons:woman" },
+        { value: "General", label: languageText.General, icon: "oui:integration-general" },
+    ];
+
     const filteredGalleries = galleryData?.filter((gallery) => {
         const searchRegex = new RegExp(searchQuery, 'i');
         return (
             (searchRegex.test(gallery.folderName) || searchRegex.test(gallery.arabicFolderName)) &&
-            (!session || gallery.session === session)
+            (!session || gallery.session === session) &&
+            (!committee || gallery.committee === committee)
         )
     });
 
@@ -129,6 +141,19 @@ const Gallery = ({ languageText, language, api }) => {
                             setValue={setSession}
                             regex={null}
                             value={session}
+                        />
+                    </div>
+                    <div className='w-[40%] lg:w-[30%]'>
+                        <SelectField
+                            options={committeeOptions}
+                            placeholder={languageText.ChooseCommittee}
+                            iconValue="fluent:people-team-16-filled"
+                            icon="fluent:people-team-16-regular"
+                            language={language}
+                            languageText={languageText}
+                            setValue={setCommittee}
+                            regex={null}
+                            value={committee}
                         />
                     </div>
                     <SearchInput languageText={languageText} language={language} onSearch={(query) => setSearchQuery(query)} />

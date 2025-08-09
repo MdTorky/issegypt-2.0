@@ -38,10 +38,10 @@ export default function FeaturePopup() {
         <>
             {/* Arrow to chat button */}
             <div className="fixed bottom-20 md:bottom-25 right-0 md:right-2 z-110 flex flex-col items-center animate-bounce">
-                <span className="bg-redtheme2 text-whitetheme text-md rounded px-2 py-1 mt-1 shadow">
+                <span className="bg-yellow-600 text-whitetheme text-md rounded px-2 py-1 mt-1 shadow">
                     Try E-GPT Beta!
                 </span>
-                <Icon icon="pepicons-print:arrow-down" className="text-redtheme text-7xl" />
+                <Icon icon="pepicons-print:arrow-down" className="text-yellow-600 text-7xl" />
 
             </div>
 
@@ -64,16 +64,16 @@ export default function FeaturePopup() {
                                 <img src={eGPT} className="w-50" />
                             </span>
 
-                            <h5 className="flex items-center gap-3 text-3xl text-center font-semibold mb-2 text-redtheme">
+                            <h5 className="flex items-center gap-3 text-3xl text-center font-semibold mb-2 text-yellow-600">
                                 Meet E-GPT!
                                 {/* <Icon icon="fluent:bot-sparkle-16-filled" /> */}
                             </h5>
 
                             <p className="w-full mb-4 text-lg text-justify">
-                                Your smart virtual assistant, powered by the latest GPT models, is here to help you with everything on our gateway — from answering questions and offering guidance, to helping you navigate UTM & ISS Egypt with ease. <span className="text-redtheme2 font-bold">(It's still BETA)</span>
+                                Your smart virtual assistant, powered by the latest GPT models, is here to help you with everything on our gateway — from answering questions and offering guidance, to helping you navigate UTM & ISS Egypt with ease. <span className="text-yellow-600 font-bold">(It's still BETA)</span>
                             </p>
                             <button
-                                className=" font-semibold right-6 bottom-6 cursor-pointer py-2 px-8 w-max break-keep text-sm rounded-lg transition-colors text-whitetheme hover:text-whitetheme2 bg-redtheme2 hover:bg-redtheme"
+                                className=" font-semibold right-6 bottom-6 cursor-pointer py-2 px-8 w-max break-keep text-sm rounded-lg transition-colors text-whitetheme hover:text-whitetheme2 bg-yellow-600 hover:bg-yellow-700 duration-300"
                                 type="button"
                                 onClick={closePopup}
                             >
