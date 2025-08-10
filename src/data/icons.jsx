@@ -8,6 +8,9 @@ import { Icon } from "@iconify/react/dist/iconify.js";
     Language:
     <Icon icon="circle-flags:uk" />
     <Icon icon="circle-flags:ps" />
+    <Icon icon="clarity:language-line" />
+    <Icon icon="clarity:language-solid" />
+
 
     Modes:
     <Icon icon="mingcute:sun-fog-fill" />
@@ -43,6 +46,9 @@ import { Icon } from "@iconify/react/dist/iconify.js";
     Gallery:
     <Icon icon={location.pathname === '/gallery' ? "solar:gallery-wide-bold" : 'solar:gallery-wide-outline'} />
 
+    General:
+    <Icon icon="oui:integration-general" />
+
 
     Menu:
     <Icon icon="solar:menu-dots-circle-broken" />
@@ -69,6 +75,9 @@ import { Icon } from "@iconify/react/dist/iconify.js";
 
     Email:
     <Icon icon="entypo:email" />
+
+    Contact:
+    <Icon icon="typcn:phone" />
 
     Password
     <Icon icon="solar:lock-password-broken" />
@@ -270,5 +279,20 @@ import { Icon } from "@iconify/react/dist/iconify.js";
     Message:
     <Icon icon="mynaui:message-minus"></Icon>
     <Icon icon="mynaui:message-minus-solid"></Icon>
+
+
+    ChatBot:
+    fluent:bot-sparkle-16-filled
+
+    Usage:
+    material-symbols-light:data-usage
+    ic:round-data-usage
+
+
+    Used:
+    ic:round-motion-photos-paused
+
+    Recent:
+    mdi:recent
 
 </div>

@@ -48,35 +48,41 @@ const AdminNavBar = ({ languageText, api, language, setCommitteeType }) => {
         //         { name: languageText.MyMembers, path: "", icon: "fluent:people-eye-20-filled" },
         //     ],
         // },
-        ...(UserType("All") ? [{
-            name: languageText.Internships,
-            icon: "hugeicons:permanent-job",
-            dropdown: [
-                { name: languageText.AddInternship, path: "/addIntern", icon: "mdi:office-building-plus" },
-            ],
-        },
-        // {
-        //     name: languageText.Gallery,
-        //     icon: "solar:gallery-wide-bold",
-        //     dropdown: [
-        //         { name: languageText.AddGallery, path: "", icon: "fluent:image-add-20-filled" },
-        //     ],
-        // },
-        {
-            name: languageText.Services,
-            icon: "ri:service-fill",
-            dropdown: [
-                { name: languageText.AddService, path: "/addService", icon: "fluent:bot-add-16-filled" },
-                { name: languageText.AddHelpingHand, path: "/addHelpingHand", icon: "mdi:cog" },
-            ],
-        },
-        {
-            name: languageText.Products,
-            icon: "game-icons:clothes",
-            dropdown: [
-                { name: languageText.ProductsData, path: "/productsData", icon: "mage:package-box-fill" },
-            ],
-        }
+        ...(UserType("All") ? [
+            {
+                name: "E-GPT Dashboard",
+                icon: "fluent:bot-sparkle-16-filled",
+                path: "/egpt"
+            },
+            {
+                name: languageText.Internships,
+                icon: "hugeicons:permanent-job",
+                dropdown: [
+                    { name: languageText.AddInternship, path: "/addIntern", icon: "mdi:office-building-plus" },
+                ],
+            },
+            // {
+            //     name: languageText.Gallery,
+            //     icon: "solar:gallery-wide-bold",
+            //     dropdown: [
+            //         { name: languageText.AddGallery, path: "", icon: "fluent:image-add-20-filled" },
+            //     ],
+            // },
+            {
+                name: languageText.Services,
+                icon: "ri:service-fill",
+                dropdown: [
+                    { name: languageText.AddService, path: "/addService", icon: "fluent:bot-add-16-filled" },
+                    { name: languageText.AddHelpingHand, path: "/addHelpingHand", icon: "mdi:cog" },
+                ],
+            },
+            {
+                name: languageText.Products,
+                icon: "game-icons:clothes",
+                dropdown: [
+                    { name: languageText.ProductsData, path: "/productsData", icon: "mage:package-box-fill" },
+                ],
+            }
         ] : []),
         ...(UserType("Social") ? [{
             name: languageText.EmojiQuiz,

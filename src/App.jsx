@@ -46,6 +46,7 @@ import EditPoints from './pages/WelcomeQuiz/EditPoints';
 import BankAccount from './pages/BankAccount';
 import Chatbot from "./components/Chatbot";
 import FeaturePopup from './components/FeaturePopup';
+import EGPTDashboard from './pages/Admin/EGPTDashboard';
 // import FormFiller from './pages/FormFiller';
 
 
@@ -165,6 +166,7 @@ function App() {
 
         {/* Admin */}
         <Route path="/adminDashboard" element={<ProtectedRoute><AdminDashboard language={language} languageText={languageText} api={api} /></ProtectedRoute>} />
+        <Route path="/egpt" element={<ProtectedRoute><EGPTDashboard language={language} languageText={languageText} api={api} /></ProtectedRoute>} />
         <Route path="/myForms" element={<ProtectedRoute><MyForms language={language} languageText={languageText} api={api} /></ProtectedRoute>} />
         <Route path="/productsData" element={<ProtectedRoute><ProductsData language={language} languageText={languageText} api={api} /></ProtectedRoute>} />
         <Route path="/editForm/:id" element={<ProtectedRoute><EditForm language={language} languageText={languageText} api={api} /></ProtectedRoute>} />
