@@ -41,33 +41,78 @@ export default function ChatBot({ api, botIcon = "fluent:bot-sparkle-16-filled",
         return arabicChars.length / text.length > 0.3; // Only say Arabic if 30%+ of char
     }
 
+    // useEffect(() => {
+    //     if (knowledgeData && Array.isArray(knowledgeData) && !knowledgeLoader && !error) {
+    //         dispatch({
+    //             type: "SET_ITEM",
+    //             collection: "knowledges",
+    //             payload: knowledgeData
+    //         });
+
+    //         const englishOnly = knowledgeData.filter(item => item.language === 'en');
+    //         const shuffled = [...englishOnly].sort(() => 0.5 - Math.random()).slice(0, 3);
+    //         setRandomSuggestions(shuffled);
+    //     }
+    // }, [knowledgeData, knowledgeLoader, error, dispatch]);
+
+
+    // useEffect(() => {
+    //     if (input.trim() && Array.isArray(knowledgeData)) {
+    //         const lowercaseInput = input.toLowerCase();
+    //         const arabic = isArabic(input);
+
+    //         const matches = knowledgeData.filter(item => {
+    //             // First message: filter by detected input language (en/ar)
+    //             if (messages.length === 1 && item.language !== (arabic ? 'ar' : 'en')) return false;
+
+    //             // After first message: allow any language
+    //             const questionMatch = item.text?.toLowerCase().includes(lowercaseInput);
+    //             const keywordMatch = Array.isArray(item.keywords) &&
+    //                 item.keywords.some(keyword => keyword.toLowerCase().includes(lowercaseInput));
+    //             return questionMatch || keywordMatch;
+    //         });
+
+    //         setFilteredSuggestions(matches.slice(0, 3));
+    //         setLiveSuggestion(matches[0] || null);
+    //     } else {
+    //         setFilteredSuggestions([]);
+    //         setLiveSuggestion(null);
+    //     }
+    // }, [input, knowledgeData, messages.length]);
+
+
     useEffect(() => {
-        if (knowledgeData && Array.isArray(knowledgeData) && !knowledgeLoader && !error) {
+        if (
+            knowledgeData &&
+            Array.isArray(knowledgeData.data) && // <-- change here
+            !knowledgeLoader &&
+            !error
+        ) {
             dispatch({
                 type: "SET_ITEM",
                 collection: "knowledges",
-                payload: knowledgeData
+                payload: knowledgeData.data // <-- use .data
             });
 
-            const englishOnly = knowledgeData.filter(item => item.language === 'en');
+            const englishOnly = knowledgeData.data.filter(item => item.language === 'en');
             const shuffled = [...englishOnly].sort(() => 0.5 - Math.random()).slice(0, 3);
             setRandomSuggestions(shuffled);
         }
     }, [knowledgeData, knowledgeLoader, error, dispatch]);
 
-
     useEffect(() => {
-        if (input.trim() && Array.isArray(knowledgeData)) {
+        if (input.trim() && Array.isArray(knowledgeData?.data)) { // <-- use .data
             const lowercaseInput = input.toLowerCase();
             const arabic = isArabic(input);
 
-            const matches = knowledgeData.filter(item => {
+            const matches = knowledgeData.data.filter(item => {
                 // First message: filter by detected input language (en/ar)
                 if (messages.length === 1 && item.language !== (arabic ? 'ar' : 'en')) return false;
 
                 // After first message: allow any language
                 const questionMatch = item.text?.toLowerCase().includes(lowercaseInput);
-                const keywordMatch = Array.isArray(item.keywords) &&
+                const keywordMatch =
+                    Array.isArray(item.keywords) &&
                     item.keywords.some(keyword => keyword.toLowerCase().includes(lowercaseInput));
                 return questionMatch || keywordMatch;
             });
@@ -81,27 +126,9 @@ export default function ChatBot({ api, botIcon = "fluent:bot-sparkle-16-filled",
     }, [input, knowledgeData, messages.length]);
 
 
-    // 2. Input changes — filter 3 for first message and 1 after that
-    // useEffect(() => {
-    //     if (input.trim() && Array.isArray(knowledgeData)) {
-    //         const lowercaseInput = input.toLowerCase();
 
-    //         const matches = knowledgeData.filter(item => {
-    //             if (item.language !== 'en') return false;
 
-    //             const questionMatch = item.text?.toLowerCase().includes(lowercaseInput);
-    //             const keywordMatch = Array.isArray(item.keywords) &&
-    //                 item.keywords.some(keyword => keyword.toLowerCase().includes(lowercaseInput));
-    //             return questionMatch || keywordMatch;
-    //         });
 
-    //         setFilteredSuggestions(matches.slice(0, 3));
-    //         setLiveSuggestion(matches[0] || null);
-    //     } else {
-    //         setFilteredSuggestions([]);
-    //         setLiveSuggestion(null);
-    //     }
-    // }, [input, knowledgeData]);
 
     const scrollToBottom = () => {
         messagesEndRef.current?.scrollIntoView({ behavior: "smooth" })
