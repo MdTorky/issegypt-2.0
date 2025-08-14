@@ -114,6 +114,7 @@ function App() {
       "/quizCompleted": languageText.QuizCompleted,
       "/auth/login": languageText.Login,
       "/auth/register": languageText.Register,
+      "/egptDashboard": "E-GPT Dashboard",
     };
 
     let pageTitle = titles[path] || languageText.ISSEgyptGateway; // Default title
@@ -166,7 +167,7 @@ function App() {
 
         {/* Admin */}
         <Route path="/adminDashboard" element={<ProtectedRoute><AdminDashboard language={language} languageText={languageText} api={api} /></ProtectedRoute>} />
-        <Route path="/egpt" element={<ProtectedRoute><EGPTDashboard language={language} languageText={languageText} api={api} /></ProtectedRoute>} />
+        <Route path="/egptDashboard" element={<ProtectedRoute><EGPTDashboard language={language} languageText={languageText} api={api} /></ProtectedRoute>} />
         <Route path="/myForms" element={<ProtectedRoute><MyForms language={language} languageText={languageText} api={api} /></ProtectedRoute>} />
         <Route path="/productsData" element={<ProtectedRoute><ProductsData language={language} languageText={languageText} api={api} /></ProtectedRoute>} />
         <Route path="/editForm/:id" element={<ProtectedRoute><EditForm language={language} languageText={languageText} api={api} /></ProtectedRoute>} />

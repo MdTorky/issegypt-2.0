@@ -31,6 +31,7 @@ export default function ChatBot({ api, botIcon = "fluent:bot-sparkle-16-filled",
 
     const { dispatch } = useFormsContext();
     const { data: knowledgeData, loading: knowledgeLoader, error } = useFetchData(`${api}/api/knowledge`);
+    const { data: suggestionKnowledge, loading: suggestionLoading, error: suggestionError } = useFetchData(`${api}/api/knowledge/suggestions`);
     const [randomSuggestions, setRandomSuggestions] = useState([]);
     const [filteredSuggestions, setFilteredSuggestions] = useState([]);
     const [liveSuggestion, setLiveSuggestion] = useState(null);
@@ -80,40 +81,60 @@ export default function ChatBot({ api, botIcon = "fluent:bot-sparkle-16-filled",
     //     }
     // }, [input, knowledgeData, messages.length]);
 
+    // const isArabic = (text) => {
+    //     const arabicRegex = /[\u0600-\u06FF]/
+    //     return arabicRegex.test(text)
+    // }
+
+
+    const isArabic = (text) => {
+        if (typeof text !== 'string') return false;
+        const arabicRegex = /[\u0600-\u06FF]/;
+        // Check if more than 30% of the characters are Arabic
+        const arabicChars = text.split('').filter(char => arabicRegex.test(char));
+        return (arabicChars.length / text.length) > 0.3;
+    };
+
 
     useEffect(() => {
-        if (
-            knowledgeData &&
-            Array.isArray(knowledgeData.data) && // <-- change here
-            !knowledgeLoader &&
-            !error
-        ) {
+        if (suggestionKnowledge && Array.isArray(suggestionKnowledge) && !suggestionLoading && !suggestionError) {
+
+            // Dispatching here is optional if this data is only used for suggestions.
             dispatch({
                 type: "SET_ITEM",
                 collection: "knowledges",
-                payload: knowledgeData.data // <-- use .data
+                payload: suggestionKnowledge
             });
 
-            const englishOnly = knowledgeData.data.filter(item => item.language === 'en');
+            const englishOnly = suggestionKnowledge.filter(item => item.language === 'en');
             const shuffled = [...englishOnly].sort(() => 0.5 - Math.random()).slice(0, 3);
+            // For random suggestions, let's show both languages to encourage discovery.
+            // const shuffled = [...suggestionKnowledge].sort(() => 0.5 - Math.random()).slice(0, 3);
             setRandomSuggestions(shuffled);
         }
-    }, [knowledgeData, knowledgeLoader, error, dispatch]);
+    }, [suggestionKnowledge, suggestionLoading, suggestionError, dispatch]);
 
+
+    // This useEffect handles the live filtering as the user types
     useEffect(() => {
-        if (input.trim() && Array.isArray(knowledgeData?.data)) { // <-- use .data
+        if (input.trim() && suggestionKnowledge && Array.isArray(suggestionKnowledge)) {
             const lowercaseInput = input.toLowerCase();
-            const arabic = isArabic(input);
+            const arabicInput = isArabic(input); // Use the correctly defined function
 
-            const matches = knowledgeData.data.filter(item => {
-                // First message: filter by detected input language (en/ar)
-                if (messages.length === 1 && item.language !== (arabic ? 'ar' : 'en')) return false;
+            const matches = suggestionKnowledge.filter(item => {
+                // When starting a new chat, only suggest from the detected language.
+                if (messages.length <= 1) { // <= 1 to account for the initial bot message
+                    const itemLang = item.language === 'ar';
+                    if (itemLang !== arabicInput) {
+                        return false;
+                    }
+                }
 
-                // After first message: allow any language
+                // After the conversation starts, search all languages.
                 const questionMatch = item.text?.toLowerCase().includes(lowercaseInput);
-                const keywordMatch =
-                    Array.isArray(item.keywords) &&
+                const keywordMatch = Array.isArray(item.keywords) &&
                     item.keywords.some(keyword => keyword.toLowerCase().includes(lowercaseInput));
+
                 return questionMatch || keywordMatch;
             });
 
@@ -123,7 +144,19 @@ export default function ChatBot({ api, botIcon = "fluent:bot-sparkle-16-filled",
             setFilteredSuggestions([]);
             setLiveSuggestion(null);
         }
-    }, [input, knowledgeData, messages.length]);
+    }, [input, suggestionKnowledge, messages.length]);
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -138,10 +171,7 @@ export default function ChatBot({ api, botIcon = "fluent:bot-sparkle-16-filled",
         scrollToBottom()
     }, [messages])
 
-    const isArabic = (text) => {
-        const arabicRegex = /[\u0600-\u06FF]/
-        return arabicRegex.test(text)
-    }
+
 
     const handleSend = async (messageToSend = input) => {
         if (typeof messageToSend !== "string" || !messageToSend.trim()) return;
@@ -210,7 +240,7 @@ export default function ChatBot({ api, botIcon = "fluent:bot-sparkle-16-filled",
             <motion.div className="fixed bottom-6 right-6 z-110" whileHover={{ scale: 1.1 }} whileTap={{ scale: 0.9 }}>
                 <button
                     onClick={() => setIsOpen(!isOpen)}
-                    className="w-12 h-12 md:w-16 md:h-16 bg-radial from-darktheme2/70 to-yellow-600/70 text-white flex justify-center items-center rounded-full ring-4 ring-yellow-600 border-3 border-whitetheme dark:border-darktheme2 cursor-pointer group z-100"
+                    className="w-12 h-12 md:w-16 md:h-16 bg-radial from-yellow-600/70 to-darktheme/70 text-white flex justify-center items-center rounded-full ring-4 ring-yellow-600 border-3 border-whitetheme/80 dark:border-darktheme2 cursor-pointer group z-100"
                 >
                     <AnimatePresence mode="wait">
                         {isOpen ? (
@@ -436,7 +466,7 @@ export default function ChatBot({ api, botIcon = "fluent:bot-sparkle-16-filled",
                                 </div>
                             </div>
                         )} */}
-                        {knowledgeLoader && (
+                        {suggestionLoading && (
                             <Loader />
                         )}
                         {messages.length === 1 && (input.trim() ? filteredSuggestions.length > 0 : randomSuggestions.length > 0) ? (
@@ -505,7 +535,7 @@ export default function ChatBot({ api, botIcon = "fluent:bot-sparkle-16-filled",
                                     whileTap={{ scale: 0.95 }}
                                     onClick={() => handleSend(input)}
                                     disabled={loading || !input.trim()}
-                                    className="bg-gradient-to-r from-yellow-600 to-yellow-500 text-white p-2 rounded-xl hover:shadow-lg transition-shadow duration-200 disabled:opacity-50 disabled:cursor-not-allowed w-15 flex justify-center items-center cursor-pointer group"
+                                    className="bg-gradient-to-r from-yellow-600 to-yellow-500 text-white p-2 rounded-lg hover:shadow-lg transition-shadow duration-200 disabled:opacity-50 disabled:cursor-not-allowed w-15 flex justify-center items-center cursor-pointer group"
                                 >
                                     <Icon icon="lets-icons:send-fill" className="w-5 h-5" />
                                     <div className="inputIconText !bg-radial from-yellow-600/60 to-yellow-600 !text-whitetheme !ring-yellow-600">
@@ -699,7 +729,7 @@ export default function ChatBot({ api, botIcon = "fluent:bot-sparkle-16-filled",
                                 </a>
                             </motion.div>
                         )}
-                        {knowledgeLoader && (
+                        {suggestionLoading && (
                             <Loader />
                         )}
                         {messages.length === 1 && (input.trim() ? filteredSuggestions.length > 0 : randomSuggestions.length > 0) ? (
@@ -757,7 +787,7 @@ export default function ChatBot({ api, botIcon = "fluent:bot-sparkle-16-filled",
                                     whileTap={{ scale: 0.95 }}
                                     onClick={() => handleSend(input)}
                                     disabled={loading || !input.trim()}
-                                    className="bg-gradient-to-r from-yellow-600 to-yellow-500 text-white p-3 rounded-xl hover:shadow-lg transition-shadow duration-200 disabled:opacity-50 disabled:cursor-not-allowed w-15 flex justify-center items-center cursor-pointer"
+                                    className="bg-gradient-to-r from-yellow-600 to-yellow-500 text-white p-3 rounded-lg hover:shadow-lg transition-shadow duration-200 disabled:opacity-50 disabled:cursor-not-allowed w-15 flex justify-center items-center cursor-pointer"
                                 >
                                     <Icon icon="lets-icons:send-fill" className="w-5 h-5" />
                                 </motion.button>

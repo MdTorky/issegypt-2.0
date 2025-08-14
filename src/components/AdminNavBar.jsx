@@ -52,7 +52,7 @@ const AdminNavBar = ({ languageText, api, language, setCommitteeType }) => {
             {
                 name: "E-GPT Dashboard",
                 icon: "fluent:bot-sparkle-16-filled",
-                path: "/egpt"
+                path: "/egptDashboard"
             },
             {
                 name: languageText.Internships,

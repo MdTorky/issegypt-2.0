@@ -15,6 +15,7 @@
     "ISSEgyptGateway": "ISS EGYPT",
 
     "Send": "Send",
+    "Delete": "Delete",
     "Online": "Online",
     "TypeQuestion": "Type your question...",
     "egpt": "e-GPT – The ISS Egypt Assistant (Beta)",
@@ -505,6 +506,7 @@
     "ISSEgyptGateway": "موقع الاتحاد المصري",
 
     "Send": "إرسال",
+    "Delete": "إلغاء",
     "Online": "اونلاين",
     "TypeQuestion": "اكتب سؤالك...",
     "egpt": "e-GPT – مساعد الاتحاد المصري (نسخة تجريبية)",

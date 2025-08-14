@@ -295,4 +295,22 @@ import { Icon } from "@iconify/react/dist/iconify.js";
     Recent:
     mdi:recent
 
+
+    Questions
+    <Icon icon="mynaui:question-waves" />
+    <Icon icon="mynaui:question-waves-solid" />
+
+
+    Answer:
+    <Icon icon="fluent:prompt-16-regular" />
+    <Icon icon="fluent:prompt-16-filled" />
+
+    Keyword
+    <Icon icon="mdi:label-multiple-outline" />
+    <Icon icon="mdi:label-multiple" />
+
+
+    Priority
+    <Icon icon="iconoir:priority-high" />
+    <Icon icon="iconoir:priority-high-solid" />
 </div>
