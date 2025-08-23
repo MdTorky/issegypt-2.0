@@ -106,6 +106,7 @@ const BottomNavbar = ({ languageText, language }) => {
                                     <motion.div variants={childVariant}
                                         whileHover={{
                                             scale: 1.05,
+                                            y: -5,
                                             background: "var(--whitetheme)",
                                             color: "var(--darktheme)",
                                             transition: {
@@ -132,6 +133,7 @@ const BottomNavbar = ({ languageText, language }) => {
                                     <motion.div variants={childVariant}
                                         whileHover={{
                                             scale: 1.05,
+                                            y: -5,
                                             background: "var(--whitetheme)",
                                             color: "var(--darktheme)",
                                             transition: {
@@ -162,6 +164,7 @@ const BottomNavbar = ({ languageText, language }) => {
                                     <motion.div variants={childVariant}
                                         whileHover={{
                                             scale: 1.05,
+                                            y: -5,
                                             background: "var(--whitetheme)",
                                             color: "var(--darktheme)",
                                             transition: {
@@ -187,6 +190,7 @@ const BottomNavbar = ({ languageText, language }) => {
                                     <motion.div variants={childVariant}
                                         whileHover={{
                                             scale: 1.05,
+                                            y: -5,
                                             background: "var(--whitetheme)",
                                             color: "var(--darktheme)",
                                             transition: {

@@ -244,11 +244,11 @@ const Home = ({ languageText, language, api }) => {
                                     }`}
                                 onClick={() => selectSlide(index)}
                                 layout
-                                whileHover={{ scale: 1.1 }}
+                                whileHover={{ scale: 1.1, y: -15 }}
                                 initial={{ opacity: 0, x: 50 }}
                                 animate={{ opacity: 1, x: 0 }}
                                 exit={{ opacity: 0, x: -50 }}
-                                transition={{ type: "spring", stiffness: 300, damping: 20, duration: 0.4 }}
+                                transition={{ type: "spring", stiffness: 300, damping: 20, duration: 0.6 }}
                             >
                                 <motion.img
                                     src={slide.imgSrc}

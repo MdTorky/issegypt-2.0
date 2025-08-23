@@ -33,7 +33,7 @@ const MemberCard = ({ member, language, languageText }) => {
                 whileHover="hover"
                 transition={{ duration: 0.4 }}
                 variants={{
-                    hover: { scale: 1.05 },
+                    hover: { scale: 1.05, y: -20 },
                 }}
             >
                 {/* Overlay Effect */}
