@@ -482,7 +482,7 @@ export default function ChatBot({ api, botIcon = "fluent:bot-sparkle-16-filled",
                                         <button
                                             key={index}
                                             onClick={() => sendMessage(suggestion)}
-                                            className="px-3 py-1 bg-gray-100 dark:bg-darktheme dark:text-whitetheme hover:bg-gray-200 dark:hover:bg-darktheme2/40 rounded-md text-sm text-gray-700 transition-colors cursor-pointer whitespace-nowrap"
+                                            className="px-3 py-1 bg-gray-100 dark:bg-darktheme dark:text-whitetheme hover:bg-gray-200 dark:hover:bg-darktheme2/40 rounded-md text-sm text-gray-700 transition-colors cursor-pointer"
                                         >
                                             {suggestion.text}
                                         </button>
@@ -493,10 +493,10 @@ export default function ChatBot({ api, botIcon = "fluent:bot-sparkle-16-filled",
                             // AFTER first message logic: show 1 live suggestion
                             input.trim() && liveSuggestion && (
                                 <div className="px-4 py-2 bg-whitetheme dark:bg-darktheme2 border-t border-gray-200 dark:border-whitetheme w-full">
-                                    <p className="text-sm text-gray-500 mb-2">Suggested question:</p>
+                                    <p className="text-sm text-gray-500 mb-2">{languageText.SuggestedQuestion}</p>
                                     <button
                                         onClick={() => sendMessage(liveSuggestion)}
-                                        className="flex items-center gap-1 px-3 py-1 bg-gray-100 dark:bg-darktheme dark:text-whitetheme hover:bg-gray-200 dark:hover:bg-darktheme2/40 rounded-md text-sm text-gray-700 transition-colors cursor-pointer whitespace-nowrap"
+                                        className="flex items-center gap-1 px-3 py-1 bg-gray-100 dark:bg-darktheme dark:text-whitetheme hover:bg-gray-200 dark:hover:bg-darktheme2/40 rounded-md text-sm text-gray-700 transition-colors cursor-pointer"
                                     >
                                         <Icon icon="hugeicons:idea-01" className="text-yellow-600 dark:text-whitetheme2 text-lg" /> {liveSuggestion.text}
                                     </button>
@@ -743,7 +743,7 @@ export default function ChatBot({ api, botIcon = "fluent:bot-sparkle-16-filled",
                                         <button
                                             key={index}
                                             onClick={() => sendMessage(suggestion)}
-                                            className="px-3 py-1 bg-gray-100 dark:bg-darktheme dark:text-whitetheme hover:bg-gray-200 dark:hover:bg-darktheme2/40 rounded-md text-sm text-gray-700 transition-colors cursor-pointer whitespace-nowrap"
+                                            className="px-3 py-1 bg-gray-100 dark:bg-darktheme dark:text-whitetheme hover:bg-gray-200 dark:hover:bg-darktheme2/40 rounded-md text-sm text-gray-700 transition-colors cursor-pointer "
                                         >
                                             {suggestion.text}
                                         </button>
@@ -754,10 +754,10 @@ export default function ChatBot({ api, botIcon = "fluent:bot-sparkle-16-filled",
                             // AFTER first message logic: show 1 live suggestion
                             input.trim() && liveSuggestion && (
                                 <div className="px-4 py-2 bg-whitetheme dark:bg-darktheme2 border-t border-gray-200 dark:border-whitetheme w-full">
-                                    <p className="text-sm text-gray-500 mb-2">Suggested question:</p>
+                                    <p className="text-sm text-gray-500 mb-2">{languageText.SuggestedQuestion}</p>
                                     <button
                                         onClick={() => sendMessage(liveSuggestion)}
-                                        className="flex items-center gap-1 px-3 py-1 bg-gray-100 dark:bg-darktheme dark:text-whitetheme hover:bg-gray-200 dark:hover:bg-darktheme2/40 rounded-md text-sm text-gray-700 transition-colors cursor-pointer whitespace-nowrap"
+                                        className="flex items-center gap-1 px-3 py-1 bg-gray-100 dark:bg-darktheme dark:text-whitetheme hover:bg-gray-200 dark:hover:bg-darktheme2/40 rounded-md text-sm text-gray-700 transition-colors cursor-pointer"
                                     >
                                         <Icon icon="hugeicons:idea-01" className="text-yellow-600 dark:text-whitetheme2 text-lg" /> {liveSuggestion.text}
                                     </button>

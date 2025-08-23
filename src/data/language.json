@@ -18,8 +18,9 @@
     "Delete": "Delete",
     "Online": "Online",
     "TypeQuestion": "Type your question...",
+    "SuggestedQuestion": "Suggested question:",
     "egpt": "e-GPT – The ISS Egypt Assistant (Beta)",
-    "egptIntro": "Hi! I'm e-GPT your AI Assistant. I am happy to assist you! Please ask your question in English (Beta)",
+    "egptIntro": "Hi! I'm e-GPT your AI Assistant. I am happy to assist you! Please ask your questions in English. (Beta)",
     "TryAskingAbout": "Try asking about:",
     "SuggestionBasedOnInput": "Suggestions based on your input:",
 
@@ -509,6 +510,7 @@
     "Delete": "إلغاء",
     "Online": "اونلاين",
     "TypeQuestion": "اكتب سؤالك...",
+    "SuggestedQuestion": "السؤال المقترح:",
     "egpt": "e-GPT – مساعد الاتحاد المصري (نسخة تجريبية)",
     "egptIntro": "مرحباً! أنا e-GPT مساعدك الذكي. سعيد بمساعدتك! (نسخة تجريبية)",
     "TryAskingAbout": "جرّب أن تسأل عن:",
