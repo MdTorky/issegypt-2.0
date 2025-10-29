@@ -14,6 +14,7 @@ import HandCardLoader from "../components/loaders/HandCardLoader";
 import images from '../data/events.json'
 import ScrollToTop from "../components/ScrollToTop";
 import Loader from "../components/loaders/Loader";
+import SplitText from "../utils/SplitText";
 
 
 const Home = ({ languageText, language, api }) => {
@@ -33,8 +34,8 @@ const Home = ({ languageText, language, api }) => {
     } = useScrollAnimations();
 
     const [slides, setSlides] = useState([
-        { id: 1, imgSrc: "https://res.cloudinary.com/dmv4mxgn5/image/upload/v1740088072/Home%20Page/ACD_vk9ajm.jpg", title: "Arabic Culture Day", aTitle: "اليوم الثقافي العربي", description: "ISS Egypt represented Egypt in the Arabic Culture Day 2024", aDescription: "مثل الاتحاد المصري مصر في اليوم الثقافي العربي 2024" },
-        { id: 2, imgSrc: "https://res.cloudinary.com/dmv4mxgn5/image/upload/v1753429912/Home%20Page/IMG_8141_senu7c.jpg", title: "Welcome Day", aTitle: "يوم الترحيب", description: "Where ISS Egypt Welcomes New Students and gives them a hand in their upcoming years", aDescription: "حيث رحب الاتحاد المصري بالطلاب الجدد وقدم لهم المساعدة في سنواتهم القادمة" },
+        { id: 1, imgSrc: "https://res.cloudinary.com/dmv4mxgn5/image/upload/v1753429912/Home%20Page/IMG_8141_senu7c.jpg", title: "Welcome Day", aTitle: "يوم الترحيب", description: "Where ISS Egypt Welcomes New Students and gives them a hand in their upcoming years", aDescription: "حيث رحب الاتحاد المصري بالطلاب الجدد وقدم لهم المساعدة في سنواتهم القادمة" },
+        { id: 2, imgSrc: "https://res.cloudinary.com/dmv4mxgn5/image/upload/v1740088072/Home%20Page/ACD_vk9ajm.jpg", title: "Arabic Culture Day", aTitle: "اليوم الثقافي العربي", description: "ISS Egypt represented Egypt in the Arabic Culture Day 2024", aDescription: "مثل الاتحاد المصري مصر في اليوم الثقافي العربي 2024" },
         { id: 3, imgSrc: "https://res.cloudinary.com/dmv4mxgn5/image/upload/v1740087762/Home%20Page/Eid_kgoenn.jpg", title: "Eid Al-Adha Celebrations", aTitle: "احتفالات عيد الأضحى", description: "ISS Egypt celebrates Eid with all the Muslim Students", aDescription: "الاتحاد المصري يحتفل بالعيد مع جميع الطلاب المسلمين" },
         { id: 4, imgSrc: "https://res.cloudinary.com/dmv4mxgn5/image/upload/v1753430655/Home%20Page/IMG_3714_ix2xcq.jpg", title: "Universities Nations Cup", aTitle: "كأس الأمم الجامعية", description: "ISS Egypt hosted the largest futsal tournament, featuring ten universities from Malaysia.", aDescription: "أقام الاتحاد المصري أكبر بطولة لكرة القدم الخماسية، بمشاركة عشر جامعات من ماليزيا." },
         { id: 5, imgSrc: "https://res.cloudinary.com/dmv4mxgn5/image/upload/v1753430800/Home%20Page/Langkawi_dgb5ch.jpg", title: "Langkawi Trip", aTitle: "رحلة لنكاوي", description: "ISS Egypt organized a trip to Langkawi Island, offering students an unforgettable experience exploring its natural beauty and vibrant culture.", aDescription: "نظم الاتحاد المصري رحلة إلى جزيرة لنكاوي، مما وفر للطلاب تجربة لا تُنسى لاستكشاف جمالها الطبيعي وثقافتها النابضة بالحياة." }
@@ -222,7 +223,27 @@ const Home = ({ languageText, language, api }) => {
                                 exit: { x: 9900, opacity: 0 }
                             }}
                             transition={{ duration: 0.5 }}
-                            className={`text-6xl lg:text-8xl lg:w-200 font-bold  uppercase   text-center lg:text-start ${language === "en" ? "font-anton tracking-wide" : ""}`} style={{ y: imageTitleYDown }}>{language === "en" ? slides[0].title : slides[0].aTitle}</motion.div>
+                            className={`text-6xl lg:text-8xl lg:w-200 font-bold  uppercase   text-center lg:text-start ${language === "en" ? "font-anton tracking-wide" : ""}`}
+
+
+                            style={{
+
+                                y: imageTitleYDown
+                            }}>{language === "en" ? slides[0].title : slides[0].aTitle}</motion.div>
+                        {/* <SplitText
+                            text={language === "en" ? slides[0].title : slides[0].aTitle}
+                            className={`text-6xl lg:text-8xl lg:w-200 font-bold  uppercase   text-center lg:text-start ${language === "en" ? "font-anton tracking-wide" : ""}`}
+                            delay={100}
+                            duration={2}
+                            ease="elastic.out(1,0.3)"
+                            splitType="chars"
+                            from={{ opacity: 0, y: 40 }}
+                            to={{ opacity: 1, y: 0 }}
+                            threshold={0.1}
+                            rootMargin="-100px"
+                            textAlign="center"
+                        // onLetterAnimationComplete={handleAnimationComplete}
+                        /> */}
                         <motion.div
                             variants={{
                                 hidden: { x: -100, opacity: 0 },

@@ -22,7 +22,7 @@ const CircularButton = ({ icon, text, type, aText, link, language, operation }) 
         if (type === "Website" || type === "YouTube" || type === "Instagram" || type === "Download" || type === "Link" || type === "IOS" || type === "Android" || type === "ImageLink") {
             window.open(link, "_blank");
         } else if (type === "Location") {
-            window.open(`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(link)}`, "_blank");
+            window.open(`${link}`, "_blank");
         } else if (type === "Email") {
             window.location.href = `mailto:${link}`;
         } else if (type === "Phone Number") {
