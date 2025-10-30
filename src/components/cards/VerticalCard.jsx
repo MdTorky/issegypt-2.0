@@ -7,6 +7,8 @@ import useDelete from '../../hooks/useDelete';
 import SuccessMessage from '../formInputs/SuccessMessage';
 import Loader from '../loaders/Loader';
 import UserType from '../UserType';
+import { usePopup } from "../../contexts/PopupContext";
+
 
 
 const VerticalCard = ({ helpingData, language, languageText, api, setSuccessText }) => {
@@ -44,6 +46,17 @@ const VerticalCard = ({ helpingData, language, languageText, api, setSuccessText
             return "icon-park-solid:other";
         } else {
             return "icon-park-solid:other"; // Default icon if type is unknown
+        }
+    };
+
+
+    const { showPopup } = usePopup();
+
+
+    const operationType = (type, aType, link) => {
+        if (type === "Bus") {
+            console.log("HELLOW")
+            showPopup(type, aType, link);
         }
     };
 
@@ -112,16 +125,19 @@ const VerticalCard = ({ helpingData, language, languageText, api, setSuccessText
                     </p>}
                 </div>
                 <div className="p-2 w-[90%] m-auto mb-3 flex justify-around items-center rounded-lg  ring-0 ring-gray-400 dark:ring-whitetheme">
-                    {helpingData.links.sort((a, b) => a.type < b.type ? 1 : -1).map((link) => {
+                    {helpingData.links.sort((a, b) => a.type < b.type ? 1 : -1).map((link, index) => {
                         return (
                             <CircularButton
-                                key={link.url}
+                                key={link.url || index}
                                 icon={iconFinder(link.type)}
                                 text={link.type}
                                 aText={link.aType}
                                 link={link.url}
                                 type={link.type}
                                 language={language}
+                                // operation={() => operationType(link.type, link.url, link.aType)}
+                                operation={() => operationType(link.type, link.aType, link.url)}
+
                             />
                         );
                     })}

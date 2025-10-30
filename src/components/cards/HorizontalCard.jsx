@@ -48,15 +48,15 @@ const HorizontalCard = ({ helpingData, language, languageText, api, setSuccessTe
         }
     };
 
-    // const { showPopup } = usePopup();
+    const { showPopup } = usePopup();
 
 
-    // // console.log(helpingData)
-    // const operationType = (type, aType, link) => {
-    //     if (type === "Description") {
-    //         showPopup(type, link, aType);
-    //     }
-    // };
+    console.log(helpingData)
+    const operationType = (type, aType, link) => {
+        if (type === "Bus") {
+            showPopup(type, aType, link);
+        }
+    };
 
 
 
