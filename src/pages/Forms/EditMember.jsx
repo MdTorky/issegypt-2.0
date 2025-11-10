@@ -35,7 +35,7 @@ const EditMember = ({ languageText, language, api }) => {
 
     const facultyOptions = [
         { value: "Electrical Engineering", label: languageText.FKE, icon: "material-symbols:electric-bolt-rounded" },
-        { value: "Computing Science", label: languageText.FC, icon: "icon-park-solid:code-laptop" },
+        { value: "Computer Science", label: languageText.FC, icon: "icon-park-solid:code-laptop" },
         { value: "Mechanical Engineering", label: languageText.FKM, icon: "vaadin:tools" },
         { value: "Civil Engineering", label: languageText.FKA, icon: "fa6-solid:helmet-safety" },
         { value: "Chemical Engineering", label: languageText.FKT, icon: "mdi:flask" },
