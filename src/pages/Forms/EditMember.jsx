@@ -102,7 +102,8 @@ const EditMember = ({ languageText, language, api }) => {
             committee,
             phone,
             linkedIn,
-            memberId
+            memberId,
+            img
         };
 
         try {
