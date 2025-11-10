@@ -47,6 +47,8 @@ import BankAccount from './pages/BankAccount';
 import Chatbot from "./components/Chatbot";
 import FeaturePopup from './components/FeaturePopup';
 import EGPTDashboard from './pages/Admin/EGPTDashboard';
+import EditMember from './pages/Forms/EditMember';
+import Members from './pages/Admin/Members';
 // import FormFiller from './pages/FormFiller';
 
 
@@ -167,6 +169,7 @@ function App() {
 
         {/* Admin */}
         <Route path="/adminDashboard" element={<ProtectedRoute><AdminDashboard language={language} languageText={languageText} api={api} /></ProtectedRoute>} />
+        <Route path="/members" element={<ProtectedRoute><Members language={language} languageText={languageText} api={api} /></ProtectedRoute>} />
         <Route path="/egptDashboard" element={<ProtectedRoute><EGPTDashboard language={language} languageText={languageText} api={api} /></ProtectedRoute>} />
         <Route path="/myForms" element={<ProtectedRoute><MyForms language={language} languageText={languageText} api={api} /></ProtectedRoute>} />
         <Route path="/productsData" element={<ProtectedRoute><ProductsData language={language} languageText={languageText} api={api} /></ProtectedRoute>} />
@@ -174,6 +177,7 @@ function App() {
         <Route path="/formData/:id" element={<ProtectedRoute><FormData language={language} languageText={languageText} api={api} /></ProtectedRoute>} />
         <Route path="/editgallery/:id" element={<ProtectedRoute><EditGallery language={language} languageText={languageText} api={api} /></ProtectedRoute>} />
         <Route path="/editIntern/:id" element={<ProtectedRoute><EditInternship language={language} languageText={languageText} api={api} /></ProtectedRoute>} />
+        <Route path="/editMember/:id" element={<ProtectedRoute><EditMember language={language} languageText={languageText} api={api} /></ProtectedRoute>} />
 
         {/* Forms */}
         <Route path="/addForm" element={<ProtectedRoute><AddForm language={language} languageText={languageText} api={api} /></ProtectedRoute>} />

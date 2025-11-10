@@ -41,6 +41,7 @@
     "FormSuccessUpdateMessage": "Form Updated Successfully",
     "FormDeleteConfirmation": "Are you sure you want to delete this Form with all of its submissions?",
     "EmailSuccessMessage": "Email Sent Successfully",
+    "EditMemberSuccessMessage": "Member Edited Successfully",
 
     "Registering": "Registering",
     "LogginIn": "Logging In",
@@ -295,6 +296,7 @@
     "PurchaseForm": "Purchase Form",
     "PersonalDetails": "Personal Details",
     "FullName": "Full Name",
+    "ArabicFullName": "Arabic Full Name",
     "MatricNo": "Matric Number",
     "ChooseYourFaculty": "Choose Your Faculty",
     "ChooseYourAddress": "Choose Your Address",
@@ -488,7 +490,10 @@
     "WaitingForGroups": "Waiting for Groups to Join",
     "NoGroupsJoined": "No groups have joined yet.",
     "StartQuiz": "Start Quiz",
-    "WaitingToAnswer": "Waiting for all groups to answer..."
+    "WaitingToAnswer": "Waiting for all groups to answer...",
+
+    "ISSEGYPTMembers": "ISS Egypt Members",
+    "MemberID": "MemberID"
   },
 
   "ar": {
@@ -533,6 +538,7 @@
     "FormSuccessUpdateMessage": "تم الفورم الفورم بنجاح",
     "FormDeleteConfirmation": "هل أنت متأكد أنك تريد حذف هذا الفورم مع جميع الطلبات المقدمة؟",
     "EmailSuccessMessage": "تم إرسال البريد الإلكتروني بنجاح",
+    "EditMemberSuccessMessage": "تم تعديل العضو بنجاح",
 
     "Registering": "جارٍ التسجيل",
     "LogginIn": "جارٍ تسجيل الدخول",
@@ -787,6 +793,7 @@
     "PurchaseForm": "فورم الشراء",
     "PersonalDetails": "البيانات الشخصية",
     "FullName": "الاسم الكامل",
+    "ArabicFullName": "الاسم الكامل بالعربية",
     "MatricNo": "رقم التسجيل",
     "ChooseYourFaculty": "اختر كليتك",
     "ChooseYourAddress": "اختر عنوانك",

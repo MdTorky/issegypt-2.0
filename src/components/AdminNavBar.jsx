@@ -82,8 +82,16 @@ const AdminNavBar = ({ languageText, api, language, setCommitteeType }) => {
                 dropdown: [
                     { name: languageText.ProductsData, path: "/productsData", icon: "mage:package-box-fill" },
                 ],
-            }
+            },
+
         ] : []),
+        ...(UserType("Admin") ? [
+            {
+                name: languageText.Members,
+                icon: "fluent:people-20-filled",
+                path: "/members"
+            },]
+            : []),
         ...(UserType("Social") ? [{
             name: languageText.EmojiQuiz,
             icon: "fluent:emoji-hint-16-filled",

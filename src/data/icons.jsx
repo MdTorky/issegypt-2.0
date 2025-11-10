@@ -313,4 +313,15 @@ import { Icon } from "@iconify/react/dist/iconify.js";
     Priority
     <Icon icon="iconoir:priority-high" />
     <Icon icon="iconoir:priority-high-solid" />
+
+
+
+    Edit Member
+    <Icon icon="fluent:person-edit-16-filled" />
+
+    Members
+    <Icon icon="fluent:people-20-filled" />
+
+    Member Id
+    <Icon icon="streamline-ultimate:touch-id-bold" />
 </div>
