@@ -58,7 +58,7 @@ const ISSEgyptMember = ({ member, language, languageText }) => {
                     <div
                         className={` absolute flex flex-col items-center bottom-10 m-auto left-0 right-0 text-4xl text-whitetheme z-20 w-[85%] transition-all duration-500  `}
                     >
-                        <h1>{language === "en" ? member.name : member.arabicName}</h1>
+                        <h1 className="text-center">{language === "en" ? member.name : member.arabicName}</h1>
                         <p className="text-2xl text-gray-400 text-center">
                             {roleChecker({
                                 languageText: languageText,

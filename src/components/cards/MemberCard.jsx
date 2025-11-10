@@ -78,8 +78,8 @@ const MemberCard = ({ member, language, languageText }) => {
                     <div
                         className={` absolute flex flex-col items-center bottom-10 m-auto left-0 right-0 text-4xl text-whitetheme z-20 w-[85%] translate-y-20 group-hover:translate-y-0 opacity-0 transition-all duration-500 group-hover:opacity-100  `}
                     >
-                        <h1>{language === "en" ? member.name : member.arabicName}</h1>
-                        <p className="text-2xl text-gray-400">
+                        <h1 className="text-center">{language === "en" ? member.name : member.arabicName}</h1>
+                        <p className=" text-center text-2xl text-gray-400">
                             {roleChecker({
                                 languageText: languageText,
                                 committee: member.committee,
@@ -177,8 +177,8 @@ const MemberCard = ({ member, language, languageText }) => {
                     <div
                         className={` absolute flex flex-col items-center bottom-10 m-auto left-0 right-0 text-4xl text-whitetheme z-20 w-[85%] transition-all duration-500  `}
                     >
-                        <h1>{language === "en" ? member.name : member.arabicName}</h1>
-                        <p className="text-2xl text-gray-400">
+                        <h1 className="text-center">{language === "en" ? member.name : member.arabicName}</h1>
+                        <p className="text-center text-2xl text-gray-400">
                             {roleChecker({
                                 languageText: languageText,
                                 committee: member.committee,

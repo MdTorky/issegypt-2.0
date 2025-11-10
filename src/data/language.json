@@ -986,6 +986,9 @@
     "WaitingForGroups": "في انتظار انضمام المجموعات",
     "NoGroupsJoined": "لم تنضم أي مجموعات بعد.",
     "StartQuiz": "ابدأ الاختبار",
-    "WaitingToAnswer": "بانتظار إجابات جميع المجموعات..."
+    "WaitingToAnswer": "بانتظار إجابات جميع المجموعات...",
+
+    "ISSEGYPTMembers": "أعضاء الاتحاد",
+    "MemberID": "رقم العضو"
   }
 }
