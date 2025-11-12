@@ -87,6 +87,21 @@ const Service = ({ language, languageText, api }) => {
     }, []);
 
 
+    const renderCard = (helping) => {
+        const CardComponent = serviceData.card === "Vertical" ? VerticalCard : HorizontalCard;
+        const cardProps = {
+            key: helping._id,
+            helpingData: helping,
+            language: language,
+            languageText: languageText,
+            api: api,
+            setSuccessText: setSuccessText,
+            // Only add 'ai' prop for HorizontalCard when link is 'aitools'
+            ...(serviceData.card !== "Vertical" && { ai: link === "aitools" ? "true" : "false" }),
+        };
+        return <CardComponent {...cardProps} />;
+    };
+
     return (
         <div className="mb-10 flex relative">
             {(serviceLoading || loading) ? (
@@ -175,7 +190,50 @@ const Service = ({ language, languageText, api }) => {
                             initial="hidden"
                             animate="visible"
                             className="flex justify-center gap-10 w-full flex-wrap">
-                            {serviceData?.groups.length > 0 && serviceData?.groups.map((group, index) => (
+                            {serviceData?.groups?.length > 0 ? (
+                                serviceData.groups.map((group, index) => {
+                                    const itemsInGroup = filteredServices.filter((helping) => helping.group === group.name);
+                                    return (
+                                        <motion.div
+                                            variants={InputChildVariants}
+                                            key={index}
+                                            className="serviceContainer"
+                                        >
+                                            <h1 className="serviceContainerTitle">
+                                                {language === "en" ? group.name : group.aName}
+                                            </h1>
+                                            <motion.div
+                                                variants={InputChildVariants}
+                                                className="flex flex-col gap-5 mb-5"
+                                            >
+                                                {itemsInGroup.length > 0 ? (
+                                                    itemsInGroup.map((helping) => renderCard(helping))
+                                                ) : (
+                                                    <div className="noData m-auto">
+                                                        <Icon icon="iconamoon:dislike-fill" />{languageText.NoData}
+                                                    </div>
+                                                )}
+                                            </motion.div>
+                                        </motion.div>
+                                    );
+                                })
+                            ) : (
+                                /* Scenario 2: No Groups Defined (Render all filtered services) */
+                                <motion.div
+                                    variants={InputChildVariants}
+                                    className=" serviceContainer flex flex-col gap-5 w-full items-center"
+                                >
+                                    {filteredServices.length > 0 ? (
+                                        filteredServices.map((helping) => renderCard(helping))
+                                    ) : (
+                                        <div className="noData text-center w-full">
+                                            <Icon icon="iconamoon:dislike-fill" className="text-4xl" />
+                                            <p className="text-xl">{languageText.NoData}</p>
+                                        </div>
+                                    )}
+                                </motion.div>
+                            )}
+                            {/* {serviceData?.groups.length > 0 && serviceData?.groups.map((group, index) => (
                                 <motion.div
                                     variants={InputChildVariants}
                                     key={index}
@@ -225,7 +283,7 @@ const Service = ({ language, languageText, api }) => {
                                             )}
                                     </motion.div>
                                 </motion.div>
-                            ))}
+                            ))} */}
                         </motion.div>
                     </div>
                 </div>
@@ -239,64 +297,7 @@ const Service = ({ language, languageText, api }) => {
     );
 };
 
-//             ) : (
-//                 <div className="mt-30 w-full flex flex-col items-center px-10 gap-10">
-//                     <motion.h2
-//                         initial={{ scale: 0, opacity: 0 }}
-//                         animate={{ scale: 1, opacity: 1 }}
-//                         exit={{ opacity: 0, scale: 0 }}
-//                         transition={{ duration: 0.9, delay: 0.1, type: "spring" }}
-//                         className="serviceTitle"
-//                     >
-//                         {language === "en" ? serviceData?.name : serviceData?.aName} <span className="text-darktheme2 dark:text-whitetheme"></span>
-//                     </motion.h2>
-//                     <motion.div
-//                         variants={{
-//                             visible: { transition: { staggerChildren: 0.2 } },
-//                             exit: { transition: { staggerChildren: 0.1 } },
-//                         }}
-//                         initial="hidden"
-//                         animate="visible"
-//                         className="flex justify-center gap-10 w-full flex-wrap">
-//                         {serviceData?.groups.length > 0 && serviceData?.groups.map((group, index) => (
-//                             <motion.div
-//                                 variants={InputChildVariants}
-//                                 key={index} className="serviceContainer">
-//                                 <h1 className="serviceContainerTitle">{language === "en" ? group.name : group.aName}</h1>
-//                                 <motion.div
-//                                     variants={InputChildVariants}
-//                                     className="flex flex-col gap-5 mb-5"
-//                                 >
-//                                     {Array.isArray(helpingData) &&
-//                                         helpingData
-//                                             .filter((helping) => helping.group === group.name)
-//                                             .map((helping, index) => {
-//                                                 return (
-//                                                     serviceData.card === "Vertical" ? (
-//                                                         <VerticalCard key={index} helpingData={helping} language={language} languageText={languageText} api={api} />
-//                                                     ) : (
-//                                                         <HorizontalCard helpingData={helping} language={language} languageText={languageText} api={api} />
-//                                                     )
 
-//                                                 )
-//                                             })}
-//                                     {/* Check if there are no matching items */}
-//                                     {(!Array.isArray(helpingData) || helpingData.filter((helping) => helping.group === group.name).length === 0) && (
-//                                         <div className="noData">
-//                                             <Icon icon="iconamoon:dislike-fill" />{languageText.NoData}
-//                                         </div>
-//                                     )}
-//                                 </motion.div>
-
-//                             </motion.div>
-//                         ))}
-
-//                     </motion.div>
-//                 </div>
-//             )}
-//         </div>
-//     )
-// }
 
 export default Service;
 
