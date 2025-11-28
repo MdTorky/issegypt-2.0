@@ -61,13 +61,13 @@ const AdminNavBar = ({ languageText, api, language, setCommitteeType }) => {
                     { name: languageText.AddInternship, path: "/addIntern", icon: "mdi:office-building-plus" },
                 ],
             },
-            // {
-            //     name: languageText.Gallery,
-            //     icon: "solar:gallery-wide-bold",
-            //     dropdown: [
-            //         { name: languageText.AddGallery, path: "", icon: "fluent:image-add-20-filled" },
-            //     ],
-            // },
+            {
+                name: languageText.Gallery,
+                icon: "solar:gallery-wide-bold",
+                dropdown: [
+                    { name: languageText.AddGallery, path: "/addGallery", icon: "fluent:image-add-20-filled" },
+                ],
+            },
             {
                 name: languageText.Services,
                 icon: "ri:service-fill",
@@ -92,16 +92,16 @@ const AdminNavBar = ({ languageText, api, language, setCommitteeType }) => {
                 path: "/members"
             },]
             : []),
-        ...(UserType("Social") ? [{
-            name: languageText.EmojiQuiz,
-            icon: "fluent:emoji-hint-16-filled",
-            dropdown: [
-                { name: languageText.HostPage, path: "/host/ISSEMOJI", icon: "carbon:bastion-host" },
-                { name: languageText.EditPoints, path: "/editpoints/ISSEMOJI", icon: "mdi:progress-star-four-points" },
-                { name: languageText.Results, path: "/results/ISSEMOJI", icon: "game-icons:podium" },
-            ],
-        }
-        ] : []),
+        // ...(UserType("Social") ? [{
+        //     name: languageText.EmojiQuiz,
+        //     icon: "fluent:emoji-hint-16-filled",
+        //     dropdown: [
+        //         { name: languageText.HostPage, path: "/host/ISSEMOJI", icon: "carbon:bastion-host" },
+        //         { name: languageText.EditPoints, path: "/editpoints/ISSEMOJI", icon: "mdi:progress-star-four-points" },
+        //         { name: languageText.Results, path: "/results/ISSEMOJI", icon: "game-icons:podium" },
+        //     ],
+        // }
+        // ] : []),
     ].filter(Boolean);
 
 

@@ -105,7 +105,8 @@ const InputField = ({
     regex,
     value,
     disabled,
-    onKeyPress // This is the value passed from the parent component
+    onKeyPress,
+    readOnly, // This is the value passed from the parent component
 }) => {
     const [changeType, setChangeType] = useState(type);
     const [isFocused, setIsFocused] = useState(false);
@@ -137,6 +138,7 @@ const InputField = ({
           ${isFocused ? "focus-within:ring-2 focus-within:ring-gray-700 dark:focus-within:ring-darktheme focus-within:ring-offset-2 focus-within:ring-offset-whitetheme dark:focus-within:ring-offset-darktheme2" : ""}
           ${hasValue || value ? "ring-2 ring-offset-2 ring-offset-whitetheme dark:ring-offset-black !ring-green-500" : ""}
           ${regex && value !== undefined && !regex.test(value) ? "!ring-redtheme" : ""}
+          ${readOnly ? "ring-2 ring-offset-2 ring-offset-whitetheme dark:ring-offset-black !ring-darktheme dark:!ring-whitetheme bg-darktheme dark:bg-whitetheme" : ""}
       `}
         >
             {/* Icon */}
@@ -165,13 +167,14 @@ const InputField = ({
                 onBlur={() => setIsFocused(false)}
                 disabled={disabled}
                 onKeyPress={onKeyPress}
+                readOnly={readOnly} // Add readOnly prop
             />
 
             {/* Required Indicator */}
             {required && type !== "password" && (
                 <div
                     className={`transition-all duration-300 group relative text-darktheme dark:text-whitetheme2 ${isFocused && !hasValue ? "!text-red-500 scale-110" : ""
-                        } ${hasValue || value ? "!text-green-500 scale-110" : ""} ${language === "en" ? "mr-3" : "ml-3"}`}
+                        } ${hasValue || value || readOnly ? "!text-green-500 scale-110" : ""} ${language === "en" ? "mr-3" : "ml-3"}`}
                 >
                     <Icon icon="solar:info-circle-broken" />
                     <div className="inputIconText bg-darktheme2">{languageText.Required}</div>

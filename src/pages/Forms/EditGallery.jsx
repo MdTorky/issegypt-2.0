@@ -10,7 +10,16 @@ import { AnimatePresence, motion } from "framer-motion";
 import Loader from "../../components/loaders/Loader";
 import SelectField from "../../components/formInputs/SelectField";
 import { useAuthContext } from '../../hooks/useAuthContext';
+import DriveUploader from "../../components/formInputs/DriveImageUploader";
+import { processImageLink } from "../../utils/ProcessImageLink";
 
+
+const constructDriveLink = (folderId) => {
+    if (folderId && typeof folderId === 'string') {
+        return `https://drive.google.com/drive/u/0/folders/${folderId.trim()}`;
+    }
+    return '';
+};
 
 const EditGallery = ({ language, languageText, api }) => {
     const { id } = useParams(); // Get the ID of the Helping Hand from the URL
@@ -28,6 +37,7 @@ const EditGallery = ({ language, languageText, api }) => {
     const [time, setTime] = useState("");
     const [session, setSession] = useState("");
     const [committee, setCommittee] = useState("");
+    const [driveCondition, setDriveCondition] = useState("")
 
 
     const { data: galleryData, loading, error } = useFetchDataById(`${api}/api/gallery/${id}`);
@@ -35,13 +45,24 @@ const EditGallery = ({ language, languageText, api }) => {
         if (galleryData && !loading && !error) {
             setFolderName(galleryData.folderName);
             setArabicFolderName(galleryData.arabicFolderName);
-            setFolderLink(galleryData.folderLink);
             setDriveLink(galleryData.driveLink);
             setIcon(galleryData.icon);
             setTime(galleryData.time);
             setFolderImage(galleryData.folderImage);
             setSession(galleryData.session);
             setCommittee(galleryData.committee);
+
+            const link = galleryData.folderLink;
+            if (link === "Coming Soon") {
+                setDriveCondition("Coming Soon");
+                setFolderLink(""); // Clear ID input
+            } else if (link === "No Drive") {
+                setDriveCondition("No Drive");
+                setFolderLink("");
+            } else {
+                setDriveCondition("Drive is Ready");
+                setFolderLink(link); // Set the Folder ID
+            }
         }
     }, [galleryData, loading, error]);
 
@@ -51,11 +72,32 @@ const EditGallery = ({ language, languageText, api }) => {
     const onSubmit = async (e) => {
         e.preventDefault();
 
+        let finalDriveLink = "";
+        let finalFolderLink = folderLink;
+
+        // Apply same logic as AddGallery
+        if (driveCondition === "Drive is Ready") {
+            if (!finalFolderLink || typeof finalFolderLink !== 'string' || finalFolderLink.trim() === '') {
+                setError({ message: "Drive condition is 'Ready' but the Folder ID is missing." });
+                return;
+            }
+            finalDriveLink = constructDriveLink(finalFolderLink);
+        } else if (driveCondition === "Coming Soon") {
+            finalFolderLink = "Coming Soon";
+            finalDriveLink = "";
+        } else if (driveCondition === "No Drive") {
+            finalFolderLink = "No Drive";
+            finalDriveLink = "";
+        } else {
+            setError({ message: "Please select a valid Drive Condition." });
+            return;
+        }
+
         const updatedHelpingData = {
             folderName,
             arabicFolderName,
-            driveLink,
-            folderLink,
+            driveLink: finalDriveLink,
+            folderLink: finalFolderLink,
             folderImage,
             icon,
             time,
@@ -64,37 +106,34 @@ const EditGallery = ({ language, languageText, api }) => {
         };
 
         await handleSubmit(`${api}/api/gallery/${id}`, "PATCH", updatedHelpingData, "galleries", languageText.GalleryUpdateMessage);
-        navigate(-1);
+        navigate(-1); // Go back
     };
 
 
-
-    const InputChildVariants = {
-        hidden: { opacity: 0, y: -50 },
-        visible: {
-            opacity: 1, y: 0,
-            transition: {
-                type: "spring",
-                stiffness: 100,
-            }
-        },
-        exit: { opacity: 0, y: 50 }
-    };
 
     const sessions = [
         { label: "2023", value: "2023", aValue: "2023", },
         { label: "2024", value: "2024", aValue: "2024", },
         { label: "2025", value: "2025", aValue: "2025", },
+        { label: "2026", value: "2026", aValue: "2026", },
+        { label: "2027", value: "2027", aValue: "2027", },
     ];
+
+    const driveOptions = [
+        { label: "Coming Soon", value: "Coming Soon" },
+        { label: "No Drive", value: "No Drive" },
+        { label: "Drive is Ready", value: "Drive is Ready" },
+    ];
+
 
     const committeeOptions = [
         { label: languageText.All, value: "", aValue: "", },
+        { value: "General", label: languageText.General, icon: "oui:integration-general" },
         { value: "Social", label: languageText.SocialCommittee, icon: "solar:people-nearby-bold" },
         { value: "Academic", label: languageText.AcademicCommittee, icon: "heroicons:academic-cap-solid" },
         { value: "Culture", label: languageText.CultureCommittee, icon: "mdi:religion-islamic" },
         { value: "Sport", label: languageText.SportCommittee, icon: "fluent-mdl2:more-sports" },
         { value: "Women", label: languageText.WomenCommittee, icon: "healthicons:woman" },
-        { value: "General", label: languageText.General, icon: "oui:integration-general" },
     ];
 
     return (
@@ -141,7 +180,7 @@ const EditGallery = ({ language, languageText, api }) => {
                                 {languageText.EditGalleryForm}<span className="text-darktheme2 dark:text-whitetheme"></span>
                             </motion.h2>
 
-                            <img src={folderImage} className="w-70 shadow-xl rounded-xl ring-darktheme ring-3 dark:ring-whitetheme border-9 border-whitetheme/0" />
+                            <img src={processImageLink(folderImage)} className="w-70 shadow-xl rounded-xl ring-darktheme ring-3 dark:ring-whitetheme border-9 border-whitetheme/0" />
 
                             <div className="formRow">
                                 <InputField
@@ -170,21 +209,9 @@ const EditGallery = ({ language, languageText, api }) => {
                                 />
                             </div>
 
-                            <div className="formRow">
-                                <InputField
-                                    placeholder={languageText.EventImageLink}
-                                    iconValue="fluent:image-copy-28-filled"
-                                    icon="fluent:image-copy-28-regular"
-                                    type="text"
-                                    language={language}
-                                    languageText={languageText}
-                                    setValue={setFolderImage}
-                                    regex={null}
-                                    required={true}
-                                    value={folderImage}
-                                />
 
-                                <InputField
+
+                            {/* <InputField
                                     placeholder={languageText.EventIcon}
                                     iconValue="icomoon-free:spinner9"
                                     icon="icomoon-free:spinner9"
@@ -195,8 +222,8 @@ const EditGallery = ({ language, languageText, api }) => {
                                     setValue={setIcon}
                                     regex={null}
                                     value={icon}
-                                />
-                            </div>
+                                /> */}
+
 
 
                             <div className="formRow">
@@ -212,10 +239,11 @@ const EditGallery = ({ language, languageText, api }) => {
                                     setValue={setTime}
                                     regex={null}
                                     value={time}
+                                    readOnly={true}
                                 />
                                 <SelectField
                                     options={sessions}
-                                    placeholder={languageText.ChooseService}
+                                    placeholder={languageText.EventYear}
                                     iconValue="mdi:update"
                                     icon="mdi:update"
                                     language={language}
@@ -226,45 +254,66 @@ const EditGallery = ({ language, languageText, api }) => {
                                     value={session}
                                 />
                             </div>
-                            <SelectField
-                                options={committeeOptions}
-                                placeholder={languageText.ChooseCommittee}
-                                iconValue="fluent:people-team-16-filled"
-                                icon="fluent:people-team-16-regular"
+
+                            <DriveUploader
+                                placeholder={languageText.EventImage}
+                                iconValue="fluent:image-copy-28-filled"
+                                icon="fluent:image-copy-28-regular"
                                 language={language}
                                 languageText={languageText}
                                 required={true}
-                                setValue={setCommittee}
-                                regex={null}
-                                value={committee}
+                                api={api}
+                                folderId="1nscG5s3ioqUWgEuGUAYQffuZ_9HB1Kjx" // Same image folder ID as AddGallery
+                                initialValue={folderImage} // Pre-fills the existing image
+                                onUploadComplete={(fileId, webViewLink) => {
+                                    setFolderImage(webViewLink || "");
+                                }}
+                                value={folderImage}
                             />
-
-
                             <div className="formRow">
-                                <InputField
-                                    placeholder={languageText.GalleryLink}
-                                    iconValue="fluent:image-copy-28-filled"
-                                    icon="fluent:image-copy-28-regular"
-                                    type="text"
+                                <SelectField
+                                    options={committeeOptions}
+                                    placeholder={languageText.ChooseCommittee}
+                                    iconValue="fluent:people-team-16-filled"
+                                    icon="fluent:people-team-16-regular"
                                     language={language}
                                     languageText={languageText}
-                                    setValue={setDriveLink}
-                                    regex={null}
-                                    value={driveLink}
-                                />
-                                <InputField
-                                    placeholder={languageText.DriveLink}
-                                    iconValue="mingcute:drive-fill"
-                                    icon="mingcute:drive-line"
-                                    type="text"
                                     required={true}
+                                    setValue={setCommittee}
+                                    regex={null}
+                                    value={committee}
+                                />
+
+                                <SelectField
+                                    options={driveOptions}
+                                    placeholder="Choose Drive Condition"
+                                    iconValue="material-symbols:drive-export"
+                                    icon="material-symbols:drive-export"
                                     language={language}
                                     languageText={languageText}
-                                    setValue={setFolderLink}
+                                    required={true}
+                                    setValue={setDriveCondition}
                                     regex={null}
-                                    value={folderLink}
+                                    value={driveCondition} // Bind value
                                 />
                             </div>
+                            {driveCondition === "Drive is Ready" && (
+                                <div className="formRow">
+                                    <InputField
+                                        placeholder={languageText.DriveLink || "Folder ID"}
+                                        iconValue="mingcute:drive-fill"
+                                        icon="mingcute:drive-line"
+                                        type="text"
+                                        required={true}
+                                        language={language}
+                                        languageText={languageText}
+                                        setValue={setFolderLink}
+                                        regex={null}
+                                        value={folderLink} // This is the ID
+                                    />
+                                </div>
+                            )}
+                            {/* {folderLink} */}
                             <AnimatePresence mode="popLayout">
                                 {submitError &&
                                     <ErrorContainer error={submitError} setError={setError} />}

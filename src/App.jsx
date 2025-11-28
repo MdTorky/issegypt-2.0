@@ -49,6 +49,7 @@ import FeaturePopup from './components/FeaturePopup';
 import EGPTDashboard from './pages/Admin/EGPTDashboard';
 import EditMember from './pages/Forms/EditMember';
 import Members from './pages/Admin/Members';
+import AddGallery from './pages/Forms/AddGallery';
 // import FormFiller from './pages/FormFiller';
 
 
@@ -150,7 +151,7 @@ function App() {
       <Navbar toggleDarkMode={toggleDarkMode} darkMode={darkMode} toggleLanguage={toggleLanguage} language={language} languageText={languageText} />
       <Chatbot api={api} language={language} languageText={languageText} />
       <Routes location={location} key={location.key}>
-        <Route path="/form/67efd27e0e02456daf346e7d" element={<Navigate to="/form/welcomeday25" replace />} />
+        {/* <Route path="/form/67efd27e0e02456daf346e7d" element={<Navigate to="/form/welcomeday25" replace />} /> */}
         <Route exact path="/" element={<Home language={language} languageText={languageText} api={api} />} />
         <Route path="/services" element={<HelpingHand language={language} languageText={languageText} api={api} />} />
         <Route path="/gallery" element={<Gallery language={language} languageText={languageText} api={api} />} />
@@ -173,8 +174,8 @@ function App() {
         <Route path="/egptDashboard" element={<ProtectedRoute><EGPTDashboard language={language} languageText={languageText} api={api} /></ProtectedRoute>} />
         <Route path="/myForms" element={<ProtectedRoute><MyForms language={language} languageText={languageText} api={api} /></ProtectedRoute>} />
         <Route path="/productsData" element={<ProtectedRoute><ProductsData language={language} languageText={languageText} api={api} /></ProtectedRoute>} />
-        <Route path="/editForm/:id" element={<ProtectedRoute><EditForm language={language} languageText={languageText} api={api} /></ProtectedRoute>} />
         <Route path="/formData/:id" element={<ProtectedRoute><FormData language={language} languageText={languageText} api={api} /></ProtectedRoute>} />
+        <Route path="/editForm/:id" element={<ProtectedRoute><EditForm language={language} languageText={languageText} api={api} /></ProtectedRoute>} />
         <Route path="/editgallery/:id" element={<ProtectedRoute><EditGallery language={language} languageText={languageText} api={api} /></ProtectedRoute>} />
         <Route path="/editIntern/:id" element={<ProtectedRoute><EditInternship language={language} languageText={languageText} api={api} /></ProtectedRoute>} />
         <Route path="/editMember/:id" element={<ProtectedRoute><EditMember language={language} languageText={languageText} api={api} /></ProtectedRoute>} />
@@ -185,6 +186,8 @@ function App() {
         <Route path="/addHelpingHand" element={<ProtectedRoute><HelpingHandForm language={language} languageText={languageText} api={api} /></ProtectedRoute>} />
         <Route path="/editHelpingHand/:id" element={<ProtectedRoute><EditHelpingHand language={language} languageText={languageText} api={api} /></ProtectedRoute>} />
         <Route path="/addIntern" element={<ProtectedRoute><AddInternship language={language} languageText={languageText} api={api} /></ProtectedRoute>} />
+        <Route path="/addGallery" element={<ProtectedRoute><AddGallery language={language} languageText={languageText} api={api} /></ProtectedRoute>} />
+
 
         <Route path="/create" element={<ProtectedRoute><CreateQuiz api={api} /></ProtectedRoute>} />
         <Route path="/host/:code" element={<ProtectedRoute><HostScreen api={api} language={language} languageText={languageText} /></ProtectedRoute>} />

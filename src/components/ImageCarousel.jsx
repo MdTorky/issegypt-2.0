@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Icon } from "@iconify/react";
+import { processImageLink } from "../utils/ProcessImageLink";
 
 const ImageCarousel = ({ images, language }) => {
     const [currentIndex, setCurrentIndex] = useState(0);
@@ -48,7 +49,7 @@ const ImageCarousel = ({ images, language }) => {
                         }}
                     >
                         <img
-                            src={images[currentIndex]?.folderImage}
+                            src={processImageLink(images[currentIndex]?.folderImage)}
                             alt={images[currentIndex]?.folderName}
                             className="w-full h-full object-cover rounded-lg shadow-[0_3px_10px_rgb(0,0,0,0.2)] "
                         />

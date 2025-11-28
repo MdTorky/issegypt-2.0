@@ -10,8 +10,8 @@ import { Icon } from "@iconify/react";
 import roleChecker from "../components/MemberLoader";
 import FacultyCard from '../components/cards/FacultyCard';
 import ImageCarousel from '../components/ImageCarousel';
-import images from '../data/events.json'
 import ScrollToTop from '../components/ScrollToTop';
+import { processImageLink } from "../utils/ProcessImageLink";
 
 const AboutUs = ({ language, languageText, api }) => {
     const shouldReduceMotion = useReducedMotion();
@@ -141,7 +141,7 @@ const AboutUs = ({ language, languageText, api }) => {
                 className=' flex flex-col gap-6 lg:w-1/3 p-3 bg-whitetheme dark:bg-darktheme  rounded-4xl shadow-2xl group ' >
                 <div className='relative bg-cover bg-center  '>
 
-                    <img src={event.img} alt="" className=' flex items-center rounded-4xl object-cover lg:h-[400px] w-full lg:group-hover:h-[500px] transition-all duration-300 ease-in-out' />
+                    <img src={processImageLink(event?.img)} alt="" className=' flex items-center rounded-4xl object-cover lg:h-[400px] w-full lg:group-hover:h-[500px] transition-all duration-300 ease-in-out' />
                     <div className={`absolute -bottom-5 ring-5 ring-whitetheme dark:ring-darktheme rounded-full bg-redtheme text-whitetheme p-3 text-3xl transition-all duration-300 ${language === "en" ? "left-6" : "right-6"}`}>
                         <Icon icon={event.icon} />
                     </div>

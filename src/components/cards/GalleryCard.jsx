@@ -4,6 +4,7 @@ import { Icon } from "@iconify/react";
 import { useAuthContext } from '../../hooks/useAuthContext';
 import CircularButton from '../CircularButton';
 import { Link } from 'react-router-dom';
+import { processImageLink } from "../../utils/ProcessImageLink";
 
 
 const GalleryCard = ({ languageText, language, gallery }) => {
@@ -38,9 +39,16 @@ const GalleryCard = ({ languageText, language, gallery }) => {
             <div
                 className='w-95 h-120 md:w-100 md:h-120 lg:h-100 lg:hover:h-120 transition-all duration-300 ease-in-out bg-darktheme2/80 ring-3 hover:ring-redtheme/80 ring-darktheme/60 dark:ring-darktheme shadow-2xl  rounded-[30px] group relative  overflow-hidden'>
                 <div className="w-full h-100 relative bg-contain bg-top overflow-hidden rounded-[30px]">
-                    <img
+                    {/* <img
                         src={gallery.folderImage}
                         className="w-full h-full object-cover rounded-[30px] shadow-[0_3px_10px_rgb(0,0,0,0.2)]"
+                    /> */}
+
+                    <img
+                        src={processImageLink(gallery.folderImage)}
+                        className="w-full h-full object-cover rounded-[30px] shadow-[0_3px_10px_rgb(0,0,0,0.2)]"
+                        loading="lazy"
+                        alt={language === "en" ? gallery.folderName : gallery.arabicFolderName}
                     />
 
                     <div className="absolute bottom-0 left-0 right-0 flex m-auto w-full h-80 bg-gradient-to-t from-darktheme2 via-darktheme2/95 to-transparent z-10 rounded-b-[30px] "></div>

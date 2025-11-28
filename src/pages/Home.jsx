@@ -172,7 +172,7 @@ const Home = ({ languageText, language, api }) => {
     // const filteredCultureImages = images.filter((image) => {
     //     return image.committee === "Culture";
     // });
-
+    const displayOrder = [0, 1, 2, 4, 5];
 
     return (
         <div>
@@ -412,10 +412,12 @@ const Home = ({ languageText, language, api }) => {
                                 />
                             ))}
                             {serviceData
-                                .sort((a, b) => (a.name > b.name ? 1 : -1)) // Sort the data alphabetically by name
-                                .slice(0, 5)
+                                .sort((a, b) => a.name.localeCompare(b.name))
+                                .slice(0, 6)
+                                .filter((_, idx) => displayOrder.includes(idx))
                                 .map((service, index) => (
                                     <HandCard
+                                        key={index}
                                         index={index}
                                         service={service}
                                         language={language}
