@@ -111,10 +111,10 @@ const ImageCarousel = ({ images, language }) => {
                         ></motion.div>
                     ))}
                 </div>
-                <h1 className={` absolute bottom-10 lg:opacity-0 lg:group-hover:opacity-100 text-4xl lg:text-6xl w-[60%] text-center lg:text-start group-hover:ring-0 md:lg:group-hover:text-whitetheme text-whitetheme z-20 ${language === "en" ? " lg:left-10" : " lg:right-10"}`}>{language === "en" ? images[currentIndex]?.folderName : images[currentIndex]?.arabicFolderName}</h1>
+                <h1 className={` absolute bottom-10 lg:opacity-0 lg:group-hover:opacity-100 text-4xl lg:text-6xl lg:w-[80%] w-[60%] text-center lg:text-start group-hover:ring-0 md:lg:group-hover:text-whitetheme text-whitetheme z-20 ${language === "en" ? " lg:left-10" : " lg:right-10"}`}>{language === "en" ? images[currentIndex]?.folderName : images[currentIndex]?.arabicFolderName}</h1>
             </div>
 
-            <div className="absolute bottom-[17%] opacity-0 group-hover:opacity-100 transition-all duration-300 ease-in-out left-0 right-0 flex m-auto w-full h-100 bg-gradient-to-t from-darktheme2 via-darktheme2/90 to-transparent  rounded-lg " />
+            {/* <div className="absolute bottom-[17%] opacity-0 group-hover:opacity-100 transition-all duration-300 ease-in-out left-0 right-0 flex m-auto w-full h-100 bg-gradient-to-t from-darktheme2 via-darktheme2/90 to-transparent  rounded-lg " /> */}
 
             {/* <div className="duration-500 -translate-y-35 relative m-auto w- lg:w-120 rounded-t-lg  text-whitetheme lg:text-darktheme lg:dark:text-whitetheme z-20"> */}
 

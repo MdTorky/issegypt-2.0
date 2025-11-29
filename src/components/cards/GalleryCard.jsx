@@ -55,7 +55,7 @@ const GalleryCard = ({ languageText, language, gallery }) => {
 
                     {user &&
 
-                        <div className=' flex gap-5 justify-between p-2 py-3 rounded-xl  right-5 absolute top-3 z-10'>
+                        <div className=' flex gap-5 justify-between p-2 py-3 rounded-xl  right-5 absolute top-3 z-100'>
                             <CircularButton
                                 icon="fluent:image-edit-16-filled"
                                 text={languageText.EditService}
