@@ -22,6 +22,23 @@ const constructDriveLink = (folderId) => {
     return '';
 };
 
+// New helper to extract ID from full URL
+const extractFolderId = (input) => {
+    if (!input) return "";
+
+    // Check if input is a URL containing "/folders/"
+    if (typeof input === 'string' && input.includes("drive.google.com") && input.includes("/folders/")) {
+        // Extract the ID part after /folders/
+        const match = input.match(/\/folders\/([a-zA-Z0-9_-]+)/);
+        if (match && match[1]) {
+            return match[1];
+        }
+    }
+
+    // If it's not a URL, return the input as is (assuming it's already the ID)
+    return input.trim();
+};
+
 const AddGallery = ({ languageText, language, api }) => {
 
     const { dispatch } = useFormsContext();
@@ -99,12 +116,20 @@ const AddGallery = ({ languageText, language, api }) => {
         let finalDriveLink = "";
         let finalFolderLink = folderLink;
 
+        // Apply same logic as AddGallery
         if (driveCondition === "Drive is Ready") {
-            if (!finalFolderLink || typeof finalFolderLink !== 'string' || finalFolderLink.trim() === '') {
+
+            // 1. CLEAN THE ID: Extract ID if it's a full URL
+            finalDriveLink = extractFolderId(finalFolderLink);
+
+            if (!finalDriveLink || typeof finalDriveLink !== 'string' || finalDriveLink.trim() === '') {
                 setError({ message: "Drive condition is 'Ready' but the Folder ID is missing." });
                 return;
             }
-            finalDriveLink = constructDriveLink(finalFolderLink);
+
+            // 2. Construct the full link
+            finalFolderLink = constructDriveLink(finalDriveLink);
+
         } else if (driveCondition === "Coming Soon") {
             finalFolderLink = "Coming Soon";
             finalDriveLink = "";

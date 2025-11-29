@@ -13,6 +13,7 @@ import { useAuthContext } from '../../hooks/useAuthContext';
 import DriveUploader from "../../components/formInputs/DriveImageUploader";
 import { processImageLink } from "../../utils/ProcessImageLink";
 
+// --- HELPER FUNCTIONS ---
 
 const constructDriveLink = (folderId) => {
     if (folderId && typeof folderId === 'string') {
@@ -20,6 +21,25 @@ const constructDriveLink = (folderId) => {
     }
     return '';
 };
+
+// New helper to extract ID from full URL
+const extractFolderId = (input) => {
+    if (!input) return "";
+
+    // Check if input is a URL containing "/folders/"
+    if (typeof input === 'string' && input.includes("drive.google.com") && input.includes("/folders/")) {
+        // Extract the ID part after /folders/
+        const match = input.match(/\/folders\/([a-zA-Z0-9_-]+)/);
+        if (match && match[1]) {
+            return match[1];
+        }
+    }
+
+    // If it's not a URL, return the input as is (assuming it's already the ID)
+    return input.trim();
+};
+
+// ------------------------
 
 const EditGallery = ({ language, languageText, api }) => {
     const { id } = useParams(); // Get the ID of the Helping Hand from the URL
@@ -41,6 +61,7 @@ const EditGallery = ({ language, languageText, api }) => {
 
 
     const { data: galleryData, loading, error } = useFetchDataById(`${api}/api/gallery/${id}`);
+
     useEffect(() => {
         if (galleryData && !loading && !error) {
             setFolderName(galleryData.folderName);
@@ -53,6 +74,8 @@ const EditGallery = ({ language, languageText, api }) => {
             setCommittee(galleryData.committee);
 
             const link = galleryData.folderLink;
+
+            // Logic to pre-fill the condition and ID
             if (link === "Coming Soon") {
                 setDriveCondition("Coming Soon");
                 setFolderLink(""); // Clear ID input
@@ -66,8 +89,7 @@ const EditGallery = ({ language, languageText, api }) => {
         }
     }, [galleryData, loading, error]);
 
-    const { handleSubmit, error: submitError, setError, submitLoading } =
-        useSubmitForm();
+    const { handleSubmit, error: submitError, setError, submitLoading } = useSubmitForm();
 
     const onSubmit = async (e) => {
         e.preventDefault();
@@ -77,11 +99,18 @@ const EditGallery = ({ language, languageText, api }) => {
 
         // Apply same logic as AddGallery
         if (driveCondition === "Drive is Ready") {
-            if (!finalFolderLink || typeof finalFolderLink !== 'string' || finalFolderLink.trim() === '') {
+
+            // 1. CLEAN THE ID: Extract ID if it's a full URL
+            finalDriveLink = extractFolderId(finalFolderLink);
+
+            if (!finalDriveLink || typeof finalDriveLink !== 'string' || finalDriveLink.trim() === '') {
                 setError({ message: "Drive condition is 'Ready' but the Folder ID is missing." });
                 return;
             }
-            finalDriveLink = constructDriveLink(finalFolderLink);
+
+            // 2. Construct the full link
+            finalFolderLink = constructDriveLink(finalDriveLink);
+
         } else if (driveCondition === "Coming Soon") {
             finalFolderLink = "Coming Soon";
             finalDriveLink = "";
@@ -97,7 +126,7 @@ const EditGallery = ({ language, languageText, api }) => {
             folderName,
             arabicFolderName,
             driveLink: finalDriveLink,
-            folderLink: finalFolderLink,
+            folderLink: finalFolderLink, // This is now the clean ID
             folderImage,
             icon,
             time,
@@ -209,23 +238,6 @@ const EditGallery = ({ language, languageText, api }) => {
                                 />
                             </div>
 
-
-
-                            {/* <InputField
-                                    placeholder={languageText.EventIcon}
-                                    iconValue="icomoon-free:spinner9"
-                                    icon="icomoon-free:spinner9"
-                                    type="text"
-                                    required={true}
-                                    language={language}
-                                    languageText={languageText}
-                                    setValue={setIcon}
-                                    regex={null}
-                                    value={icon}
-                                /> */}
-
-
-
                             <div className="formRow">
 
                                 <InputField
@@ -239,7 +251,7 @@ const EditGallery = ({ language, languageText, api }) => {
                                     setValue={setTime}
                                     regex={null}
                                     value={time}
-                                    readOnly={true}
+                                    readOnly={true} // Assuming you want this readOnly based on AddGallery logic
                                 />
                                 <SelectField
                                     options={sessions}
@@ -261,14 +273,12 @@ const EditGallery = ({ language, languageText, api }) => {
                                 icon="fluent:image-copy-28-regular"
                                 language={language}
                                 languageText={languageText}
-                                required={true}
                                 api={api}
                                 folderId="1nscG5s3ioqUWgEuGUAYQffuZ_9HB1Kjx" // Same image folder ID as AddGallery
                                 initialValue={folderImage} // Pre-fills the existing image
                                 onUploadComplete={(fileId, webViewLink) => {
                                     setFolderImage(webViewLink || "");
                                 }}
-                                value={folderImage}
                             />
                             <div className="formRow">
                                 <SelectField
@@ -313,7 +323,7 @@ const EditGallery = ({ language, languageText, api }) => {
                                     />
                                 </div>
                             )}
-                            {/* {folderLink} */}
+                            {/* {driveLink} */}
                             <AnimatePresence mode="popLayout">
                                 {submitError &&
                                     <ErrorContainer error={submitError} setError={setError} />}
@@ -329,4 +339,4 @@ const EditGallery = ({ language, languageText, api }) => {
     )
 }
 
-export default EditGallery
+export default EditGallery;
