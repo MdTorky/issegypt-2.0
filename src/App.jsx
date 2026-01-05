@@ -147,7 +147,7 @@ function App() {
   // dark:bg-darktheme2 bg-whitetheme
   return (
     <div className={`min-h-screen  transition-all duration-300 ${language == 'ar' ? "font-modernpro arabic" : "font-tanker"} ${darkMode ? "backgroundDark" : "backgroundWhite"}`}>
-      <FeaturePopup />
+      {/* <FeaturePopup /> */}
       <Navbar toggleDarkMode={toggleDarkMode} darkMode={darkMode} toggleLanguage={toggleLanguage} language={language} languageText={languageText} />
       <Chatbot api={api} language={language} languageText={languageText} />
       <Routes location={location} key={location.key}>
