@@ -344,7 +344,7 @@ const EGPTDashboard = ({ api, language, languageText }) => {
 
                     {/* <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-4">
            */}
-                    <div className="w-3/4 m-auto mb-10 flex lg:flex-row flex-col gap-4 items-center px-10">
+                    <div className="md:w-3/4 m-auto mb-10 flex lg:flex-row flex-col gap-4 items-center px-10">
                         <SearchInput
                             languageText={languageText}
                             language={language}
@@ -442,7 +442,7 @@ const EGPTDashboard = ({ api, language, languageText }) => {
                             {knowledgeData?.data.map((item, index) => (
                                 <div className="tableRow" key={item._id}>
                                     <div className="tableDiv">{index + 1}</div>
-                                    <div className="tableDiv">
+                                    <div className="tableDiv w-50">
                                         {/* <span className="w-1/3 bg-red-900 m-auto text-start"> */}
                                         {item.text}
                                         {/* </span> */}

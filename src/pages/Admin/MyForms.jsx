@@ -160,9 +160,9 @@ const MyForms = ({ languageText, language, api }) => {
                     <p className="text-gray-600 text-2xl text-center  mb-4">
                         {languageText.MyFormDesc}
                     </p>
-
+                    {/* <div className="w-full md:w-50"> */}
                     <SearchInput languageText={languageText} language={language} onSearch={(query) => setSearchQuery(query)} />
-
+                    {/* </div> */}
                     <p className="auto md:hidden ScrollHorizontally mt-4" >{languageText.ScrollHorizontally}</p>
 
 
@@ -175,9 +175,9 @@ const MyForms = ({ languageText, language, api }) => {
                             {committeeType === "All" && <div className="tableDiv">{languageText.Committee}</div>}
                             <div className="tableDiv">{languageText.Action}</div>
                         </div>
-                        <div className="tableBody">
+                        <div className="tableBody ">
                             {filteredForms.length === 0 && (
-                                <div className="tableRow ">
+                                <div className="tableRow">
                                     <div className="w-full flex justify-center items-center gap-2">
                                         <Icon icon="material-symbols:nearby-error-rounded" />
                                         {languageText.NoForms}</div>

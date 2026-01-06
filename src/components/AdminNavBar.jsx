@@ -106,10 +106,15 @@ const AdminNavBar = ({ languageText, api, language, setCommitteeType }) => {
 
 
     const committeList = [
-        { label: languageText.All, value: "All", icon: "fluent:select-all-off-16-filled" },
+        ...(UserType("Top2") ? [{
+            label: languageText.All,
+            value: "All",
+            icon: "fluent:select-all-off-16-filled"
+        }] : []),
         ...(UserType("All") ? [{
             label: user?.committee,
-            value: user?.committee
+            value: user?.committee,
+            icon: user?.committee === "ISS Egypt" ? "emojione-monotone:flag-for-egypt" : user?.committee === "Vice" ? "fontisto:person" : user?.committee === "Secretary" ? "mingcute:document-2-fill" : "fluent:money-16-filled"
         }] : []),
         ...(UserType("Admin") ? [{
             label: languageText.PresidentOnly,
@@ -125,7 +130,6 @@ const AdminNavBar = ({ languageText, api, language, setCommitteeType }) => {
             icon: "mingcute:document-2-fill"
         }, {
             label: languageText.Treasurer,
-
             value: "Treasurer",
             icon: "fluent:money-16-filled"
         },
@@ -330,7 +334,7 @@ const AdminNavBar = ({ languageText, api, language, setCommitteeType }) => {
                                 animate={{ scale: isOpen ? 1 : 0, x: isOpen ? 0 : language === "en" ? 100 : -100 }}
                                 transition={{ delay: 0.2 }}
                                 className="flex flex-col">
-                                <span className=" text-lg">{language === "en" ? currentMember?.name : currentMember?.arabicName}</span>
+                                <span className=" text-md">{language === "en" ? currentMember?.name : currentMember?.arabicName}</span>
                                 <p className="text-sm text-gray-400 -mt-2 w-[90%]">
                                     {roleChecker({
                                         languageText: languageText,
@@ -476,7 +480,7 @@ const AdminNavBar = ({ languageText, api, language, setCommitteeType }) => {
                             />
                         </div>
 
-                        {setCommitteeType && UserType("Secretary") && <div className="absolute top-28 w-full p-4">
+                        {setCommitteeType && UserType("All") && <div className="absolute top-28 w-full p-4">
                             {membersLoading ? (
                                 <div className="w-full justify-center flex">
                                     <SmallLoader />

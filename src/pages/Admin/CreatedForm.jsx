@@ -276,7 +276,7 @@ const CreatedForm = ({ languageText, language, api }) => {
                                                 // animate="visible"
                                                 // exit="exit"
                                                 transition={{ duration: 0.8, ease: "linear", type: "spring", stiffness: 100 }}
-                                                className={`lg:w-[50%] p-8 flex flex-col gap-4  rounded-xl`}
+                                                className={`lg:w-[50%] w-full p-8 flex flex-col gap-4  rounded-xl`}
                                             >
                                                 <h1 className='text-2xl text-center text-redtheme dark:text-whitetheme'>{languageText.PersonalDetails}</h1>
 
