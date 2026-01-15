@@ -73,7 +73,8 @@ const Gallery = ({ languageText, language, api }) => {
                 style={{ backgroundImage: "url('')" }}>
 
                 <motion.img
-                    src="https://static.vecteezy.com/system/resources/thumbnails/030/551/580/small_2x/modern-art-gallery-interior-with-blank-poster-on-wall-photo.jpeg"
+                    // src="https://static.vecteezy.com/system/resources/thumbnails/030/551/580/small_2x/modern-art-gallery-interior-with-blank-poster-on-wall-photo.jpeg"
+                    src="https://images.unsplash.com/photo-1500051638674-ff996a0ec29e?q=80&w=2192&auto=format&fit=crop"
                     className="absolute w-full h-300 m-auto left-0 right-0 object-cover brightness-50"
                     initial={{ scale: 1.1, opacity: 0 }}
                     animate={{ scale: 1, opacity: 1 }}

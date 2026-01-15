@@ -1,13 +1,13 @@
 import { useState, useEffect } from "react";
-import { motion } from "framer-motion";
-import { Icon } from "@iconify/react/dist/iconify.js";
+import { AnimatePresence, motion } from "motion/react";
+import { Icon } from "@iconify/react";
 
 const ScrollToTop = ({ languageText }) => {
     const [isVisible, setIsVisible] = useState(false);
 
     useEffect(() => {
         const toggleVisibility = () => {
-            setIsVisible(window.scrollY > 300); // Show when scrolled 300px down
+            setIsVisible(window.scrollY > 300);
         };
 
         window.addEventListener("scroll", toggleVisibility);
@@ -19,30 +19,42 @@ const ScrollToTop = ({ languageText }) => {
     };
 
     return (
-        isVisible && (
-            <motion.div
-                whileHover={{ scale: 1.3 }}
-                whileTap={{ scale: 0.4 }}
-                transition={{ duration: 0.6, ease: "easeInOut" }}
-
-                onClick={scrollToTop}
-                className="fixed bottom-6 left-9 bg-radial from-redtheme/70 to-redtheme2/90 text-white p-3 rounded-full ring-4 ring-redtheme/70 border-3 border-whitetheme dark:border-darktheme2 cursor-pointer shadow-lg group  z-100"
-            >
-                <motion.div
-                    initial={{ y: 0 }}
-                    animate={{ y: [0, -5, 0] }}
-                    transition={{ repeat: Infinity, duration: 1.2, ease: "easeInOut" }}
+        <AnimatePresence>
+            {isVisible && (
+                <motion.button
+                    initial={{ opacity: 0, scale: 0.5, y: 20 }}
+                    animate={{ opacity: 1, scale: 1, y: 0 }}
+                    exit={{ opacity: 0, scale: 0.5, y: 20 }}
+                    whileHover={{ scale: 1.1, y: -5 }}
+                    whileTap={{ scale: 0.9 }}
+                    transition={{ type: "spring", stiffness: 400, damping: 25 }}
+                    onClick={scrollToTop}
+                    className="fixed bottom-6 left-6 md:bottom-8 md:left-8 z-50 p-3 md:p-4 rounded-full 
+                             bg-redtheme/80 dark:bg-redtheme/70 text-whitetheme 
+                             backdrop-blur-md shadow-lg shadow-redtheme/30
+                             border border-whitetheme/20 dark:border-whitetheme/10
+                             flex items-center justify-center group cursor-pointer"
+                    aria-label="Scroll to top"
                 >
+                    {/* <Icon
+                        icon="heroicons:arrow-up-20-solid"
+                        className="w-6 h-6 md:w-7 md:h-7 transition-transform duration-300 group-hover:-translate-y-0.5"
+                    /> */}
 
-                    <Icon icon="pajamas:scroll-up" />
+                    <motion.div
+                        initial={{ y: 0 }}
+                        animate={{ y: [0, -5, 0] }}
+                        transition={{ repeat: Infinity, duration: 1.2, ease: "easeInOut" }}
+                    >
 
-                </motion.div>
-                <div className="inputIconText !bg-radial from-redtheme to-redtheme !text-whitetheme">
-                    {languageText.ToTop}
-                </div>
-
-            </motion.div>
-        )
+                        <Icon icon="pajamas:scroll-up" />
+                    </motion.div>
+                    <div className="inputIconText !bg-radial from-redtheme to-redtheme !text-whitetheme">
+                        {languageText.ToTop}
+                    </div>
+                </motion.button>
+            )}
+        </AnimatePresence>
     );
 };
 

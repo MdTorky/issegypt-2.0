@@ -1,104 +1,150 @@
 import { Icon } from "@iconify/react";
-import { AnimatePresence, motion } from "motion/react"
+import { AnimatePresence, motion } from "motion/react";
 import { useAuthContext } from '../hooks/useAuthContext';
 import { useLogout } from '../hooks/useLogout';
-import SuccessMessage from "./formInputs/SuccessMessage";
 import { Link } from "react-router-dom";
+import { useState, useEffect } from 'react';
 
 const Navbar = ({ toggleDarkMode, darkMode, toggleLanguage, language, languageText }) => {
-    const { user } = useAuthContext()
+    const { user } = useAuthContext();
+    const [scrolled, setScrolled] = useState(false);
 
+    // Handle scroll effect for glassmorphism intensity
+    useEffect(() => {
+        const handleScroll = () => {
+            const isScrolled = window.scrollY > 20;
+            setScrolled(isScrolled);
+        };
+
+        window.addEventListener('scroll', handleScroll);
+        return () => window.removeEventListener('scroll', handleScroll);
+    }, []);
 
     const navVariant = {
-        hidden: {
-            y: -100,
-        },
+        hidden: { y: -100, opacity: 0 },
         visible: {
             y: 0,
-            transition: { type: "spring", duration: 1, stiffness: 100 }
+            opacity: 1,
+            transition: { type: "spring", stiffness: 100, damping: 20, mass: 1 }
         }
-    }
+    };
+
+    const logoVariant = {
+        hover: { scale: 1.05, transition: { type: "spring", stiffness: 400 } },
+        tap: { scale: 0.95 }
+    };
 
     return (
-        <>
-            <motion.div
-                variants={navVariant}
-                initial="hidden"
-                animate="visible"
-                className="flex items-center justify-between w-full p-5 fixed bg-transparent z-100">
-                <h1 className="text-darktheme  dark:text-white text-3xl md:text-6xl transition duration-300">{languageText.ISS}<span className="text-redtheme"> {languageText.EGYPT} </span></h1>
-                <div className="flex gap-1 md:gap-5">
+        <motion.nav
+            variants={navVariant}
+            initial="hidden"
+            animate="visible"
+            className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 pointer-events-none flex justify-center pt-4 md:pt-6`}
+        >
+            <div className={`
+                pointer-events-auto
+                relative flex items-center justify-between 
+                w-[95%] md:w-[90%] max-w-7xl
+                py-3 px-4 md:px-6 rounded-2xl
+                transition-all duration-500
+                ${scrolled
+                    ? 'bg-whitetheme/70 dark:bg-darktheme/70 backdrop-blur-xl shadow-lg border border-whitetheme2/50 dark:border-darktheme2/50'
+                    : 'bg-transparent backdrop-blur-sm'
+                }
+            `}>
+                {/* Logo Section */}
+                <motion.div
+                    variants={logoVariant}
+                    whileHover="hover"
+                    whileTap="tap"
+                    className="flex items-center gap-2 cursor-pointer"
+                >
+                    <h1 className="text-3xl md:text-5xl transition-colors duration-300">
+                        <span className="font-tanker text-darktheme dark:text-whitetheme">{languageText.ISS}</span>
+                        <span className="font-tanker text-redtheme"> {languageText.EGYPT}</span>
+                    </h1>
+                </motion.div>
 
-                    {/* {user.email} */}
-                    {user && <Link className="flex text-whitetheme items-center text-xs lg:text-lg gap-2 bg-redtheme px-1 md:px-2 rounded-full border-2 border-darktheme cursor-pointer hover:scale-120 transition duration-300"
-                        to="/adminDashboard">
-                        <Icon icon="eos-icons:admin" />{languageText.Admin}
-                    </Link>}
+                {/* Controls Section */}
+                <div className="flex items-center gap-3 md:gap-4">
 
+                    {/* Admin Dashboard Link */}
+                    <AnimatePresence>
+                        {user && (
+                            <motion.div
+                                initial={{ opacity: 0, scale: 0.8 }}
+                                animate={{ opacity: 1, scale: 1 }}
+                                exit={{ opacity: 0, scale: 0.8 }}
+                            >
+                                <Link to="/adminDashboard">
+                                    <motion.button
+                                        whileHover={{ scale: 1.05 }}
+                                        whileTap={{ scale: 0.95 }}
+                                        className="flex items-center gap-2 px-3 py-1.5 md:px-4 md:py-2 bg-redtheme text-whitetheme rounded-xl text-sm md:text-base font-medium shadow-md hover:shadow-redtheme/20 transition-all"
+                                    >
+                                        <Icon icon="eos-icons:admin" className="text-lg" />
+                                        <span className="hidden md:block font-tanker tracking-wide">{languageText.Admin}</span>
+                                    </motion.button>
+                                </Link>
+                            </motion.div>
+                        )}
+                    </AnimatePresence>
+
+                    {/* Separator */}
+                    <div className="h-6 w-[1px] bg-gray-300 dark:bg-gray-700 mx-1 md:mx-2" />
 
                     {/* Language Switch */}
-                    <label className="inline-flex items-center relative cursor-pointer">
-                        <input
-                            className="peer hidden"
-                            id="language"
-                            type="checkbox"
-                            checked={language === "ar"}
-                            onChange={toggleLanguage}
-                        />
-                        <div className="relative w-[50px] h-[22px] md:w-[90px] md:h-[40px]
-                    
-                    bg-whitetheme dark:bg-zinc-500  rounded-full 
-                        after:absolute after:content-[''] 
-                        
-                        after:h-[20px] after:w-[20px] md:after:w-[35px] md:after:h-[35px] 
-                        
-                        after:bg-darktheme peer-checked:after:bg-darktheme after:rounded-full 
-                        
-                        md:after:top-[2.5px] after:top-[1.3px] md:after:left-[7px] md:active:after:w-[40px] md:peer-checked:after:left-[83px] md:peer-checked:after:translate-x-[-100%] after:left-[3.88px] active:after:w-[20px] peer-checked:after:left-[46.11px] peer-checked:after:translate-x-[-90%]
-
-                        shadow-sm duration-300 after:duration-300 after:shadow-md ring-1 ring-gray-300 dark:ring-zinc-700">
-                        </div>
-
-
-                        <Icon icon="circle-flags:uk" className="peer-checked:opacity-60 absolute w-3 h-3 md:w-6 md:h-6 md:left-[13px] left-[7.5px]" />
-                        <Icon icon="circle-flags:ps" className="opacity-60 peer-checked:opacity-90 absolute w-3 h-3 md:w-6 md:h-6 md:right-[13px] right-[7.5px]" />
-                    </label>
-
-
+                    <motion.button
+                        whileHover={{ scale: 1.1 }}
+                        whileTap={{ scale: 0.9 }}
+                        onClick={toggleLanguage}
+                        className="relative p-2 rounded-full bg-whitetheme/50 dark:bg-darktheme2/50 hover:bg-whitetheme dark:hover:bg-darktheme2 transition-colors border border-gray-200 dark:border-gray-700 shadow-sm"
+                        aria-label="Toggle Language"
+                    >
+                        <AnimatePresence mode="wait" initial={false}>
+                            <motion.div
+                                key={language}
+                                initial={{ y: -20, opacity: 0, rotate: -90 }}
+                                animate={{ y: 0, opacity: 1, rotate: 0 }}
+                                exit={{ y: 20, opacity: 0, rotate: 90 }}
+                                transition={{ duration: 0.2 }}
+                            >
+                                {language === "ar" ? (
+                                    <Icon icon="circle-flags:ps" className="w-6 h-6 md:w-7 md:h-7" />
+                                ) : (
+                                    <Icon icon="circle-flags:uk" className="w-6 h-6 md:w-7 md:h-7" />
+                                )}
+                            </motion.div>
+                        </AnimatePresence>
+                    </motion.button>
 
                     {/* Dark Mode Switch */}
-                    <label className="inline-flex items-center relative cursor-pointer">
-                        <input
-                            className="peer hidden"
-                            id="darkMode"
-                            type="checkbox"
-                            checked={darkMode}
-                            onChange={toggleDarkMode}
-                        />
-                        <div className="relative w-[50px] h-[22px] md:w-[90px] md:h-[40px] 
-
-                    bg-whitetheme dark:bg-zinc-500 peer-checked:bg-zinc-500 rounded-full 
-                        after:absolute after:content-[''] 
-
-                        after:h-[20px] after:w-[20px] md:after:w-[35px] md:after:h-[35px] 
-
-                        after:bg-gradient-to-r after:from-orange-500 after:to-yellow-400 peer-checked:after:from-darktheme 
-                        peer-checked:after:to-darktheme after:rounded-full 
-
-                   md:after:top-[2.5px] after:top-[1.3px] md:after:left-[7px] md:active:after:w-[40px] md:peer-checked:after:left-[83px] md:peer-checked:after:translate-x-[-100%] after:left-[3.88px] active:after:w-[20px] peer-checked:after:left-[46.11px] peer-checked:after:translate-x-[-90%]
-                        
-                        shadow-sm duration-300 after:duration-300 after:shadow-md ring-gray-300 dark:ring-zinc-700">
-                        </div>
-
-                        <Icon icon="mingcute:sun-fog-fill" className="peer-checked:opacity-60 absolute  w-3 h-3 md:w-6 md:h-6 md:left-[13px] left-[7.5px] text-whitetheme" />
-                        <Icon icon="mingcute:moon-fog-fill" className="opacity-60 peer-checked:opacity-90 peer-checked:text-white absolute  w-3 h-3 md:w-6 md:h-6 md:right-[13px] right-[7.5px] text-darktheme dark:text-white" />
-                    </label>
+                    <motion.button
+                        whileHover={{ scale: 1.1, rotate: 15 }}
+                        whileTap={{ scale: 0.9 }}
+                        onClick={toggleDarkMode}
+                        className="relative p-2 rounded-full bg-whitetheme/50 dark:bg-darktheme2/50 hover:bg-whitetheme dark:hover:bg-darktheme2 transition-colors border border-gray-200 dark:border-gray-700 shadow-sm overflow-hidden"
+                        aria-label="Toggle Dark Mode"
+                    >
+                        <AnimatePresence mode="wait" initial={false}>
+                            <motion.div
+                                key={darkMode ? "dark" : "light"}
+                                initial={{ y: -20, opacity: 0 }}
+                                animate={{ y: 0, opacity: 1 }}
+                                exit={{ y: 20, opacity: 0 }}
+                                transition={{ duration: 0.2 }}
+                            >
+                                {darkMode ? (
+                                    <Icon icon="mingcute:moon-fog-fill" className="w-6 h-6 md:w-7 md:h-7 text-whitetheme" />
+                                ) : (
+                                    <Icon icon="mingcute:sun-fog-fill" className="w-6 h-6 md:w-7 md:h-7 text-orange-400" />
+                                )}
+                            </motion.div>
+                        </AnimatePresence>
+                    </motion.button>
                 </div>
-
-
-            </motion.div>
-
-        </>
+            </div>
+        </motion.nav>
     );
 };
 

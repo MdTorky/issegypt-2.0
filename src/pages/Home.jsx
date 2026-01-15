@@ -183,150 +183,122 @@ const Home = ({ languageText, language, api }) => {
                         key={slides[0].id}
                         src={slides[0].imgSrc}
                         alt={slides[0].title}
-                        className="absolute w-full h-full m-auto left-0 right-0 object-cover brightness-50"
+                        className="absolute w-full h-full inset-0 object-cover"
                         initial={{ scale: 1.1, opacity: 0 }}
                         animate={{ scale: 1, opacity: 1 }}
                         exit={{ scale: 1.1, opacity: 0 }}
-                        transition={{ duration: 0.6 }}
-                        layout
+                        transition={{ duration: 1.2, ease: "circOut" }}
                         style={{
-                            position: fixedScaleDown,
                             scale: scaleBackground,
-                            opacity: opacityDown,
                             y: translateY,
                         }}
                     />
                 </AnimatePresence>
 
+                {/* Cinematic Overlay */}
+                <div className="absolute inset-0 bg-gradient-to-t from-darktheme2 via-darktheme/50 to-black/30 z-0" />
+
                 {/* Content */}
-                <AnimatePresence>
-
-                    <motion.div
-                        initial="hidden"
-                        whileInView="visible"
-                        exit="exit"
-                        // viewport={{ once: true }}
-                        variants={{
-                            visible: { transition: { staggerChildren: 0.2 } },
-                        }} className="absolute top-40 lg:top-80 w-full lg:w-4/5 left-1/2 lg:transform -translate-x-1/2 p-10 text-white text-shadow-lg">
+                <div className="absolute inset-0 z-10 flex flex-col justify-center items-center px-4 md:px-20">
+                    <div className="text-center max-w-7xl mx-auto flex flex-col items-center gap-6 ">
                         <motion.div
-                            variants={{
-                                hidden: { x: -300, opacity: 0 },
-                                visible: { x: 0, opacity: 1 },
-                            }}
-                            transition={{ duration: 0.5 }}
-                            className="font-bold tracking-widest text-gray-400 text-center lg:text-start" style={{ y: imageTitleYDown }}>{languageText.ISSEGYPTUTM}</motion.div>
-                        <motion.div
-                            variants={{
-                                hidden: { x: -200, opacity: 0 },
-                                visible: { x: 0, opacity: 1 },
-                                exit: { x: 9900, opacity: 0 }
-                            }}
-                            transition={{ duration: 0.5 }}
-                            className={`text-6xl lg:text-8xl lg:w-200 font-bold  uppercase   text-center lg:text-start ${language === "en" ? "font-anton tracking-wide" : ""}`}
+                            initial={{ opacity: 0, y: 20 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            transition={{ delay: 0.2 }}
+                            className="font-bold tracking-[0.2em] text-red-500 uppercase text-sm md:text-xl drop-shadow-md"
+                        >
+                            {languageText.ISSEGYPTUTM}
+                        </motion.div>
+
+                        <div className="overflow-hidden">
+                            <h1 className={`text-6xl md:text-8xl lg:text-9xl font-bold text-white uppercase text-center leading-tight drop-shadow-xl ${language === "en" ? "font-anton tracking-wide" : "font-modernpro"}`}>
+                                {language === "en" ? slides[0].title : slides[0].aTitle}
+                            </h1>
+                        </div>
+
+                        <motion.p
+                            initial={{ opacity: 0 }}
+                            animate={{ opacity: 1 }}
+                            transition={{ delay: 0.6, duration: 0.8 }}
+                            className="text-white/80 text-lg md:text-2xl max-w-3xl text-center leading-relaxed font-light drop-shadow-lg"
+                        >
+                            {language === "en" ? slides[0].description : slides[0].aDescription}
+                        </motion.p>
+                    </div>
+                </div>
 
 
-                            style={{
-
-                                y: imageTitleYDown
-                            }}>{language === "en" ? slides[0].title : slides[0].aTitle}</motion.div>
-                        {/* <SplitText
-                            text={language === "en" ? slides[0].title : slides[0].aTitle}
-                            className={`text-6xl lg:text-8xl lg:w-200 font-bold  uppercase   text-center lg:text-start ${language === "en" ? "font-anton tracking-wide" : ""}`}
-                            delay={100}
-                            duration={2}
-                            ease="elastic.out(1,0.3)"
-                            splitType="chars"
-                            from={{ opacity: 0, y: 40 }}
-                            to={{ opacity: 1, y: 0 }}
-                            threshold={0.1}
-                            rootMargin="-100px"
-                            textAlign="center"
-                        // onLetterAnimationComplete={handleAnimationComplete}
-                        /> */}
-                        <motion.div
-                            variants={{
-                                hidden: { x: -100, opacity: 0 },
-                                visible: { x: 0, opacity: 1 },
-                            }}
-                            transition={{ duration: 0.5 }}
-                            className="text-2xl text-gray-400 lg:w-150 text-center lg:text-start" style={{ opacity: imageDescriptionOpacity }}>{language === "en" ? slides[0].description : slides[0].aDescription}</motion.div>
-                    </motion.div>
-                </AnimatePresence>
-
-
-                {/* Courasel */}
-                <div className={`absolute bottom-10 justify-center left-0 right-0 !m-auto  lg:bottom-30 transform flex gap-5 ${language === "en" ? "lg:-right-20 lg:left-auto" : "lg:-left-20 lg:right-auto "}`}>
+                {/* Glass Carousel Thumbs */}
+                <div className={`absolute bottom-8 left-0 right-0 z-20 flex justify-center gap-4 px-4`}>
                     <AnimatePresence mode="popLayout">
                         {slides.map((slide, index) => (
                             <motion.div
                                 key={slide.id}
-                                className={`w-20 h-30 lg:w-40 lg:h-60 relative ring-3 border-5 border-whitetheme/0 cursor-pointer rounded-lg overflow-hidden shrink-100 flex items-center shadow-2xl ${index === 0 ? ' opacity-100 ring-redtheme' : 'opacity-50 ring-whitetheme'
-                                    }`}
+                                className={`relative cursor-pointer rounded-xl border-5 border-whitetheme/0 overflow-hidden shadow-2xl transition-all duration-300
+                                                   ${index === 0 ? 'w-24 h-36 md:w-32 md:h-48 ring-3 ring-redtheme translate-y-[-10px]' : 'w-16 h-24 md:w-20 md:h-32 opacity-60 hover:opacity-100 hover:scale-105 glass-card'}
+                                               `}
                                 onClick={() => selectSlide(index)}
                                 layout
-                                whileHover={{ scale: 1.1, y: -15 }}
-                                initial={{ opacity: 0, x: 50 }}
-                                animate={{ opacity: 1, x: 0 }}
-                                exit={{ opacity: 0, x: -50 }}
-                                transition={{ type: "spring", stiffness: 300, damping: 20, duration: 0.6 }}
+                                initial={{ opacity: 0, scale: 0.8 }}
+                                animate={{ opacity: 1, scale: 1 }}
+                                exit={{ opacity: 0, scale: 0.5 }}
+                                transition={{ type: "spring", stiffness: 300, damping: 25 }}
                             >
-                                <motion.img
+                                <img
                                     src={slide.imgSrc}
                                     alt={slide.title}
-                                    className={`w-100 h-100 flex  object-cover rounded-xl bg-center  ${index === 0 ? 'brightness-50' : "brightness-50"}`}
+                                    className="w-full h-full object-cover"
                                 />
-
-                                <div className={`absolute flex justify-center bottom-0 left-0 right-0 m-auto text-center lg:text-start text-[10px] lg:text-lg text-whitetheme ${language === "en" ? "lg:left-3 lg:right-auto" : "lg:right-3 lg:left-auto "} `}>
-                                    {language === "en" ? slide.title : slide.aTitle}
-                                </div>
                             </motion.div>
                         ))}
-
                     </AnimatePresence>
                 </div>
 
                 {/* Navigation Arrows */}
-                <div className={`absolute bottom-45 lg:bottom-10 left-0 right-0 justify-center flex gap-4 z-10 ${language === "en" ? "lg:right-122 lg:left-auto" : "lg:left-122 lg:right-auto"}`}>
-
-                    <div>
-                        <motion.button
-                            onClick={prevSlide}
-                            variants={buttonVariant}
-                            initial={{ y: 150 }}
-                            animate={{ y: 0, transition: { type: "spring" } }}
-                            transition="transition"
-                            whileHover="hover"
-                            whileTap="tap"
-                            className="relativeGeneralButton group">
-
-                            <Icon icon={`${language == "en" ? "solar:map-arrow-left-bold-duotone" : "solar:map-arrow-right-bold-duotone"}`} />
-
-                            <div className="generalButtonText bg-redtheme">{languageText.Previous}</div>
-                        </motion.button>
-                    </div>
-                    <div>
-                        <motion.button
-                            onClick={nextSlide}
-                            variants={buttonVariant}
-                            initial={{ y: 150 }}
-                            animate={{ y: 0, transition: { type: "spring" } }}
-                            transition="transition"
-                            whileHover="hover"
-                            whileTap="tap"
-                            className="relativeGeneralButton group">
-
-                            <Icon icon={`${language == "en" ? "solar:map-arrow-right-bold-duotone" : "solar:map-arrow-left-bold-duotone"}`} />
-
-                            <div className="generalButtonText bg-redtheme" >{languageText.Next}</div>
-                        </motion.button>
-                    </div>
+                <div className="absolute top-3/4 md:top-1/2 -translate-y-1/2 w-full flex justify-between px-4 md:px-12 z-20 pointer-events-none">
+                    <button
+                        onClick={prevSlide}
+                        className="pointer-events-auto p-4 rounded-full glass-card glass-card-hover text-white hover:text-redtheme transition-all group"
+                    >
+                        <Icon icon={language == "en" ? "solar:map-arrow-left-bold-duotone" : "solar:map-arrow-right-bold-duotone"} className="text-3xl md:text-4xl group-hover:scale-110 transition-transform" />
+                    </button>
+                    <button
+                        onClick={nextSlide}
+                        className="pointer-events-auto p-4 rounded-full glass-card glass-card-hover text-white hover:text-redtheme transition-all group"
+                    >
+                        <Icon icon={language == "en" ? "solar:map-arrow-right-bold-duotone" : "solar:map-arrow-left-bold-duotone"} className="text-3xl md:text-4xl group-hover:scale-110 transition-transform" />
+                    </button>
                 </div>
 
 
-
+                <div className={`absolute top-24 ${language === "en" ? "right-4 md:right-10" : "left-4 md:left-10"} z-20`}>
+                    <motion.div
+                        className="flex flex-col gap-3 glass-card p-3 rounded-full"
+                        initial={{ x: 100, opacity: 0 }}
+                        animate={{ x: 0, opacity: 1 }}
+                        transition={{ delay: 1 }}
+                    >
+                        {[
+                            { link: "https://www.instagram.com/issegypt/", icon: "mdi:instagram", color: "hover:text-pink-500" },
+                            { link: "https://www.facebook.com/Eg.UTM", icon: "qlementine-icons:facebook-16", color: "hover:text-blue-500" },
+                            { link: "https://www.linkedin.com/company/issegypt", icon: "tabler:brand-linkedin", color: "hover:text-blue-600" },
+                            { link: "https://www.youtube.com/@issegypt", icon: "mingcute:youtube-fill", color: "hover:text-red-500" },
+                            { link: "https://linktr.ee/issegypt", icon: "tabler:brand-linktree", color: "hover:text-green-500" }
+                        ].map((social, idx) => (
+                            <a
+                                key={idx}
+                                href={social.link}
+                                target="_blank"
+                                rel="noreferrer"
+                                className={`text-white/70 text-2xl transition-all duration-300 hover:scale-110 ${social.color}`}
+                            >
+                                <Icon icon={social.icon} />
+                            </a>
+                        ))}
+                    </motion.div>
+                </div>
                 {/* Social Media Accounts */}
-                <AnimatePresence>
+                {/* <AnimatePresence>
                     <motion.div
                         className={`absolute flex justify-center lg:flex-col gap-3 top-[15%] lg:top-auto lg:bottom-20 text-red-900 left-0 right-0 ${language === "en" ? "lg:left-10 lg:right-auto" : "lg:right-10 lg:left-auto"}`}
                         initial="hidden"
@@ -356,7 +328,7 @@ const Home = ({ languageText, language, api }) => {
                             </motion.div>
                         ))}
                     </motion.div>
-                </AnimatePresence>
+                </AnimatePresence> */}
 
             </div>
 

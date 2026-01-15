@@ -1,5 +1,3 @@
-
-
 import { useState, useRef, useEffect } from "react"
 import { motion, AnimatePresence } from "framer-motion"
 import { Icon } from "@iconify/react"
@@ -7,11 +5,10 @@ import axios from "axios"
 import ReactMarkdown from "react-markdown"
 import remarkGfm from "remark-gfm"
 import InputField from "./formInputs/InputField"
-import { useFormsContext } from "../hooks/useFormContext";
-import useFetchData from "../hooks/useFetchData";
+import { useFormsContext } from "../hooks/useFormContext"
+import useFetchData from "../hooks/useFetchData"
 import eGPT from '../assets/img/eGPT logo 2.png'
 import Loader from './loaders/SmallLoader'
-
 
 export default function ChatBot({ api, botIcon = "fluent:bot-sparkle-16-filled", chatbotImage = eGPT, language, languageText }) {
 
@@ -35,71 +32,16 @@ export default function ChatBot({ api, botIcon = "fluent:bot-sparkle-16-filled",
     const [randomSuggestions, setRandomSuggestions] = useState([]);
     const [filteredSuggestions, setFilteredSuggestions] = useState([]);
     const [liveSuggestion, setLiveSuggestion] = useState(null);
-    const ar = (text) => {
-
-        const arabicRegex = /[\u0600-\u06FF]/;
-        const arabicChars = text.split('').filter(char => arabicRegex.test(char));
-        return arabicChars.length / text.length > 0.3; // Only say Arabic if 30%+ of char
-    }
-
-    // useEffect(() => {
-    //     if (knowledgeData && Array.isArray(knowledgeData) && !knowledgeLoader && !error) {
-    //         dispatch({
-    //             type: "SET_ITEM",
-    //             collection: "knowledges",
-    //             payload: knowledgeData
-    //         });
-
-    //         const englishOnly = knowledgeData.filter(item => item.language === 'en');
-    //         const shuffled = [...englishOnly].sort(() => 0.5 - Math.random()).slice(0, 3);
-    //         setRandomSuggestions(shuffled);
-    //     }
-    // }, [knowledgeData, knowledgeLoader, error, dispatch]);
-
-
-    // useEffect(() => {
-    //     if (input.trim() && Array.isArray(knowledgeData)) {
-    //         const lowercaseInput = input.toLowerCase();
-    //         const arabic = isArabic(input);
-
-    //         const matches = knowledgeData.filter(item => {
-    //             // First message: filter by detected input language (en/ar)
-    //             if (messages.length === 1 && item.language !== (arabic ? 'ar' : 'en')) return false;
-
-    //             // After first message: allow any language
-    //             const questionMatch = item.text?.toLowerCase().includes(lowercaseInput);
-    //             const keywordMatch = Array.isArray(item.keywords) &&
-    //                 item.keywords.some(keyword => keyword.toLowerCase().includes(lowercaseInput));
-    //             return questionMatch || keywordMatch;
-    //         });
-
-    //         setFilteredSuggestions(matches.slice(0, 3));
-    //         setLiveSuggestion(matches[0] || null);
-    //     } else {
-    //         setFilteredSuggestions([]);
-    //         setLiveSuggestion(null);
-    //     }
-    // }, [input, knowledgeData, messages.length]);
-
-    // const isArabic = (text) => {
-    //     const arabicRegex = /[\u0600-\u06FF]/
-    //     return arabicRegex.test(text)
-    // }
-
 
     const isArabic = (text) => {
         if (typeof text !== 'string') return false;
         const arabicRegex = /[\u0600-\u06FF]/;
-        // Check if more than 30% of the characters are Arabic
         const arabicChars = text.split('').filter(char => arabicRegex.test(char));
         return (arabicChars.length / text.length) > 0.3;
     };
 
-
     useEffect(() => {
         if (suggestionKnowledge && Array.isArray(suggestionKnowledge) && !suggestionLoading && !suggestionError) {
-
-            // Dispatching here is optional if this data is only used for suggestions.
             dispatch({
                 type: "SET_ITEM",
                 collection: "knowledges",
@@ -108,29 +50,23 @@ export default function ChatBot({ api, botIcon = "fluent:bot-sparkle-16-filled",
 
             const englishOnly = suggestionKnowledge.filter(item => item.language === 'en');
             const shuffled = [...englishOnly].sort(() => 0.5 - Math.random()).slice(0, 3);
-            // For random suggestions, let's show both languages to encourage discovery.
-            // const shuffled = [...suggestionKnowledge].sort(() => 0.5 - Math.random()).slice(0, 3);
             setRandomSuggestions(shuffled);
         }
     }, [suggestionKnowledge, suggestionLoading, suggestionError, dispatch]);
 
 
-    // This useEffect handles the live filtering as the user types
     useEffect(() => {
         if (input.trim() && suggestionKnowledge && Array.isArray(suggestionKnowledge)) {
             const lowercaseInput = input.toLowerCase();
-            const arabicInput = isArabic(input); // Use the correctly defined function
+            const arabicInput = isArabic(input);
 
             const matches = suggestionKnowledge.filter(item => {
-                // When starting a new chat, only suggest from the detected language.
-                if (messages.length <= 1) { // <= 1 to account for the initial bot message
+                if (messages.length <= 1) {
                     const itemLang = item.language === 'ar';
                     if (itemLang !== arabicInput) {
                         return false;
                     }
                 }
-
-                // After the conversation starts, search all languages.
                 const questionMatch = item.text?.toLowerCase().includes(lowercaseInput);
                 const keywordMatch = Array.isArray(item.keywords) &&
                     item.keywords.some(keyword => keyword.toLowerCase().includes(lowercaseInput));
@@ -146,31 +82,16 @@ export default function ChatBot({ api, botIcon = "fluent:bot-sparkle-16-filled",
         }
     }, [input, suggestionKnowledge, messages.length]);
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
     const scrollToBottom = () => {
-        messagesEndRef.current?.scrollIntoView({ behavior: "smooth" })
+        // Use timeout to ensure DOM update is finished
+        setTimeout(() => {
+            messagesEndRef.current?.scrollIntoView({ behavior: "smooth" })
+        }, 100);
     }
 
     useEffect(() => {
         scrollToBottom()
-    }, [messages])
-
+    }, [messages, loading])
 
 
     const handleSend = async (messageToSend = input) => {
@@ -206,7 +127,6 @@ export default function ChatBot({ api, botIcon = "fluent:bot-sparkle-16-filled",
                 },
             ]);
         }
-
         setLoading(false);
     };
 
@@ -228,575 +148,358 @@ export default function ChatBot({ api, botIcon = "fluent:bot-sparkle-16-filled",
         let hour = parseInt(hourStr, 10);
         const minute = parseInt(minuteStr, 10);
         const period = hour >= 12 ? "PM" : "AM";
-
-        hour = hour % 12 || 12; // convert 0 -> 12 and 13 -> 1
-
+        hour = hour % 12 || 12;
         return `${hour}:${minute.toString().padStart(2, "0")}${period}`;
     }
 
+    // --- Animation Variants ---
+    const chatContainerVariants = {
+        hidden: { opacity: 0, scale: 0.8, y: 50 },
+        visible: {
+            opacity: 1,
+            scale: 1,
+            y: 0,
+            transition: { type: "spring", stiffness: 300, damping: 25 }
+        },
+        exit: { opacity: 0, scale: 0.8, y: 50, transition: { duration: 0.2 } }
+    };
+
+    const messageVariants = {
+        hidden: { opacity: 0, y: 20, scale: 0.9 },
+        visible: { opacity: 1, y: 0, scale: 1, transition: { type: "spring", stiffness: 400, damping: 30 } }
+    };
+
     return (
         <>
-            {/* Floating Chat Button */}
-            <motion.div className="fixed bottom-6 right-6 z-110" whileHover={{ scale: 1.1 }} whileTap={{ scale: 0.9 }}>
-                <button
-                    onClick={() => setIsOpen(!isOpen)}
-                    className="w-12 h-12 md:w-16 md:h-16 bg-radial from-yellow-600/70 to-darktheme/70 text-white flex justify-center items-center rounded-full ring-4 ring-yellow-600 border-3 border-whitetheme/80 dark:border-darktheme2 cursor-pointer group z-100"
-                >
-                    <AnimatePresence mode="wait">
-                        {isOpen ? (
-                            <motion.div
-                                key="close"
-                                initial={{ rotate: -90, opacity: 0 }}
-                                animate={{ rotate: 0, opacity: 1 }}
-                                exit={{ rotate: 90, opacity: 0 }}
-                                transition={{ duration: 0.2 }}
-                            >
-                                <Icon icon="solar:close-circle-broken" className="w-6 h-6" />
-                            </motion.div>
-                        ) : (
-                            <motion.div
-                                key="chat"
-                                initial={{ rotate: -90, opacity: 0 }}
-                                animate={{ rotate: 0, opacity: 1 }}
-                                exit={{ rotate: 90, opacity: 0 }}
-                                transition={{ duration: 0.2 }}
-                                className="text-xl"
-                            >
-                                {chatbotImage ? (
-                                    <img
-                                        src={chatbotImage || "/placeholder.svg"}
-                                        alt="Chatbot"
-                                        className="w-2/3 h-2/3 m-auto rounded-full object-cover"
-                                    />
-                                ) : (
-                                    // <Icon icon="mdi:chat" className="w-6 h-6" />
-                                    <motion.div
-                                        initial={{ scale: 1 }}
-                                        animate={{ scale: [1, 0.8, 1] }}
-                                        transition={{ repeat: Infinity, duration: 1.2, ease: "easeInOut" }}
-                                    >
+            {/* --- Floating Launcher Button --- */}
+            <motion.div
+                className="fixed bottom-6 right-6 z-100 "
+                whileHover={{ scale: 1.1 }}
+                whileTap={{ scale: 0.9 }}
+            >
+                <div className="relative group">
+                    {/* Pulsing ring effect */}
+                    <motion.div
+                        className="absolute inset-0 rounded-full bg-yellow-500 opacity-70 blur-md"
+                        animate={{ scale: [1, 1.3, 1], opacity: [0.7, 0, 0.7] }}
+                        transition={{ duration: 2, repeat: Infinity }}
+                    />
 
-                                        <Icon icon="mdi:chat" />
+                    <button
+                        onClick={() => setIsOpen(!isOpen)}
+                        className="relative w-16 h-16 bg-gradient-to-br from-yellow-500 via-yellow-600 to-yellow-700 text-white rounded-full shadow-[0_0_20px_rgba(234,179,8,0.5)] border-2 border-white/30 flex items-center justify-center overflow-hidden z-10 cursor-pointer"
+                    >
+                        {/* Shine sweep */}
+                        <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/40 to-transparent -translate-x-full group-hover:animate-[shimmer_1s_infinite]" />
 
-                                    </motion.div>
-                                )}
-                            </motion.div>
-                        )}
-                    </AnimatePresence>
+                        <AnimatePresence mode="wait">
+                            {isOpen ? (
+                                <motion.div
+                                    key="close"
+                                    initial={{ rotate: -90, opacity: 0 }}
+                                    animate={{ rotate: 0, opacity: 1 }}
+                                    exit={{ rotate: 90, opacity: 0 }}
+                                    transition={{ duration: 0.2 }}
+                                >
+                                    <Icon icon="solar:close-circle-bold-duotone" className="w-8 h-8 text-white" />
+                                </motion.div>
+                            ) : (
+                                <motion.div
+                                    key="open"
+                                    initial={{ rotate: 90, opacity: 0 }}
+                                    animate={{ rotate: 0, opacity: 1 }}
+                                    exit={{ rotate: -90, opacity: 0 }}
+                                    transition={{ duration: 0.2 }}
+                                    className="p-1"
+                                >
+                                    {chatbotImage ? (
+                                        <img src={chatbotImage} alt="Bot" className="w-full h-full object-cover rounded-full" />
+                                    ) : (
+                                        <Icon icon={botIcon} className="w-8 h-8 text-white" />
+                                    )}
+                                </motion.div>
+                            )}
+                        </AnimatePresence>
+                    </button>
+
+                    {/* Badge */}
+                    {/* {!isOpen && (
+                        <motion.div
+                            initial={{ opacity: 0, y: 10 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            className="absolute -top-10 left-1/2 -translate-x-1/2 bg-black/80 text-white text-xs px-3 py-1 rounded-full whitespace-nowrap backdrop-blur-sm pointer-events-none"
+                        >
+                            Need help?
+                        </motion.div>
+                    )} */}
                     <div className="inputIconText !bg-radial from-yellow-600/60 to-yellow-600/60 !text-whitetheme !ring-yellow-600">
                         e-GPT AI Beta
                     </div>
-                </button>
+                </div>
+
             </motion.div>
 
-            {/* Chat Window */}
+            {/* --- Chat Window --- */}
             <AnimatePresence>
                 {isOpen && (
                     <motion.div
-                        initial={{ opacity: 0, scale: 0.8, y: 20 }}
-                        animate={{ opacity: 1, scale: 1, y: 0 }}
-                        exit={{ opacity: 0, scale: 0.8, y: 20 }}
-                        transition={{ duration: 0.3, ease: "easeOut" }}
-                        className="fixed bottom-24 right-6 w-96 h-[32rem] bg-white dark:bg-darktheme2 rounded-2xl z-110 md:flex flex-col overflow-hidden shadow-[4.0px_8.0px_8.0px_rgba(0,0,0,0.38)] hidden"
-
+                        variants={chatContainerVariants}
+                        initial="hidden"
+                        animate="visible"
+                        exit="exit"
+                        className="fixed bottom-24 right-4 md:right-8 w-[92vw] md:w-[400px] h-[600px] max-h-[85vh] flex flex-col z-110 overflow-hidden rounded-[2rem] border border-white/20 shadow-[0_20px_50px_rgba(0,0,0,0.3)] bg-white/70 dark:bg-[#121212]/80 backdrop-blur-2xl"
                     >
                         {/* Header */}
-                        <div className="bg-gradient-to-l from-darktheme2 to-yellow-600 p-4 text-white">
-                            <div className="flex items-center space-x-3">
-                                <div className="w-10 h-10 rounded-full flex items-center justify-center">
+                        <div className="relative p-5 shrink-0 bg-gradient-to-r from-gray-900/90 via-black/80 to-gray-900/90 dark:from-black dark:to-gray-900 text-white border-b border-white/5">
+                            {/* Decorative Glows */}
+                            <div className="absolute top-0 right-0 w-40 h-40 bg-yellow-500/20 rounded-full blur-[50px] pointer-events-none" />
+                            <div className="absolute bottom-0 left-0 w-32 h-32 bg-blue-500/10 rounded-full blur-[40px] pointer-events-none" />
 
-
-                                    {chatbotImage ? (
-                                        <img
-                                            src={chatbotImage || "/placeholder.svg"}
-                                            alt="Chatbot"
-                                            className="w-full h-full m-auto rounded-full object-cover"
-                                        />
-                                    ) : (
-                                        <motion.div
-                                            initial={{ scale: 1 }}
-                                            animate={{ scale: [1, 0.8, 1] }}
-                                            transition={{ repeat: Infinity, duration: 1.2, ease: "easeInOut" }}
-                                        >
-
-                                            <Icon icon={botIcon} className="w-6 h-6" />
-
-                                        </motion.div>
-                                    )}
+                            <div className="relative z-10 flex items-center justify-between">
+                                <div className="flex items-center gap-4">
+                                    <div className="relative">
+                                        <div className="w-12 h-12 rounded-full p-0.5 bg-gradient-to-br from-yellow-400 to-yellow-600 shadow-lg shadow-yellow-500/20">
+                                            <div className="w-full h-full rounded-full bg-black overflow-hidden relative">
+                                                {chatbotImage ? (
+                                                    <img src={chatbotImage} alt="Avatar" className="w-full h-full object-cover" />
+                                                ) : (
+                                                    <Icon icon={botIcon} className="w-6 h-6 m-auto mt-2 text-white" />
+                                                )}
+                                            </div>
+                                        </div>
+                                        <span className="absolute bottom-0 right-0 w-3 h-3 bg-green-500 border-2 border-black rounded-full shadow-[0_0_8px_rgba(34,197,94,0.8)]"></span>
+                                    </div>
+                                    <div>
+                                        <h3 className={`text-xl font-bold tracking-wide text-transparent bg-clip-text bg-gradient-to-r from-yellow-100 to-yellow-500 ${isArabic(botName) ? 'font-modernpro' : 'font-tanker'}`}>
+                                            {botName}
+                                        </h3>
+                                        <p className="text-xs text-gray-400 flex items-center gap-1">
+                                            <Icon icon="svg-spinners:pulse-2" className="text-yellow-500" />
+                                            {languageText.Online}
+                                        </p>
+                                    </div>
                                 </div>
                                 <div>
-                                    <h3 className="font-semibold text-lg tracking-wide">{botName}</h3>
-                                    <p className="text-sm opacity-90">{languageText.Online}</p>
+                                    <button onClick={() => setIsOpen(false)} className="text-white/50 hover:text-white transition-colors">
+                                        <Icon icon="solar:minimize-square-3-linear" className="w-6 h-6" />
+                                    </button>
                                 </div>
                             </div>
                         </div>
 
-                        {/* Messages */}
-                        <div className="flex-1 overflow-y-auto p-4 space-y-4 bg-whitetheme dark:bg-darktheme2 ">
-                            {messages.map((msg, index) => (
-                                <motion.div
-                                    key={index}
-                                    initial={{ opacity: 0, y: 10 }}
-                                    animate={{ opacity: 1, y: 0 }}
-                                    transition={{ duration: 0.3 }}
-                                    // dir={isArabic(msg.text) ? "rtl" : "ltr"}
-                                    className={`flex ${msg.from === "user" ? "justify-end" : "justify-start"}`}
-                                >
-                                    <div
-                                        className={`flex items-end space-x-2 max-w-[80%]  ${msg.from === "user" ? "flex-row-reverse space-x-reverse" : ""}`}
+                        {/* Messages Area */}
+
+                        <div className="flex-1 overflow-y-auto p-4 space-y-6 scrollbar-thin scrollbar-thumb-yellow-500/20 scrollbar-track-transparent">
+                            {messages.map((msg, index) => {
+                                const isUser = msg.from === "user";
+                                const isAr = isArabic(msg.text);
+                                // Dynamic font class based on user request
+                                const fontClass = isAr ? 'font-modernpro' : 'font-tanker';
+
+                                return (
+                                    <motion.div
+                                        key={index}
+                                        variants={messageVariants}
+                                        initial="hidden"
+                                        animate="visible"
+                                        layout // Good for smoother list updates
+                                        className={`flex ${isUser ? "justify-end" : "justify-start"}`}
                                     >
-                                        {/* Avatar */}
-                                        <div
-                                            className={`w-8 h-8 rounded-full flex  items-center justify-center flex-shrink-0  shadow-[0_3px_10px_rgb(0,0,0,0.2)] ${msg.from === "user" ? "bg-yellow-600 ring-2 ring-yellow-600 border-2 border-whitetheme dark:border-darktheme2 text-white" : "bg-darktheme2 dark:bg-whitetheme2 text-whitetheme dark:text-darktheme ring-2 ring-darktheme2 border-2 border-whitetheme dark:ring-whitetheme2 dark:border-darktheme2"
-                                                }`}
-                                        >
-                                            <Icon icon={msg.from === "user" ? "solar:user-bold" : botIcon} />
-                                        </div>
+                                        <div className={`flex items-end gap-3 max-w-[85%] ${isUser ? "flex-row-reverse" : "flex-row"}`}>
 
-                                        {/* Message Bubble */}
-                                        <div
-                                            className={`rounded-2xl px-4 py-3 shadow-[4.0px_8.0px_8.0px_rgba(0,0,0,0.38)] ${msg.from === "user"
-                                                ? "bg-yellow-600 ring-2 ring-yellow-600 border-2 border-whitetheme dark:border-darktheme2 text-white rounded-br-md"
-                                                : "bg-darktheme dark:bg-whitetheme2 text-whitetheme dark:text-darktheme2 ring-2 ring-darktheme2 border-2 border-whitetheme dark:ring-whitetheme2 dark:border-darktheme2 rounded-bl-md"
-                                                } ${isArabic(msg.text) ? "font-modernpro text-end" : "font-tanker text-start"}`}
-                                        >
-                                            <ReactMarkdown
-                                                remarkPlugins={[remarkGfm]}
-                                                components={{
-                                                    a: ({ href, children }) => (
-                                                        <a
-                                                            href={href}
-                                                            className={`underline hover:no-underline ${msg.from === "user" ? "text-blue-100" : "text-yellow-600"
-                                                                }`}
-                                                            target="_blank"
-                                                            rel="noopener noreferrer"
-                                                            onMouseEnter={() => setHoveredLink(href || null)}
-                                                            onMouseLeave={() => setHoveredLink(null)}
-                                                        >
-                                                            {children}
-                                                        </a>
-                                                    ),
-                                                    p: ({ children }) => <p className="mb-2 last:mb-0">{children}</p>,
-                                                    ul: ({ children }) => <ul className="list-disc list-inside space-y-1">{children}</ul>,
-                                                    ol: ({ children }) => <ol className="list-decimal list-inside space-y-1">{children}</ol>,
-                                                }}
-                                            >
-                                                {msg.text}
-                                            </ReactMarkdown>
-                                            <div className={`${msg.from === "user" ? "text-gray-300" : "text-gray-500"} text-end  font-tanker`}>
-                                                {formatTime(msg.timestamp.toLocaleTimeString())}
+                                            {/* Avatar */}
+                                            {!isUser && (
+                                                <div className="flex-shrink-0 w-8 h-8 rounded-full bg-black/50 border border-white/10 flex items-center justify-center text-yellow-500 shadow-md">
+                                                    <Icon icon={botIcon} className="w-4 h-4" />
+                                                </div>
+                                            )}
 
+                                            {/* Bubble */}
+                                            <div className={`relative group`}>
+                                                <div
+                                                    className={`
+                                                        px-5 py-3.5 rounded-2xl shadow-sm text-sm md:text-base transition-all duration-300
+                                                        ${isUser
+                                                            ? "bg-gradient-to-tr from-yellow-600 via-yellow-500 to-amber-500 text-white rounded-br-none shadow-lg shadow-yellow-500/20"
+                                                            : "bg-white/80 dark:bg-zinc-800/80 backdrop-blur-md text-gray-800 dark:text-gray-100 border border-white/20 dark:border-white/5 rounded-bl-none shadow-md"}
+                                                        ${fontClass} ${isAr ? 'text-right leading-relaxed tracking-wide' : 'text-left tracking-wide'}
+                                                    `}
+                                                >
+                                                    <ReactMarkdown
+                                                        remarkPlugins={[remarkGfm]}
+                                                        components={{
+                                                            a: ({ href, children }) => (
+                                                                <a
+                                                                    href={href}
+                                                                    className={`font-bold underline decoration-dotted decoration-2 underline-offset-4 transition-colors
+                                                                        ${isUser ? "text-white hover:text-yellow-100" : "text-yellow-600 dark:text-yellow-400 hover:text-yellow-700 dark:hover:text-yellow-300"}
+                                                                    `}
+                                                                    target="_blank"
+                                                                    rel="noopener noreferrer"
+                                                                    onMouseEnter={() => setHoveredLink(href || null)}
+                                                                    onMouseLeave={() => setHoveredLink(null)}
+                                                                >
+                                                                    {children}
+                                                                </a>
+                                                            ),
+                                                            p: ({ children }) => <p className="mb-2 last:mb-0 leading-relaxed">{children}</p>,
+                                                            ul: ({ children }) => <ul className="list-disc list-inside space-y-1 my-2 bg-black/5 dark:bg-white/5 p-2 rounded-lg">{children}</ul>,
+                                                            ol: ({ children }) => <ol className="list-decimal list-inside space-y-1 my-2 bg-black/5 dark:bg-white/5 p-2 rounded-lg">{children}</ol>,
+                                                            code: ({ node, inline, className, children, ...props }) => (
+                                                                <code className={`${inline ? 'bg-black/10 dark:bg-white/10 px-1 py-0.5 rounded text-xs font-mono' : 'block bg-black/80 text-white p-2 rounded-lg text-xs overflow-x-auto'}`} {...props}>
+                                                                    {children}
+                                                                </code>
+                                                            )
+                                                        }}
+                                                    >
+                                                        {msg.text}
+                                                    </ReactMarkdown>
+                                                </div>
+
+                                                {/* Timestamp */}
+                                                <div className={`absolute -bottom-5 w-max text-[10px] text-gray-800 opacity-100 group-hover:opacity-100 transition-opacity ${isUser ? 'right-0' : 'left-0'}`}>
+                                                    {formatTime(msg.timestamp.toLocaleTimeString())}
+                                                </div>
                                             </div>
                                         </div>
-                                    </div>
-                                </motion.div>
-                            ))}
+                                    </motion.div>
+                                )
+                            })}
 
-                            {/* Loading Animation */}
+                            {/* Typing Indicator */}
                             {loading && (
-                                <motion.div
-                                    initial={{ opacity: 0, y: 10 }}
-                                    animate={{ opacity: 1, y: 0 }}
-                                    className="flex justify-start"
-                                >
-                                    <div className="flex items-end space-x-2 max-w-[80%]">
-                                        <div className="w-8 h-8 rounded-full bg-darktheme2 dark:bg-whitetheme2 text-whitetheme dark:text-darktheme ring-2 ring-darktheme2 border-2 border-whitetheme dark:ring-whitetheme2 dark:border-darktheme2 flex items-center justify-center flex-shrink-0">
-                                            <Icon icon={botIcon} className="w-5 h-5" />
+                                <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} className="flex justify-start">
+                                    <div className="flex items-end gap-3">
+                                        <div className="w-8 h-8 rounded-full bg-black/50 flex items-center justify-center text-yellow-500">
+                                            <Icon icon="eos-icons:bubble-loading" className="w-5 h-5" />
                                         </div>
-                                        <div className="bg-darktheme dark:bg-whitetheme2 text-whitetheme dark:text-darktheme ring-2 ring-darktheme2 border-2 border-whitetheme dark:ring-whitetheme2 dark:border-darktheme rounded-2xl rounded-bl-md px-4 py-3 shadow-sm">
-                                            <div className="flex space-x-1">
-                                                <motion.div
-                                                    className="w-2 h-2 bg-whitetheme dark:bg-yellow-600 rounded-full"
-                                                    animate={{ scale: [1, 1.2, 1] }}
-                                                    transition={{ duration: 1, repeat: Number.POSITIVE_INFINITY, delay: 0 }}
-                                                />
-                                                <motion.div
-                                                    className="w-2 h-2 bg-whitetheme dark:bg-yellow-600 rounded-full"
-                                                    animate={{ scale: [1, 1.2, 1] }}
-                                                    transition={{ duration: 1, repeat: Number.POSITIVE_INFINITY, delay: 0.2 }}
-                                                />
-                                                <motion.div
-                                                    className="w-2 h-2 bg-whitetheme dark:bg-yellow-600 rounded-full"
-                                                    animate={{ scale: [1, 1.2, 1] }}
-                                                    transition={{ duration: 1, repeat: Number.POSITIVE_INFINITY, delay: 0.4 }}
-                                                />
+                                        <div className="h-10 px-4 bg-white/50 dark:bg-zinc-800/50 backdrop-blur-sm rounded-2xl rounded-bl-none flex items-center border border-white/10">
+                                            <div className="flex gap-1.5">
+                                                {[0, 1, 2].map((i) => (
+                                                    <motion.div
+                                                        key={i}
+                                                        className="w-1.5 h-1.5 bg-yellow-500 rounded-full"
+                                                        animate={{ y: [0, -5, 0] }}
+                                                        transition={{ duration: 0.6, repeat: Infinity, delay: i * 0.2 }}
+                                                    />
+                                                ))}
                                             </div>
                                         </div>
                                     </div>
                                 </motion.div>
                             )}
-
                             <div ref={messagesEndRef} />
                         </div>
 
-                        {/* Link Preview */}
-                        {hoveredLink && (
-                            <motion.div
-                                initial={{ opacity: 0, y: 10 }}
-                                animate={{ opacity: 1, y: 0 }}
-                                className="mx-4 mb-2 bg-darktheme border-3 dark:bg-whitetheme2 border-gray-700 dark:border-gray-400 rounded-lg p-3 absolute bottom-15 right-0 left-0"
-                            >
-                                <div className="flex items-center space-x-2 text-sm">
-                                    <Icon icon="mingcute:link-fill" className="w-4 h-4 dark:text-yellow-600 text-whitetheme2" />
-                                    <span className="dark:text-yellow-600 text-whitetheme2 font-medium">Link Preview:</span>
-                                </div>
-                                <a
-                                    href={hoveredLink}
-                                    className="text-gray-500 text-sm hover:underline block mt-1 truncate"
-                                    target="_blank"
-                                    rel="noopener noreferrer"
+                        {/* --- Detailed Link Preview --- */}
+                        <AnimatePresence>
+                            {hoveredLink && (
+                                <motion.div
+                                    initial={{ opacity: 0, y: 20, scale: 0.9 }}
+                                    animate={{ opacity: 1, y: 0, scale: 1 }}
+                                    exit={{ opacity: 0, y: 20, scale: 0.9 }}
+                                    className="absolute bottom-[4.5rem] left-4 right-4 z-50 pointer-events-none"
                                 >
-                                    {hoveredLink}
-                                </a>
-                            </motion.div>
-                        )}
-                        {/* {messages.length === 1 && (
-                            <div className="px-4 py-2 bg-white border-t border-gray-200 w-full">
-                                <p className="text-sm text-gray-600 mb-2">Try asking about:</p>
-                                <div className="flex gap-2 flex-wrap">
-                                    {randomSuggestions.map((suggestion, index) => (
-                                        <button
-                                            key={index}
-                                            onClick={() => sendMessage(suggestion)}
-                                            className="px-3 py-1 bg-gray-100 hover:bg-gray-200 rounded-md text-sm text-gray-700 transition-colors cursor-pointer whitespace-nowrap"
-                                        >
-                                            {suggestion.question}
-                                        </button>
-                                    ))}
-                                </div>
-                            </div>
-                        )} */}
-                        {suggestionLoading && (
-                            <Loader />
-                        )}
-                        {messages.length === 1 && (input.trim() ? filteredSuggestions.length > 0 : randomSuggestions.length > 0) ? (
-                            // FIRST message logic: show random or filtered 3
+                                    <div className="bg-white/90 dark:bg-zinc-900/95 backdrop-blur-xl border border-yellow-500/30 p-3 rounded-xl shadow-2xl flex gap-3 items-center">
+                                        <div className="w-10 h-10 bg-yellow-100 dark:bg-yellow-900/30 rounded-lg flex items-center justify-center shrink-0">
+                                            <Icon icon="solar:link-circle-bold-duotone" className="w-6 h-6 text-yellow-600 dark:text-yellow-400" />
+                                        </div>
+                                        <div className="min-w-0 flex-1">
+                                            <p className="text-xs font-bold text-yellow-600 dark:text-yellow-500 uppercase tracking-widest mb-0.5">Link Preview</p>
+                                            <p className="text-sm font-medium text-gray-700 dark:text-gray-300 truncate">{hoveredLink}</p>
+                                        </div>
+                                    </div>
+                                </motion.div>
+                            )}
+                        </AnimatePresence>
 
-                            // (filteredSuggestions || randomSuggestions) &&
-                            <div className="px-4 py-2 bg-whitetheme dark:bg-darktheme2 border-t border-gray-200 dark:border-whitetheme w-full">
-                                <p className="text-sm text-gray-500 mb-2">
-                                    {input.trim() ? languageText.SuggestionBasedOnInput : languageText.TryAskingAbout}
-                                </p>
-                                <div className="flex gap-2 flex-wrap">
-                                    {(input.trim() ? filteredSuggestions : randomSuggestions).map((suggestion, index) => (
-                                        <button
-                                            key={index}
-                                            onClick={() => sendMessage(suggestion)}
-                                            className="px-3 py-1 bg-gray-100 dark:bg-darktheme dark:text-whitetheme hover:bg-gray-200 dark:hover:bg-darktheme2/40 rounded-md text-sm text-gray-700 transition-colors cursor-pointer"
-                                        >
-                                            {suggestion.text}
-                                        </button>
-                                    ))}
-                                </div>
-                            </div>
-                        ) : (
-                            // AFTER first message logic: show 1 live suggestion
-                            input.trim() && liveSuggestion && (
-                                <div className="px-4 py-2 bg-whitetheme dark:bg-darktheme2 border-t border-gray-200 dark:border-whitetheme w-full">
-                                    <p className="text-sm text-gray-500 mb-2">{languageText.SuggestedQuestion}</p>
-                                    <button
-                                        onClick={() => sendMessage(liveSuggestion)}
-                                        className="flex items-center gap-1 px-3 py-1 bg-gray-100 dark:bg-darktheme dark:text-whitetheme hover:bg-gray-200 dark:hover:bg-darktheme2/40 rounded-md text-sm text-gray-700 transition-colors cursor-pointer"
-                                    >
-                                        <Icon icon="hugeicons:idea-01" className="text-yellow-600 dark:text-whitetheme2 text-lg" /> {liveSuggestion.text}
-                                    </button>
-                                </div>
-                            )
-                        )}
-                        {/* Input */}
-                        <div className="p-4 bg-whitetheme dark:bg-darktheme2 border-t-0 border-gray-200 dark:border-whitetheme">
-                            <div className="flex space-x-2">
-                                {/* <input
-                                    type="text"
-                                    className="flex-1 border border-gray-300 rounded-full px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                                    placeholder="Type your message..."
-                                    value={input}
-                                    onChange={(e) => setInput(e.target.value)}
-                                    onKeyPress={handleKeyPress}
-                                    disabled={loading}
-                                /> */}
 
-                                <InputField
-                                    placeholder={languageText.TypeQuestion}
-                                    iconValue="mynaui:message-minus-solid"
-                                    icon="mynaui:message-minus"
-                                    type="text"
-                                    language={language}
-                                    languageText={languageText}
-                                    required={true}
-                                    setValue={setInput}
-                                    regex={null}
-                                    value={input}
-                                    disabled={loading}
-                                    onKeyPress={handleKeyPress}
-                                />
+                        {/* Suggestions */}
+                        <div className="px-4 pb-2">
+                            {(messages.length === 1 && (input.trim() ? filteredSuggestions.length > 0 : randomSuggestions.length > 0)) || (input.trim() && liveSuggestion) ? (
+                                <motion.div
+                                    initial={{ height: 0, opacity: 0 }}
+                                    animate={{ height: "auto", opacity: 1 }}
+                                    className="flex flex-wrap gap-2 justify-center"
+                                >
+                                    {messages.length === 1 ? (
+                                        (input.trim() ? filteredSuggestions : randomSuggestions).map((item, idx) => (
+                                            <button
+                                                key={idx}
+                                                onClick={() => sendMessage(item)}
+                                                className="px-3 py-1.5 text-xs font-medium bg-white/80 dark:bg-zinc-800/80 border border-gray-200 dark:border-gray-700 rounded-full hover:bg-yellow-500 hover:text-white dark:hover:bg-yellow-500 hover:border-yellow-500 transition-all shadow-sm"
+                                            >
+                                                {item.text}
+                                            </button>
+                                        ))
+                                    ) : (
+                                        input.trim() && liveSuggestion && (
+                                            <button
+                                                onClick={() => sendMessage(liveSuggestion)}
+                                                className="w-full flex items-center gap-2 p-2 bg-gradient-to-r from-yellow-500/10 to-transparent border border-yellow-500/20 rounded-lg text-sm text-yellow-700 dark:text-yellow-300 hover:bg-yellow-500/20 transition-colors text-left"
+                                            >
+                                                <Icon icon="solar:lightbulb-bolt-bold-duotone" className="w-5 h-5 flex-shrink-0 text-yellow-500" />
+                                                <span className="truncate">{liveSuggestion.text}</span>
+                                            </button>
+                                        )
+                                    )}
+                                </motion.div>
+                            ) : null}
+                        </div>
+
+
+                        {/* Input Area */}
+                        <div className="p-4 bg-white/60 dark:bg-[#121212]/80 backdrop-blur-md border-t border-white/10 relative">
+                            {/* Gradient line at top */}
+                            <div className="absolute top-0 left-0 right-0 h-[1px] bg-gradient-to-r from-transparent via-yellow-500/50 to-transparent" />
+
+                            <div className="flex items-center gap-2">
+                                <div className="flex-1">
+                                    <InputField
+                                        placeholder={languageText.TypeQuestion}
+                                        iconValue="solar:chat-line-bold-duotone" // Updated icon
+                                        icon="solar:chat-line-linear"
+                                        type="text"
+                                        language={language}
+                                        languageText={languageText}
+                                        required={true}
+                                        setValue={setInput}
+                                        regex={null}
+                                        value={input}
+                                        disabled={loading}
+                                        onKeyPress={handleKeyPress}
+                                    // Ensuring InputField inherits styling nicely or wrapping it
+                                    />
+                                </div>
+
                                 <motion.button
-                                    whileHover={{ scale: 1.05 }}
+                                    whileHover={{ scale: 1.05, rotate: -10 }}
                                     whileTap={{ scale: 0.95 }}
                                     onClick={() => handleSend(input)}
                                     disabled={loading || !input.trim()}
-                                    className="bg-gradient-to-r from-yellow-600 to-yellow-500 text-white p-2 rounded-lg hover:shadow-lg transition-shadow duration-200 disabled:opacity-50 disabled:cursor-not-allowed w-15 flex justify-center items-center cursor-pointer group"
+                                    className="w-12 h-12 flex items-center justify-center bg-gradient-to-br from-yellow-500 to-amber-600 text-white rounded-xl shadow-lg shadow-yellow-500/30 hover:shadow-yellow-500/50 transition-shadow disabled:opacity-50 disabled:shadow-none"
                                 >
-                                    <Icon icon="lets-icons:send-fill" className="w-5 h-5" />
-                                    <div className="inputIconText !bg-radial from-yellow-600/60 to-yellow-600 !text-whitetheme !ring-yellow-600">
-                                        {languageText.Send}
-                                    </div>
+                                    <Icon icon="solar:plain-3-bold" className="w-6 h-6  translate-y-0.5 -rotate-45" />
                                 </motion.button>
                             </div>
                         </div>
+
                     </motion.div>
                 )}
             </AnimatePresence>
 
-            {/* Mobile Responsive Overlay */}
+            {/* Mobile Backdrop */}
             <AnimatePresence>
                 {isOpen && (
                     <motion.div
                         initial={{ opacity: 0 }}
                         animate={{ opacity: 1 }}
                         exit={{ opacity: 0 }}
-                        className="fixed inset-0 bg-black/20 z-30 md:hidden"
+                        className="fixed inset-0 bg-black/60 backdrop-blur-sm z-30 md:hidden"
                         onClick={() => setIsOpen(false)}
                     />
-                )}
-            </AnimatePresence>
-
-            {/* Mobile Chat Window */}
-            <AnimatePresence>
-                {isOpen && (
-                    <motion.div
-                        initial={{ opacity: 0, y: "100%" }}
-                        animate={{ opacity: 1, y: 0 }}
-                        exit={{ opacity: 0, y: "100%" }}
-                        transition={{ duration: 0.3, ease: "easeOut" }}
-                        className="fixed inset-x-4 bottom-4 top-20 bg-white dark:bg-darktheme2 rounded-2xl flex flex-col overflow-hidden shadow-[4.0px_8.0px_8.0px_rgba(0,0,0,0.38)] md:hidden z-120"
-                    >
-                        {/* Mobile Header */}
-                        <div className="bg-gradient-to-l from-darktheme2 to-yellow-600 p-4 text-white">
-                            <div className="flex items-center justify-between">
-                                <div className="flex items-center space-x-3">
-                                    <div className="w-10 h-10rounded-full flex items-center justify-center">
-                                        {chatbotImage ? (
-                                            <img
-                                                src={chatbotImage || "/placeholder.svg"}
-                                                alt="Chatbot"
-                                                className="w-full h-full m-auto rounded-full object-cover"
-                                            />
-                                        ) : (
-                                            <motion.div
-                                                initial={{ scale: 1 }}
-                                                animate={{ scale: [1, 0.8, 1] }}
-                                                transition={{ repeat: Infinity, duration: 1.2, ease: "easeInOut" }}
-                                            >
-
-                                                <Icon icon={botIcon} className="w-6 h-6" />
-
-                                            </motion.div>
-                                        )}
-                                    </div>
-                                    <div>
-                                        <h3 className="font-semibold text-lg tracking-wide">{botName}</h3>
-                                        <p className="text-sm opacity-90">{languageText.Online}</p>
-                                    </div>
-                                </div>
-                                <button
-                                    onClick={() => setIsOpen(false)}
-                                    className="w-8 h-8 rounded-full bg-white/20 flex items-center justify-center"
-                                >
-                                    <Icon icon="solar:close-circle-broken" className="w-5 h-5" />
-                                </button>
-                            </div>
-                        </div>
-
-                        {/* Mobile Messages */}
-                        <div className="flex-1 overflow-y-auto p-4 space-y-4 bg-whitetheme dark:bg-darktheme2">
-                            {messages.map((msg, index) => (
-                                <motion.div
-                                    key={index}
-                                    initial={{ opacity: 0, y: 10 }}
-                                    animate={{ opacity: 1, y: 0 }}
-                                    transition={{ duration: 0.3 }}
-                                    // dir={isArabic(msg.text) ? "rtl" : "ltr"}
-                                    className={`flex ${msg.from === "user" ? "justify-end" : "justify-start"}`}
-                                >
-                                    <div
-                                        className={`flex items-end space-x-2 max-w-[85%] ${msg.from === "user" ? "flex-row-reverse space-x-reverse" : ""}`}
-                                    >
-                                        {/* Avatar */}
-                                        <div
-                                            className={`w-8 h-8 rounded-full flex items-center justify-center flex-shrink-0 shadow-[0_3px_10px_rgb(0,0,0,0.2)] ${msg.from === "user"
-                                                ? "bg-yellow-600 ring-2 ring-yellow-600 border-2 border-whitetheme dark:border-darktheme2 text-white"
-                                                : "bg-darktheme2 dark:bg-whitetheme2 text-whitetheme dark:text-darktheme ring-2 ring-darktheme2 border-2 border-whitetheme dark:ring-whitetheme2 dark:border-darktheme2"
-                                                }`}
-                                        >
-                                            <Icon icon={msg.from === "user" ? "solar:user-bold" : botIcon} />
-                                        </div>
-
-                                        {/* Message Bubble */}
-                                        <div
-                                            className={`rounded-2xl px-4 py-3 shadow-[4.0px_8.0px_8.0px_rgba(0,0,0,0.38)] ${msg.from === "user"
-                                                ? "bg-yellow-600 ring-2 ring-yellow-600 border-2 border-whitetheme dark:border-darktheme2 text-white rounded-br-md"
-                                                : "bg-darktheme dark:bg-whitetheme2 text-whitetheme dark:text-darktheme2 ring-2 ring-darktheme2 border-2 border-whitetheme dark:ring-whitetheme2 dark:border-darktheme2 rounded-bl-md"
-                                                } ${isArabic(msg.text) ? "font-modernpro text-end" : "font-tanker text-start"}`}
-                                        >
-                                            <ReactMarkdown
-                                                remarkPlugins={[remarkGfm]}
-                                                components={{
-                                                    a: ({ href, children }) => (
-                                                        <a
-                                                            href={href}
-                                                            className={`underline hover:no-underline ${msg.from === "user" ? "text-blue-100" : "text-yellow-600"
-                                                                }`}
-                                                            target="_blank"
-                                                            rel="noopener noreferrer"
-                                                            onMouseEnter={() => setHoveredLink(href || null)}
-                                                            onMouseLeave={() => setHoveredLink(null)}
-                                                        >
-                                                            {children}
-                                                        </a>
-                                                    ),
-                                                    p: ({ children }) => <p className="mb-2 last:mb-0">{children}</p>,
-                                                    ul: ({ children }) => <ul className="list-disc list-inside space-y-1">{children}</ul>,
-                                                    ol: ({ children }) => <ol className="list-decimal list-inside space-y-1">{children}</ol>,
-                                                }}
-                                            >
-                                                {msg.text}
-                                            </ReactMarkdown>
-                                            <div className={`${msg.from === "user" ? "text-gray-300" : "text-gray-500"} text-end  font-tanker`}>
-                                                {formatTime(msg.timestamp.toLocaleTimeString())}
-
-                                            </div>
-                                        </div>
-                                    </div>
-                                </motion.div>
-                            ))}
-
-                            {/* Loading Animation */}
-                            {loading && (
-                                <motion.div
-                                    initial={{ opacity: 0, y: 10 }}
-                                    animate={{ opacity: 1, y: 0 }}
-                                    className="flex justify-start"
-                                >
-                                    <div className="flex items-end space-x-2 max-w-[80%]">
-                                        <div className="w-8 h-8 rounded-full bg-darktheme2 dark:bg-whitetheme2 text-whitetheme dark:text-darktheme ring-2 ring-darktheme2 border-2 border-whitetheme dark:ring-whitetheme2 dark:border-darktheme2 flex items-center justify-center flex-shrink-0">
-                                            <Icon icon={botIcon} className="w-5 h-5" />
-                                        </div>
-                                        <div className="bg-darktheme dark:bg-whitetheme2 text-whitetheme dark:text-darktheme ring-2 ring-darktheme2 border-2 border-whitetheme dark:ring-whitetheme2 dark:border-darktheme rounded-2xl rounded-bl-md px-4 py-3 shadow-sm">
-                                            <div className="flex space-x-1">
-                                                <motion.div
-                                                    className="w-2 h-2 bg-whitetheme dark:bg-yellow-600 rounded-full"
-                                                    animate={{ scale: [1, 1.2, 1] }}
-                                                    transition={{ duration: 1, repeat: Number.POSITIVE_INFINITY, delay: 0 }}
-                                                />
-                                                <motion.div
-                                                    className="w-2 h-2 bg-whitetheme dark:bg-yellow-600 rounded-full"
-                                                    animate={{ scale: [1, 1.2, 1] }}
-                                                    transition={{ duration: 1, repeat: Number.POSITIVE_INFINITY, delay: 0.2 }}
-                                                />
-                                                <motion.div
-                                                    className="w-2 h-2 bg-whitetheme dark:bg-yellow-600 rounded-full"
-                                                    animate={{ scale: [1, 1.2, 1] }}
-                                                    transition={{ duration: 1, repeat: Number.POSITIVE_INFINITY, delay: 0.4 }}
-                                                />
-                                            </div>
-                                        </div>
-                                    </div>
-                                </motion.div>
-                            )}
-
-                            <div ref={messagesEndRef} />
-                        </div>
-
-                        {/* Link Preview */}
-                        {hoveredLink && (
-                            <motion.div
-                                initial={{ opacity: 0, y: 10 }}
-                                animate={{ opacity: 1, y: 0 }}
-                                className="mx-4 mb-2 bg-darktheme border-3 dark:bg-whitetheme2 border-gray-700 dark:border-gray-400 rounded-lg p-3"
-                            >
-                                <div className="flex items-center space-x-2 text-sm">
-                                    <Icon icon="mingcute:link-fill" className="w-4 h-4 dark:text-yellow-600 text-whitetheme2" />
-                                    <span className="dark:text-yellow-600 text-whitetheme2 font-medium">Link Preview:</span>
-                                </div>
-                                <a
-                                    href={hoveredLink}
-                                    className="text-gray-500 text-sm hover:underline block mt-1 truncate"
-                                    target="_blank"
-                                    rel="noopener noreferrer"
-                                >
-                                    {hoveredLink}
-                                </a>
-                            </motion.div>
-                        )}
-                        {suggestionLoading && (
-                            <Loader />
-                        )}
-                        {messages.length === 1 && (input.trim() ? filteredSuggestions.length > 0 : randomSuggestions.length > 0) ? (
-                            // FIRST message logic: show random or filtered 3
-                            <div className="px-4 py-2 bg-whitetheme dark:bg-darktheme2 border-t border-gray-200 dark:border-whitetheme w-full">
-                                <p className="text-sm text-gray-500 mb-2">
-                                    {input.trim() ? "Suggestions based on your input:" : "Try asking about:"}
-                                </p>
-                                <div className="flex gap-2 flex-wrap">
-                                    {(input.trim() ? filteredSuggestions : randomSuggestions).map((suggestion, index) => (
-                                        <button
-                                            key={index}
-                                            onClick={() => sendMessage(suggestion)}
-                                            className="px-3 py-1 bg-gray-100 dark:bg-darktheme dark:text-whitetheme hover:bg-gray-200 dark:hover:bg-darktheme2/40 rounded-md text-sm text-gray-700 transition-colors cursor-pointer "
-                                        >
-                                            {suggestion.text}
-                                        </button>
-                                    ))}
-                                </div>
-                            </div>
-                        ) : (
-                            // AFTER first message logic: show 1 live suggestion
-                            input.trim() && liveSuggestion && (
-                                <div className="px-4 py-2 bg-whitetheme dark:bg-darktheme2 border-t border-gray-200 dark:border-whitetheme w-full">
-                                    <p className="text-sm text-gray-500 mb-2">{languageText.SuggestedQuestion}</p>
-                                    <button
-                                        onClick={() => sendMessage(liveSuggestion)}
-                                        className="flex items-center gap-1 px-3 py-1 bg-gray-100 dark:bg-darktheme dark:text-whitetheme hover:bg-gray-200 dark:hover:bg-darktheme2/40 rounded-md text-sm text-gray-700 transition-colors cursor-pointer"
-                                    >
-                                        <Icon icon="hugeicons:idea-01" className="text-yellow-600 dark:text-whitetheme2 text-lg" /> {liveSuggestion.text}
-                                    </button>
-                                </div>
-                            )
-                        )}
-
-
-                        {/* Mobile Input */}
-                        <div className="p-4 bg-whitetheme dark:bg-darktheme2 border-t-0 border-gray-200 dark:border-whitetheme">
-                            <div className="flex space-x-2">
-                                <InputField
-                                    placeholder="Type your message..."
-                                    iconValue="mynaui:message-minus-solid"
-                                    icon="mynaui:message-minus"
-                                    type="text"
-                                    language={language}
-                                    languageText={languageText}
-                                    required={true}
-                                    setValue={setInput}
-                                    regex={null}
-                                    value={input}
-                                    disabled={loading}
-                                />
-                                <motion.button
-                                    whileHover={{ scale: 1.05 }}
-                                    whileTap={{ scale: 0.95 }}
-                                    onClick={() => handleSend(input)}
-                                    disabled={loading || !input.trim()}
-                                    className="bg-gradient-to-r from-yellow-600 to-yellow-500 text-white p-3 rounded-lg hover:shadow-lg transition-shadow duration-200 disabled:opacity-50 disabled:cursor-not-allowed w-15 flex justify-center items-center cursor-pointer"
-                                >
-                                    <Icon icon="lets-icons:send-fill" className="w-5 h-5" />
-                                </motion.button>
-                            </div>
-                        </div>
-                    </motion.div>
                 )}
             </AnimatePresence>
         </>
     )
 }
-

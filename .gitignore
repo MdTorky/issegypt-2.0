@@ -12,6 +12,7 @@ dist
 dist-ssr
 *.local
 
+/src/components/Old Compenets/*
 # Editor directories and files
 .vscode/*
 !.vscode/extensions.json
