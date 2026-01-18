@@ -83,7 +83,7 @@ const Navbar = ({ toggleDarkMode, darkMode, toggleLanguage, language, languageTe
                                         className="flex items-center gap-2 px-3 py-1.5 md:px-4 md:py-2 bg-redtheme text-whitetheme rounded-xl text-sm md:text-base font-medium shadow-md hover:shadow-redtheme/20 transition-all"
                                     >
                                         <Icon icon="eos-icons:admin" className="text-lg" />
-                                        <span className="hidden md:block font-tanker tracking-wide">{languageText.Admin}</span>
+                                        <span className="hidden md:block tracking-wide">{languageText.Admin}</span>
                                     </motion.button>
                                 </Link>
                             </motion.div>
