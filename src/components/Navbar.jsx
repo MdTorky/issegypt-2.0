@@ -60,8 +60,8 @@ const Navbar = ({ toggleDarkMode, darkMode, toggleLanguage, language, languageTe
                     className="flex items-center gap-2 cursor-pointer"
                 >
                     <h1 className="text-3xl md:text-5xl transition-colors duration-300">
-                        <span className="font-tanker text-darktheme dark:text-whitetheme">{languageText.ISS}</span>
-                        <span className="font-tanker text-redtheme"> {languageText.EGYPT}</span>
+                        <span className="text-darktheme dark:text-whitetheme">{languageText.ISS}</span>
+                        <span className=" text-redtheme"> {languageText.EGYPT}</span>
                     </h1>
                 </motion.div>
 
