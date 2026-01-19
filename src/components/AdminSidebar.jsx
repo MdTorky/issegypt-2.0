@@ -41,7 +41,7 @@ const AdminSidebar = ({
             variants={sidebarVariants}
             initial={isOpen ? "expanded" : "collapsed"}
             animate={isOpen ? "expanded" : "collapsed"}
-            className={`hidden lg:flex flex-col h-4/5 my-auto relative top-0 bottom-0 ${language === "en" ? "left-0 border-r rounded-r-3xl" : "right-0 border-l rounded-l-3xl"} bg-darktheme2/95 backdrop-blur-xl border-white/10 shadow-2xl z-50 text-whitetheme `}
+            className={`hidden lg:flex flex-col h-4/5  sticky top-25  ${language === "en" ? "left-0 border-r rounded-r-3xl" : "right-0 border-l rounded-l-3xl"} bg-darktheme2/95 backdrop-blur-xl border-white/10 shadow-2xl z-50 text-whitetheme `}
         >
             {/* <motion.div
             variants={sidebarVariants}
