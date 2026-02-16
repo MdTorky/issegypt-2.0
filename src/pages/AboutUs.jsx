@@ -223,9 +223,40 @@ const AboutUs = ({ language, languageText, api }) => {
                         transition={{ duration: 0.8, type: "spring", stiffness: 200 }}
 
                         src={logo} alt="" className='mt-20 lg:mt-0 w-[250px]' />
-                    {/* <div className='w-[100px]'>
-                    </div> */}
                 </div>
+
+                {/* Hero Section with Gradient Background */}
+
+
+                {/* <div className='flex lg:flex-row flex-col-reverse lg:justify-between items-center  lg:px-30 px-10 py-16 gap-12'>
+                    <motion.div
+                        initial={{ x: language === "en" ? -200 : 200, opacity: 0 }}
+                        animate={{ x: 0, opacity: 1 }}
+                        exit={{ x: language === "en" ? -200 : 200, opacity: 0 }}
+                        transition={{ duration: 0.8, type: "spring", stiffness: 200 }}
+                        className="flex-1"
+                    >
+                        <h1 className='lg:mt-0 text-darktheme dark:text-whitetheme lg:text-7xl text-5xl lg:text-start text-center font-bold leading-tight'>
+                            {languageText.ISSEGYPTUTM}, <span className='text-transparent bg-clip-text bg-gradient-to-r from-redtheme to-orange-500'>{languageText.WhoAreWe}</span>
+                        </h1>
+                        <p className='text-gray-500 dark:text-gray-300 text-xl lg:text-2xl lg:text-start text-center font-light'>{languageText.DiscoverOurJoruney}</p>
+                    </motion.div>
+                    <motion.div
+                        initial={{ x: language === "en" ? 200 : -200, opacity: 0, scale: 0.8 }}
+                        animate={{ x: 0, opacity: 1, scale: 1 }}
+                        exit={{ x: language === "en" ? 200 : -200, opacity: 0 }}
+                        transition={{ duration: 0.8, type: "spring", stiffness: 200 }}
+                        className="flex-1 flex justify-center"
+                    >
+                        <motion.div
+                            whileHover={{ scale: 1.05, rotate: 5 }}
+                            className='relative w-[250px] flex items-center justify-center'
+                        >
+                            <div className="absolute inset-0 bg-gradient-to-br from-redtheme to-orange-500 rounded-3xl blur-2xl opacity-20 animate-pulse" />
+                            <img src={logo} alt="ISS Egypt Logo" className='relative w-full drop-shadow-2xl' />
+                        </motion.div>
+                    </motion.div>
+                </div> */}
 
                 <motion.div
                     initial={{ width: 0, opacity: 0 }}

@@ -205,7 +205,7 @@ const Home = ({ languageText, language, api }) => {
                             initial={{ opacity: 0, y: 20 }}
                             animate={{ opacity: 1, y: 0 }}
                             transition={{ delay: 0.2 }}
-                            className="font-bold tracking-[0.2em] text-red-500 uppercase text-sm md:text-xl drop-shadow-md"
+                            className="font-bold tracking-[0.2em] text-whitetheme uppercase text-sm md:text-xl drop-shadow-md bg-redtheme px-3 py-1 rounded-lg"
                         >
                             {languageText.ISSEGYPTUTM}
                         </motion.div>

@@ -187,7 +187,7 @@ const MyForms = ({ languageText, language, api }) => {
 
                             {filteredForms.map((form) => (
                                 <div className="tableRow cursor-pointer" key={form.id} onClick={(e) => {
-                                    copyLink(`issegypt.vercel.app/form/${form.link}`)
+                                    copyLink(`issegypt.net/form/${form.link}`)
                                 }}>
                                     <div className="tableDiv">
                                         <img src={form.eventImg} alt="" className="w-20 lg:w-30 m-auto rounded-lg" />
