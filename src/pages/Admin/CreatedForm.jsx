@@ -36,6 +36,8 @@ const CreatedForm = ({ languageText, language, api }) => {
     const [joinedGroup, setJoinedGroup] = useState(false)
     const navigate = useNavigate();
 
+    const [isSubmitting, setIsSubmitting] = useState(false);
+
 
     const facultyOptions = [
         { value: "Electrical", label: languageText.FKE, icon: "material-symbols:electric-bolt-rounded" },
@@ -108,9 +110,12 @@ const CreatedForm = ({ languageText, language, api }) => {
     const { handleSubmit, error: submitError, setError, submitLoading } =
         useSubmitForm();
 
+    const isLoadingBtn = submitLoading || isSubmitting;
+
 
     const onSubmit = async (e) => {
         e.preventDefault(); // Prevent default first
+        setIsSubmitting(true);
 
         // Validate required fields
         if ((formData.inputs.includes("Faculty") && !faculty) || (formData.inputs.includes("Semester") && !semester) || (formData.inputs.includes("Year") && !year) || (formData.inputs.includes("Select Input") && !selectInputValues)) {
@@ -152,6 +157,10 @@ const CreatedForm = ({ languageText, language, api }) => {
         } catch (error) {
             console.error("Submission failed:", error);
             setError(languageText.SubmitFailed);
+            setIsSubmitting(false);
+
+        } finally {
+            setIsSubmitting(false);
         }
     };
 
@@ -202,7 +211,7 @@ const CreatedForm = ({ languageText, language, api }) => {
                                 </div>
                             </div>
                         ) :
-                            submitLoading ? (
+                            (submitLoading || isLoadingBtn) ? (
                                 <div className="h-screen flex w-full justify-center">
                                     <Loader text={languageText.Submitting} />
                                 </div>
@@ -556,7 +565,15 @@ const CreatedForm = ({ languageText, language, api }) => {
                                                     {submitError &&
                                                         <ErrorContainer error={submitError} setError={setError} />}
                                                 </AnimatePresence>
-                                                {((formData.groupLink && joinedGroup) || (!formData.groupLink)) && <FormButton icon="hugeicons:task-done-01" text={languageText.SubmitForm} />}
+                                                {((formData.groupLink && joinedGroup) || (!formData.groupLink)) && (
+                                                    isLoadingBtn ? (
+                                                        <button type="button" className="formButton flex items-center justify-center gap-2" disabled>
+                                                            <Loader text={languageText.Submitting} size="sm" />
+                                                        </button>
+                                                    ) : (
+                                                        <FormButton icon="hugeicons:task-done-01" text={languageText.SubmitForm} />
+                                                    )
+                                                )}
                                             </motion.form>
                                         </div>
 

@@ -3,7 +3,29 @@ import React from 'react'
 import { Icon } from "@iconify/react";
 import { motion } from "framer-motion";
 
-const Loader = ({ text }) => {
+const Loader = ({ text, size = 'md' }) => {
+    // two variants: 'md' (original large centered) and 'sm' (inline small spinner + text)
+    if (size === 'sm') {
+        return (
+            <div className="flex items-center gap-3">
+                <div className="w-6 h-6 border-2 border-transparent text-darktheme text-base animate-spin flex items-center justify-center border-t-redtheme rounded-full">
+                    <div className="w-4 h-4 border-2 border-transparent text-yellow-600 text-base animate-spin flex items-center justify-center dark:border-t-whitetheme border-t-darktheme rounded-full">
+                        <Icon icon="icomoon-free:spinner9" />
+                    </div>
+                </div>
+                {text && (
+                    <motion.div
+                        className='text-redtheme text-sm'
+                        animate={{ scale: [1, 1.15, 1] }}
+                        transition={{ duration: 1, repeat: Infinity, ease: "easeInOut" }}
+                    >
+                        {text}...
+                    </motion.div>
+                )}
+            </div>
+        );
+    }
+
     return (
         /* From Uiverse.io by devAaus */
         <div className="flex-col gap-4 w-full flex items-center justify-center">
