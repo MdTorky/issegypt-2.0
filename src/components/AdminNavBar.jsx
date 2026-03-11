@@ -114,7 +114,7 @@ const AdminNavBar = ({ languageText, api, language, setCommitteeType }) => {
             value: user?.committee,
             icon: user?.committee === "ISS Egypt" ? "emojione-monotone:flag-for-egypt" : user?.committee === "Vice" ? "fontisto:person" : user?.committee === "Secretary" ? "mingcute:document-2-fill" : "fluent:money-16-filled"
         }] : []),
-        ...(UserType("Admin") ? [{
+        ...(UserType("All") ? [{
             label: languageText.PresidentOnly,
             value: "ISS Egypt",
             icon: "emojione-monotone:flag-for-egypt"
